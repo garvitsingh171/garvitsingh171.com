@@ -1,0 +1,47 @@
+name: Website Task
+description: Create a task for the personal website
+title: "[Type]: "
+labels: []
+body:
+  - type: textarea
+    id: overview
+    attributes:
+      label: Overview
+      description: What needs to be done?
+      placeholder: Explain the goal of this issue clearly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Break the work into small steps.
+      placeholder: |
+        - [ ] Step 1
+        - [ ] Step 2
+        - [ ] Step 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: What should be true when this issue is complete?
+      placeholder: |
+        - [ ] Feature works on desktop
+        - [ ] Feature works on mobile
+        - [ ] No placeholder content remains
+        - [ ] Code is reviewed manually
+    validations:
+      required: true
+
+  - type: textarea
+    id: ai_usage
+    attributes:
+      label: AI Usage Notes
+      description: Mention how AI can be used for this issue.
+      placeholder: Example: AI can help draft content, but final wording must be manually reviewed.
+    validations:
+      required: false
