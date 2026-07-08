@@ -1,4 +1,4 @@
-## Summary
+# Summary
 
 Briefly explain what this PR adds or changes.
 
@@ -8,9 +8,9 @@ Closes #
 
 ## Changes Made
 
-- 
-- 
-- 
+-
+-
+-
 
 ## Screenshots
 
