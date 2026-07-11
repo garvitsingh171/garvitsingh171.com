@@ -1,5 +1,6 @@
 import type { Project } from "../../types/project";
 import { Button, Card } from "../ui";
+import { ProjectStatusBadge } from "./ProjectStatusBadge";
 
 export type ProjectCardProps = {
   project: Project;
@@ -22,7 +23,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <div className="mt-5 flex flex-1 flex-col">
-          <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <h3 className="min-w-0 flex-1 text-xl font-semibold text-white">
+              {project.title}
+            </h3>
+
+            <ProjectStatusBadge status={project.status} />
+          </div>
 
           <p className="mt-3 text-sm leading-6 text-slate-300">
             {project.summary}
