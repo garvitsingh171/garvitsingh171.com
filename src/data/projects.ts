@@ -1,6 +1,6 @@
 import type { Project } from "../types/project.js";
 
-export const projects = [
+export const projects: Project[] = [
   {
     title: "Pravaah",
     slug: "pravaah",
@@ -82,4 +82,4 @@ export const projects = [
     githubUrl: "https://github.com/garvitsingh171/workoutly",
     featured: true,
   },
-] satisfies Project[];
+];
