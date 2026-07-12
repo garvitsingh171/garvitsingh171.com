@@ -7,8 +7,6 @@ export type ProjectCardProps = {
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const hasProjectLinks = Boolean(project.githubUrl || project.liveUrl);
-
   return (
     <Card className="group h-full shadow-sm transition-shadow duration-300 hover:shadow-lg hover:shadow-slate-950/30">
       <div className="flex h-full flex-col">
@@ -49,36 +47,44 @@ export function ProjectCard({ project }: ProjectCardProps) {
             ))}
           </ul>
 
-          {hasProjectLinks ? (
-            <div className="mt-auto flex flex-col gap-3 pt-6 sm:flex-row">
-              {project.githubUrl ? (
-                <Button
-                  as="anchor"
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="outline"
-                  className="w-full sm:w-auto"
-                  aria-label={`View ${project.title} repository on GitHub in a new tab`}
-                >
-                  GitHub Repository
-                </Button>
-              ) : null}
+          <div className="mt-auto flex flex-col gap-3 pt-6 sm:flex-row">
+            <Button
+              as="link"
+              to={`/projects/${project.slug}`}
+              className="w-full sm:w-auto"
+              aria-label={`View ${project.title} case study`}
+            >
+              View Case Study
+            </Button>
 
-              {project.liveUrl ? (
-                <Button
-                  as="anchor"
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto"
-                  aria-label={`View the live ${project.title} project in a new tab`}
-                >
-                  Live Project
-                </Button>
-              ) : null}
-            </div>
-          ) : null}
+            {project.githubUrl ? (
+              <Button
+                as="anchor"
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="outline"
+                className="w-full sm:w-auto"
+                aria-label={`View ${project.title} repository on GitHub in a new tab`}
+              >
+                GitHub Repository
+              </Button>
+            ) : null}
+
+            {project.liveUrl ? (
+              <Button
+                as="anchor"
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="outline"
+                className="w-full sm:w-auto"
+                aria-label={`View the live ${project.title} project in a new tab`}
+              >
+                Live Project
+              </Button>
+            ) : null}
+          </div>
         </div>
       </div>
     </Card>
