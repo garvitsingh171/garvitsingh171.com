@@ -26,6 +26,41 @@ export const projects: Project[] = [
       src: "/images/projects/pravaah.svg",
       alt: "Pravaah clinic flow management project cover",
     },
+    caseStudy: {
+      category: "Clinic operations MVP",
+      problem:
+        "Small and medium clinics need to coordinate appointments, patient queues, dashboard activity, and no-show risk from one system.",
+      solution:
+        "Pravaah enables clinic-side Admin and Staff users to manage doctors, patients, appointments, daily queues, dashboard activity, and explainable no-show risk.",
+      features: [
+        {
+          title: "Clinic workflow management",
+          description:
+            "Supports clinic-side Admin and Staff users as they manage doctors, patients, appointments, and daily queues.",
+        },
+        {
+          title: "Explainable no-show risk",
+          description:
+            "Uses deterministic, rule-based assessment so the application can present understandable reasons.",
+        },
+        {
+          title: "Suggested staff actions",
+          description:
+            "Pairs no-show explanations with suggested staff actions inside the clinic workflow.",
+        },
+      ],
+      technicalDecisions: [
+        {
+          title: "Deterministic no-show assessment",
+          description:
+            "The no-show assessment is rule-based rather than trained machine learning.",
+          reason:
+            "This keeps the displayed reasons and suggested staff actions understandable.",
+        },
+      ],
+      currentProgress:
+        "Pravaah is currently in progress as a full-stack clinic operations MVP for small and medium clinics.",
+    },
     featured: true,
   },
   {
@@ -52,6 +87,49 @@ export const projects: Project[] = [
       alt: "BeatHub API backend project cover",
     },
     githubUrl: "https://github.com/garvitsingh171/beathub-api",
+    caseStudy: {
+      category: "Backend API",
+      problem:
+        "A backend-first music platform needs secure authentication, role-based access, documented endpoints, and deployment support.",
+      solution:
+        "BeatHub API provides REST endpoints for managing users, songs, artists, albums, and playlists with authentication, authorization, validation, and API documentation.",
+      features: [
+        {
+          title: "Protected REST resources",
+          description:
+            "Includes protected CRUD endpoints for users, songs, artists, albums, and playlists.",
+        },
+        {
+          title: "Authentication and authorization",
+          description:
+            "Uses JWT authentication and role-based authorization for API access control.",
+        },
+        {
+          title: "API testing and documentation",
+          description:
+            "Includes Swagger documentation and a Postman collection for API testing.",
+        },
+        {
+          title: "Deployment support",
+          description:
+            "Includes Docker support for containerized deployment workflows.",
+        },
+      ],
+      technicalDecisions: [
+        {
+          title: "Cursor-based song pagination",
+          description:
+            "Song listing endpoints use cursor-based pagination.",
+        },
+        {
+          title: "Documented API surface",
+          description:
+            "Swagger documentation and a Postman collection support endpoint exploration and testing.",
+        },
+      ],
+      results:
+        "The completed API includes authentication, role-based authorization, protected CRUD endpoints, cursor-based song pagination, validation, rate limiting, Swagger documentation, Docker support, and a Postman collection.",
+    },
     featured: true,
   },
   {
@@ -80,6 +158,44 @@ export const projects: Project[] = [
       alt: "Workoutly workout tracking application project cover",
     },
     githubUrl: "https://github.com/garvitsingh171/workoutly",
+    caseStudy: {
+      category: "Workout tracking application",
+      problem:
+        "Workout tracking requires a way to create routines, record completed sessions, monitor progress, and build consistent training habits.",
+      solution:
+        "Workoutly lets users securely create routines, complete workout sessions, and manage their own fitness data through a full-stack MERN application.",
+      features: [
+        {
+          title: "Routine and session tracking",
+          description:
+            "Users can create routines, complete workout sessions, and view workout history.",
+        },
+        {
+          title: "Progress visibility",
+          description:
+            "Includes calendar summaries, weekly goals, streak tracking, exercise progress, and dashboard insights.",
+        },
+        {
+          title: "Personal fitness data",
+          description:
+            "Combines ownership-based authorization with personal-record detection, reusable workout templates, and CSV exports.",
+        },
+      ],
+      technicalDecisions: [
+        {
+          title: "Ownership-based authorization",
+          description:
+            "Workout data is managed through ownership-based authorization.",
+        },
+        {
+          title: "MERN application structure",
+          description:
+            "The project combines React and Vite on the frontend with Node.js, Express, MongoDB, and Mongoose on the backend.",
+        },
+      ],
+      currentProgress:
+        "Workoutly is currently in progress as a full-stack MERN workout tracker.",
+    },
     featured: true,
   },
 ];

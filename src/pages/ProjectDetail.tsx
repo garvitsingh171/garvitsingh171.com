@@ -1,8 +1,17 @@
 import { Link, useParams } from "react-router-dom";
-import { ProjectStatusBadge } from "../components/projects";
+import {
+  CaseStudySection,
+  ChallengeList,
+  FeatureGrid,
+  ProjectMetadata,
+  ProjectNavigation,
+  ProjectStatusBadge,
+  TechnicalDecisionList,
+  TechnologyList,
+} from "../components/projects";
 import { Button, Card } from "../components/ui";
 import { projects } from "../data/projects";
-import type { ProjectType } from "../types/project";
+import type { ProjectTextContent, ProjectType } from "../types/project";
 
 const projectTypeLabels = {
   "full-stack": "Full-stack",
@@ -10,6 +19,50 @@ const projectTypeLabels = {
   frontend: "Frontend",
   "open-source": "Open source",
 } satisfies Record<ProjectType, string>;
+
+const projectStatusLabels = {
+  completed: "Completed",
+  "in-progress": "In Progress",
+  planned: "Planned",
+} as const;
+
+function getTextItems(content?: ProjectTextContent) {
+  if (Array.isArray(content)) {
+    return content.map((item) => item.trim()).filter(Boolean);
+  }
+
+  return content?.trim() ? [content.trim()] : [];
+}
+
+function hasTextContent(
+  content?: ProjectTextContent,
+): content is ProjectTextContent {
+  return getTextItems(content).length > 0;
+}
+
+function hasItems<T>(items?: T[]): items is T[] {
+  return Array.isArray(items) && items.length > 0;
+}
+
+function ProjectText({ content }: { content: ProjectTextContent }) {
+  const items = getTextItems(content);
+
+  if (items.length === 1) {
+    return (
+      <p className="max-w-3xl text-base leading-8 text-slate-300">
+        {items[0]}
+      </p>
+    );
+  }
+
+  return (
+    <ul className="max-w-3xl list-disc space-y-3 pl-5 text-base leading-8 text-slate-300">
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -38,26 +91,44 @@ export default function ProjectDetail() {
     );
   }
 
+  const caseStudy = project.caseStudy;
+  const projectTypeLabel = projectTypeLabels[project.type];
+  const problem = caseStudy?.problem;
+  const solution = caseStudy?.solution;
+  const features = caseStudy?.features;
+  const architecture = caseStudy?.architecture;
+  const technicalDecisions = caseStudy?.technicalDecisions;
+  const challenges = caseStudy?.challenges;
+  const learnings = caseStudy?.learnings;
+  const results = caseStudy?.results;
+  const currentProgress = caseStudy?.currentProgress;
   const projectLinks = [
-    project.githubUrl
-      ? {
-          label: "GitHub Repository",
-          href: project.githubUrl,
-          ariaLabel: `View ${project.title} repository on GitHub in a new tab`,
-        }
-      : null,
     project.liveUrl
       ? {
-          label: "Live Project",
+          label: "View Live Project",
           href: project.liveUrl,
           ariaLabel: `View the live ${project.title} project in a new tab`,
         }
       : null,
+    project.githubUrl
+      ? {
+          label: "View Repository",
+          href: project.githubUrl,
+          ariaLabel: `View ${project.title} repository on GitHub in a new tab`,
+        }
+      : null,
+    project.apiDocsUrl
+      ? {
+          label: "API Documentation",
+          href: project.apiDocsUrl,
+          ariaLabel: `View ${project.title} API documentation in a new tab`,
+        }
+      : null,
     project.caseStudyUrl
       ? {
-          label: "Case Study",
+          label: "Additional Case Study",
           href: project.caseStudyUrl,
-          ariaLabel: `View the ${project.title} case study in a new tab`,
+          ariaLabel: `View an additional ${project.title} case study resource in a new tab`,
         }
       : null,
   ].filter((link): link is { label: string; href: string; ariaLabel: string } =>
@@ -74,11 +145,11 @@ export default function ProjectDetail() {
       </Link>
 
       <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
-        <div>
+        <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
             <ProjectStatusBadge status={project.status} />
             <span className="rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-xs font-semibold text-slate-300">
-              {projectTypeLabels[project.type]}
+              {projectTypeLabel}
             </span>
           </div>
 
@@ -89,67 +160,125 @@ export default function ProjectDetail() {
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
             {project.summary}
           </p>
-        </div>
 
-        <div className="overflow-hidden rounded-lg border border-slate-800 bg-slate-950">
-          <img
-            src={project.image.src}
-            alt={project.image.alt}
-            className="aspect-video h-full w-full object-cover"
+          <div className="mt-6">
+            <ProjectMetadata
+              items={[
+                { label: "Status", value: projectStatusLabels[project.status] },
+                {
+                  label: "Category",
+                  value: caseStudy?.category ?? projectTypeLabel,
+                },
+                { label: "Role", value: caseStudy?.role },
+                { label: "Timeline", value: caseStudy?.timeline },
+                { label: "Team", value: caseStudy?.team },
+              ]}
+            />
+          </div>
+
+          <TechnologyList
+            technologies={project.techStack}
+            ariaLabel={`${project.title} technology stack`}
+            className="mt-6"
           />
-        </div>
-      </header>
-
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <Card>
-          <h2 className="text-2xl font-semibold tracking-tight text-white">
-            Overview
-          </h2>
-          <p className="mt-4 text-base leading-8 text-slate-300">
-            {project.description}
-          </p>
-        </Card>
-
-        <aside className="space-y-6">
-          <Card>
-            <h2 className="text-lg font-semibold text-white">Tech Stack</h2>
-            <ul
-              aria-label={`${project.title} technologies`}
-              className="mt-4 flex flex-wrap gap-2"
-            >
-              {project.techStack.map((technology) => (
-                <li
-                  key={technology}
-                  className="rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-xs font-medium text-slate-300"
-                >
-                  {technology}
-                </li>
-              ))}
-            </ul>
-          </Card>
 
           {projectLinks.length > 0 ? (
-            <Card>
-              <h2 className="text-lg font-semibold text-white">Links</h2>
-              <div className="mt-4 flex flex-col gap-3">
-                {projectLinks.map((link) => (
-                  <Button
-                    key={link.href}
-                    as="anchor"
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="outline"
-                    aria-label={link.ariaLabel}
-                  >
-                    {link.label}
-                  </Button>
-                ))}
-              </div>
-            </Card>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {projectLinks.map((link) => (
+                <Button
+                  key={link.href}
+                  as="anchor"
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant={
+                    link.label === "View Live Project" ? "primary" : "outline"
+                  }
+                  className="w-full sm:w-auto"
+                  aria-label={link.ariaLabel}
+                >
+                  {link.label}
+                </Button>
+              ))}
+            </div>
           ) : null}
-        </aside>
+        </div>
+
+        {project.image ? (
+          <div className="overflow-hidden rounded-lg border border-slate-800 bg-slate-950">
+            <img
+              src={project.image.src}
+              alt={project.image.alt}
+              className="aspect-video h-full w-full object-cover"
+            />
+          </div>
+        ) : null}
+      </header>
+
+      <div className="space-y-6">
+        <CaseStudySection id="overview" title="Overview">
+          <ProjectText content={project.description} />
+        </CaseStudySection>
+
+        {hasTextContent(problem) ? (
+          <CaseStudySection id="problem" title="The Problem">
+            <ProjectText content={problem} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasTextContent(solution) ? (
+          <CaseStudySection id="solution" title="The Solution">
+            <ProjectText content={solution} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(features) ? (
+          <CaseStudySection id="features" title="Key Features">
+            <FeatureGrid features={features} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasTextContent(architecture) ? (
+          <CaseStudySection
+            id="architecture"
+            title="Architecture and Development Approach"
+          >
+            <ProjectText content={architecture} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(technicalDecisions) ? (
+          <CaseStudySection id="technical-decisions" title="Technical Decisions">
+            <TechnicalDecisionList decisions={technicalDecisions} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(challenges) ? (
+          <CaseStudySection id="challenges" title="Challenges and Learnings">
+            <ChallengeList challenges={challenges} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(learnings) ? (
+          <CaseStudySection id="learnings" title="Learnings">
+            <ProjectText content={learnings} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasTextContent(results) ? (
+          <CaseStudySection id="results" title="Results">
+            <ProjectText content={results} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasTextContent(currentProgress) ? (
+          <CaseStudySection id="current-progress" title="Current Progress">
+            <ProjectText content={currentProgress} />
+          </CaseStudySection>
+        ) : null}
       </div>
+
+      <ProjectNavigation projects={projects} currentSlug={project.slug} />
     </article>
   );
 }
