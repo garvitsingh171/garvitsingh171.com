@@ -95,6 +95,8 @@ export default function ProjectDetail() {
   const projectTypeLabel = projectTypeLabels[project.type];
   const problem = caseStudy?.problem;
   const solution = caseStudy?.solution;
+  const targetUsers = caseStudy?.targetUsers;
+  const useCases = caseStudy?.useCases;
   const features = caseStudy?.features;
   const architecture = caseStudy?.architecture;
   const technicalDecisions = caseStudy?.technicalDecisions;
@@ -102,6 +104,8 @@ export default function ProjectDetail() {
   const learnings = caseStudy?.learnings;
   const results = caseStudy?.results;
   const currentProgress = caseStudy?.currentProgress;
+  const limitations = caseStudy?.limitations;
+  const futureImprovements = caseStudy?.futureImprovements;
   const projectLinks = [
     project.liveUrl
       ? {
@@ -232,6 +236,34 @@ export default function ProjectDetail() {
           </CaseStudySection>
         ) : null}
 
+        {hasItems(targetUsers) || hasItems(useCases) ? (
+          <CaseStudySection id="users-and-use-cases" title="Users and Use Cases">
+            <div className="grid gap-6 md:grid-cols-2">
+              {hasItems(targetUsers) ? (
+                <div>
+                  <h3 className="text-lg font-semibold text-white">
+                    Intended Users
+                  </h3>
+                  <div className="mt-3">
+                    <ProjectText content={targetUsers} />
+                  </div>
+                </div>
+              ) : null}
+
+              {hasItems(useCases) ? (
+                <div>
+                  <h3 className="text-lg font-semibold text-white">
+                    Common Use Cases
+                  </h3>
+                  <div className="mt-3">
+                    <ProjectText content={useCases} />
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </CaseStudySection>
+        ) : null}
+
         {hasItems(features) ? (
           <CaseStudySection id="features" title="Key Features">
             <FeatureGrid features={features} />
@@ -274,6 +306,18 @@ export default function ProjectDetail() {
         {hasTextContent(currentProgress) ? (
           <CaseStudySection id="current-progress" title="Current Progress">
             <ProjectText content={currentProgress} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(limitations) ? (
+          <CaseStudySection id="limitations" title="Limitations">
+            <ProjectText content={limitations} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(futureImprovements) ? (
+          <CaseStudySection id="future-improvements" title="Future Improvements">
+            <ProjectText content={futureImprovements} />
           </CaseStudySection>
         ) : null}
       </div>
