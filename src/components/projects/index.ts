@@ -1,6 +1,23 @@
+export { CaseStudySection } from "./CaseStudySection";
+export type { CaseStudySectionProps } from "./CaseStudySection";
+export { ChallengeList } from "./ChallengeList";
+export type { ChallengeListProps } from "./ChallengeList";
+export { FeatureGrid } from "./FeatureGrid";
+export type { FeatureGridProps } from "./FeatureGrid";
 export { ProjectCard } from "./ProjectCard";
 export type { ProjectCardProps } from "./ProjectCard";
 export { ProjectFilters } from "./ProjectFilters";
 export type { ProjectFilter, ProjectFiltersProps } from "./ProjectFilters";
+export { ProjectMetadata } from "./ProjectMetadata";
+export type {
+  ProjectMetadataItem,
+  ProjectMetadataProps,
+} from "./ProjectMetadata";
+export { ProjectNavigation } from "./ProjectNavigation";
+export type { ProjectNavigationProps } from "./ProjectNavigation";
 export { ProjectStatusBadge } from "./ProjectStatusBadge";
 export type { ProjectStatusBadgeProps } from "./ProjectStatusBadge";
+export { TechnicalDecisionList } from "./TechnicalDecisionList";
+export type { TechnicalDecisionListProps } from "./TechnicalDecisionList";
+export { TechnologyList } from "./TechnologyList";
+export type { TechnologyListProps } from "./TechnologyList";
