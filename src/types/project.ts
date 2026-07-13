@@ -38,6 +38,8 @@ export type ProjectCaseStudy = {
   category?: string;
   problem?: ProjectTextContent;
   solution?: ProjectTextContent;
+  targetUsers?: string[];
+  useCases?: string[];
   features?: ProjectFeature[];
   architecture?: ProjectTextContent;
   technicalDecisions?: ProjectTechnicalDecision[];
@@ -45,6 +47,8 @@ export type ProjectCaseStudy = {
   learnings?: string[];
   results?: ProjectTextContent;
   currentProgress?: ProjectTextContent;
+  limitations?: string[];
+  futureImprovements?: string[];
 };
 
 export type Project = {
