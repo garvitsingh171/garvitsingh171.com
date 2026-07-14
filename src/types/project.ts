@@ -13,6 +13,16 @@ export type ProjectImage = {
 
 export type ProjectTextContent = string | string[];
 
+export type ProjectScreenshotViewport = "desktop" | "mobile";
+
+export type ProjectScreenshot = {
+  src: string;
+  alt: string;
+  title?: string;
+  caption?: string;
+  viewport?: ProjectScreenshotViewport;
+};
+
 export type ProjectFeature = {
   title: string;
   description?: string;
@@ -31,6 +41,39 @@ export type ProjectChallenge = {
   learning?: string;
 };
 
+export type ProjectArchitectureLayerKind =
+  | "client"
+  | "api"
+  | "service"
+  | "database"
+  | "external"
+  | "tooling";
+
+export type ProjectArchitectureLayer = {
+  id: string;
+  title: string;
+  description: string;
+  technologies?: string[];
+  kind?: ProjectArchitectureLayerKind;
+};
+
+export type ProjectArchitectureConnection = {
+  from: string;
+  to: string;
+  label?: string;
+};
+
+export type ProjectArchitectureDiagram = ProjectImage & {
+  caption?: string;
+};
+
+export type ProjectArchitecture = {
+  overview?: ProjectTextContent;
+  layers?: ProjectArchitectureLayer[];
+  connections?: ProjectArchitectureConnection[];
+  diagram?: ProjectArchitectureDiagram;
+};
+
 export type ProjectCaseStudy = {
   role?: string;
   timeline?: string;
@@ -41,7 +84,7 @@ export type ProjectCaseStudy = {
   targetUsers?: string[];
   useCases?: string[];
   features?: ProjectFeature[];
-  architecture?: ProjectTextContent;
+  architecture?: ProjectArchitecture;
   technicalDecisions?: ProjectTechnicalDecision[];
   challenges?: ProjectChallenge[];
   learnings?: string[];
@@ -60,6 +103,7 @@ export type Project = {
   type: ProjectType;
   techStack: string[];
   image?: ProjectImage;
+  screenshots?: ProjectScreenshot[];
   githubUrl?: string;
   liveUrl?: string;
   apiDocsUrl?: string;

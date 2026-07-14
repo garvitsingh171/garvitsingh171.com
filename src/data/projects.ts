@@ -101,12 +101,90 @@ export const projects: Project[] = [
             "The current risk feature stores LOW, MEDIUM, or HIGH results with scores, reasons, and suggested staff actions. It is deterministic rule logic, not trained machine learning.",
         },
       ],
-      architecture: [
-        "The backend follows a route, validation middleware, controller, service, repository, Prisma, and PostgreSQL flow. Routes define endpoints, Zod validation checks inputs, controllers handle HTTP concerns, services apply business rules, and repositories perform database reads, writes, transactions, and raw SQL where needed.",
-        "The main relational entities are User, Clinic, Doctor, DoctorClinic, Patient, PatientClinic, Appointment, QueueEntry, and NoShowPrediction. Appointments connect clinic, doctor, patient, creator, time, status, queue entry, and risk context. Queue entries represent the daily operational flow.",
-        "Appointment creation is a multi-step operation. It verifies clinic ownership for doctor and patient records, counts previous patient attendance signals, acquires transaction-level advisory locks, checks slot conflicts, calculates the next queue position, creates the appointment, creates the queue entry, and stores the no-show prediction inside a transaction.",
-        "The frontend is responsible for Clerk sign-in, active clinic resolution, protected app layout, dashboard, doctors, patients, appointments, queue, loading states, empty states, errors, and toast feedback. Final authorization and writes remain backend responsibilities.",
-      ],
+      architecture: {
+        overview: [
+          "The backend follows a route, validation middleware, controller, service, repository, Prisma, and PostgreSQL flow. Routes define endpoints, Zod validation checks inputs, controllers handle HTTP concerns, services apply business rules, and repositories perform database reads, writes, transactions, and raw SQL where needed.",
+          "The main relational entities are User, Clinic, Doctor, DoctorClinic, Patient, PatientClinic, Appointment, QueueEntry, and NoShowPrediction. Appointments connect clinic, doctor, patient, creator, time, status, queue entry, and risk context. Queue entries represent the daily operational flow.",
+          "Appointment creation is a multi-step operation. It verifies clinic ownership for doctor and patient records, counts previous patient attendance signals, acquires transaction-level advisory locks, checks slot conflicts, calculates the next queue position, creates the appointment, creates the queue entry, and stores the no-show prediction inside a transaction.",
+          "The frontend is responsible for Clerk sign-in, active clinic resolution, protected app layout, dashboard, doctors, patients, appointments, queue, loading states, empty states, errors, and toast feedback. Final authorization and writes remain backend responsibilities.",
+        ],
+        layers: [
+          {
+            id: "react-app",
+            title: "React application",
+            description:
+              "Handles Clerk sign-in, protected application shell, active clinic context, dashboard, doctors, patients, appointments, queue, loading states, empty states, errors, and toast feedback.",
+            technologies: [
+              "React",
+              "TypeScript",
+              "Vite",
+              "Tailwind CSS",
+              "React Router",
+              "Clerk",
+            ],
+            kind: "client",
+          },
+          {
+            id: "express-api",
+            title: "Express API",
+            description:
+              "Registers routes, resolves authentication context, validates input with Zod, runs HTTP controllers and business services, enforces clinic access rules, and coordinates appointment and queue workflows.",
+            technologies: ["Node.js", "Express", "TypeScript", "Zod"],
+            kind: "api",
+          },
+          {
+            id: "persistence",
+            title: "Repository and persistence layer",
+            description:
+              "Runs Prisma operations, PostgreSQL transactions, appointment conflict checks, queue position calculation, advisory locks, and multi-record writes.",
+            technologies: ["Prisma", "PostgreSQL"],
+            kind: "service",
+          },
+          {
+            id: "postgresql",
+            title: "PostgreSQL database",
+            description:
+              "Stores relational clinic, user, doctor, patient, appointment, queue, and no-show prediction data.",
+            technologies: ["PostgreSQL"],
+            kind: "database",
+          },
+          {
+            id: "clerk",
+            title: "External identity service",
+            description:
+              "Provides user sign-in, session identity, and authentication verification before the API maps that identity to an internal Pravaah user.",
+            technologies: ["Clerk"],
+            kind: "external",
+          },
+        ],
+        connections: [
+          {
+            from: "react-app",
+            to: "clerk",
+            label: "User sign-in and session identity.",
+          },
+          {
+            from: "react-app",
+            to: "express-api",
+            label: "Authenticated JSON requests for clinic workflows.",
+          },
+          {
+            from: "express-api",
+            to: "clerk",
+            label: "Token and identity verification before protected operations continue.",
+          },
+          {
+            from: "express-api",
+            to: "persistence",
+            label: "Prisma queries, transactions, and clinic-scoped business rules.",
+          },
+          {
+            from: "persistence",
+            to: "postgresql",
+            label: "PostgreSQL stores relational clinic, appointment, queue, and prediction data.",
+          },
+        ],
+      },
       technicalDecisions: [
         {
           title: "PostgreSQL with Prisma",
@@ -368,11 +446,94 @@ export const projects: Project[] = [
             "The Dockerfile builds a production Node 18 Alpine image, and docker-compose runs the API with a MongoDB service for local deployment testing.",
         },
       ],
-      architecture: [
-        "The application starts in src/server.js, loads environment variables, connects to MongoDB, and listens on the configured PORT or 3000. src/app.js creates the Express app, enables JSON parsing, applies the API rate limiter, registers route modules, serves Swagger UI, and attaches not-found and global error handlers.",
-        "The code is organized as route, middleware, controller, service, model, and MongoDB. Routes define endpoint paths and middleware chains. Middleware handles validation, JWT authentication, role checks, rate limiting, and errors. Controllers shape HTTP responses. Services call Mongoose models. Models define MongoDB document structure.",
-        "MongoDB data is modelled with Mongoose schemas. Songs reference artists and optionally albums, albums reference artists, playlists reference users and songs, and users can reference liked songs. The model uses document collections with references where relationships are needed.",
-      ],
+      architecture: {
+        overview: [
+          "The application starts in src/server.js, loads environment variables, connects to MongoDB, and listens on the configured PORT or 3000. src/app.js creates the Express app, enables JSON parsing, applies the API rate limiter, registers route modules, serves Swagger UI, and attaches not-found and global error handlers.",
+          "The code is organized as route, middleware, controller, service, model, and MongoDB. Routes define endpoint paths and middleware chains. Middleware handles validation, JWT authentication, role checks, rate limiting, and errors. Controllers shape HTTP responses. Services call Mongoose models. Models define MongoDB document structure.",
+          "MongoDB data is modelled with Mongoose schemas. Songs reference artists and optionally albums, albums reference artists, playlists reference users and songs, and users can reference liked songs. The model uses document collections with references where relationships are needed.",
+        ],
+        layers: [
+          {
+            id: "api-consumers",
+            title: "API consumers and documentation",
+            description:
+              "Supports Swagger UI exploration, Postman requests, and future web or mobile clients that consume the REST API over HTTP/JSON.",
+            technologies: ["Swagger", "Postman", "HTTP/JSON"],
+            kind: "client",
+          },
+          {
+            id: "express-api",
+            title: "Express API",
+            description:
+              "Owns resource routes, authentication, admin role checks, validation middleware, rate limiting, centralized errors, and API response shape.",
+            technologies: ["Node.js", "Express", "JWT", "Express Validator"],
+            kind: "api",
+          },
+          {
+            id: "controllers-services",
+            title: "Controllers and services",
+            description:
+              "Handle requests, perform resource operations, implement cursor pagination, and provide simple analytics logic.",
+            kind: "service",
+          },
+          {
+            id: "mongoose-models",
+            title: "Mongoose models",
+            description:
+              "Define user, song, artist, album, and playlist schemas with ObjectId relationships, schema validation, model methods, and hooks.",
+            technologies: ["Mongoose"],
+            kind: "service",
+          },
+          {
+            id: "mongodb",
+            title: "MongoDB database",
+            description:
+              "Persists music catalog resources, playlists, users, liked songs, and related document data.",
+            technologies: ["MongoDB"],
+            kind: "database",
+          },
+          {
+            id: "docker",
+            title: "Runtime tooling",
+            description:
+              "Provides a reproducible local API and MongoDB setup through the Dockerfile and docker-compose configuration.",
+            technologies: ["Docker"],
+            kind: "tooling",
+          },
+        ],
+        connections: [
+          {
+            from: "api-consumers",
+            to: "express-api",
+            label: "HTTP/JSON requests from Swagger UI, Postman, or future clients.",
+          },
+          {
+            from: "express-api",
+            to: "controllers-services",
+            label: "Validated requests are routed into controller and service logic.",
+          },
+          {
+            from: "controllers-services",
+            to: "mongoose-models",
+            label: "Resource operations use Mongoose schemas and model methods.",
+          },
+          {
+            from: "mongoose-models",
+            to: "mongodb",
+            label: "Mongoose persists and reads document data from MongoDB.",
+          },
+          {
+            from: "docker",
+            to: "express-api",
+            label: "Docker runs the API container for local deployment testing.",
+          },
+          {
+            from: "docker",
+            to: "mongodb",
+            label: "Docker Compose runs MongoDB beside the API service.",
+          },
+        ],
+      },
       technicalDecisions: [
         {
           title: "MongoDB with Mongoose",
@@ -660,14 +821,85 @@ export const projects: Project[] = [
             "The repository includes guarded demo seeding, local and production-image Docker Compose files, server/client Dockerfiles, and a GitHub Actions workflow that runs server tests, client lint, client tests, and a client build with MongoDB available in CI.",
         },
       ],
-      architecture: [
-        "The frontend is a React single-page application built with Vite, React Router, Axios, authentication context, theme context, protected and public route wrappers, and toast-based feedback. Pages cover dashboard, workout creation/editing, active sessions, history, progress, records, goals, and exercises.",
-        "A typical request flows from a page or form into the shared Axios client, then to an Express API route, middleware, controller or service logic, Mongoose model operations, MongoDB persistence, an API response, React state updates, and user feedback. Axios attaches the access token and extracts backend error messages for toasts.",
-        "The backend uses Node.js, Express, MongoDB, Mongoose, JWT, bcrypt, Multer, Cloudinary, CORS, cookie parsing, custom application errors, validation middleware, and shared response helpers. Route groups include /api/users, /api/auth, /api/workouts, /api/sessions, /api/goals, /api/records, /api/exercises, /api/upload, and /api/health.",
-        "The codebase has an evolving layered architecture rather than a perfectly uniform one. Workout and user flows use route, validation, controller, service, repository, model, and MongoDB layers, while sessions, goals, records, exercises, and uploads keep more business logic directly in controllers or focused services.",
-        "The main data models divide responsibilities clearly. User stores account identity, Workout stores reusable plans, WorkoutSession stores completed session snapshots, Goal stores an active weekly target, PersonalRecord stores best values per user/exercise/record type, and Exercise stores default or user-created exercise definitions.",
-        "Deployment and operations configuration is present but still project-level rather than proven production operations. The repo includes environment-variable documentation, a Vercel SPA rewrite under the client, Docker Compose for local Mongo/client/server runs, a production-image compose file, Dockerfiles, demo seeding, and CI checks.",
-      ],
+      architecture: {
+        overview: [
+          "The frontend is a React single-page application built with Vite, React Router, Axios, authentication context, theme context, protected and public route wrappers, and toast-based feedback. Pages cover dashboard, workout creation/editing, active sessions, history, progress, records, goals, and exercises.",
+          "A typical request flows from a page or form into the shared Axios client, then to an Express API route, middleware, controller or service logic, Mongoose model operations, MongoDB persistence, an API response, React state updates, and user feedback. Axios attaches the access token and extracts backend error messages for toasts.",
+          "The backend uses Node.js, Express, MongoDB, Mongoose, JWT, bcrypt, Multer, Cloudinary, CORS, cookie parsing, custom application errors, validation middleware, and shared response helpers. Route groups include /api/users, /api/auth, /api/workouts, /api/sessions, /api/goals, /api/records, /api/exercises, /api/upload, and /api/health.",
+          "The codebase has an evolving layered architecture rather than a perfectly uniform one. Workout and user flows use route, validation, controller, service, repository, model, and MongoDB layers, while sessions, goals, records, exercises, and uploads keep more business logic directly in controllers or focused services.",
+          "The main data models divide responsibilities clearly. User stores account identity, Workout stores reusable plans, WorkoutSession stores completed session snapshots, Goal stores an active weekly target, PersonalRecord stores best values per user/exercise/record type, and Exercise stores default or user-created exercise definitions.",
+          "Deployment and operations configuration is present but still project-level rather than proven production operations. The repo includes environment-variable documentation, a Vercel SPA rewrite under the client, Docker Compose for local Mongo/client/server runs, a production-image compose file, Dockerfiles, demo seeding, and CI checks.",
+        ],
+        layers: [
+          {
+            id: "react-client",
+            title: "React client",
+            description:
+              "Handles authentication UI, protected routes, workout builder, active sessions, dashboard, history, goals, progress, records, exercise library, theme state, and user feedback.",
+            technologies: ["React", "Vite", "React Router", "Axios"],
+            kind: "client",
+          },
+          {
+            id: "express-api",
+            title: "Express API",
+            description:
+              "Owns authentication, workout CRUD, session persistence, goals and streaks, exercise progress, personal records, exercise library, upload endpoint, and centralized errors.",
+            technologies: ["Node.js", "Express", "JWT", "bcrypt", "Multer"],
+            kind: "api",
+          },
+          {
+            id: "mongodb",
+            title: "MongoDB persistence",
+            description:
+              "Stores user accounts, reusable workout templates, completed workout sessions, goals, personal records, and default or custom exercises through Mongoose models.",
+            technologies: ["MongoDB", "Mongoose"],
+            kind: "database",
+          },
+          {
+            id: "cloudinary",
+            title: "Media service",
+            description:
+              "Stores workout cover images uploaded through the authenticated API and returns secure hosted image URLs.",
+            technologies: ["Cloudinary"],
+            kind: "external",
+          },
+          {
+            id: "delivery-tooling",
+            title: "Delivery and verification tooling",
+            description:
+              "Supports Docker-based environments, guarded demo seeding, automated server and client checks, and production client build verification.",
+            technologies: ["Docker", "GitHub Actions"],
+            kind: "tooling",
+          },
+        ],
+        connections: [
+          {
+            from: "react-client",
+            to: "express-api",
+            label: "Bearer-authenticated API requests through the shared Axios client.",
+          },
+          {
+            from: "express-api",
+            to: "mongodb",
+            label: "Mongoose reads and writes users, workouts, sessions, goals, records, and exercises.",
+          },
+          {
+            from: "express-api",
+            to: "cloudinary",
+            label: "Validated workout-cover uploads are streamed to Cloudinary.",
+          },
+          {
+            from: "delivery-tooling",
+            to: "express-api",
+            label: "CI and Docker verify the server runtime and API behavior.",
+          },
+          {
+            from: "delivery-tooling",
+            to: "react-client",
+            label: "CI runs client lint, tests, and production build verification.",
+          },
+        ],
+      },
       technicalDecisions: [
         {
           title: "MERN stack",

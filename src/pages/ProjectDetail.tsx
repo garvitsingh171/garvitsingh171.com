@@ -3,15 +3,19 @@ import {
   CaseStudySection,
   ChallengeList,
   FeatureGrid,
+  hasTextContent,
+  ProjectArchitectureSection,
   ProjectMetadata,
   ProjectNavigation,
+  ProjectScreenshotsSection,
   ProjectStatusBadge,
+  ProjectText,
   TechnicalDecisionList,
   TechnologyList,
 } from "../components/projects";
 import { Button, Card } from "../components/ui";
 import { projects } from "../data/projects";
-import type { ProjectTextContent, ProjectType } from "../types/project";
+import type { ProjectType } from "../types/project";
 
 const projectTypeLabels = {
   "full-stack": "Full-stack",
@@ -26,42 +30,8 @@ const projectStatusLabels = {
   planned: "Planned",
 } as const;
 
-function getTextItems(content?: ProjectTextContent) {
-  if (Array.isArray(content)) {
-    return content.map((item) => item.trim()).filter(Boolean);
-  }
-
-  return content?.trim() ? [content.trim()] : [];
-}
-
-function hasTextContent(
-  content?: ProjectTextContent,
-): content is ProjectTextContent {
-  return getTextItems(content).length > 0;
-}
-
 function hasItems<T>(items?: T[]): items is T[] {
   return Array.isArray(items) && items.length > 0;
-}
-
-function ProjectText({ content }: { content: ProjectTextContent }) {
-  const items = getTextItems(content);
-
-  if (items.length === 1) {
-    return (
-      <p className="max-w-3xl text-base leading-8 text-slate-300">
-        {items[0]}
-      </p>
-    );
-  }
-
-  return (
-    <ul className="max-w-3xl list-disc space-y-3 pl-5 text-base leading-8 text-slate-300">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  );
 }
 
 export default function ProjectDetail() {
@@ -270,14 +240,15 @@ export default function ProjectDetail() {
           </CaseStudySection>
         ) : null}
 
-        {hasTextContent(architecture) ? (
-          <CaseStudySection
-            id="architecture"
-            title="Architecture and Development Approach"
-          >
-            <ProjectText content={architecture} />
-          </CaseStudySection>
-        ) : null}
+        <ProjectScreenshotsSection
+          projectTitle={project.title}
+          screenshots={project.screenshots}
+        />
+
+        <ProjectArchitectureSection
+          projectTitle={project.title}
+          architecture={architecture}
+        />
 
         {hasItems(technicalDecisions) ? (
           <CaseStudySection id="technical-decisions" title="Technical Decisions">
