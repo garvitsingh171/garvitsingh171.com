@@ -41,6 +41,21 @@ export type ProjectChallenge = {
   learning?: string;
 };
 
+export type ProjectLearningCategory =
+  | "technical"
+  | "architecture"
+  | "debugging"
+  | "deployment"
+  | "collaboration"
+  | "product";
+
+export type ProjectLearning = {
+  title: string;
+  description: string;
+  category: ProjectLearningCategory;
+  application?: string;
+};
+
 export type ProjectArchitectureLayerKind =
   | "client"
   | "api"
@@ -87,7 +102,7 @@ export type ProjectCaseStudy = {
   architecture?: ProjectArchitecture;
   technicalDecisions?: ProjectTechnicalDecision[];
   challenges?: ProjectChallenge[];
-  learnings?: string[];
+  learnings?: ProjectLearning[];
   results?: ProjectTextContent;
   currentProgress?: ProjectTextContent;
   limitations?: string[];

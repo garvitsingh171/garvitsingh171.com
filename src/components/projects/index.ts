@@ -15,6 +15,8 @@ export type {
   ProjectMetadataItem,
   ProjectMetadataProps,
 } from "./ProjectMetadata";
+export { ProjectLearningsSection } from "./ProjectLearningsSection";
+export type { ProjectLearningsSectionProps } from "./ProjectLearningsSection";
 export { ProjectNavigation } from "./ProjectNavigation";
 export type { ProjectNavigationProps } from "./ProjectNavigation";
 export { ProjectStatusBadge } from "./ProjectStatusBadge";
