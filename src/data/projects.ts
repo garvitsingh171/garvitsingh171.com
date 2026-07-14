@@ -301,12 +301,70 @@ export const projects: Project[] = [
         },
       ],
       learnings: [
-        "Relational schema design matters when appointments connect users, clinics, doctors, patients, queue entries, and prediction records.",
-        "Transactions are essential when one user action creates or updates multiple records.",
-        "Backend business rules should protect appointment conflicts, clinic access, and final status transitions.",
-        "Clerk handles identity, but the application still needs its own role, status, and clinic access model.",
-        "Rule-based risk scoring should be clearly explained so readers do not confuse it with trained machine learning.",
-        "Deployment planning needs environment variables, CORS configuration, database migrations, and post-deploy smoke checks.",
+        {
+          category: "architecture",
+          title: "Relational models should reflect real workflows",
+          description:
+            "Pravaah taught me that schema design should start from the clinic workflow, not from isolated screens. Users, clinics, doctors, patients, appointments, queue entries, and no-show prediction records all affect each other, while DoctorClinic and PatientClinic links model clinic-specific relationships.",
+          application:
+            "For future systems, I start by mapping entities, ownership, states, and relationship constraints before implementing endpoints.",
+        },
+        {
+          category: "technical",
+          title: "Multi-record workflows need transactions",
+          description:
+            "Appointment booking creates appointment, queue, and no-show prediction data together. If only one of those writes succeeded, the clinic day could show a scheduled appointment without a queue entry or stored risk context.",
+          application:
+            "I now identify operations that must succeed or fail together before writing repository code.",
+        },
+        {
+          category: "debugging",
+          title: "Concurrency exists even in small MVPs",
+          description:
+            "Appointment-slot checks and queue-position calculation both depend on read-then-write behavior. Pravaah needed transaction-level advisory locks and conflict checks because local single-user testing can hide race conditions.",
+          application:
+            "I look carefully at workflows involving counters, positions, inventory, slots, or status changes before assuming sequential requests.",
+        },
+        {
+          category: "technical",
+          title: "Authentication and authorization are different layers",
+          description:
+            "Clerk confirms session identity, but Pravaah still needs an active internal user with role, status, and clinic association before clinic operations are allowed. A signed-in user should not automatically access every clinic record.",
+          application:
+            "I keep external identity management separate from domain authorization and add resource-specific access checks in the API.",
+        },
+        {
+          category: "architecture",
+          title: "Operational workflows benefit from explicit states",
+          description:
+            "Appointment and queue statuses have to stay synchronized, and final states such as completed, cancelled, or no-show should not be changed accidentally. Treating these as business transitions made the workflow safer than arbitrary string updates.",
+          application:
+            "I model status transitions as backend rules whenever a workflow has final states or linked records.",
+        },
+        {
+          category: "product",
+          title: "Explainable rules are better than unsupported AI claims",
+          description:
+            "The no-show feature uses deterministic LOW, MEDIUM, and HIGH risk rules with reasons and suggested actions. Because the project has no verified training dataset, describing the feature honestly is more useful than overstating it as machine learning.",
+          application:
+            "I match technical claims to the evidence and data actually available, especially when a feature could be mistaken for AI.",
+        },
+        {
+          category: "deployment",
+          title: "Deployment is a cross-system workflow",
+          description:
+            "Pravaah deployment planning has to coordinate the frontend, backend, PostgreSQL, Prisma migrations, Clerk configuration, CORS, and environment variables. A successful local build is only one part of release readiness.",
+          application:
+            "I use deployment checklists, environment documentation, migrations, and post-deploy smoke tests instead of treating deployment as a single command.",
+        },
+        {
+          category: "collaboration",
+          title: "Clear boundaries improve maintainability and handoff",
+          description:
+            "Routes, validation, controllers, services, repositories, and Prisma access each have different responsibilities. Those boundaries make it easier for another developer to understand where clinic access rules or appointment logic belong.",
+          application:
+            "I organize modules so future reviewers can find HTTP handling, business rules, and persistence code without reading the entire application.",
+        },
       ],
       results: [
         "Implemented the core MVP spine for clinic-side Admin and Staff workflows.",
@@ -642,13 +700,78 @@ export const projects: Project[] = [
         },
       ],
       learnings: [
-        "How to organize an Express API into routes, middleware, controllers, services, models, and utilities.",
-        "How JWT authentication differs from role-based authorization.",
-        "How Mongoose schemas, ObjectId references, required fields, unique fields, methods, hooks, and JSON transforms work together.",
-        "How express-validator can catch body and parameter issues before controller logic runs.",
-        "How centralized error handling improves response consistency.",
-        "How cursor pagination works with MongoDB ObjectIds.",
-        "How Docker and docker-compose make backend runtime setup easier to reproduce.",
+        {
+          category: "architecture",
+          title: "Backend structure matters before feature count grows",
+          description:
+            "BeatHub API moved beyond a single route file into route modules, middleware, controllers, services, models, and utilities. That separation made users, songs, artists, albums, playlists, analytics, auth, and errors easier to extend.",
+          application:
+            "I establish module boundaries before CRUD endpoints become tightly coupled and difficult to test.",
+        },
+        {
+          category: "technical",
+          title: "Authentication and role authorization need different failure paths",
+          description:
+            "The API distinguishes missing or invalid tokens from authenticated users who lack the admin role. Returning 401 for authentication failures and 403 for permission failures makes backend behavior clearer.",
+          application:
+            "I design authentication and authorization middleware separately so each failure mode communicates the right problem.",
+        },
+        {
+          category: "technical",
+          title: "Security belongs in more than controllers",
+          description:
+            "Password hashing, password exclusion, comparison methods, and JSON transforms live close to the User model. That keeps sensitive-field handling from depending on every controller remembering to remove password data.",
+          application:
+            "I place security guarantees near the data model when practical, then keep controllers focused on request and response flow.",
+        },
+        {
+          category: "debugging",
+          title: "Boundary validation keeps deeper layers simpler",
+          description:
+            "express-validator checks request bodies and MongoDB ObjectId parameters before controller and database logic run. This turns predictable bad input into consistent 400 responses instead of scattered runtime errors.",
+          application:
+            "I reject malformed input at the API boundary with a documented response shape before it reaches business logic.",
+        },
+        {
+          category: "architecture",
+          title: "Pagination is part of the API contract",
+          description:
+            "Cursor pagination for songs affected query logic, cursor validation, response metadata, and future client behavior. It was not only a database optimization.",
+          application:
+            "I design list response shape, metadata, and error handling before implementing pagination queries.",
+        },
+        {
+          category: "debugging",
+          title: "Centralized errors reduce debugging ambiguity",
+          description:
+            "Validation failures, duplicate keys, invalid IDs, missing resources, and application errors all need predictable JSON responses. A shared error handler made tests and future client integration easier to reason about.",
+          application:
+            "I prefer one documented error contract over endpoint-specific response formats.",
+        },
+        {
+          category: "collaboration",
+          title: "API documentation is collaboration infrastructure",
+          description:
+            "Swagger UI and the Postman collection make the backend understandable to a future frontend developer or reviewer without requiring them to read controller source code first.",
+          application:
+            "I treat API examples and documentation as part of the interface rather than optional polish.",
+        },
+        {
+          category: "deployment",
+          title: "Containers expose runtime assumptions",
+          description:
+            "Docker and Docker Compose clarify the Node runtime, MongoDB dependency, ports, and environment variables. Containerization improves setup repeatability, but it does not by itself prove production readiness.",
+          application:
+            "I use containers to document runtime requirements while separately planning hosting, secrets, health checks, and monitoring.",
+        },
+        {
+          category: "product",
+          title: "Practice infrastructure still has production trade-offs",
+          description:
+            "The in-memory rate limiter is useful for learning and local API protection, but it would not coordinate limits across multiple API instances. That limitation belongs in the project story instead of being hidden.",
+          application:
+            "I state infrastructure limits clearly and choose production replacements only when the project scope requires them.",
+        },
       ],
       results: [
         "Implemented user registration, login, JWT authentication, admin role checks, and password hashing.",
@@ -1059,16 +1182,94 @@ export const projects: Project[] = [
         },
       ],
       learnings: [
-        "How React forms and protected routes connect to authenticated Express APIs.",
-        "How bcrypt password hashing, JWT access tokens, refresh-token cookies, and local session persistence fit together.",
-        "Why authentication and resource ownership authorization need separate checks.",
-        "How to model reusable templates separately from completed historical events in MongoDB.",
-        "How Mongoose schemas, embedded subdocuments, indexes, validation, and ObjectId references shape a full-stack feature.",
-        "How to calculate server-side metrics from user-entered session data without trusting only the frontend.",
-        "How uploads work with Multer memory storage, file validation, Cloudinary streaming, and URL persistence.",
-        "How date filters, monthly grouping, weekly goals, and streaks create hidden complexity.",
-        "How centralized errors and shared response helpers make frontend feedback easier to implement.",
-        "How Docker, environment documentation, demo seeding, and CI fit into a more complete project lifecycle.",
+        {
+          category: "architecture",
+          title: "Mutable templates and historical events need separate models",
+          description:
+            "Workout templates describe reusable plans, while WorkoutSession documents describe what actually happened during a completed workout. Editing a template later should not rewrite the reps, weights, timing, or volume from past sessions.",
+          application:
+            "I separate reusable definitions from immutable or snapshot-based events when they have different lifecycles.",
+        },
+        {
+          category: "technical",
+          title: "A valid token does not grant access to every resource",
+          description:
+            "Workoutly uses JWTs to identify the requester, but workouts, sessions, goals, records, and custom exercises are user-specific. Ownership checks still have to protect each personal fitness resource.",
+          application:
+            "I add owner or tenant conditions to protected database operations rather than relying only on authentication middleware.",
+        },
+        {
+          category: "technical",
+          title: "Derived metrics should be calculated on the server",
+          description:
+            "Completed-set totals, volume, summaries, and personal records should not depend only on client-calculated values. The server normalizes set values, counts completed work, and calculates volume from actual reps and weight.",
+          application:
+            "I calculate trusted business metrics on the server from validated inputs whenever the result affects history or user-facing summaries.",
+        },
+        {
+          category: "architecture",
+          title: "Similar-looking domain data may have different lifecycles",
+          description:
+            "Workout exercises store planned values, session exercises store actual reps, weights, and completion state, and exercise-library entries support suggestions and custom movements. Similar names do not mean the same model responsibility.",
+          application:
+            "I model data around lifecycle and ownership instead of grouping fields only because they look similar in the UI.",
+        },
+        {
+          category: "debugging",
+          title: "Date-based features contain hidden edge cases",
+          description:
+            "History filters, monthly calendar aggregation, weekly targets, and streaks all depend on date boundaries. Workoutly's straightforward ISO date logic works for the current scope, but timezone behavior remains an important improvement area.",
+          application:
+            "I define timezone and calendar-boundary rules early when building date-sensitive features.",
+        },
+        {
+          category: "technical",
+          title: "Uploads require a complete pipeline",
+          description:
+            "Workout cover images involve Multer memory storage, MIME filtering, file-size limits, Cloudinary streaming, secure URLs, and error handling. A file input alone is not an upload system.",
+          application:
+            "I plan validation, storage, cleanup, credentials, and failure recovery together when adding media features.",
+        },
+        {
+          category: "architecture",
+          title: "Authentication convenience and security involve trade-offs",
+          description:
+            "Bearer access tokens, localStorage persistence, refresh-token cookies, retry behavior, logout, and protected routes all interact. The current approach fits the project scope, but hardened production use would need stronger rotation, revocation, and storage decisions.",
+          application:
+            "I document token lifecycle and threat assumptions instead of describing an auth flow as secure without qualification.",
+        },
+        {
+          category: "debugging",
+          title: "Error handling is part of the user experience",
+          description:
+            "Loading states, empty states, validation messages, authentication failures, and toast feedback determine whether the app feels reliable. Backend response consistency makes that frontend feedback easier to implement.",
+          application:
+            "I design failure and empty-state behavior alongside the successful workflow.",
+        },
+        {
+          category: "architecture",
+          title: "An evolving architecture reveals where abstraction helps",
+          description:
+            "Workout and user modules have clearer service and repository layers, while sessions, goals, exercises, records, and uploads still contain more controller logic. The unevenness shows where abstraction would help and where extra files would be premature.",
+          application:
+            "I introduce layers when they isolate meaningful business logic rather than adding structure automatically.",
+        },
+        {
+          category: "collaboration",
+          title: "Reproducible demo data improves review and handoff",
+          description:
+            "Guarded demo seeding creates populated and empty-state accounts so a reviewer can inspect dashboards, history, progress, records, and empty states without manually creating weeks of workouts.",
+          application:
+            "I provide safe, repeatable seed data when a project's value depends on historical records or realistic state.",
+        },
+        {
+          category: "deployment",
+          title: "CI and Docker are steps toward release readiness",
+          description:
+            "GitHub Actions verifies server tests, client lint, client tests, and the production client build, while Docker documents runtime dependencies. Those checks still do not prove monitoring, hosted secrets, or smoke-tested production behavior.",
+          application:
+            "I treat automated checks as one release layer inside a larger deployment checklist.",
+        },
       ],
       results: [
         "Built an authenticated full-stack MERN workout tracker.",

@@ -5,6 +5,7 @@ import {
   FeatureGrid,
   hasTextContent,
   ProjectArchitectureSection,
+  ProjectLearningsSection,
   ProjectMetadata,
   ProjectNavigation,
   ProjectScreenshotsSection,
@@ -257,16 +258,15 @@ export default function ProjectDetail() {
         ) : null}
 
         {hasItems(challenges) ? (
-          <CaseStudySection id="challenges" title="Challenges and Learnings">
+          <CaseStudySection id="challenges" title="Engineering Challenges">
             <ChallengeList challenges={challenges} />
           </CaseStudySection>
         ) : null}
 
-        {hasItems(learnings) ? (
-          <CaseStudySection id="learnings" title="Learnings">
-            <ProjectText content={learnings} />
-          </CaseStudySection>
-        ) : null}
+        <ProjectLearningsSection
+          projectTitle={project.title}
+          learnings={learnings}
+        />
 
         {hasTextContent(results) ? (
           <CaseStudySection id="results" title="Results">
