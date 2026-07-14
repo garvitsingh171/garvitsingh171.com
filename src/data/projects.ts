@@ -543,6 +543,10 @@ export const projects: Project[] = [
       "Mongoose",
       "JWT",
       "bcrypt",
+      "Multer",
+      "Cloudinary",
+      "Docker",
+      "GitHub Actions",
     ],
     image: {
       src: "/images/projects/workoutly.svg",
@@ -551,41 +555,335 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/garvitsingh171/workoutly",
     caseStudy: {
       category: "Workout tracking application",
-      problem:
-        "Workout tracking requires a way to create routines, record completed sessions, monitor progress, and build consistent training habits.",
-      solution:
-        "Workoutly lets users securely create routines, complete workout sessions, and manage their own fitness data through a full-stack MERN application.",
+      role: "Full-stack developer",
+      team: "Solo project",
+      problem: [
+        "The core product problem behind Workoutly is that planning a workout and completing a workout are different jobs. A reusable routine can describe intended exercises, sets, repetitions, rest time, duration, difficulty, and notes, but it does not show what actually happened in the gym.",
+        "A useful workout tracker needs to preserve both sides of that workflow. Users need a way to prepare repeatable routines, start a session from a saved plan, record actual repetitions and weights, save historical results, review consistency, and keep each user's fitness data private without maintaining a separate spreadsheet.",
+        "I started Workoutly after building mostly frontend-focused React projects. The goal was not to create a coaching platform or a commercial fitness product; it was to learn how a real React interface connects to authenticated APIs, persistent MongoDB documents, uploads, session history, and deployment configuration.",
+      ],
+      solution: [
+        "Workoutly is a full-stack MERN application that separates reusable workout templates from completed workout sessions. Users create routines, add planned exercises, upload a workout cover image, start an active session, mark sets complete, enter actual reps and weight, and save the completed session as its own MongoDB document.",
+        "The backend protects API routes with JWT access-token authentication and resource-level ownership checks. Workouts, sessions, goals, records, exercise library data, uploads, and profile data are scoped to the authenticated user where applicable, so a valid token does not automatically grant access to another user's workout data.",
+        "As the project matured, I extended it beyond basic workout CRUD into persisted history, date filters, monthly calendar summaries, CSV export, weekly goals, streaks, exercise-specific progress, personal-record detection, default and custom exercises, demo seeding, Docker configuration, and GitHub Actions verification.",
+      ],
+      targetUsers: [
+        "Individuals who want to create and reuse their own workout routines.",
+        "Beginner and intermediate gym users who want a structured record of completed workouts.",
+        "Users who want simple consistency indicators such as weekly goals, streaks, and calendar history.",
+        "Users who want to observe changes in repetitions, weight, and exercise volume over time.",
+        "Developers reviewing the project as a practical full-stack MERN application.",
+      ],
+      useCases: [
+        "Register, log in, and access protected workout pages.",
+        "Create reusable workout templates with ordered exercises, sets, reps, rest time, duration, difficulty, and notes.",
+        "Upload a workout cover image for a saved routine.",
+        "View, edit, delete, paginate, and duplicate owned workout templates.",
+        "Start an active workout session from a saved routine.",
+        "Record actual repetitions, weight, and completed state for each set.",
+        "Save completed sessions with timing data, completed-set totals, and total volume.",
+        "Review workout history with date range, workout-name, and sort filters.",
+        "View a monthly calendar summary of completed sessions.",
+        "Export completed session and set-level history as CSV.",
+        "Track weekly goals, remaining sessions, completion percentage, and streaks.",
+        "Search exercise progress and review personal records for completed workouts.",
+      ],
       features: [
         {
-          title: "Routine and session tracking",
+          title: "Registration, login, and protected routes",
           description:
-            "Users can create routines, complete workout sessions, and view workout history.",
+            "Users can register and log in with password hashing through bcrypt. Protected frontend pages require an authenticated user, and protected backend routes require a Bearer access token.",
         },
         {
-          title: "Progress visibility",
+          title: "Access tokens with refresh-token support",
           description:
-            "Includes calendar summaries, weekly goals, streak tracking, exercise progress, and dashboard insights.",
+            "The frontend stores the access token and user object in localStorage and attaches the token through the Authorization header. Refresh-token endpoints and an HTTP-only cookie flow exist, and the Axios client can retry a 401 through /api/auth/refresh when a refresh cookie is available.",
         },
         {
-          title: "Personal fitness data",
+          title: "Ownership-scoped workout templates",
           description:
-            "Combines ownership-based authorization with personal-record detection, reusable workout templates, and CSV exports.",
+            "Workout create, list, read, update, delete, and duplicate operations are scoped to the authenticated author. Authentication confirms the user, while authorization confirms ownership of the requested workout.",
         },
+        {
+          title: "Reusable workout builder",
+          description:
+            "Workout templates store a name, embedded exercises, duration, difficulty, notes, optional cover image URL, author, and timestamps. Each planned exercise stores a name, target sets, target reps, rest duration, and exercise notes.",
+        },
+        {
+          title: "Workout cover-image upload",
+          description:
+            "Authenticated uploads use Multer memory storage, JPEG/PNG/WebP/GIF filtering, a 5 MB limit, and Cloudinary upload streaming into the workoutly folder. The API returns a secure URL and public ID, and the create-workout flow saves the URL as the routine cover image.",
+        },
+        {
+          title: "Active workout sessions",
+          description:
+            "Starting a routine converts planned exercises into set logs. Users can enter actual reps and weight, mark sets complete, use the rest timer, and finish only after at least one set has been completed.",
+        },
+        {
+          title: "Persisted session history",
+          description:
+            "Completed sessions are stored separately from workout templates with user, source workout, workout-name snapshot, start and completion times, duration, set results, completed-set total, total volume, notes, and timestamps.",
+        },
+        {
+          title: "History filters, calendar, and CSV export",
+          description:
+            "History supports newest/oldest sorting, date range filtering, workout-name filtering, pagination, selected-date drill-down from a monthly calendar, and CSV export with escaped session and set-level values.",
+        },
+        {
+          title: "Dashboard summaries",
+          description:
+            "The dashboard combines saved routine counts with session summary data, goal summary data, recent sessions, calendar activity, exercise-library category context, and loading, empty, and error states.",
+        },
+        {
+          title: "Weekly goals and streaks",
+          description:
+            "Users can set an active weekly workout target. The default target is 3 sessions, valid targets are 1 through 14, and the summary reports sessions this week, remaining sessions, completion percentage, current streak, and longest streak.",
+        },
+        {
+          title: "Exercise progress tracking",
+          description:
+            "Users can search an exercise name and view progress derived from matching completed sessions, including best weight, best reps, total volume, completed sets, session date, and workout name.",
+        },
+        {
+          title: "Automatic personal records",
+          description:
+            "After a session is saved, completed sets are evaluated for max weight, max reps, and max volume records per user and exercise. Records link back to the session and workout where they were achieved.",
+        },
+        {
+          title: "Default and custom exercise library",
+          description:
+            "The exercise library combines default exercises with user-created custom exercises. It supports search, category filtering, equipment filtering, instructions, and uniqueness rules for default names and user-scoped custom names.",
+        },
+        {
+          title: "Demo data, Docker, and CI",
+          description:
+            "The repository includes guarded demo seeding, local and production-image Docker Compose files, server/client Dockerfiles, and a GitHub Actions workflow that runs server tests, client lint, client tests, and a client build with MongoDB available in CI.",
+        },
+      ],
+      architecture: [
+        "The frontend is a React single-page application built with Vite, React Router, Axios, authentication context, theme context, protected and public route wrappers, and toast-based feedback. Pages cover dashboard, workout creation/editing, active sessions, history, progress, records, goals, and exercises.",
+        "A typical request flows from a page or form into the shared Axios client, then to an Express API route, middleware, controller or service logic, Mongoose model operations, MongoDB persistence, an API response, React state updates, and user feedback. Axios attaches the access token and extracts backend error messages for toasts.",
+        "The backend uses Node.js, Express, MongoDB, Mongoose, JWT, bcrypt, Multer, Cloudinary, CORS, cookie parsing, custom application errors, validation middleware, and shared response helpers. Route groups include /api/users, /api/auth, /api/workouts, /api/sessions, /api/goals, /api/records, /api/exercises, /api/upload, and /api/health.",
+        "The codebase has an evolving layered architecture rather than a perfectly uniform one. Workout and user flows use route, validation, controller, service, repository, model, and MongoDB layers, while sessions, goals, records, exercises, and uploads keep more business logic directly in controllers or focused services.",
+        "The main data models divide responsibilities clearly. User stores account identity, Workout stores reusable plans, WorkoutSession stores completed session snapshots, Goal stores an active weekly target, PersonalRecord stores best values per user/exercise/record type, and Exercise stores default or user-created exercise definitions.",
+        "Deployment and operations configuration is present but still project-level rather than proven production operations. The repo includes environment-variable documentation, a Vercel SPA rewrite under the client, Docker Compose for local Mongo/client/server runs, a production-image compose file, Dockerfiles, demo seeding, and CI checks.",
       ],
       technicalDecisions: [
         {
-          title: "Ownership-based authorization",
+          title: "MERN stack",
           description:
-            "Workout data is managed through ownership-based authorization.",
+            "Workoutly uses React and Vite on the frontend with Node.js, Express, MongoDB, and Mongoose on the backend.",
+          reason:
+            "Using JavaScript across the stack made the project approachable while I was learning how frontend forms, REST APIs, and persistent documents fit together.",
+          tradeOff:
+            "MongoDB document relationships and cross-document consistency remain application responsibilities, and plain JavaScript does not provide the compile-time guarantees that TypeScript would.",
         },
         {
-          title: "MERN application structure",
+          title: "Separate workout templates and completed sessions",
           description:
-            "The project combines React and Vite on the frontend with Node.js, Express, MongoDB, and Mongoose on the backend.",
+            "Workout documents store reusable plans, while WorkoutSession documents store actual completed training events.",
+          reason:
+            "A template can change over time, but historical sessions should still show what was actually performed when the session was saved.",
+          tradeOff:
+            "This adds more models, endpoints, validation, and synchronization logic than storing every workout as a single mutable document.",
+        },
+        {
+          title: "Ownership-based authorization",
+          description:
+            "Protected operations query or validate data against the authenticated user's id instead of relying only on a valid token.",
+          reason:
+            "Workout plans, session history, goals, records, and custom exercises are personal data and should not be visible or mutable across accounts.",
+          tradeOff:
+            "Ownership checks need to be repeated consistently across related routes such as workout read/update/delete/duplicate and session creation.",
+        },
+        {
+          title: "JWT access tokens with refresh-token support",
+          description:
+            "API requests use Bearer access tokens. Login can set an HTTP-only refresh cookie when refresh-token secrets are configured, and the Axios client can retry protected requests through the refresh endpoint.",
+          reason:
+            "This gave me a practical way to learn stateless API authentication, protected routes, and session persistence across page refreshes.",
+          tradeOff:
+            "The current frontend still stores the access token in localStorage, and a hardened production session strategy would need stronger token rotation, revocation, and storage decisions.",
+        },
+        {
+          title: "Embedded exercise data in workouts and sessions",
+          description:
+            "Workout templates embed planned exercise details, and sessions embed the set-level results that were completed during that workout.",
+          reason:
+            "A full routine or completed session can be retrieved as one document, and historical session snapshots remain readable without reconstructing them from a changing exercise library.",
+          tradeOff:
+            "Exercise names and snapshots can diverge from library definitions, and very large histories would need document-size and indexing considerations.",
+        },
+        {
+          title: "Cloudinary for workout cover images",
+          description:
+            "Images are uploaded through an authenticated endpoint, validated in memory with Multer, streamed to Cloudinary, and stored on the workout as a hosted URL.",
+          reason:
+            "Binary media does not belong directly in MongoDB, and a hosted media service keeps the application database focused on structured workout data.",
+          tradeOff:
+            "Cloudinary credentials must be configured securely, and the current code does not implement old remote-asset cleanup when a workout image is replaced or a workout is deleted.",
+        },
+        {
+          title: "Server-calculated session metrics",
+          description:
+            "The backend normalizes set values, counts only completed sets, calculates total volume from actual repetitions multiplied by weight, and detects personal records after saving a session.",
+          reason:
+            "Completed-set count, volume, summaries, and records should not depend only on client-side calculations that can be changed or bypassed.",
+          tradeOff:
+            "The metric definitions are intentionally simple and do not yet handle bodyweight exercise formulas, assisted exercises, unit preferences, warm-up sets, or one-repetition-max estimates.",
+        },
+        {
+          title: "Page-based pagination",
+          description:
+            "Workout and session list endpoints accept page and limit query values and cap the backend limit at 50.",
+          reason:
+            "Page pagination is easy to reason about for dashboards and history screens while the dataset is small.",
+          tradeOff:
+            "Offset-style pagination can become less efficient at large scale than cursor-based pagination.",
+        },
+        {
+          title: "Reusable API response and error handling",
+          description:
+            "Controllers use a shared success helper where practical, and centralized error middleware returns JSON errors with success: false and a message.",
+          reason:
+            "A predictable response shape makes frontend integration and toast-based error handling simpler.",
+          tradeOff:
+            "Some endpoints include compatibility fields such as top-level token, user, pagination, or newRecords, so controller discipline is still needed to keep responses consistent.",
+        },
+        {
+          title: "Docker and GitHub Actions",
+          description:
+            "Docker Compose can run the app with MongoDB locally, production compose can pull tagged images, and CI runs server tests, client lint, client tests, and a client build.",
+          reason:
+            "Container and CI configuration helped me learn how full-stack projects move beyond local-only development.",
+          tradeOff:
+            "Passing CI and having deployment configuration does not prove production readiness without real secrets, hosted infrastructure, monitoring, and smoke-tested deployments.",
         },
       ],
-      currentProgress:
-        "Workoutly is currently in progress as a full-stack MERN workout tracker.",
+      challenges: [
+        {
+          challenge:
+            "The original workout template model was not enough to represent what a user actually completed.",
+          resolution:
+            "I introduced a separate WorkoutSession model with workout-name snapshots, timing data, set-level results, completed-set totals, volume, notes, and user/workout references.",
+          learning:
+            "Planning data and event history often deserve separate models, even when they look similar in the interface.",
+        },
+        {
+          challenge:
+            "A valid token should not allow one user to read, edit, delete, duplicate, or save a session for another user's workout.",
+          resolution:
+            "The backend resolves the authenticated user from the access token, filters lists by owner, and applies explicit ownership checks before sensitive workout and session actions.",
+          learning:
+            "Authentication confirms who is making the request; authorization decides whether that person can access the resource.",
+        },
+        {
+          challenge:
+            "Session metrics needed to distinguish planned targets from completed work.",
+          resolution:
+            "The session controller normalizes numeric values, counts only completed sets, requires at least one completed set, and calculates total volume from actual reps multiplied by weight.",
+          learning:
+            "Derived metrics need clear definitions and server-side validation, especially when the client can send set-level details.",
+        },
+        {
+          challenge:
+            "A completed session can create several possible records across exercises and record types.",
+          resolution:
+            "After a session is saved, the record service checks completed sets for max weight, max reps, and max volume, then creates or updates the current record only when the new value is higher.",
+          learning:
+            "Derived data can make history more useful, but update rules need to stay deterministic and easy to explain.",
+        },
+        {
+          challenge:
+            "History filters, calendar grouping, weekly goals, and streaks all depend on consistent date handling.",
+          resolution:
+            "The backend validates date-only filters, uses ISO date keys for grouping, filters monthly calendar data, and calculates weekly/streak values from persisted completed session dates.",
+          learning:
+            "Date handling becomes a real domain concern quickly, and timezone-aware boundaries are worth improving as a project matures.",
+        },
+        {
+          challenge:
+            "Image uploads needed to accept useful workout covers without letting arbitrary or oversized files reach storage.",
+          resolution:
+            "The upload route requires authentication, uses Multer memory storage, filters MIME types to JPEG/PNG/WebP/GIF, caps files at 5 MB, streams to Cloudinary, and returns a secure hosted URL.",
+          learning:
+            "Uploads are more than a file input; they require validation, storage decisions, secret management, and error handling.",
+        },
+        {
+          challenge:
+            "The frontend needed to make authentication failures, validation errors, empty histories, loading states, and failed API calls understandable.",
+          resolution:
+            "The app uses centralized backend errors, Axios error-message extraction, protected route wrappers, loading and empty states, and toast feedback across the main workflows.",
+          learning:
+            "Error handling is part of product quality, not just a backend implementation detail.",
+        },
+        {
+          challenge:
+            "Deployment configuration had to coordinate React, Express, MongoDB, Cloudinary, CORS, cookies, JWT secrets, Docker, Vercel-style frontend routing, and CI.",
+          resolution:
+            "The repository documents environment variables, keeps secrets out of committed configuration, supports configurable API/client URLs, adds Docker Compose files, and verifies server and client checks through GitHub Actions.",
+          learning:
+            "Full-stack deployment is a coordinated system, not a single build command.",
+        },
+      ],
+      learnings: [
+        "How React forms and protected routes connect to authenticated Express APIs.",
+        "How bcrypt password hashing, JWT access tokens, refresh-token cookies, and local session persistence fit together.",
+        "Why authentication and resource ownership authorization need separate checks.",
+        "How to model reusable templates separately from completed historical events in MongoDB.",
+        "How Mongoose schemas, embedded subdocuments, indexes, validation, and ObjectId references shape a full-stack feature.",
+        "How to calculate server-side metrics from user-entered session data without trusting only the frontend.",
+        "How uploads work with Multer memory storage, file validation, Cloudinary streaming, and URL persistence.",
+        "How date filters, monthly grouping, weekly goals, and streaks create hidden complexity.",
+        "How centralized errors and shared response helpers make frontend feedback easier to implement.",
+        "How Docker, environment documentation, demo seeding, and CI fit into a more complete project lifecycle.",
+      ],
+      results: [
+        "Built an authenticated full-stack MERN workout tracker.",
+        "Implemented registration, login, access-token protected APIs, refresh-token endpoints, logout, and protected frontend routes.",
+        "Implemented reusable workout CRUD with ownership checks, validation, pagination, and duplication.",
+        "Implemented workout cover-image uploads through an authenticated Multer and Cloudinary flow.",
+        "Implemented active workout sessions with set-level actual reps, weight, completed state, rest timer behavior, and persisted completed sessions.",
+        "Added workout history filtering, newest/oldest sorting, monthly calendar summaries, selected-date details, and CSV export.",
+        "Added dashboard summaries for saved routines, completed sessions, total sets, total volume, total duration, average duration, weekly activity, recent sessions, and streak context.",
+        "Added weekly workout goals with a default target, target updates, remaining sessions, completion percentage, current streak, and longest streak.",
+        "Added exercise-specific progress history based on persisted completed sessions.",
+        "Added automatic personal-record tracking for max weight, max reps, and max volume.",
+        "Added a default and custom exercise library with search, category, and equipment filters.",
+        "Added guarded demo seeding, Docker configuration, and GitHub Actions checks for the server and client.",
+      ],
+      currentProgress: [
+        "The core full-stack workout-planning and completed-session workflow is implemented.",
+        "Session history, goals, streaks, progress, records, exports, exercise library, seed data, Docker configuration, and CI are present in the source repository.",
+        "The project remains in progress because authentication hardening, architecture consistency, analytics scaling, media lifecycle cleanup, timezone handling, broader testing, and production observability can still improve.",
+        "No verified live deployment URL is included in the portfolio data.",
+      ],
+      limitations: [
+        "Workoutly is designed for individual users and does not implement trainer/client, gym-management, team, or organization workflows.",
+        "Authorization is ownership-based, not a role-based or fine-grained permission system.",
+        "The application does not include nutrition tracking, body measurements, recovery tracking, medical guidance, or professional coaching workflows.",
+        "Progress and volume calculations are simple and do not estimate one-repetition maxes or model bodyweight and assisted exercises differently.",
+        "Date grouping, weekly boundaries, and streak calculations use straightforward date logic and could benefit from stronger timezone-aware handling.",
+        "The backend architecture is mixed: workouts and users have clearer service/repository layers, while sessions, goals, exercises, records, and uploads still contain substantial controller logic.",
+        "Access-token storage and refresh-token integration work for the current app, but production-grade token rotation, revocation, and safer access-token storage would need more work.",
+        "Automated tests cover many server workflows and a few client interactions, but they are not exhaustive across every feature, upload path, UI state, and failure case.",
+        "Dashboard, calendar, streak, and summary endpoints currently read user sessions in application logic for several calculations rather than using optimized aggregation for every metric.",
+        "Workout cover-image uploads are implemented for routine creation, but edit-time image replacement and Cloudinary cleanup for old assets are not fully handled.",
+        "No monitoring, structured logging, alerting, production observability stack, native mobile app, offline workout-session support, social features, or sharing workflows are documented.",
+      ],
+      futureImprovements: [
+        "Harden authentication with a fully integrated refresh-token strategy, token rotation, revocation, and safer access-token handling.",
+        "Add broader unit, integration, and end-to-end test coverage for uploads, auth refresh behavior, UI states, history filters, goals, records, and failure paths.",
+        "Move more backend modules toward a consistent route, validation, controller, service, repository, model structure where the extra separation pays off.",
+        "Use MongoDB aggregation and additional indexes for dashboard, calendar, history, and progress metrics as data grows.",
+        "Improve timezone-aware history filters, monthly calendars, weekly boundaries, and streak calculations.",
+        "Add structured backend logging, monitoring, health checks, deployment smoke tests, and production observability.",
+        "Support replacing workout cover images after creation and delete old Cloudinary assets when images or workouts are removed.",
+        "Add richer progress charts, configurable date ranges, measurement units, and user preferences.",
+        "Improve volume calculations for bodyweight movements, assisted exercises, warm-up sets, and unit conversion without claiming medical or coaching advice.",
+        "Add workout timers, pause/resume support, rest-timer persistence, and recovery of interrupted active sessions.",
+        "Add scheduled workout plans, reminders, PWA support, or mobile-oriented offline session capture as future product extensions.",
+      ],
     },
     featured: true,
   },
