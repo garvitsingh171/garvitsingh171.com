@@ -4,6 +4,7 @@ import {
   EducationSection,
   WorkingStyleSection,
 } from "../components/about";
+import { SkillsSection } from "../components/skills";
 import { aboutContent } from "../data/about";
 
 export default function About() {
@@ -12,6 +13,7 @@ export default function About() {
       <AboutHeroSection content={aboutContent.introduction} />
       <EducationSection content={aboutContent.education} />
       <CurrentLearningSection content={aboutContent.currentLearning} />
+      <SkillsSection />
       <WorkingStyleSection content={aboutContent.workingStyle} />
     </>
   );
