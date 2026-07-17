@@ -5,6 +5,7 @@ const navigationLinks = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
   { label: "Projects", to: "/projects" },
+  { label: "Open Source", to: "/open-source" },
   { label: "Experience", to: "/experience" },
   { label: "Contact", to: "/contact" },
 ] as const;
