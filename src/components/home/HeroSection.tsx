@@ -1,4 +1,5 @@
 import { heroContent } from "../../data/home";
+import { ResumeDownloadButton } from "../resume";
 import { Button } from "../ui";
 
 export function HeroSection() {
@@ -24,7 +25,7 @@ export function HeroSection() {
           {heroContent.position}
         </p>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Button
             as="link"
             to={heroContent.primaryCta.href}
@@ -32,10 +33,14 @@ export function HeroSection() {
           >
             {heroContent.primaryCta.label}
           </Button>
+          <ResumeDownloadButton
+            variant="outline"
+            className="w-full sm:w-auto"
+          />
           <Button
             as="link"
             to={heroContent.secondaryCta.href}
-            variant="outline"
+            variant="ghost"
             className="w-full sm:w-auto"
           >
             {heroContent.secondaryCta.label}

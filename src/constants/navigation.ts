@@ -1,3 +1,5 @@
+import { resumeConfig } from "../data/resume";
+
 export const desktopNavigation = [
   {
     label: "Home",
@@ -16,12 +18,8 @@ export const desktopNavigation = [
     href: "/open-source",
   },
   {
-    label: "Writing",
-    href: "/writing",
-  },
-  {
     label: "Resume",
-    href: "/resume",
+    href: resumeConfig.pagePath,
   },
   {
     label: "Contact",
@@ -40,7 +38,7 @@ export const mobilePrimaryNavigation = [
   },
   {
     label: "Resume",
-    href: "/resume",
+    href: resumeConfig.pagePath,
   },
   {
     label: "Contact",
@@ -66,7 +64,7 @@ export const footerNavigation = [
   },
   {
     label: "Resume",
-    href: "/resume",
+    href: resumeConfig.pagePath,
     external: false,
   },
 ] as const;

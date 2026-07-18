@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import OpenSource from "./pages/OpenSource";
 import ProjectDetail from "./pages/ProjectDetail";
 import Projects from "./pages/Projects";
+import Resume from "./pages/Resume";
+import { resumeConfig } from "./data/resume";
 
 export default function App() {
   return (
@@ -21,6 +23,7 @@ export default function App() {
           <Route path="/open-source" element={<OpenSource />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path={resumeConfig.pagePath} element={<Resume />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
