@@ -1,4 +1,5 @@
 import { resumeConfig } from "../data/resume";
+import { socialLinks } from "../data/socialLinks";
 
 export const desktopNavigation = [
   {
@@ -47,21 +48,10 @@ export const mobilePrimaryNavigation = [
 ] as const;
 
 export const footerNavigation = [
-  {
-    label: "GitHub",
-    href: "https://github.com/garvitsingh171",
+  ...socialLinks.map((link) => ({
+    ...link,
     external: true,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/garvitsingh171",
-    external: true,
-  },
-  {
-    label: "Email",
-    href: "mailto:garvitsingh171@gmail.com",
-    external: true,
-  },
+  })),
   {
     label: "Resume",
     href: resumeConfig.pagePath,

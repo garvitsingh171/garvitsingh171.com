@@ -1,7 +1,9 @@
 import { useEffect } from "react";
+import { InternshipAvailability } from "../components/internship";
 import { ResumeDownloadButton } from "../components/resume";
 import { ProjectStatusBadge, TechnologyList } from "../components/projects";
 import { Button, Card, SectionHeading } from "../components/ui";
+import { internshipAvailability } from "../data/internship";
 import { resumeContent } from "../data/resume";
 
 function TextList({ items }: { items: string[] }) {
@@ -117,6 +119,8 @@ export default function Resume() {
           </div>
         </Card>
       </section>
+
+      <InternshipAvailability content={internshipAvailability} />
 
       <section
         className="border-t border-slate-800 py-12 sm:py-16"
