@@ -120,7 +120,7 @@ export const resumeContent: ResumeContent = {
   meta: {
     title: "Resume | Garvit Singh",
     description:
-      "Resume overview for Garvit Singh, including software engineering skills, projects, education, and open-source work.",
+      "View Garvit Singh's resume, projects, technical skills, open-source experience, and availability for remote software engineering internships.",
   },
   introduction: {
     label: "Resume",
