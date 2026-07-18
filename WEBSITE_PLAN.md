@@ -138,11 +138,11 @@ The Writing page should show my learning notes, project learnings, and technical
 
 Writing categories:
 
-* DSA Notes
-* Backend Learnings
 * Project Learnings
-* Open Source Learnings
-* LLD/System Design Basics
+* Backend Engineering
+* Open Source
+* DSA and Problem Solving
+* Engineering Growth
 
 Initial writing ideas:
 
