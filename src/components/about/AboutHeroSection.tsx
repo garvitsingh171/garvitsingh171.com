@@ -1,5 +1,6 @@
 import { Button } from "../ui";
 import type { AboutIntroduction } from "../../types/about.js";
+import { ResumeDownloadButton } from "../resume";
 
 type AboutHeroSectionProps = {
   content: AboutIntroduction;
@@ -38,10 +39,14 @@ export function AboutHeroSection({ content }: AboutHeroSectionProps) {
           >
             View projects
           </Button>
+          <ResumeDownloadButton
+            variant="outline"
+            className="w-full sm:w-auto"
+          />
           <Button
             as="link"
             to="/contact"
-            variant="outline"
+            variant="ghost"
             className="w-full sm:w-auto"
           >
             Contact me
