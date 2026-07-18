@@ -9,6 +9,7 @@ import OpenSource from "./pages/OpenSource";
 import ProjectDetail from "./pages/ProjectDetail";
 import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
+import Writing from "./pages/Writing";
 import { resumeConfig } from "./data/resume";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/open-source" element={<OpenSource />} />
+          <Route path="/writing" element={<Writing />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/contact" element={<Contact />} />
           <Route path={resumeConfig.pagePath} element={<Resume />} />

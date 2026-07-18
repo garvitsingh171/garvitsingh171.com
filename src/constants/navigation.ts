@@ -19,6 +19,10 @@ export const desktopNavigation = [
     href: "/open-source",
   },
   {
+    label: "Writing",
+    href: "/writing",
+  },
+  {
     label: "Resume",
     href: resumeConfig.pagePath,
   },
