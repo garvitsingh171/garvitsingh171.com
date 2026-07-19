@@ -4,7 +4,7 @@ import { Button } from "../ui";
 
 export function HeroSection() {
   return (
-    <section className="py-16 sm:py-20 lg:py-24" aria-labelledby="home-hero-title">
+    <section aria-labelledby="home-hero-title">
       <div className="max-w-4xl">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
           {heroContent.label}

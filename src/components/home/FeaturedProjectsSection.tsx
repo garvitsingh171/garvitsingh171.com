@@ -10,7 +10,7 @@ export function FeaturedProjectsSection() {
   }
 
   return (
-    <section className="border-t border-slate-800 py-12 sm:py-16">
+    <section className="border-t border-slate-800 pt-10 sm:pt-12">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <SectionHeading
           label="Selected Work"

@@ -1,18 +1,69 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { EmptyState } from "../components/ui";
+import { fallbackStates } from "../data/fallbackStates";
+
+function useNotFoundMetadata() {
+  useEffect(() => {
+    const previousTitle = document.title;
+    const existingDescription = document.querySelector<HTMLMetaElement>(
+      'meta[name="description"]',
+    );
+    const previousDescription = existingDescription
+      ? existingDescription.getAttribute("content")
+      : null;
+    const description =
+      existingDescription ?? document.createElement("meta");
+
+    if (!existingDescription) {
+      description.setAttribute("name", "description");
+      document.head.append(description);
+    }
+
+    document.title = fallbackStates.globalNotFound.meta.title;
+    description.setAttribute(
+      "content",
+      fallbackStates.globalNotFound.meta.description,
+    );
+
+    return () => {
+      document.title = previousTitle;
+
+      if (existingDescription) {
+        if (previousDescription === null) {
+          existingDescription.removeAttribute("content");
+        } else {
+          existingDescription.setAttribute("content", previousDescription);
+        }
+      }
+
+      if (!existingDescription) {
+        description.remove();
+      }
+    };
+  }, []);
+}
 
 export default function NotFound() {
+  useNotFoundMetadata();
+
   return (
-    <section className="space-y-4">
-      <h1 className="text-4xl font-bold tracking-tight">Page not found</h1>
-      <p className="max-w-2xl text-lg leading-8 text-slate-300">
-        The page you are looking for does not exist.
-      </p>
-      <Link
-        to="/"
-        className="inline-flex rounded-md bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-400"
-      >
-        Back to Home
-      </Link>
-    </section>
+    <EmptyState
+      label={fallbackStates.globalNotFound.label}
+      title={fallbackStates.globalNotFound.title}
+      description={fallbackStates.globalNotFound.description}
+      headingLevel="h1"
+      variant="page"
+      className="my-4 sm:my-8"
+      primaryAction={{
+        type: "link",
+        label: "Go to homepage",
+        to: "/",
+      }}
+      secondaryAction={{
+        type: "link",
+        label: "View projects",
+        to: "/projects",
+      }}
+    />
   );
 }

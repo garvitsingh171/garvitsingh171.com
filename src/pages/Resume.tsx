@@ -32,11 +32,8 @@ export default function Resume() {
   }, []);
 
   return (
-    <>
-      <section
-        className="py-16 sm:py-20 lg:py-24"
-        aria-labelledby="resume-page-heading"
-      >
+    <div className="space-y-12 sm:space-y-16">
+      <section aria-labelledby="resume-page-heading">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
           <div className="min-w-0 max-w-4xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
@@ -100,7 +97,7 @@ export default function Resume() {
       </section>
 
       <section
-        className="border-t border-slate-800 py-12 sm:py-16"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="resume-summary-heading"
       >
         <SectionHeading
@@ -123,7 +120,7 @@ export default function Resume() {
       <InternshipAvailability content={internshipAvailability} />
 
       <section
-        className="border-t border-slate-800 py-12 sm:py-16"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="resume-skills-heading"
       >
         <SectionHeading
@@ -157,7 +154,7 @@ export default function Resume() {
       </section>
 
       <section
-        className="border-t border-slate-800 py-12 sm:py-16"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="resume-experience-heading"
       >
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -218,7 +215,7 @@ export default function Resume() {
       </section>
 
       <section
-        className="border-t border-slate-800 py-12 sm:py-16"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="resume-projects-heading"
       >
         <SectionHeading
@@ -268,7 +265,7 @@ export default function Resume() {
       </section>
 
       <section
-        className="border-t border-slate-800 py-12 sm:py-16"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="resume-education-heading"
       >
         <SectionHeading
@@ -336,7 +333,7 @@ export default function Resume() {
       </section>
 
       <section
-        className="border-t border-slate-800 py-12 sm:py-16"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="resume-achievements-heading"
       >
         <SectionHeading
@@ -360,7 +357,7 @@ export default function Resume() {
       </section>
 
       <section
-        className="border-t border-slate-800 py-12 sm:py-16"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="resume-final-cta-heading"
       >
         <div className="rounded-lg border border-slate-800 bg-slate-900/60 p-6 sm:p-8">
@@ -387,6 +384,6 @@ export default function Resume() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

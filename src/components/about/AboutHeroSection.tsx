@@ -9,7 +9,6 @@ type AboutHeroSectionProps = {
 export function AboutHeroSection({ content }: AboutHeroSectionProps) {
   return (
     <section
-      className="py-16 sm:py-20 lg:py-24"
       aria-labelledby="about-page-heading"
     >
       <div className="max-w-4xl">

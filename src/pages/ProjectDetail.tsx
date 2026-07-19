@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   CaseStudySection,
@@ -14,7 +15,8 @@ import {
   TechnicalDecisionList,
   TechnologyList,
 } from "../components/projects";
-import { Button, Card } from "../components/ui";
+import { Button, EmptyState } from "../components/ui";
+import { fallbackStates } from "../data/fallbackStates";
 import { projects } from "../data/projects";
 import type { ProjectType } from "../types/project";
 
@@ -35,30 +37,78 @@ function hasItems<T>(items?: T[]): items is T[] {
   return Array.isArray(items) && items.length > 0;
 }
 
+function useMissingProjectMetadata(isMissingProject: boolean) {
+  useEffect(() => {
+    if (!isMissingProject) {
+      return;
+    }
+
+    const previousTitle = document.title;
+    const existingDescription = document.querySelector<HTMLMetaElement>(
+      'meta[name="description"]',
+    );
+    const previousDescription = existingDescription
+      ? existingDescription.getAttribute("content")
+      : null;
+    const description =
+      existingDescription ?? document.createElement("meta");
+
+    if (!existingDescription) {
+      description.setAttribute("name", "description");
+      document.head.append(description);
+    }
+
+    document.title = fallbackStates.projectNotFound.meta.title;
+    description.setAttribute(
+      "content",
+      fallbackStates.projectNotFound.meta.description,
+    );
+
+    return () => {
+      document.title = previousTitle;
+
+      if (existingDescription) {
+        if (previousDescription === null) {
+          existingDescription.removeAttribute("content");
+        } else {
+          existingDescription.setAttribute("content", previousDescription);
+        }
+      }
+
+      if (!existingDescription) {
+        description.remove();
+      }
+    };
+  }, [isMissingProject]);
+}
+
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((projectItem) => projectItem.slug === slug);
+  const isMissingProject = !project;
+
+  useMissingProjectMetadata(isMissingProject);
 
   if (!project) {
     return (
-      <section className="space-y-6">
-        <Button as="link" to="/projects" variant="ghost" className="px-0">
-          &larr; Back to Projects
-        </Button>
-
-        <Card className="max-w-3xl">
-          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Project not found
-          </h1>
-          <p className="mt-4 text-base leading-7 text-slate-300">
-            The project you are looking for does not exist or may have moved.
-            Return to the projects page to explore the available work.
-          </p>
-          <Button as="link" to="/projects" className="mt-6 w-full sm:w-auto">
-            View Projects
-          </Button>
-        </Card>
-      </section>
+      <EmptyState
+        label={fallbackStates.projectNotFound.label}
+        title={fallbackStates.projectNotFound.title}
+        description={fallbackStates.projectNotFound.description}
+        headingLevel="h1"
+        variant="page"
+        className="my-4 sm:my-8"
+        primaryAction={{
+          type: "link",
+          label: "View projects",
+          to: "/projects",
+        }}
+        secondaryAction={{
+          type: "link",
+          label: "Go to homepage",
+          to: "/",
+        }}
+      />
     );
   }
 

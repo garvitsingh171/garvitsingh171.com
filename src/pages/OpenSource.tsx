@@ -10,7 +10,7 @@ import { openSourceContent } from "../data/openSource";
 
 export default function OpenSource() {
   return (
-    <>
+    <div className="space-y-12 sm:space-y-16">
       <OpenSourceHeroSection
         introduction={openSourceContent.introduction}
         links={openSourceContent.links}
@@ -24,6 +24,6 @@ export default function OpenSource() {
         content={openSourceContent.closing}
         links={openSourceContent.links}
       />
-    </>
+    </div>
   );
 }

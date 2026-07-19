@@ -4,6 +4,7 @@ import {
   ProjectFilters,
   type ProjectFilter,
 } from "../components/projects";
+import { EmptyState } from "../components/ui";
 import { projects } from "../data/projects";
 
 export default function Projects() {
@@ -13,6 +14,7 @@ export default function Projects() {
     selectedFilter === "all"
       ? projects
       : projects.filter((project) => project.type === selectedFilter);
+  const hasProjects = projects.length > 0;
 
   return (
     <section>
@@ -45,19 +47,24 @@ export default function Projects() {
               <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
+        ) : hasProjects ? (
+          <EmptyState
+            title="No projects found in this category"
+            description="Try another category or reset the filter to view all projects."
+            headingLevel="h2"
+            announce
+            primaryAction={{
+              type: "button",
+              label: "View all projects",
+              onClick: () => setSelectedFilter("all"),
+            }}
+          />
         ) : (
-          <div
-            role="status"
-            className="rounded-lg border border-slate-800 bg-slate-900/60 p-8 text-center"
-          >
-            <h2 className="text-xl font-semibold text-white">
-              No projects in this category yet
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              More projects will be added as the portfolio grows. Choose another
-              category to continue browsing.
-            </p>
-          </div>
+          <EmptyState
+            title="No projects have been added yet"
+            description="Project case studies will appear here as the portfolio grows."
+            headingLevel="h2"
+          />
         )}
       </div>
     </section>

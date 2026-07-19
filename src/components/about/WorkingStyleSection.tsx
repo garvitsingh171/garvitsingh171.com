@@ -7,7 +7,7 @@ type WorkingStyleSectionProps = {
 
 export function WorkingStyleSection({ content }: WorkingStyleSectionProps) {
   return (
-    <section className="border-t border-slate-800 py-12 sm:py-16">
+    <section className="border-t border-slate-800 pt-10 sm:pt-12">
       <SectionHeading
         label="How I Work"
         title={content.heading}
