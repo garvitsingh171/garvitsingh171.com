@@ -68,18 +68,24 @@ export default function Contact() {
               <p>{contactPageContent.introduction.supportingDescription}</p>
             </div>
 
-            <ul
-              aria-label="Welcome contact topics"
-              className="mt-8 grid gap-3 sm:grid-cols-2"
-            >
-              {contactPageContent.introduction.welcomedContexts.map((item) => (
-                <li key={item} className="min-w-0">
-                  <span className="flex min-h-11 items-center rounded-md border border-slate-800 bg-slate-900/60 px-3 py-2 text-sm font-medium leading-6 text-slate-200">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold text-white">
+                {contactPageContent.opportunities.heading}
+              </h2>
+
+              <ul
+                aria-label={contactPageContent.opportunities.heading}
+                className="mt-4 grid gap-3 sm:grid-cols-2"
+              >
+                {contactPageContent.opportunities.items.map((item) => (
+                  <li key={item} className="min-w-0">
+                    <span className="flex min-h-11 items-center rounded-md border border-slate-800 bg-slate-900/60 px-3 py-2 text-sm font-medium leading-6 text-slate-200">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <Card className="p-5 sm:p-6">
@@ -105,6 +111,18 @@ export default function Contact() {
             <p className="mt-4 break-words text-sm font-medium leading-6 text-slate-400">
               {contactDetails.email}
             </p>
+
+            <div className="mt-6 border-t border-slate-800 pt-5">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-200">
+                {contactPageContent.availability.heading}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-300">
+                {contactPageContent.availability.description}
+              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-400">
+                {contactPageContent.responseNote}
+              </p>
+            </div>
           </Card>
         </div>
       </section>

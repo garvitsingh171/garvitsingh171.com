@@ -27,7 +27,7 @@ export const socialLinks = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/garvitsingh171",
+    href: "https://linkedin.com/in/garvitsingh171",
     icon: "linkedin",
     external: true,
     ariaLabel: "Visit Garvit Singh's LinkedIn profile",

@@ -2,48 +2,56 @@ import { SITE_CONFIG } from "../constants/site";
 import { socialLinks } from "./socialLinks";
 
 const emailSubject = "Portfolio Contact";
+const onlineProfileLinks = socialLinks.filter((link) => link.id !== "email");
 
 export const contactDetails = {
   email: SITE_CONFIG.email,
   emailSubject,
   emailHref: `mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent(emailSubject)}`,
-  emailCtaLabel: "Send me an email",
-  emailCtaAriaLabel:
-    "Email Garvit Singh about internships, projects, collaboration, or professional networking",
+  emailCtaLabel: "Start a conversation",
+  emailCtaAriaLabel: "Email Garvit Singh",
 } as const;
 
 export const contactPageContent = {
   meta: {
     title: "Contact | Garvit Singh",
     description:
-      "Contact Garvit Singh for internships, software development opportunities, open-source collaboration, technical discussions, and professional networking.",
+      "Contact Garvit Singh about remote software engineering internships, backend and full-stack projects, open-source collaboration, and practical software products.",
   },
   introduction: {
     label: "Contact",
-    heading: "Let's connect.",
+    heading: "Let's start a useful conversation.",
     description:
-      "I am open to thoughtful conversations around software engineering, product work, and opportunities where I can contribute and keep learning.",
+      "I'm open to thoughtful conversations about remote software engineering internships, backend and full-stack projects, open-source collaboration, and practical software products.",
     supportingDescription:
-      "Email is the best starting point for internships, scoped projects, open-source collaboration, technical discussions, professional networking, or feedback about something I have built.",
-    welcomedContexts: [
-      "Internship opportunities",
-      "Software development projects",
+      "Whether you are hiring, building a product, maintaining an open-source project, or have constructive feedback on my work, feel free to reach out.",
+  },
+  opportunities: {
+    heading: "What you can reach out about",
+    items: [
+      "Remote software engineering internships",
+      "Backend and full-stack development",
       "Open-source collaboration",
-      "Technical discussions",
-      "Professional networking",
-      "Project feedback",
+      "Technical and product discussions",
+      "Project feedback and professional networking",
     ],
   },
   emailCard: {
-    title: "Start with email",
+    title: "Start with an email",
     description:
-      "Send a short note with context and I will reply as soon as I can.",
+      "Email is the best way to reach me about internship opportunities, collaboration, or detailed project discussions.",
   },
+  availability: {
+    heading: "Availability",
+    description:
+      "Available for remote internship opportunities from August 2026, alongside university commitments.",
+  },
+  responseNote:
+    "I review relevant messages and reply as soon as I can around my university schedule.",
   socialSection: {
     label: "Profiles",
-    title: "Professional links",
-    description:
-      "These are the same profile links used across the site, kept in one place so they stay current.",
-    links: socialLinks,
+    title: "Find me online",
+    description: "Explore my work on GitHub or connect with me on LinkedIn.",
+    links: onlineProfileLinks,
   },
 } as const;
