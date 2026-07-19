@@ -52,11 +52,9 @@ export const mobilePrimaryNavigation = [
 ] as const;
 
 export const footerNavigation = [
-  ...socialLinks.map((link) => ({
-    ...link,
-    external: true,
-  })),
+  ...socialLinks,
   {
+    id: "resume",
     label: "Resume",
     href: resumeConfig.pagePath,
     external: false,
