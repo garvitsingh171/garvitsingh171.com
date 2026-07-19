@@ -7,7 +7,7 @@ import { socialLinks, type SocialLink } from "../../data/socialLinks";
 import { isEmailLink, isExternalWebLink } from "../../utils/links";
 
 const linkClasses = [
-  "inline-flex min-h-9 items-center rounded-sm text-slate-300 transition-colors duration-150",
+  "inline-flex min-h-10 items-center rounded-sm text-slate-300 transition-colors duration-150",
   "hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
 ].join(" ");
 
@@ -22,7 +22,7 @@ function FooterSocialLink({ link }: { link: SocialLink }) {
   );
 
   const className = [
-    "inline-flex min-h-10 items-center gap-3 rounded-md text-sm font-medium text-slate-300 transition-colors duration-150",
+    "inline-flex min-h-11 items-center gap-3 rounded-md text-sm font-medium text-slate-300 transition-colors duration-150",
     "hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
   ].join(" ");
 
@@ -32,7 +32,7 @@ function FooterSocialLink({ link }: { link: SocialLink }) {
         href={link.href}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={link.ariaLabel}
+        aria-label={`${link.ariaLabel} (opens in a new tab)`}
         className={className}
       >
         {content}
@@ -58,7 +58,7 @@ function FooterSocialLink({ link }: { link: SocialLink }) {
 export function Footer() {
   return (
     <footer className="border-t border-slate-800 bg-slate-950/70">
-      <div className="mx-auto grid max-w-5xl gap-8 px-6 py-10 text-sm text-slate-400 md:grid-cols-2 lg:grid-cols-[minmax(0,1.45fr)_minmax(10rem,0.75fr)_minmax(12rem,0.9fr)]">
+      <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 text-sm text-slate-400 sm:px-6 md:grid-cols-2 lg:grid-cols-[minmax(0,1.45fr)_minmax(10rem,0.75fr)_minmax(12rem,0.9fr)]">
         <section className="space-y-4 md:col-span-2 lg:col-span-1">
           <div>
             <Link
@@ -79,7 +79,7 @@ export function Footer() {
             <ResumeDownloadButton
               label="Download PDF"
               variant="ghost"
-              className="min-h-9 px-0 py-0 text-slate-300 hover:bg-transparent hover:text-white"
+              className="min-h-10 px-0 py-0 text-slate-300 hover:bg-transparent hover:text-white"
             />
           </div>
         </section>

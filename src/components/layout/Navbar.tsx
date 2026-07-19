@@ -110,7 +110,7 @@ export function Navbar() {
 
   return (
     <header className="border-b border-slate-800 bg-slate-950/90">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <NavLink
           to="/"
           className="min-w-0 rounded-sm text-base font-semibold text-white transition-colors hover:text-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400 sm:text-lg"

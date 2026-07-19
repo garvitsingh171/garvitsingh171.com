@@ -28,8 +28,9 @@ export function MobileNavigation({
     <nav
       id={id}
       aria-label="Mobile primary navigation"
+      aria-hidden={!isOpen}
       className={[
-        "border-t border-slate-800 bg-slate-950 px-6 py-3 lg:hidden",
+        "border-t border-slate-800 bg-slate-950 px-4 py-3 sm:px-6 lg:hidden",
         isOpen ? "block" : "hidden",
       ].join(" ")}
     >
