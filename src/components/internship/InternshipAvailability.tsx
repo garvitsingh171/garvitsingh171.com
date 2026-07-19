@@ -87,7 +87,7 @@ export function InternshipAvailability({
                     key={link.href}
                     href={link.href}
                     target="_blank"
-                    rel="noreferrer noopener"
+                    rel="noopener noreferrer"
                     className="rounded-sm transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
                     aria-label={link.ariaLabel}
                   >

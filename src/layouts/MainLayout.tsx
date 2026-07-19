@@ -2,6 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { ResumeDownloadButton } from "../components/resume";
 import { desktopNavigation, footerNavigation } from "../constants/navigation";
 import { SITE_CONFIG } from "../constants/site";
+import { isEmailLink, isExternalWebLink } from "../utils/links";
 
 export default function MainLayout() {
   return (
@@ -50,12 +51,20 @@ export default function MainLayout() {
             className="flex flex-wrap items-center gap-x-4 gap-y-2"
           >
             {footerNavigation.map((link) =>
-              link.external ? (
+              isExternalWebLink(link.href) ? (
                 <a
                   key={link.href}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="rounded-sm transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                >
+                  {link.label}
+                </a>
+              ) : isEmailLink(link.href) ? (
+                <a
+                  key={link.href}
+                  href={link.href}
                   className="rounded-sm transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
                 >
                   {link.label}
