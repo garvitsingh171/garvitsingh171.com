@@ -22,7 +22,6 @@ export function OpenSourceHeroSection({
 
   return (
     <section
-      className="py-16 sm:py-20 lg:py-24"
       aria-labelledby="open-source-page-heading"
     >
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">

@@ -16,7 +16,7 @@ export function OpenSourceProjectsSection({
 
   return (
     <section
-      className="border-t border-slate-800 pt-12 sm:pt-16"
+      className="border-t border-slate-800 pt-10 sm:pt-12"
       aria-labelledby="open-source-projects-heading"
     >
       <SectionHeading
@@ -27,9 +27,11 @@ export function OpenSourceProjectsSection({
         className="mb-2"
       />
 
-      {projects.map((project) => (
-        <OpenSourceProjectSection key={project.id} project={project} />
-      ))}
+      <div className="mt-8 space-y-10 sm:space-y-12">
+        {projects.map((project) => (
+          <OpenSourceProjectSection key={project.id} project={project} />
+        ))}
+      </div>
     </section>
   );
 }

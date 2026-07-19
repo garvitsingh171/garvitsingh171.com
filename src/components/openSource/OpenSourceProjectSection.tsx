@@ -47,7 +47,7 @@ export function OpenSourceProjectSection({
 
   return (
     <section
-      className="border-t border-slate-800 py-12 sm:py-16"
+      className="border-t border-slate-800 pt-10 sm:pt-12"
       aria-labelledby={projectHeadingId}
     >
       <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.45fr)]">

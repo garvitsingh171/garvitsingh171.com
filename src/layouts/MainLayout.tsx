@@ -15,7 +15,7 @@ export default function MainLayout() {
 
       <main
         id="main-content"
-        className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 sm:px-6"
+        className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 sm:px-6 sm:py-16 lg:py-20"
       >
         <Outlet />
       </main>

@@ -31,7 +31,7 @@ export function OpenSourceProgramSection({
 
   return (
     <section
-      className="border-t border-slate-800 py-12 sm:py-16"
+      className="border-t border-slate-800 pt-10 sm:pt-12"
       aria-labelledby="open-source-program-heading"
     >
       <SectionHeading

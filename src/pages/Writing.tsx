@@ -11,7 +11,7 @@ import {
   writingCategories,
 } from "../data/writing";
 import type { WritingCategory, WritingCategoryId } from "../types/writing";
-import { Button } from "../components/ui";
+import { EmptyState } from "../components/ui";
 
 const writingPageTitle = "Writing | Garvit Singh";
 
@@ -26,43 +26,6 @@ const resolveWritingCategory = (id: WritingCategoryId) =>
 
 const getEntryCountLabel = (count: number) =>
   `${count} ${count === 1 ? "entry" : "entries"}`;
-
-type WritingEmptyStateProps = {
-  title: string;
-  description: string;
-  onReset?: () => void;
-};
-
-function WritingEmptyState({
-  title,
-  description,
-  onReset,
-}: WritingEmptyStateProps) {
-  return (
-    <div
-      role="status"
-      className="rounded-lg border border-slate-800 bg-slate-900/60 p-8 text-center"
-    >
-      <h3 className="text-xl font-semibold text-white">{title}</h3>
-      <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-300">
-        {description}
-      </p>
-
-      {onReset ? (
-        <div className="mt-6">
-          <Button
-            as="button"
-            type="button"
-            variant="outline"
-            onClick={onReset}
-          >
-            View All Writing
-          </Button>
-        </div>
-      ) : null}
-    </div>
-  );
-}
 
 export default function Writing() {
   const [selectedCategory, setSelectedCategory] =
@@ -102,7 +65,7 @@ export default function Writing() {
   const hasGridArticles = visibleGridArticles.length > 0;
 
   return (
-    <>
+    <div className="space-y-12 sm:space-y-16">
       <section aria-labelledby="writing-page-heading">
         <header className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
@@ -125,7 +88,7 @@ export default function Writing() {
 
       {featuredArticle ? (
         <section
-          className="mt-12 border-t border-slate-800 pt-10 sm:mt-16 sm:pt-12"
+          className="border-t border-slate-800 pt-10 sm:pt-12"
           aria-labelledby="featured-writing-heading"
         >
           <div className="mb-6">
@@ -148,7 +111,7 @@ export default function Writing() {
       ) : null}
 
       <section
-        className="mt-12 border-t border-slate-800 pt-10 sm:mt-16 sm:pt-12"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="writing-library-heading"
       >
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -178,9 +141,10 @@ export default function Writing() {
 
         <div className="mt-10">
           {!hasWritingContent ? (
-            <WritingEmptyState
-              title="No writing has been added yet."
+            <EmptyState
+              title="No writing has been added yet"
               description="Technical notes and project reflections will appear here as they are prepared."
+              headingLevel="h3"
             />
           ) : hasGridArticles ? (
             <div className="grid gap-6 md:grid-cols-2">
@@ -193,14 +157,20 @@ export default function Writing() {
               ))}
             </div>
           ) : !hasFilteredArticles ? (
-            <WritingEmptyState
-              title="No articles are available in this category yet."
-              description="Choose another category to continue browsing."
-              onReset={() => setSelectedCategory("all")}
+            <EmptyState
+              title="No articles are available in this category yet"
+              description="Choose another category or return to the complete writing library."
+              headingLevel="h3"
+              announce
+              primaryAction={{
+                type: "button",
+                label: "View all writing",
+                onClick: () => setSelectedCategory("all"),
+              }}
             />
           ) : null}
         </div>
       </section>
-    </>
+    </div>
   );
 }

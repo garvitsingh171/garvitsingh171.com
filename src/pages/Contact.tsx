@@ -45,11 +45,8 @@ export default function Contact() {
   useContactMetadata();
 
   return (
-    <>
-      <section
-        className="py-16 sm:py-20 lg:py-24"
-        aria-labelledby="contact-page-heading"
-      >
+    <div className="space-y-12 sm:space-y-16">
+      <section aria-labelledby="contact-page-heading">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
           <div className="min-w-0 max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
@@ -128,7 +125,7 @@ export default function Contact() {
       </section>
 
       <section
-        className="border-t border-slate-800 py-12 sm:py-16"
+        className="border-t border-slate-800 pt-10 sm:pt-12"
         aria-labelledby="contact-social-heading"
       >
         <SectionHeading
@@ -144,6 +141,6 @@ export default function Contact() {
           ariaLabel="Garvit Singh professional social links"
         />
       </section>
-    </>
+    </div>
   );
 }
