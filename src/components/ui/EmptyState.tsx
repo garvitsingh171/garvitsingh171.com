@@ -36,13 +36,13 @@ export type EmptyStateProps = {
 };
 
 const variantClasses: Record<EmptyStateVariant, string> = {
-  section: "rounded-lg border border-slate-800 bg-slate-900/60 p-6 sm:p-8",
-  page: "mx-auto max-w-3xl rounded-lg border border-slate-800 bg-slate-900/60 p-6 sm:p-8 lg:p-10",
+  section: "rounded-card border border-border bg-surface p-6 sm:p-8",
+  page: "mx-auto max-w-3xl rounded-card border border-border bg-surface p-6 sm:p-8 lg:p-10",
 };
 
 const headingClasses: Record<EmptyStateVariant, string> = {
-  section: "text-2xl font-bold tracking-tight text-white sm:text-3xl",
-  page: "text-4xl font-bold tracking-tight text-white sm:text-5xl",
+  section: "text-heading-2 text-primary",
+  page: "text-display-2 text-primary",
 };
 
 function EmptyStateHeading({
@@ -115,8 +115,8 @@ export function EmptyState({
       : "items-start text-left";
   const descriptionClasses =
     align === "center"
-      ? "mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300"
-      : "mt-4 max-w-2xl text-base leading-7 text-slate-300";
+      ? "mx-auto mt-4 max-w-2xl text-body-md text-secondary"
+      : "mt-4 max-w-2xl text-body-md text-secondary";
   const hasActions = Boolean(primaryAction || secondaryAction);
 
   return (
@@ -133,14 +133,14 @@ export function EmptyState({
       {icon ? (
         <span
           aria-hidden="true"
-          className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg border border-blue-400/20 bg-blue-400/10 text-blue-200"
+          className="mb-5 flex h-11 w-11 items-center justify-center rounded-control border border-accent-border bg-accent-soft text-accent"
         >
           {icon}
         </span>
       ) : null}
 
       {label ? (
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+        <p className="text-label text-accent">
           {label}
         </p>
       ) : null}

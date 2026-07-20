@@ -21,20 +21,20 @@ export function ChallengeList({ challenges }: ChallengeListProps) {
       {visibleChallenges.map((item) => (
         <Card key={item.challenge} className="p-5">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+            <p className="text-label text-accent">
               Challenge
             </p>
-            <p className="mt-2 text-sm leading-6 text-slate-300">
+            <p className="mt-2 text-body-sm text-secondary">
               {item.challenge}
             </p>
           </div>
 
           {item.resolution ? (
             <div className="mt-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+              <p className="text-label text-accent">
                 Approach
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-300">
+              <p className="mt-2 text-body-sm text-secondary">
                 {item.resolution}
               </p>
             </div>
@@ -42,10 +42,10 @@ export function ChallengeList({ challenges }: ChallengeListProps) {
 
           {item.learning ? (
             <div className="mt-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+              <p className="text-label text-accent">
                 Learning
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-300">
+              <p className="mt-2 text-body-sm text-secondary">
                 {item.learning}
               </p>
             </div>

@@ -16,7 +16,7 @@ export function OpenSourceStatsSection({ stats }: OpenSourceStatsSectionProps) {
 
   return (
     <section
-      className="border-t border-slate-800 pt-10 sm:pt-12"
+      className="section-divider"
       aria-labelledby="open-source-stats-heading"
     >
       <SectionHeading
@@ -31,16 +31,16 @@ export function OpenSourceStatsSection({ stats }: OpenSourceStatsSectionProps) {
         {primaryStats.map((stat) => (
           <li
             key={stat.label}
-            className="min-w-0 rounded-lg border border-slate-800 bg-slate-900/60 p-4 sm:p-5"
+            className="min-w-0 rounded-lg border border-border bg-surface p-4 sm:p-5"
           >
-            <p className="break-words text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <p className="break-words text-3xl font-semibold text-primary sm:text-4xl">
               {stat.value}
             </p>
-            <h3 className="mt-3 text-sm font-semibold text-slate-100">
+            <h3 className="mt-3 text-sm font-semibold text-primary">
               {stat.label}
             </h3>
             {stat.description ? (
-              <p className="mt-2 text-sm leading-6 text-slate-400">
+              <p className="mt-2 text-sm leading-6 text-secondary">
                 {stat.description}
               </p>
             ) : null}
@@ -53,16 +53,16 @@ export function OpenSourceStatsSection({ stats }: OpenSourceStatsSectionProps) {
           {supportingStats.map((stat) => (
             <li
               key={stat.label}
-              className="min-w-0 rounded-lg border border-slate-800 bg-slate-950/50 p-4"
+              className="min-w-0 rounded-lg border border-border bg-subtle p-4"
             >
-              <p className="break-words text-xl font-semibold text-slate-100">
+              <p className="break-words text-xl font-semibold text-primary">
                 {stat.value}
               </p>
-              <h3 className="mt-2 text-sm font-semibold text-slate-300">
+              <h3 className="mt-2 text-sm font-semibold text-secondary">
                 {stat.label}
               </h3>
               {stat.description ? (
-                <p className="mt-2 text-sm leading-6 text-slate-500">
+                <p className="mt-2 text-sm leading-6 text-muted">
                   {stat.description}
                 </p>
               ) : null}

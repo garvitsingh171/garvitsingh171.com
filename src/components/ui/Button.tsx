@@ -6,9 +6,11 @@ import type {
 import { Link, type LinkProps } from "react-router-dom";
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
+type ButtonSize = "sm" | "md" | "lg";
 
 type SharedButtonProps = {
   variant?: ButtonVariant;
+  size?: ButtonSize;
   children: ReactNode;
 };
 
@@ -34,20 +36,34 @@ type ButtonProps =
   | AnchorButtonProps;
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "border-transparent bg-slate-100 text-slate-950 hover:bg-white",
-  secondary: "border-transparent bg-slate-800 text-slate-100 hover:bg-slate-700",
+  primary:
+    "border-accent bg-accent text-inverse-text hover:border-accent-hover hover:bg-accent-hover active:border-accent-active active:bg-accent-active",
+  secondary:
+    "border-inverse bg-inverse text-inverse-text hover:border-primary hover:bg-primary hover:text-page",
   outline:
-    "border-slate-700 bg-transparent text-slate-100 hover:border-slate-500 hover:bg-slate-900",
+    "border-border-strong bg-transparent text-primary hover:border-primary hover:bg-surface-hover",
   ghost:
-    "border-transparent bg-transparent text-slate-300 hover:bg-slate-900 hover:text-white",
+    "border-transparent bg-transparent text-secondary hover:bg-surface-hover hover:text-primary",
 };
 
-function getButtonClasses(variant: ButtonVariant, className: string) {
+const sizeClasses: Record<ButtonSize, string> = {
+  sm: "min-h-9 px-3.5 py-1.5 text-sm",
+  md: "min-h-11 px-4 py-2 text-sm",
+  lg: "min-h-12 px-5 py-2.5 text-base",
+};
+
+function getButtonClasses(
+  variant: ButtonVariant,
+  size: ButtonSize,
+  className: string,
+) {
   return [
-    "inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-semibold transition-colors",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
+    "inline-flex items-center justify-center gap-2 rounded-control border font-semibold transition duration-200",
+    "hover:-translate-y-0.5 active:translate-y-0",
+    "focus-visible:outline-focus disabled:hover:translate-y-0",
     "disabled:cursor-not-allowed disabled:opacity-50",
     variantClasses[variant],
+    sizeClasses[size],
     className,
   ].join(" ");
 }
@@ -55,11 +71,12 @@ function getButtonClasses(variant: ButtonVariant, className: string) {
 export function Button({
   as = "button",
   variant = "primary",
+  size = "md",
   className = "",
   children,
   ...props
 }: ButtonProps) {
-  const buttonClasses = getButtonClasses(variant, className);
+  const buttonClasses = getButtonClasses(variant, size, className);
 
   if (as === "link") {
     return (
@@ -70,10 +87,17 @@ export function Button({
   }
 
   if (as === "anchor") {
+    const anchorProps = props as AnchorHTMLAttributes<HTMLAnchorElement>;
+    const safeRel =
+      anchorProps.target === "_blank"
+        ? (anchorProps.rel ?? "noopener noreferrer")
+        : anchorProps.rel;
+
     return (
       <a
         className={buttonClasses}
-        {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
+        {...anchorProps}
+        rel={safeRel}
       >
         {children}
       </a>

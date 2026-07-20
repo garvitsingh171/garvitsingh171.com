@@ -12,15 +12,15 @@ type StatusConfig = {
 const statusConfig = {
   published: {
     label: "Published",
-    className: "border-blue-400/30 bg-blue-400/10 text-blue-200",
+    className: "border-accent-border bg-accent-soft text-accent",
   },
   draft: {
     label: "Draft",
-    className: "border-slate-600 bg-slate-800/70 text-slate-300",
+    className: "border-border-strong bg-subtle text-secondary",
   },
   "coming-soon": {
     label: "Coming Soon",
-    className: "border-slate-700 bg-slate-950/70 text-slate-300",
+    className: "border-border-strong bg-subtle text-secondary",
   },
 } satisfies Record<WritingArticleStatus, StatusConfig>;
 

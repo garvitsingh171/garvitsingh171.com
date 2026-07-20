@@ -10,14 +10,14 @@ export function ProjectText({ content }: ProjectTextProps) {
 
   if (items.length === 1) {
     return (
-      <p className="max-w-3xl text-base leading-8 text-slate-300">
+      <p className="max-w-3xl text-body-md text-secondary">
         {items[0]}
       </p>
     );
   }
 
   return (
-    <ul className="max-w-3xl list-disc space-y-3 pl-5 text-base leading-8 text-slate-300">
+    <ul className="max-w-3xl list-disc space-y-3 pl-5 text-body-md text-secondary">
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}

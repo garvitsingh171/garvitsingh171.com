@@ -13,7 +13,7 @@ function ExternalLinkIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-4 w-4 shrink-0 text-slate-500 transition-colors group-hover:text-blue-200"
+      className="h-4 w-4 shrink-0 text-muted transition group-hover:text-accent"
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -36,24 +36,24 @@ function ExternalLinkIcon() {
 
 function getLinkClasses() {
   return [
-    "group flex min-h-16 items-center gap-3 rounded-lg border border-slate-800 bg-slate-950/60 p-4 transition-colors",
-    "hover:border-slate-700 hover:bg-slate-900/80",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
+    "group flex min-h-16 items-center gap-3 rounded-card border border-border bg-surface p-4 transition duration-200",
+    "hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover",
+    "focus-visible:outline-focus",
   ].join(" ");
 }
 
 function SocialLinkItem({ link }: { link: SocialLink }) {
   const content = (
     <>
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-blue-400/20 bg-blue-400/10 text-blue-200 transition-colors group-hover:border-blue-300/40 group-hover:text-blue-100">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-control border border-accent-border bg-accent-soft text-accent transition group-hover:border-accent">
         <SocialIcon icon={link.icon} className="h-5 w-5" />
       </span>
 
       <span className="min-w-0 flex-1">
-        <span className="block text-sm font-semibold text-white">
+        <span className="block text-sm font-semibold text-primary">
           {link.label}
         </span>
-        <span className="mt-1 block truncate text-sm text-slate-400">
+        <span className="mt-1 block truncate text-sm text-secondary">
           {link.username ?? link.description ?? link.href}
         </span>
       </span>

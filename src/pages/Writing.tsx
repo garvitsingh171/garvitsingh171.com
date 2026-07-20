@@ -68,18 +68,18 @@ export default function Writing() {
     <div className="space-y-12 sm:space-y-16">
       <section aria-labelledby="writing-page-heading">
         <header className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+          <p className="text-label text-accent">
             Writing
           </p>
 
           <h1
             id="writing-page-heading"
-            className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl"
+            className="mt-4 text-display-2 text-primary"
           >
             Notes from building, contributing, and learning.
           </h1>
 
-          <p className="mt-5 text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
+          <p className="mt-5 text-body-lg text-secondary">
             Reflections on software projects, backend engineering, open-source
             collaboration, DSA, and the systems I use to improve as a developer.
           </p>
@@ -88,16 +88,16 @@ export default function Writing() {
 
       {featuredArticle ? (
         <section
-          className="border-t border-slate-800 pt-10 sm:pt-12"
+          className="section-divider"
           aria-labelledby="featured-writing-heading"
         >
           <div className="mb-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+            <p className="text-label text-accent">
               Featured
             </p>
             <h2
               id="featured-writing-heading"
-              className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+              className="mt-3 text-heading-2 text-primary"
             >
               Featured Writing
             </h2>
@@ -111,21 +111,21 @@ export default function Writing() {
       ) : null}
 
       <section
-        className="border-t border-slate-800 pt-10 sm:pt-12"
+        className="section-divider"
         aria-labelledby="writing-library-heading"
       >
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+            <p className="text-label text-accent">
               Library
             </p>
             <h2
               id="writing-library-heading"
-              className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+              className="mt-3 text-heading-2 text-primary"
             >
               Articles and Notes
             </h2>
-            <p className="mt-3 text-base leading-7 text-slate-300">
+            <p className="mt-3 text-base leading-7 text-secondary">
               {selectedCategoryLabel} · {getEntryCountLabel(filteredArticles.length)}
             </p>
           </div>

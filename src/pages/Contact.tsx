@@ -49,24 +49,24 @@ export default function Contact() {
       <section aria-labelledby="contact-page-heading">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
           <div className="min-w-0 max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+            <p className="text-label text-accent">
               {contactPageContent.introduction.label}
             </p>
 
             <h1
               id="contact-page-heading"
-              className="mt-5 max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
+              className="mt-5 max-w-4xl text-display-2 text-primary"
             >
               {contactPageContent.introduction.heading}
             </h1>
 
-            <div className="mt-6 max-w-3xl space-y-4 text-base leading-8 text-slate-300 sm:text-lg">
+            <div className="mt-6 max-w-3xl space-y-4 text-body-lg text-secondary">
               <p>{contactPageContent.introduction.description}</p>
               <p>{contactPageContent.introduction.supportingDescription}</p>
             </div>
 
             <div className="mt-8">
-              <h2 className="text-xl font-semibold text-white">
+              <h2 className="text-xl font-semibold text-primary">
                 {contactPageContent.opportunities.heading}
               </h2>
 
@@ -76,7 +76,7 @@ export default function Contact() {
               >
                 {contactPageContent.opportunities.items.map((item) => (
                   <li key={item} className="min-w-0">
-                    <span className="flex min-h-11 items-center rounded-md border border-slate-800 bg-slate-900/60 px-3 py-2 text-sm font-medium leading-6 text-slate-200">
+                    <span className="flex min-h-11 items-center rounded-md border border-border bg-surface px-3 py-2 text-sm font-medium leading-6 text-primary">
                       {item}
                     </span>
                   </li>
@@ -86,10 +86,10 @@ export default function Contact() {
           </div>
 
           <Card className="p-5 sm:p-6">
-            <h2 className="text-xl font-semibold text-white">
+            <h2 className="text-xl font-semibold text-primary">
               {contactPageContent.emailCard.title}
             </h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
+            <p className="mt-3 text-sm leading-6 text-secondary">
               {contactPageContent.emailCard.description}
             </p>
 
@@ -105,18 +105,18 @@ export default function Contact() {
               </Button>
             </div>
 
-            <p className="mt-4 break-words text-sm font-medium leading-6 text-slate-400">
+            <p className="mt-4 break-words text-sm font-medium leading-6 text-secondary">
               {contactDetails.email}
             </p>
 
-            <div className="mt-6 border-t border-slate-800 pt-5">
-              <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-200">
+            <div className="mt-6 border-t border-border pt-5">
+              <h3 className="text-label text-accent">
                 {contactPageContent.availability.heading}
               </h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
+              <p className="mt-3 text-sm leading-6 text-secondary">
                 {contactPageContent.availability.description}
               </p>
-              <p className="mt-3 text-sm leading-6 text-slate-400">
+              <p className="mt-3 text-sm leading-6 text-secondary">
                 {contactPageContent.responseNote}
               </p>
             </div>
@@ -125,7 +125,7 @@ export default function Contact() {
       </section>
 
       <section
-        className="border-t border-slate-800 pt-10 sm:pt-12"
+        className="section-divider"
         aria-labelledby="contact-social-heading"
       >
         <SectionHeading

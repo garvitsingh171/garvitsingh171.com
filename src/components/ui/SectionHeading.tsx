@@ -21,20 +21,20 @@ export function SectionHeading({
   return (
     <div className={["max-w-2xl space-y-3", alignmentClasses, className].join(" ")}>
       {label ? (
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+        <p className="text-label text-accent">
           {label}
         </p>
       ) : null}
 
       <h2
         id={id}
-        className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+        className="text-heading-2 text-primary"
       >
         {title}
       </h2>
 
       {description ? (
-        <p className="text-base leading-7 text-slate-300">{description}</p>
+        <p className="text-body-md text-secondary">{description}</p>
       ) : null}
     </div>
   );

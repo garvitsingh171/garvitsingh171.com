@@ -22,22 +22,22 @@ export function TechnicalDecisionList({
     <div className="grid gap-4">
       {visibleDecisions.map((decision) => (
         <Card key={decision.title} className="p-5">
-          <h3 className="text-lg font-semibold text-white">
+          <h3 className="text-lg font-semibold text-primary">
             {decision.title}
           </h3>
 
           {decision.description ? (
-            <p className="mt-3 text-sm leading-6 text-slate-300">
+            <p className="mt-3 text-body-sm text-secondary">
               {decision.description}
             </p>
           ) : null}
 
           {decision.reason ? (
             <div className="mt-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+              <p className="text-label text-accent">
                 Reason
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-300">
+              <p className="mt-2 text-body-sm text-secondary">
                 {decision.reason}
               </p>
             </div>
@@ -45,10 +45,10 @@ export function TechnicalDecisionList({
 
           {decision.tradeOff ? (
             <div className="mt-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+              <p className="text-label text-accent">
                 Trade-off
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-300">
+              <p className="mt-2 text-body-sm text-secondary">
                 {decision.tradeOff}
               </p>
             </div>

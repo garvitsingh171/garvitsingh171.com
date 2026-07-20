@@ -19,7 +19,7 @@ type DetailBlockProps = {
 function DetailBlock({ title, children }: DetailBlockProps) {
   return (
     <div className="min-w-0">
-      <h5 className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-200">
+      <h5 className="text-label text-accent">
         {title}
       </h5>
       <div className="mt-3">{children}</div>
@@ -33,7 +33,7 @@ function DetailList({ items }: { items: string[] }) {
       {items.map((item) => (
         <li
           key={item}
-          className="border-l border-slate-700 pl-3 text-sm leading-6 text-slate-300"
+          className="border-l border-border-strong pl-3 text-sm leading-6 text-secondary"
         >
           {item}
         </li>
@@ -50,21 +50,21 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <ContributionStatusBadge status={contribution.status} />
-              <span className="rounded-full border border-slate-700 bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-slate-300">
+              <span className="rounded-full border border-border-strong bg-subtle px-2.5 py-1 text-xs font-semibold text-secondary">
                 PR #{contribution.pullRequestNumber}
               </span>
             </div>
 
             <h4
               id={`${contribution.id}-title`}
-              className="mt-4 break-words text-xl font-semibold tracking-tight text-white"
+              className="mt-4 break-words text-xl font-semibold text-primary"
             >
               {contribution.title}
             </h4>
           </div>
         </div>
 
-        <p className="mt-4 text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">
+        <p className="mt-4 text-sm leading-6 text-secondary sm:text-base sm:leading-7">
           {contribution.summary}
         </p>
 
@@ -102,11 +102,11 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
           ) : null}
         </div>
 
-        <details className="group mt-6 rounded-md border border-slate-800 bg-slate-950/50">
+        <details className="group mt-6 rounded-md border border-border bg-subtle">
           <summary
             className={[
-              "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-md px-4 py-3 text-sm font-semibold text-slate-100 transition-colors",
-              "hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
+              "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-md px-4 py-3 text-sm font-semibold text-primary transition-colors",
+              "hover:bg-surface-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
               "[&::-webkit-details-marker]:hidden",
             ].join(" ")}
           >
@@ -127,10 +127,10 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
             </svg>
           </summary>
 
-          <div className="space-y-6 border-t border-slate-800 px-4 py-5 sm:px-5">
+          <div className="space-y-6 border-t border-border px-4 py-5 sm:px-5">
             {contribution.problem ? (
               <DetailBlock title="Problem">
-                <p className="text-sm leading-6 text-slate-300">
+                <p className="text-sm leading-6 text-secondary">
                   {contribution.problem}
                 </p>
               </DetailBlock>
@@ -171,7 +171,7 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
                 <ul className="space-y-2">
                   {contribution.filePaths.map((filePath) => (
                     <li key={filePath}>
-                      <code className="block rounded-md border border-slate-800 bg-slate-950 px-3 py-2 text-xs leading-5 text-slate-300 break-all">
+                      <code className="block rounded-md border border-border bg-page px-3 py-2 text-xs leading-5 text-secondary break-all">
                         {filePath}
                       </code>
                     </li>

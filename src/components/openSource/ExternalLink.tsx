@@ -75,8 +75,8 @@ export function ExternalLink({
       rel="noopener noreferrer"
       aria-label={ariaLabel}
       className={[
-        "inline-flex min-h-10 items-center gap-1.5 rounded-md text-sm font-semibold text-blue-300 transition-colors hover:text-blue-200",
-        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
+        "inline-flex min-h-10 items-center gap-1.5 rounded-md text-sm font-semibold text-accent transition-colors hover:text-accent",
+        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
         className,
       ].join(" ")}
     >

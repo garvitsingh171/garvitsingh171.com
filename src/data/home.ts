@@ -25,14 +25,14 @@ export const homeMeta = {
 } as const;
 
 export const heroContent: HeroContent = {
-  label: "Software Product Engineering Student",
-  heading: "Building practical full-stack products with backend-first thinking.",
+  label: "Building full-stack products and backend systems",
+  heading: "I build software products around real workflows, clear architecture, and useful outcomes.",
   description:
-    "I am Garvit Singh, a B.Tech CSE student at JECRC University in collaboration with Kalvium. I build full-stack web projects, backend APIs, and product-focused solutions while strengthening my foundations in DSA, system design, and real-world engineering.",
+    "I am Garvit Singh, a B.Tech CSE student at JECRC University in collaboration with Kalvium. My work focuses on full-stack products, backend APIs, data modelling, authentication, and practical user flows.",
   position:
     "Currently focused on backend development, full-stack projects, open source, and practical software engineering.",
   primaryCta: {
-    label: "View Projects",
+    label: "View Selected Work",
     href: "/projects",
   },
   secondaryCta: {

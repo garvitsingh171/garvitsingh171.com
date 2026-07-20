@@ -13,11 +13,11 @@ export function SkillCard({ skill }: SkillCardProps) {
         <SkillIcon icon={skill.icon} />
 
         <div className="min-w-0">
-          <h4 className="text-base font-semibold leading-6 text-white">
+          <h4 className="text-base font-semibold leading-6 text-primary">
             {skill.name}
           </h4>
           {skill.description ? (
-            <p className="mt-2 text-sm leading-6 text-slate-300">
+            <p className="mt-2 text-sm leading-6 text-secondary">
               {skill.description}
             </p>
           ) : null}

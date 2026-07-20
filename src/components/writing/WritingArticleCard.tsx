@@ -55,17 +55,17 @@ export function WritingArticleCard({
     <Card className="h-full min-w-0 shadow-sm">
       <div className="flex h-full min-w-0 flex-col">
         <div className="flex flex-wrap items-start justify-between gap-3">
-          <p className="min-w-0 text-sm font-semibold leading-6 text-blue-200">
+          <p className="min-w-0 text-sm font-semibold leading-6 text-accent">
             {category.label}
           </p>
           <WritingArticleStatusBadge status={article.status} />
         </div>
 
-        <h3 className="mt-4 min-w-0 break-words text-xl font-semibold text-white">
+        <h3 className="mt-4 min-w-0 break-words text-xl font-semibold text-primary">
           {article.title}
         </h3>
 
-        <p className="mt-3 text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">
+        <p className="mt-3 text-sm leading-6 text-secondary sm:text-base sm:leading-7">
           {article.summary}
         </p>
 
@@ -77,7 +77,7 @@ export function WritingArticleCard({
             {article.tags.map((tag) => (
               <li
                 key={tag}
-                className="min-w-0 max-w-full rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-xs font-medium text-slate-300 break-words"
+                className="min-w-0 max-w-full rounded-full border border-border-strong bg-subtle px-3 py-1 text-xs font-medium text-secondary break-words"
               >
                 {tag}
               </li>
@@ -86,7 +86,7 @@ export function WritingArticleCard({
         ) : null}
 
         {metadata.length > 0 ? (
-          <p className="mt-5 text-sm leading-6 text-slate-400">
+          <p className="mt-5 text-sm leading-6 text-secondary">
             {metadata.join(" · ")}
           </p>
         ) : null}
@@ -103,7 +103,7 @@ export function WritingArticleCard({
               Read Article
             </Button>
           ) : articleNote ? (
-            <p className="text-sm font-semibold leading-6 text-slate-400">
+            <p className="text-sm font-semibold leading-6 text-secondary">
               {articleNote}
             </p>
           ) : null}

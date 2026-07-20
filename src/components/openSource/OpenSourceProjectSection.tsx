@@ -20,15 +20,15 @@ function ProjectList({
   }
 
   return (
-    <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-5">
-      <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-200">
+    <div className="rounded-lg border border-border bg-surface p-5">
+      <h4 className="text-label text-accent">
         {title}
       </h4>
       <ul className="mt-4 space-y-3">
         {items.map((item) => (
           <li
             key={item}
-            className="border-l border-slate-700 pl-3 text-sm leading-6 text-slate-300"
+            className="border-l border-border-strong pl-3 text-sm leading-6 text-secondary"
           >
             {item}
           </li>
@@ -47,33 +47,33 @@ export function OpenSourceProjectSection({
 
   return (
     <section
-      className="border-t border-slate-800 pt-10 sm:pt-12"
+      className="section-divider"
       aria-labelledby={projectHeadingId}
     >
       <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.45fr)]">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
             {showShortName ? (
-              <span className="rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-xs font-semibold text-slate-300">
+              <span className="rounded-full border border-border-strong bg-subtle px-3 py-1 text-xs font-semibold text-secondary">
                 {project.shortName}
               </span>
             ) : null}
-            <span className="rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-blue-200">
+            <span className="rounded-full border border-accent-border bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
               {project.role}
             </span>
           </div>
 
           <h3
             id={projectHeadingId}
-            className="mt-5 break-words text-3xl font-bold tracking-tight text-white sm:text-4xl"
+            className="mt-5 break-words text-heading-2 text-primary"
           >
             {project.name}
           </h3>
 
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300">
+          <p className="mt-5 max-w-3xl text-base leading-7 text-secondary">
             {project.description}
           </p>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">
+          <p className="mt-4 max-w-3xl text-base leading-7 text-secondary">
             {project.contributionSummary}
           </p>
 
@@ -85,8 +85,8 @@ export function OpenSourceProjectSection({
         </div>
 
         {hasItems(project.links) ? (
-          <div className="min-w-0 rounded-lg border border-slate-800 bg-slate-900/50 p-5">
-            <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-200">
+          <div className="min-w-0 rounded-lg border border-border bg-surface p-5">
+            <h4 className="text-label text-accent">
               Project links
             </h4>
             <div className="mt-4 flex flex-col items-start gap-2">
@@ -109,21 +109,21 @@ export function OpenSourceProjectSection({
         <ProjectList title="Project learnings" items={project.learnings} />
 
         {hasItems(project.stats) ? (
-          <div className="rounded-lg border border-slate-800 bg-slate-950/50 p-5">
-            <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-200">
+          <div className="rounded-lg border border-border bg-subtle p-5">
+            <h4 className="text-label text-accent">
               Project stats
             </h4>
             <dl className="mt-4 space-y-4">
               {project.stats.map((stat) => (
                 <div key={stat.label} className="min-w-0">
-                  <dt className="text-sm font-medium text-slate-400">
+                  <dt className="text-sm font-medium text-secondary">
                     {stat.label}
                   </dt>
-                  <dd className="mt-1 break-words text-xl font-semibold text-white">
+                  <dd className="mt-1 break-words text-xl font-semibold text-primary">
                     {stat.value}
                   </dd>
                   {stat.description ? (
-                    <p className="mt-1 text-sm leading-6 text-slate-500">
+                    <p className="mt-1 text-sm leading-6 text-muted">
                       {stat.description}
                     </p>
                   ) : null}
@@ -136,13 +136,13 @@ export function OpenSourceProjectSection({
 
       {hasItems(project.contributions) ? (
         <div className="mt-10">
-          <h4 className="text-xl font-semibold text-white">Contributions</h4>
-          <ol className="mt-6 space-y-6 md:border-l md:border-slate-800 md:pl-6">
+          <h4 className="text-xl font-semibold text-primary">Contributions</h4>
+          <ol className="mt-6 space-y-6 md:border-l md:border-border md:pl-6">
             {project.contributions.map((contribution) => (
               <li key={contribution.id} className="relative min-w-0">
                 <span
                   aria-hidden="true"
-                  className="absolute -left-[1.85rem] top-6 hidden h-3 w-3 rounded-full border border-emerald-300 bg-slate-950 md:block"
+                  className="absolute -left-[1.85rem] top-6 hidden h-3 w-3 rounded-full border border-emerald-300 bg-page md:block"
                 />
                 <ContributionCard contribution={contribution} />
               </li>

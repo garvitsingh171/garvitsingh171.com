@@ -2,7 +2,7 @@ import type {
   ProjectLearning,
   ProjectLearningCategory,
 } from "../../types/project";
-import { Card } from "../ui";
+import { Badge, Card } from "../ui";
 import { CaseStudySection } from "./CaseStudySection";
 
 export type ProjectLearningsSectionProps = {
@@ -43,24 +43,24 @@ export function ProjectLearningsSection({
         {visibleLearnings.map((learning) => (
           <li key={`${learning.category}-${learning.title}`}>
             <Card className="h-full p-5">
-              <span className="inline-flex rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-xs font-semibold text-slate-300">
+              <Badge>
                 {learningCategoryLabels[learning.category]}
-              </span>
+              </Badge>
 
-              <h3 className="mt-4 text-lg font-semibold text-white">
+              <h3 className="mt-4 text-lg font-semibold text-primary">
                 {learning.title}
               </h3>
 
-              <p className="mt-3 text-sm leading-6 text-slate-300">
+              <p className="mt-3 text-body-sm text-secondary">
                 {learning.description}
               </p>
 
               {learning.application?.trim() ? (
-                <div className="mt-5 border-t border-slate-800 pt-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+                <div className="mt-5 border-t border-border pt-4">
+                  <p className="text-label text-accent">
                     How I apply it
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                  <p className="mt-2 text-body-sm text-secondary">
                     {learning.application}
                   </p>
                 </div>

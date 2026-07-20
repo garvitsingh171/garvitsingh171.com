@@ -4,7 +4,7 @@ import type {
   ProjectArchitectureLayer,
   ProjectArchitectureLayerKind,
 } from "../../types/project";
-import { Card } from "../ui";
+import { Badge, Card } from "../ui";
 import { CaseStudySection } from "./CaseStudySection";
 import { ProjectText } from "./ProjectText";
 import { hasTextContent } from "./projectTextUtils";
@@ -87,7 +87,7 @@ export function ProjectArchitectureSection({
 
         {diagram ? (
           <figure>
-            <div className="overflow-hidden rounded-lg border border-slate-800 bg-slate-950/80 p-3">
+            <div className="overflow-hidden rounded-media border border-border bg-subtle p-3">
               <img
                 src={diagram.src}
                 alt={diagram.alt}
@@ -98,7 +98,7 @@ export function ProjectArchitectureSection({
             </div>
 
             {diagram.caption ? (
-              <figcaption className="mt-3 text-sm leading-6 text-slate-400">
+              <figcaption className="mt-3 text-body-sm text-muted">
                 {diagram.caption}
               </figcaption>
             ) : null}
@@ -110,18 +110,18 @@ export function ProjectArchitectureSection({
             {visibleLayers.map((layer) => (
               <Card key={layer.id} className="h-full p-5">
                 <div className="flex flex-wrap items-start justify-between gap-3">
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-primary">
                     {layer.title}
                   </h3>
 
                   {layer.kind ? (
-                    <span className="rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-xs font-semibold text-slate-300">
+                    <Badge>
                       {layerKindLabels[layer.kind]}
-                    </span>
+                    </Badge>
                   ) : null}
                 </div>
 
-                <p className="mt-3 text-sm leading-6 text-slate-300">
+                <p className="mt-3 text-body-sm text-secondary">
                   {layer.description}
                 </p>
 
@@ -131,11 +131,10 @@ export function ProjectArchitectureSection({
                     className="mt-4 flex flex-wrap gap-2"
                   >
                     {layer.technologies.map((technology) => (
-                      <li
-                        key={technology}
-                        className="rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-xs font-medium text-slate-300"
-                      >
-                        {technology}
+                      <li key={technology}>
+                        <Badge className="rounded-md font-medium normal-case">
+                          {technology}
+                        </Badge>
                       </li>
                     ))}
                   </ul>
@@ -147,7 +146,7 @@ export function ProjectArchitectureSection({
 
         {visibleConnections.length > 0 ? (
           <div>
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-primary">
               Layer Relationships
             </h3>
             <ol className="mt-4 grid gap-3">
@@ -162,17 +161,17 @@ export function ProjectArchitectureSection({
                 return (
                   <li
                     key={`${connection.from}-${connection.to}-${connection.label ?? ""}`}
-                    className="rounded-lg border border-slate-800 bg-slate-950/50 p-4"
+                    className="rounded-card border border-border bg-subtle p-4"
                   >
-                    <p className="text-sm font-semibold text-white">
+                    <p className="text-sm font-semibold text-primary">
                       {fromLayer.title}{" "}
-                      <span aria-hidden="true" className="text-blue-300">
+                      <span aria-hidden="true" className="text-accent">
                         -&gt;
                       </span>{" "}
                       {toLayer.title}
                     </p>
                     {connection.label ? (
-                      <p className="mt-2 text-sm leading-6 text-slate-300">
+                      <p className="mt-2 text-body-sm text-secondary">
                         {connection.label}
                       </p>
                     ) : null}

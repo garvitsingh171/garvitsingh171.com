@@ -5,6 +5,7 @@ type CardProps = {
   description?: string;
   children?: ReactNode;
   className?: string;
+  interactive?: boolean;
 };
 
 export function Card({
@@ -12,22 +13,24 @@ export function Card({
   description,
   children,
   className = "",
+  interactive = false,
 }: CardProps) {
   const hasHeaderContent = Boolean(title || description);
 
   return (
     <article
       className={[
-        "rounded-lg border border-slate-800 bg-slate-900/60 p-6 transition-colors hover:border-slate-700",
+        "rounded-card border border-border bg-surface p-6 shadow-subtle transition duration-200",
+        interactive ? "hover:-translate-y-0.5 hover:border-border-strong" : "",
         className,
       ].join(" ")}
     >
       {title ? (
-        <h3 className="text-xl font-semibold text-white">{title}</h3>
+        <h3 className="text-xl font-semibold text-primary">{title}</h3>
       ) : null}
 
       {description ? (
-        <p className="mt-3 leading-7 text-slate-300">{description}</p>
+        <p className="mt-3 leading-7 text-secondary">{description}</p>
       ) : null}
 
       {children ? (

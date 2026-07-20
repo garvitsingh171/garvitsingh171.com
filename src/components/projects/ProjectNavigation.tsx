@@ -23,18 +23,18 @@ function ProjectNavLink({
     <Link
       to={`/projects/${project.slug}`}
       className={[
-        "rounded-lg border border-slate-800 bg-slate-900/60 p-5 transition-colors hover:border-slate-600 hover:bg-slate-900",
-        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
+        "rounded-card border border-border bg-surface p-5 transition duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover",
+        "focus-visible:outline-focus",
         alignmentClass,
       ].join(" ")}
     >
-      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+      <span className="text-label text-accent">
         {label}
       </span>
-      <span className="mt-2 block text-lg font-semibold text-white">
+      <span className="mt-2 block text-lg font-semibold text-primary">
         {project.title}
       </span>
-      <span className="mt-2 line-clamp-2 block text-sm leading-6 text-slate-300">
+      <span className="mt-2 line-clamp-2 block text-body-sm text-secondary">
         {project.summary}
       </span>
     </Link>

@@ -32,12 +32,12 @@ export function ContributionMetadata({
       {metadata.map((item) => (
         <div
           key={item.label}
-          className="min-w-0 rounded-md border border-slate-800 bg-slate-950/60 px-3 py-2"
+          className="min-w-0 rounded-md border border-border bg-subtle px-3 py-2"
         >
-          <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+          <dt className="text-xs font-semibold uppercase text-muted">
             {item.label}
           </dt>
-          <dd className="mt-1 break-words text-sm font-medium text-slate-200">
+          <dd className="mt-1 break-words text-sm font-medium text-primary">
             {item.value}
           </dd>
         </div>
