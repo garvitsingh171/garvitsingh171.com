@@ -8,10 +8,39 @@ export type NavigationItem = {
 
 export const primaryNavigation = [
   {
-    id: "home",
-    label: "Home",
-    href: "/",
+    id: "work",
+    label: "Work",
+    href: "/projects",
   },
+  {
+    id: "about",
+    label: "About",
+    href: "/about",
+  },
+  {
+    id: "open-source",
+    label: "Open Source",
+    href: "/open-source",
+  },
+  {
+    id: "resume",
+    label: "Resume",
+    href: resumeConfig.pagePath,
+  },
+] as const satisfies readonly NavigationItem[];
+
+export const contactNavigation = {
+  id: "contact",
+  label: "Contact",
+  href: "/contact",
+} as const satisfies NavigationItem;
+
+export const mobileNavigation = [
+  ...primaryNavigation,
+  contactNavigation,
+] as const satisfies readonly NavigationItem[];
+
+export const footerNavigation = [
   {
     id: "about",
     label: "About",
@@ -43,24 +72,3 @@ export const primaryNavigation = [
     href: "/contact",
   },
 ] as const satisfies readonly NavigationItem[];
-
-const footerNavigationIds = [
-  "about",
-  "projects",
-  "open-source",
-  "writing",
-  "resume",
-  "contact",
-] as const;
-
-const navigationById = new Map(primaryNavigation.map((item) => [item.id, item]));
-
-export const footerNavigation = footerNavigationIds.map((id) => {
-  const item = navigationById.get(id);
-
-  if (!item) {
-    throw new Error(`Missing footer navigation item: ${id}`);
-  }
-
-  return item;
-});

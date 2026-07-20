@@ -20,10 +20,10 @@ export function FeatureGrid({ features }: FeatureGridProps) {
     <div className="grid gap-4 md:grid-cols-2">
       {visibleFeatures.map((feature) => (
         <Card key={feature.title} className="h-full p-5">
-          <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
+          <h3 className="text-lg font-semibold text-primary">{feature.title}</h3>
 
           {feature.description ? (
-            <p className="mt-3 text-sm leading-6 text-slate-300">
+            <p className="mt-3 text-body-sm text-secondary">
               {feature.description}
             </p>
           ) : null}

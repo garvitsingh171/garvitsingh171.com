@@ -9,12 +9,15 @@ export function FeaturedProjectsSection() {
     return null;
   }
 
+  const [primaryProject, ...supportingProjects] = featuredProjects;
+
   return (
-    <section className="border-t border-slate-800 pt-10 sm:pt-12">
+    <section className="section-divider" aria-labelledby="home-work-heading">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <SectionHeading
-          label="Selected Work"
-          title="Featured projects"
+          id="home-work-heading"
+          label="01 / Selected Work"
+          title="Projects built around real product problems."
           description="A selection of full-stack products and backend systems built around practical problems, secure APIs, and real engineering workflows."
         />
 
@@ -28,10 +31,18 @@ export function FeaturedProjectsSection() {
         </Button>
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
-        {featuredProjects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
-        ))}
+      <div className="mt-10 space-y-6">
+        {primaryProject ? (
+          <ProjectCard project={primaryProject} variant="featured" />
+        ) : null}
+
+        {supportingProjects.length > 0 ? (
+          <div className="grid gap-6 lg:grid-cols-2">
+            {supportingProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </div>
+        ) : null}
       </div>
     </section>
   );

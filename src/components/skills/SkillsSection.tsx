@@ -5,7 +5,7 @@ import { SkillCard } from "./SkillCard";
 export function SkillsSection() {
   return (
     <section
-      className="border-t border-slate-800 pt-10 sm:pt-12"
+      className="section-divider"
       aria-labelledby="skills-heading"
     >
       <SectionHeading
@@ -29,18 +29,18 @@ export function SkillsSection() {
           return (
             <section
               key={category.id}
-              className="border-t border-slate-800 pt-8 first:border-t-0 first:pt-0"
+              className="border-t border-border pt-8 first:border-t-0 first:pt-0"
               aria-labelledby={`${category.id}-skills-heading`}
             >
               <div className="max-w-3xl">
                 <h3
                   id={`${category.id}-skills-heading`}
-                  className="text-2xl font-semibold tracking-tight text-white"
+                  className="text-2xl font-semibold text-primary"
                 >
                   {category.title}
                 </h3>
                 {category.description ? (
-                  <p className="mt-3 text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">
+                  <p className="mt-3 text-sm leading-6 text-secondary sm:text-base sm:leading-7">
                     {category.description}
                   </p>
                 ) : null}

@@ -1,15 +1,164 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-sans: Manrope, Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas,
+    "Liberation Mono", monospace;
+
+  --color-page: var(--bg-page);
+  --color-surface: var(--bg-surface);
+  --color-surface-elevated: var(--bg-surface-elevated);
+  --color-surface-hover: var(--bg-surface-hover);
+  --color-subtle: var(--bg-subtle);
+  --color-inverse: var(--bg-inverse);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-tertiary);
+  --color-inverse-text: var(--text-inverse);
+  --color-border: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-focus: var(--focus);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-active: var(--accent-active);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-border: var(--accent-border);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --color-slate-950: var(--bg-page);
+  --color-slate-900: var(--bg-surface);
+  --color-slate-800: var(--border-default);
+  --color-slate-700: var(--border-strong);
+  --color-slate-600: var(--text-tertiary);
+  --color-slate-500: var(--text-tertiary);
+  --color-slate-400: var(--text-secondary);
+  --color-slate-300: var(--text-secondary);
+  --color-slate-200: var(--text-primary);
+  --color-slate-100: var(--text-primary);
+  --color-blue-500: var(--accent);
+  --color-blue-400: var(--focus);
+  --color-blue-300: var(--accent);
+  --color-blue-200: var(--accent);
+  --color-blue-100: var(--accent-hover);
+  --color-emerald-400: var(--success);
+  --color-emerald-300: var(--success);
+  --color-emerald-200: var(--success);
+  --color-white: var(--text-primary);
+
+  --radius-control: var(--radius-sm);
+  --radius-card: var(--radius-md);
+  --radius-media: var(--radius-lg);
+  --shadow-subtle: var(--shadow-xs);
+  --shadow-elevated: var(--shadow-sm);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
 :root {
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #e5e7eb;
-  background: #020617;
+  --bg-page: #f7f7f3;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-hover: #f0f1ec;
+  --bg-subtle: #f0f1ec;
+  --bg-inverse: #171817;
+  --text-primary: #171817;
+  --text-secondary: #62655f;
+  --text-tertiary: #858880;
+  --text-inverse: #f7f7f3;
+  --border-default: #d9dbd4;
+  --border-strong: #bfc2ba;
+  --accent: #3157d5;
+  --accent-hover: #2748b8;
+  --accent-active: #203c9a;
+  --accent-soft: #e8ecfc;
+  --accent-border: #bac7f7;
+  --success: #217a55;
+  --success-soft: #e7f4ed;
+  --warning: #9a5d12;
+  --warning-soft: #f8eedc;
+  --danger: #b53d3d;
+  --danger-soft: #f9e7e7;
+  --info: #3157d5;
+  --info-soft: #e8ecfc;
+  --focus: #4d70e8;
+  --overlay: rgba(15, 16, 15, 0.56);
+  --selection-background: #3157d5;
+  --selection-text: #ffffff;
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.625rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-pill: 999px;
+  --shadow-xs: 0 1px 2px rgba(15, 16, 15, 0.06);
+  --shadow-sm: 0 8px 24px rgba(15, 16, 15, 0.08);
+  --shadow-lg: 0 20px 60px rgba(15, 16, 15, 0.12);
+  --motion-instant: 80ms;
+  --motion-fast: 140ms;
+  --motion-standard: 200ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --container-full: 80rem;
+  --container-standard: 70rem;
+  --container-reading: 45rem;
+
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--bg-page);
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root.dark,
+:root[data-theme="dark"] {
+  --bg-page: #10110f;
+  --bg-surface: #171816;
+  --bg-surface-elevated: #1b1d19;
+  --bg-surface-hover: #1e201d;
+  --bg-subtle: #1e201d;
+  --bg-inverse: #f3f3ee;
+  --text-primary: #f3f3ee;
+  --text-secondary: #a9aca4;
+  --text-tertiary: #858980;
+  --text-inverse: #151614;
+  --border-default: #33362f;
+  --border-strong: #4c5147;
+  --accent: #8297ff;
+  --accent-hover: #9eaeff;
+  --accent-active: #b2beff;
+  --accent-soft: #20294a;
+  --accent-border: #43579e;
+  --success: #64c898;
+  --success-soft: #173829;
+  --warning: #e4af62;
+  --warning-soft: #3d2d16;
+  --danger: #f08b8b;
+  --danger-soft: #412020;
+  --info: #8297ff;
+  --info-soft: #20294a;
+  --focus: #a9b6ff;
+  --overlay: rgba(0, 0, 0, 0.68);
+  --selection-background: #a9b6ff;
+  --selection-text: #10110f;
+
+  color-scheme: dark;
 }
 
 * {
@@ -17,20 +166,28 @@
 }
 
 html {
+  min-width: 320px;
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  background: var(--bg-page);
 }
 
 body {
   min-height: 100vh;
   margin: 0;
-  background:
-    radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 32rem),
-    #020617;
+  background: var(--bg-page);
+  color: var(--text-primary);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:not([class]) {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 button,
@@ -40,6 +197,14 @@ select {
   font: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 img,
 svg {
   display: block;
@@ -47,6 +212,160 @@ svg {
 }
 
 ::selection {
-  color: #020617;
-  background: #93c5fd;
+  color: var(--selection-text);
+  background: var(--selection-background);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@layer base {
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: 0;
+  }
+
+  p,
+  li,
+  dd {
+    max-width: 75ch;
+  }
+}
+
+@layer utilities {
+  .text-display-1 {
+    font-family: var(--font-display);
+    font-size: 2.875rem;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .text-display-2 {
+    font-family: var(--font-display);
+    font-size: 2.625rem;
+    line-height: 1.02;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .text-heading-1 {
+    font-family: var(--font-display);
+    font-size: 2.375rem;
+    line-height: 1.08;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .text-heading-2 {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    line-height: 1.14;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .text-body-lg {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  .text-body-md {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .text-body-sm {
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+
+  .text-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .content-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .section-divider {
+    border-top: 1px solid var(--border-default);
+    padding-top: 3rem;
+  }
+}
+
+@media (min-width: 640px) {
+  @layer utilities {
+    .text-display-1 {
+      font-size: 3.875rem;
+    }
+
+    .text-display-2 {
+      font-size: 3.25rem;
+    }
+
+    .text-heading-1 {
+      font-size: 2.75rem;
+    }
+
+    .text-heading-2 {
+      font-size: 2.125rem;
+    }
+
+    .text-body-lg {
+      font-size: 1.125rem;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  @layer utilities {
+    .text-display-1 {
+      font-size: 4.75rem;
+      line-height: 0.98;
+    }
+
+    .text-display-2 {
+      font-size: 3.75rem;
+      line-height: 1;
+    }
+
+    .text-heading-1 {
+      font-size: 3.125rem;
+      line-height: 1.06;
+    }
+
+    .text-heading-2 {
+      font-size: 2.375rem;
+      line-height: 1.12;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

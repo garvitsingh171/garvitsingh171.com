@@ -15,7 +15,7 @@ import {
   TechnicalDecisionList,
   TechnologyList,
 } from "../components/projects";
-import { Button, EmptyState } from "../components/ui";
+import { Badge, Button, EmptyState } from "../components/ui";
 import { fallbackStates } from "../data/fallbackStates";
 import { projects } from "../data/projects";
 import type { ProjectType } from "../types/project";
@@ -161,28 +161,26 @@ export default function ProjectDetail() {
   );
 
   return (
-    <article className="space-y-10">
+    <article className="space-y-12">
       <Link
         to="/projects"
-        className="inline-flex text-sm font-semibold text-blue-300 transition-colors hover:text-blue-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+        className="inline-flex rounded-sm text-sm font-semibold text-accent transition hover:text-accent-hover focus-visible:outline-focus"
       >
         &larr; Back to Projects
       </Link>
 
-      <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
+      <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
             <ProjectStatusBadge status={project.status} />
-            <span className="rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-xs font-semibold text-slate-300">
-              {projectTypeLabel}
-            </span>
+            <Badge>{projectTypeLabel}</Badge>
           </div>
 
-          <h1 className="mt-5 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-5 text-display-2 text-primary">
             {project.title}
           </h1>
 
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
+          <p className="mt-5 max-w-3xl text-body-lg text-secondary">
             {project.summary}
           </p>
 
@@ -205,6 +203,7 @@ export default function ProjectDetail() {
             technologies={project.techStack}
             ariaLabel={`${project.title} technology stack`}
             className="mt-6"
+            limit={8}
           />
 
           {projectLinks.length > 0 ? (
@@ -230,17 +229,17 @@ export default function ProjectDetail() {
         </div>
 
         {project.image ? (
-          <div className="overflow-hidden rounded-lg border border-slate-800 bg-slate-950">
+          <div className="overflow-hidden rounded-media border border-border bg-subtle p-2 shadow-subtle">
             <img
               src={project.image.src}
               alt={project.image.alt}
-              className="aspect-video h-full w-full object-cover"
+              className="aspect-[4/3] h-full w-full rounded-card object-cover"
             />
           </div>
         ) : null}
       </header>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         <CaseStudySection id="overview" title="Overview">
           <ProjectText content={project.description} />
         </CaseStudySection>
@@ -262,7 +261,7 @@ export default function ProjectDetail() {
             <div className="grid gap-6 md:grid-cols-2">
               {hasItems(targetUsers) ? (
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-primary">
                     Intended Users
                   </h3>
                   <div className="mt-3">
@@ -273,7 +272,7 @@ export default function ProjectDetail() {
 
               {hasItems(useCases) ? (
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-primary">
                     Common Use Cases
                   </h3>
                   <div className="mt-3">

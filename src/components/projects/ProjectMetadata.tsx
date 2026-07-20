@@ -23,12 +23,12 @@ export function ProjectMetadata({ items }: ProjectMetadataProps) {
       {visibleItems.map((item) => (
         <div
           key={item.label}
-          className="rounded-lg border border-slate-800 bg-slate-950/60 p-4"
+          className="rounded-card border border-border bg-subtle p-4"
         >
-          <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+          <dt className="text-label text-muted">
             {item.label}
           </dt>
-          <dd className="mt-2 text-sm font-semibold text-slate-100">
+          <dd className="mt-2 text-sm font-semibold text-primary">
             {item.value}
           </dd>
         </div>

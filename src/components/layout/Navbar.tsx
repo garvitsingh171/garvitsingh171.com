@@ -1,18 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { primaryNavigation } from "../../constants/navigation";
+import {
+  contactNavigation,
+  mobileNavigation,
+  primaryNavigation,
+} from "../../constants/navigation";
 import { SITE_CONFIG } from "../../constants/site";
+import { Button, ThemeToggle } from "../ui";
 import { MobileNavigation } from "./MobileNavigation";
 
 const mobileNavigationId = "primary-mobile-navigation";
 
 function getDesktopLinkClasses({ isActive }: { isActive: boolean }) {
   return [
-    "whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
+    "relative whitespace-nowrap rounded-sm px-1 py-2 text-sm font-semibold transition duration-200",
+    "after:absolute after:inset-x-1 after:bottom-0 after:h-px after:origin-left after:bg-accent after:transition-transform after:duration-200",
+    "focus-visible:outline-focus",
     isActive
-      ? "bg-blue-500 text-white"
-      : "text-slate-300 hover:bg-slate-900 hover:text-white",
+      ? "text-primary after:scale-x-100"
+      : "text-secondary after:scale-x-0 hover:text-primary hover:after:scale-x-100",
   ].join(" ");
 }
 
@@ -89,6 +95,19 @@ export function Navbar() {
   }, [isMenuOpen]);
 
   useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
     const desktopQuery = window.matchMedia("(min-width: 1024px)");
 
     function closeMenuAtDesktopWidth(event: MediaQueryListEvent) {
@@ -109,55 +128,71 @@ export function Navbar() {
   };
 
   return (
-    <header className="border-b border-slate-800 bg-slate-950/90">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur">
+      <div className="mx-auto flex min-h-18 max-w-[var(--container-full)] items-center justify-between gap-4 px-5 py-3 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <NavLink
           to="/"
-          className="min-w-0 rounded-sm text-base font-semibold text-white transition-colors hover:text-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400 sm:text-lg"
+          className="group inline-flex min-w-0 items-center gap-3 rounded-sm text-base font-semibold text-primary transition hover:text-accent focus-visible:outline-focus sm:text-lg"
           end
         >
+          <span
+            aria-hidden="true"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-subtle font-mono text-sm text-accent transition group-hover:border-accent-border"
+          >
+            GS
+          </span>
           <span className="block truncate">{SITE_CONFIG.name}</span>
         </NavLink>
 
-        <nav
-          aria-label="Primary navigation"
-          className="hidden items-center gap-1 lg:flex"
-        >
-          {primaryNavigation.map((link) => (
-            <NavLink
-              key={link.id}
-              to={link.href}
-              className={getDesktopLinkClasses}
-              end={link.href === "/"}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
+        <div className="hidden items-center gap-6 lg:flex">
+          <nav
+            aria-label="Primary navigation"
+            className="flex items-center gap-6"
+          >
+            {primaryNavigation.map((link) => (
+              <NavLink
+                key={link.id}
+                to={link.href}
+                className={getDesktopLinkClasses}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        <button
-          ref={menuButtonRef}
-          type="button"
-          aria-expanded={isMenuOpen}
-          aria-controls={mobileNavigationId}
-          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-          onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
-          className={[
-            "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border transition-colors duration-150 lg:hidden",
-            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
-            isMenuOpen
-              ? "border-blue-400/60 bg-blue-500 text-white"
-              : "border-slate-700 bg-slate-900/60 text-slate-200 hover:border-slate-600 hover:bg-slate-900 hover:text-white",
-          ].join(" ")}
-        >
-          <MenuIcon isOpen={isMenuOpen} />
-        </button>
+          <div className="flex items-center gap-3">
+            <Button as="link" to={contactNavigation.href} size="sm">
+              {contactNavigation.label}
+            </Button>
+            <ThemeToggle />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            ref={menuButtonRef}
+            type="button"
+            aria-expanded={isMenuOpen}
+            aria-controls={mobileNavigationId}
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
+            className={[
+              "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-control border transition duration-200 focus-visible:outline-focus",
+              isMenuOpen
+                ? "border-accent bg-accent text-inverse-text"
+                : "border-border bg-surface text-secondary hover:border-border-strong hover:bg-surface-hover hover:text-primary",
+            ].join(" ")}
+          >
+            <MenuIcon isOpen={isMenuOpen} />
+          </button>
+        </div>
       </div>
 
       <MobileNavigation
         id={mobileNavigationId}
         isOpen={isMenuOpen}
-        links={primaryNavigation}
+        links={mobileNavigation}
         onNavigate={closeMenu}
       />
     </header>

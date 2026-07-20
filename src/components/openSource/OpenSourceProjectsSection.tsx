@@ -16,7 +16,7 @@ export function OpenSourceProjectsSection({
 
   return (
     <section
-      className="border-t border-slate-800 pt-10 sm:pt-12"
+      className="section-divider"
       aria-labelledby="open-source-projects-heading"
     >
       <SectionHeading

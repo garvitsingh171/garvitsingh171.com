@@ -18,14 +18,12 @@ export function CaseStudySection({
 }: CaseStudySectionProps) {
   return (
     <section id={id} className={className}>
-      <Card className="p-6 sm:p-7">
+      <Card className="p-6 sm:p-8">
         <div className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight text-white">
-            {title}
-          </h2>
+          <h2 className="text-heading-2 text-primary">{title}</h2>
 
           {subtitle ? (
-            <p className="mt-3 text-sm leading-6 text-slate-400">
+            <p className="mt-3 text-body-sm text-muted">
               {subtitle}
             </p>
           ) : null}

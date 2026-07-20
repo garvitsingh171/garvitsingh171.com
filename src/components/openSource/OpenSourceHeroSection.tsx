@@ -27,19 +27,19 @@ export function OpenSourceHeroSection({
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
         <div className="min-w-0 max-w-4xl">
           {introduction.eyebrow ? (
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+            <p className="text-label text-accent">
               {introduction.eyebrow}
             </p>
           ) : null}
 
           <h1
             id="open-source-page-heading"
-            className="mt-5 max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
+            className="mt-5 max-w-4xl text-display-2 text-primary"
           >
             {introduction.heading}
           </h1>
 
-          <div className="mt-6 max-w-3xl space-y-4 text-base leading-8 text-slate-300 sm:text-lg">
+          <div className="mt-6 max-w-3xl space-y-4 text-body-lg text-secondary">
             {introduction.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -65,20 +65,20 @@ export function OpenSourceHeroSection({
 
         {hasItems(heroStats) ? (
           <Card className="p-5 sm:p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-200">
+            <p className="text-label text-accent">
               Contribution snapshot
             </p>
             <dl className="mt-5 space-y-5">
               {heroStats.map((stat) => (
                 <div key={stat.label} className="min-w-0">
-                  <dt className="text-sm font-medium text-slate-400">
+                  <dt className="text-sm font-medium text-secondary">
                     {stat.label}
                   </dt>
-                  <dd className="mt-1 break-words text-3xl font-bold text-white">
+                  <dd className="mt-1 break-words text-3xl font-semibold text-primary">
                     {stat.value}
                   </dd>
                   {stat.description ? (
-                    <p className="mt-2 text-sm leading-6 text-slate-300">
+                    <p className="mt-2 text-sm leading-6 text-secondary">
                       {stat.description}
                     </p>
                   ) : null}

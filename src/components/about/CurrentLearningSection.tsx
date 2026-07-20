@@ -9,7 +9,7 @@ export function CurrentLearningSection({
   content,
 }: CurrentLearningSectionProps) {
   return (
-    <section className="border-t border-slate-800 pt-10 sm:pt-12">
+    <section className="section-divider">
       <SectionHeading
         label="Learning Focus"
         title={content.heading}
@@ -29,7 +29,7 @@ export function CurrentLearningSection({
               <ul className="flex flex-wrap gap-2">
                 {area.topics.map((topic) => (
                   <li key={topic} className="min-w-0 max-w-full">
-                    <span className="inline-flex max-w-full rounded-md border border-slate-700 bg-slate-950/70 px-2.5 py-1 text-xs font-medium leading-5 text-slate-300 break-words">
+                    <span className="inline-flex max-w-full rounded-md border border-border-strong bg-subtle px-2.5 py-1 text-xs font-medium leading-5 text-secondary break-words">
                       {topic}
                     </span>
                   </li>

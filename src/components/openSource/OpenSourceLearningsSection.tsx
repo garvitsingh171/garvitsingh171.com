@@ -15,7 +15,7 @@ export function OpenSourceLearningsSection({
 
   return (
     <section
-      className="border-t border-slate-800 pt-10 sm:pt-12"
+      className="section-divider"
       aria-labelledby="open-source-learnings-heading"
     >
       <SectionHeading
@@ -36,14 +36,14 @@ export function OpenSourceLearningsSection({
           >
             {hasItems(learning.examples) ? (
               <div>
-                <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-200">
+                <h4 className="text-label text-accent">
                   Examples
                 </h4>
                 <ul className="mt-3 space-y-2">
                   {learning.examples.map((example) => (
                     <li
                       key={example}
-                      className="border-l border-slate-700 pl-3 text-sm leading-6 text-slate-400"
+                      className="border-l border-border-strong pl-3 text-sm leading-6 text-secondary"
                     >
                       {example}
                     </li>

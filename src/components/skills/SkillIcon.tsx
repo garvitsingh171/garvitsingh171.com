@@ -211,7 +211,7 @@ export function SkillIcon({ icon }: SkillIconProps) {
   const Icon = skillIconMap[icon] ?? CodeIcon;
 
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-blue-400/20 bg-blue-400/10 text-blue-200">
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent">
       <Icon className="h-5 w-5" />
     </span>
   );

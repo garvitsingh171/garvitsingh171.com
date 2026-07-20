@@ -1,4 +1,5 @@
 import type { ProjectStatus } from "../../types/project";
+import { Badge } from "../ui";
 
 export type ProjectStatusBadgeProps = {
   status: ProjectStatus;
@@ -6,35 +7,26 @@ export type ProjectStatusBadgeProps = {
 
 type StatusConfig = {
   label: string;
-  className: string;
+  tone: "neutral" | "success" | "warning";
 };
 
 const statusConfig = {
   completed: {
     label: "Completed",
-    className: "border-emerald-400/30 bg-emerald-400/10 text-emerald-200",
+    tone: "success",
   },
   "in-progress": {
     label: "In Progress",
-    className: "border-blue-400/30 bg-blue-400/10 text-blue-200",
+    tone: "warning",
   },
   planned: {
     label: "Planned",
-    className: "border-slate-600 bg-slate-800/70 text-slate-300",
+    tone: "neutral",
   },
 } satisfies Record<ProjectStatus, StatusConfig>;
 
 export function ProjectStatusBadge({ status }: ProjectStatusBadgeProps) {
   const config = statusConfig[status];
 
-  return (
-    <span
-      className={[
-        "inline-flex w-fit shrink-0 items-center rounded-full border px-2.5 py-1 text-xs font-semibold leading-none",
-        config.className,
-      ].join(" ")}
-    >
-      {config.label}
-    </span>
-  );
+  return <Badge tone={config.tone}>{config.label}</Badge>;
 }

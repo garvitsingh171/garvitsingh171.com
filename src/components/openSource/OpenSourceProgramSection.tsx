@@ -12,7 +12,7 @@ function TextList({ items }: { items: string[] }) {
       {items.map((item) => (
         <li
           key={item}
-          className="border-l border-slate-700 pl-3 text-sm leading-6 text-slate-300"
+          className="border-l border-border-strong pl-3 text-sm leading-6 text-secondary"
         >
           {item}
         </li>
@@ -31,7 +31,7 @@ export function OpenSourceProgramSection({
 
   return (
     <section
-      className="border-t border-slate-800 pt-10 sm:pt-12"
+      className="section-divider"
       aria-labelledby="open-source-program-heading"
     >
       <SectionHeading
@@ -48,12 +48,12 @@ export function OpenSourceProgramSection({
             {metadata.map((item) => (
               <div
                 key={item.label}
-                className="rounded-lg border border-slate-800 bg-slate-900/60 p-5"
+                className="rounded-lg border border-border bg-surface p-5"
               >
-                <dt className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">
+                <dt className="text-sm font-semibold uppercase text-muted">
                   {item.label}
                 </dt>
-                <dd className="mt-2 break-words text-2xl font-bold text-white">
+                <dd className="mt-2 break-words text-2xl font-semibold text-primary">
                   {item.value}
                 </dd>
               </div>
@@ -62,25 +62,25 @@ export function OpenSourceProgramSection({
 
           {hasItems(program.mentors) || hasItems(program.reviewers) ? (
             <Card className="p-5">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold text-primary">
                 Guidance and review
               </h3>
               {hasItems(program.mentors) ? (
                 <div className="mt-4">
-                  <h4 className="text-sm font-semibold text-blue-200">
+                  <h4 className="text-sm font-semibold text-accent">
                     Mentor support
                   </h4>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                  <p className="mt-2 text-sm leading-6 text-secondary">
                     {program.mentors.join(", ")}
                   </p>
                 </div>
               ) : null}
               {hasItems(program.reviewers) ? (
                 <div className="mt-4">
-                  <h4 className="text-sm font-semibold text-blue-200">
+                  <h4 className="text-sm font-semibold text-accent">
                     Review interaction
                   </h4>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                  <p className="mt-2 text-sm leading-6 text-secondary">
                     {program.reviewers.join(", ")}
                   </p>
                 </div>
@@ -105,7 +105,7 @@ export function OpenSourceProgramSection({
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
           {hasItems(program.activities) ? (
             <Card className="p-5 sm:p-6">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold text-primary">
                 Contribution workflow
               </h3>
               <div className="mt-4">
@@ -116,7 +116,7 @@ export function OpenSourceProgramSection({
 
           {hasItems(program.outcomes) ? (
             <Card className="p-5 sm:p-6">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold text-primary">
                 Program outcomes
               </h3>
               <div className="mt-4">

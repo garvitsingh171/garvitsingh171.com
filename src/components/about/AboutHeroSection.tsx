@@ -12,18 +12,18 @@ export function AboutHeroSection({ content }: AboutHeroSectionProps) {
       aria-labelledby="about-page-heading"
     >
       <div className="max-w-4xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+        <p className="text-label text-accent">
           Software Product Engineering
         </p>
 
         <h1
           id="about-page-heading"
-          className="mt-5 max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
+          className="mt-5 max-w-4xl text-display-2 text-primary"
         >
           {content.heading}
         </h1>
 
-        <div className="mt-6 max-w-3xl space-y-4 text-base leading-8 text-slate-300 sm:text-lg">
+        <div className="mt-6 max-w-3xl space-y-4 text-body-lg text-secondary">
           {content.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}

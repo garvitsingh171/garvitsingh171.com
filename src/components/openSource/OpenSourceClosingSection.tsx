@@ -19,18 +19,18 @@ export function OpenSourceClosingSection({
 
   return (
     <section
-      className="border-t border-slate-800 pt-10 sm:pt-12"
+      className="section-divider"
       aria-labelledby="open-source-closing-heading"
     >
-      <div className="rounded-lg border border-slate-800 bg-slate-900/60 p-6 sm:p-8">
+      <div className="rounded-lg border border-border bg-surface p-6 sm:p-8">
         <h2
           id="open-source-closing-heading"
-          className="max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl"
+          className="max-w-3xl text-heading-1 text-primary"
         >
           {content.heading}
         </h2>
 
-        <div className="mt-5 max-w-3xl space-y-4 text-base leading-7 text-slate-300">
+        <div className="mt-5 max-w-3xl space-y-4 text-body-md text-secondary">
           {content.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}

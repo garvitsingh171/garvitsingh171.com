@@ -10,11 +10,11 @@ type MobileNavigationProps = {
 
 function getMobileLinkClasses({ isActive }: { isActive: boolean }) {
   return [
-    "flex min-h-11 items-center rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400",
+    "flex min-h-12 items-center rounded-control border px-4 py-3 text-base font-semibold transition duration-200",
+    "focus-visible:outline-focus",
     isActive
-      ? "border border-blue-400/60 bg-blue-500/15 text-white"
-      : "border border-transparent text-slate-300 hover:bg-slate-900 hover:text-white",
+      ? "border-accent-border bg-accent-soft text-accent"
+      : "border-transparent text-secondary hover:border-border hover:bg-surface-hover hover:text-primary",
   ].join(" ");
 }
 
@@ -30,17 +30,16 @@ export function MobileNavigation({
       aria-label="Mobile primary navigation"
       aria-hidden={!isOpen}
       className={[
-        "border-t border-slate-800 bg-slate-950 px-4 py-3 sm:px-6 lg:hidden",
+        "border-t border-border bg-surface px-5 py-4 shadow-elevated sm:px-6 lg:hidden",
         isOpen ? "block" : "hidden",
       ].join(" ")}
     >
-      <ul className="mx-auto grid max-w-5xl gap-1">
+      <ul className="mx-auto grid max-w-[var(--container-full)] gap-2">
         {links.map((link) => (
           <li key={link.id}>
             <NavLink
               to={link.href}
               className={getMobileLinkClasses}
-              end={link.href === "/"}
               onClick={onNavigate}
             >
               {link.label}
