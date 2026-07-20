@@ -21,7 +21,9 @@ export function Card({
     <article
       className={[
         "rounded-card border border-border bg-surface p-6 shadow-subtle transition duration-200",
-        interactive ? "hover:-translate-y-0.5 hover:border-border-strong" : "",
+        interactive
+          ? "motion-safe:hover:-translate-y-0.5 hover:border-border-strong"
+          : "",
         className,
       ].join(" ")}
     >

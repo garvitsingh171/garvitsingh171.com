@@ -59,7 +59,7 @@ function getButtonClasses(
 ) {
   return [
     "inline-flex items-center justify-center gap-2 rounded-control border font-semibold transition duration-200",
-    "hover:-translate-y-0.5 active:translate-y-0",
+    "motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0",
     "focus-visible:outline-focus disabled:hover:translate-y-0",
     "disabled:cursor-not-allowed disabled:opacity-50",
     variantClasses[variant],
