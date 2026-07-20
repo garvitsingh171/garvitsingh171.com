@@ -23,7 +23,7 @@ function ProjectNavLink({
     <Link
       to={`/projects/${project.slug}`}
       className={[
-        "rounded-card border border-border bg-surface p-5 transition duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover",
+        "rounded-card border border-border bg-surface p-5 transition duration-200 motion-safe:hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover",
         "focus-visible:outline-focus",
         alignmentClass,
       ].join(" ")}

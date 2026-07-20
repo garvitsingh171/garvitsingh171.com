@@ -18,6 +18,11 @@ export type PersonalStat = {
   description: string;
 };
 
+export type HeroFact = {
+  label: string;
+  value: string;
+};
+
 export const homeMeta = {
   title: "Garvit Singh | Full-Stack Developer",
   description:
@@ -36,10 +41,25 @@ export const heroContent: HeroContent = {
     href: "/projects",
   },
   secondaryCta: {
-    label: "Contact Me",
-    href: "/contact",
+    label: "View Resume",
+    href: "/resume",
   },
 };
+
+export const heroFacts: HeroFact[] = [
+  {
+    label: "Software Product Engineering student",
+    value: "JECRC × Kalvium",
+  },
+  {
+    label: "Academic signal",
+    value: "9+ CGPA",
+  },
+  {
+    label: "Merged open-source pull requests",
+    value: "5",
+  },
+];
 
 export const personalStats: PersonalStat[] = [
   {
@@ -48,7 +68,7 @@ export const personalStats: PersonalStat[] = [
     description: "Full-stack, backend, and product-focused learning projects.",
   },
   {
-    value: "4+",
+    value: "5",
     label: "Open Source PRs Merged",
     description:
       "Contributions through GitHub issues, pull requests, and review workflows.",

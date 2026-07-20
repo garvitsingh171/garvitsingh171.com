@@ -1,5 +1,5 @@
 import { projects } from "../../data/projects";
-import { ProjectCard } from "../projects";
+import { FeaturedProject, ProjectCard } from "../projects";
 import { Button, SectionHeading } from "../ui";
 
 export function FeaturedProjectsSection() {
@@ -33,7 +33,7 @@ export function FeaturedProjectsSection() {
 
       <div className="mt-10 space-y-6">
         {primaryProject ? (
-          <ProjectCard project={primaryProject} variant="featured" />
+          <FeaturedProject project={primaryProject} priority />
         ) : null}
 
         {supportingProjects.length > 0 ? (

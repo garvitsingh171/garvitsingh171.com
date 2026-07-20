@@ -26,7 +26,7 @@ export const projects: Project[] = [
     ],
     image: {
       src: "/images/projects/pravaah.svg",
-      alt: "Pravaah clinic flow management project cover",
+      alt: "Pravaah clinic operations project cover for appointment, queue, and patient-flow management",
     },
     githubUrl: "https://github.com/garvitsingh171/pravaah",
     caseStudy: {
@@ -423,7 +423,7 @@ export const projects: Project[] = [
     ],
     image: {
       src: "/images/projects/beathub-api.svg",
-      alt: "BeatHub API backend project cover",
+      alt: "BeatHub API backend project cover for music catalog, authentication, and playlist endpoints",
     },
     githubUrl: "https://github.com/garvitsingh171/beathub-api",
     caseStudy: {
@@ -834,7 +834,7 @@ export const projects: Project[] = [
     ],
     image: {
       src: "/images/projects/workoutly.svg",
-      alt: "Workoutly workout tracking application project cover",
+      alt: "Workoutly workout tracking project cover for routines, completed sessions, and progress history",
     },
     githubUrl: "https://github.com/garvitsingh171/workoutly",
     caseStudy: {

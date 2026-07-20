@@ -1,8 +1,7 @@
-import { heroContent } from "../../data/home";
+import { heroContent, heroFacts } from "../../data/home";
 import { projects } from "../../data/projects";
-import { ResumeDownloadButton } from "../resume";
 import { Button } from "../ui";
-import { ProjectStatusBadge } from "../projects";
+import { ProjectMedia, ProjectMeta } from "../projects";
 
 export function HeroSection() {
   const heroProject = projects.find((project) => project.slug === "pravaah") ?? projects[0];
@@ -34,19 +33,27 @@ export function HeroSection() {
             >
               {heroContent.primaryCta.label}
             </Button>
-            <ResumeDownloadButton
-              variant="outline"
-              className="w-full sm:w-auto"
-            />
             <Button
               as="link"
               to={heroContent.secondaryCta.href}
-              variant="ghost"
+              variant="outline"
+              size="lg"
               className="w-full sm:w-auto"
             >
               {heroContent.secondaryCta.label}
             </Button>
           </div>
+
+          <dl className="mt-8 grid gap-3 sm:grid-cols-3">
+            {heroFacts.map((fact) => (
+              <div key={fact.label} className="border-l border-border pl-3">
+                <dt className="text-label text-muted">{fact.label}</dt>
+                <dd className="mt-2 text-sm font-semibold text-primary">
+                  {fact.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         {heroProject?.image ? (
@@ -54,20 +61,15 @@ export function HeroSection() {
             className="rounded-media border border-border bg-surface p-3 shadow-subtle"
             aria-label="Featured project preview"
           >
-            <div className="overflow-hidden rounded-card border border-border bg-subtle">
-              <img
-                src={heroProject.image.src}
-                alt={heroProject.image.alt}
-                decoding="async"
-                className="aspect-[4/3] h-full w-full object-cover"
-              />
-            </div>
+            <ProjectMedia
+              image={heroProject.image}
+              projectTitle={heroProject.title}
+              priority
+              className="rounded-card"
+            />
 
             <div className="p-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <ProjectStatusBadge status={heroProject.status} />
-                <span className="text-label text-muted">Current build</span>
-              </div>
+              <ProjectMeta project={heroProject} compact />
               <h2 className="mt-3 text-2xl font-semibold text-primary">
                 {heroProject.title}
               </h2>

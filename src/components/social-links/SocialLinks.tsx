@@ -37,7 +37,7 @@ function ExternalLinkIcon() {
 function getLinkClasses() {
   return [
     "group flex min-h-16 items-center gap-3 rounded-card border border-border bg-surface p-4 transition duration-200",
-    "hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover",
+    "motion-safe:hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover",
     "focus-visible:outline-focus",
   ].join(" ");
 }
