@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   FeaturedWritingArticle,
   WritingArticleCard,
@@ -12,9 +12,9 @@ import {
 } from "../data/writing";
 import type { WritingCategory, WritingCategoryId } from "../types/writing";
 import { AnimatedSection } from "../components/animation";
+import { SEO } from "../components/seo";
 import { EmptyState } from "../components/ui";
-
-const writingPageTitle = "Writing | Garvit Singh";
+import { staticRouteSeo } from "../data/seo";
 
 const fallbackCategory = (id: WritingCategoryId): WritingCategory => ({
   id,
@@ -31,15 +31,6 @@ const getEntryCountLabel = (count: number) =>
 export default function Writing() {
   const [selectedCategory, setSelectedCategory] =
     useState<WritingFilter>("all");
-
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = writingPageTitle;
-
-    return () => {
-      document.title = previousTitle;
-    };
-  }, []);
 
   const filteredArticles =
     selectedCategory === "all"
@@ -66,7 +57,9 @@ export default function Writing() {
   const hasGridArticles = visibleGridArticles.length > 0;
 
   return (
-    <div className="space-y-12 sm:space-y-16">
+    <>
+      <SEO {...staticRouteSeo.writing} />
+      <div className="space-y-12 sm:space-y-16">
       <AnimatedSection aria-labelledby="writing-page-heading">
         <header className="max-w-3xl">
           <p className="text-label text-accent">
@@ -172,6 +165,7 @@ export default function Writing() {
           ) : null}
         </div>
       </AnimatedSection>
-    </div>
+      </div>
+    </>
   );
 }

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   CaseStudySection,
@@ -15,12 +14,14 @@ import {
   TechnicalDecisionList,
   TechnologyList,
 } from "../components/projects";
+import { SEO } from "../components/seo";
 import { Badge, Button, EmptyState } from "../components/ui";
 import { fallbackStates } from "../data/fallbackStates";
 import { projects } from "../data/projects";
 import { useResolvedTheme } from "../hooks/useResolvedTheme";
 import type { ProjectType } from "../types/project";
 import { resolveProjectImageSrc } from "../utils/projectImage";
+import { resolveProjectSeoMetadata } from "../utils/seo";
 
 const projectTypeLabels = {
   "full-stack": "Full-stack",
@@ -39,79 +40,39 @@ function hasItems<T>(items?: T[]): items is T[] {
   return Array.isArray(items) && items.length > 0;
 }
 
-function useMissingProjectMetadata(isMissingProject: boolean) {
-  useEffect(() => {
-    if (!isMissingProject) {
-      return;
-    }
-
-    const previousTitle = document.title;
-    const existingDescription = document.querySelector<HTMLMetaElement>(
-      'meta[name="description"]',
-    );
-    const previousDescription = existingDescription
-      ? existingDescription.getAttribute("content")
-      : null;
-    const description =
-      existingDescription ?? document.createElement("meta");
-
-    if (!existingDescription) {
-      description.setAttribute("name", "description");
-      document.head.append(description);
-    }
-
-    document.title = fallbackStates.projectNotFound.meta.title;
-    description.setAttribute(
-      "content",
-      fallbackStates.projectNotFound.meta.description,
-    );
-
-    return () => {
-      document.title = previousTitle;
-
-      if (existingDescription) {
-        if (previousDescription === null) {
-          existingDescription.removeAttribute("content");
-        } else {
-          existingDescription.setAttribute("content", previousDescription);
-        }
-      }
-
-      if (!existingDescription) {
-        description.remove();
-      }
-    };
-  }, [isMissingProject]);
-}
-
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((projectItem) => projectItem.slug === slug);
-  const isMissingProject = !project;
   const resolvedTheme = useResolvedTheme();
-
-  useMissingProjectMetadata(isMissingProject);
 
   if (!project) {
     return (
-      <EmptyState
-        label={fallbackStates.projectNotFound.label}
-        title={fallbackStates.projectNotFound.title}
-        description={fallbackStates.projectNotFound.description}
-        headingLevel="h1"
-        variant="page"
-        className="my-4 sm:my-8"
-        primaryAction={{
-          type: "link",
-          label: "View projects",
-          to: "/projects",
-        }}
-        secondaryAction={{
-          type: "link",
-          label: "Go to homepage",
-          to: "/",
-        }}
-      />
+      <>
+        <SEO
+          title={fallbackStates.projectNotFound.meta.title}
+          description={fallbackStates.projectNotFound.meta.description}
+          canonicalUrl={null}
+          noIndex
+        />
+        <EmptyState
+          label={fallbackStates.projectNotFound.label}
+          title={fallbackStates.projectNotFound.title}
+          description={fallbackStates.projectNotFound.description}
+          headingLevel="h1"
+          variant="page"
+          className="my-4 sm:my-8"
+          primaryAction={{
+            type: "link",
+            label: "View projects",
+            to: "/projects",
+          }}
+          secondaryAction={{
+            type: "link",
+            label: "Go to homepage",
+            to: "/",
+          }}
+        />
+      </>
     );
   }
 
@@ -167,13 +128,15 @@ export default function ProjectDetail() {
     : "";
 
   return (
-    <article className="space-y-12">
-      <Link
-        to="/projects"
-        className="inline-flex rounded-sm text-sm font-semibold text-accent transition hover:text-accent-hover focus-visible:outline-focus"
-      >
-        &larr; Back to Projects
-      </Link>
+    <>
+      <SEO {...resolveProjectSeoMetadata(project)} />
+      <article className="space-y-12">
+        <Link
+          to="/projects"
+          className="inline-flex rounded-sm text-sm font-semibold text-accent transition hover:text-accent-hover focus-visible:outline-focus"
+        >
+          &larr; Back to Projects
+        </Link>
 
       <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
         <div className="min-w-0">
@@ -351,6 +314,7 @@ export default function ProjectDetail() {
       </div>
 
       <ProjectNavigation projects={projects} currentSlug={project.slug} />
-    </article>
+      </article>
+    </>
   );
 }

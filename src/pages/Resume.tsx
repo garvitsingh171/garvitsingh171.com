@@ -1,11 +1,12 @@
-import { useEffect } from "react";
 import { AnimatedSection } from "../components/animation";
 import { InternshipAvailability } from "../components/internship";
 import { ResumeDownloadButton } from "../components/resume";
 import { ProjectStatusBadge, TechnologyList } from "../components/projects";
+import { SEO } from "../components/seo";
 import { Button, Card, SectionHeading } from "../components/ui";
 import { internshipAvailability } from "../data/internship";
 import { resumeContent } from "../data/resume";
+import { staticRouteSeo } from "../data/seo";
 
 function TextList({ items }: { items: string[] }) {
   return (
@@ -23,17 +24,10 @@ function TextList({ items }: { items: string[] }) {
 }
 
 export default function Resume() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = resumeContent.meta.title;
-
-    return () => {
-      document.title = previousTitle;
-    };
-  }, []);
-
   return (
-    <div className="space-y-12 sm:space-y-16">
+    <>
+      <SEO {...staticRouteSeo.resume} />
+      <div className="space-y-12 sm:space-y-16">
       <AnimatedSection aria-labelledby="resume-page-heading">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
           <div className="min-w-0 max-w-4xl">
@@ -385,6 +379,7 @@ export default function Resume() {
           </div>
         </div>
       </AnimatedSection>
-    </div>
+      </div>
+    </>
   );
 }

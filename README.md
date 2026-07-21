@@ -32,6 +32,20 @@ npm install
 npm run dev
 ```
 
+## SEO Metadata
+
+Site-wide metadata defaults live in `src/constants/site.ts`. Page metadata for
+indexable static routes lives in `src/data/seo.ts`, and each page renders it
+through the reusable `SEO` component. Project case-study metadata is derived
+from `src/data/projects.ts`; a project can optionally provide `seo.title`,
+`seo.description`, or `seo.image` when the derived values need an override.
+
+The production build runs `scripts/generate-static-seo.mjs` after Vite. That
+script creates route-specific static HTML files and `dist/sitemap.xml` from the
+static route metadata plus the centralized project slugs. Vercel still serves
+the React app as a client-side application, but known public routes have
+pre-rendered head metadata for non-JavaScript crawlers.
+
 ## Deployment
 
 The website is deployed on Vercel and connected to a custom domain.

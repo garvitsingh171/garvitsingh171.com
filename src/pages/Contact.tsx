@@ -1,53 +1,16 @@
-import { useEffect } from "react";
 import { AnimatedSection } from "../components/animation";
+import { SEO } from "../components/seo";
 import { SocialIcon, SocialLinks } from "../components/social-links";
 import { Button, Card, SectionHeading } from "../components/ui";
 import { contactDetails, contactPageContent } from "../data/contact";
-
-function useContactMetadata() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    const existingDescription = document.querySelector<HTMLMetaElement>(
-      'meta[name="description"]',
-    );
-    const previousDescription = existingDescription
-      ? existingDescription.getAttribute("content")
-      : null;
-    const description =
-      existingDescription ?? document.createElement("meta");
-
-    if (!existingDescription) {
-      description.setAttribute("name", "description");
-      document.head.append(description);
-    }
-
-    document.title = contactPageContent.meta.title;
-    description.setAttribute("content", contactPageContent.meta.description);
-
-    return () => {
-      document.title = previousTitle;
-
-      if (existingDescription) {
-        if (previousDescription === null) {
-          existingDescription.removeAttribute("content");
-        } else {
-          existingDescription.setAttribute("content", previousDescription);
-        }
-      }
-
-      if (!existingDescription) {
-        description.remove();
-      }
-    };
-  }, []);
-}
+import { staticRouteSeo } from "../data/seo";
 
 export default function Contact() {
-  useContactMetadata();
-
   return (
-    <div className="space-y-12 sm:space-y-16">
-      <AnimatedSection aria-labelledby="contact-page-heading">
+    <>
+      <SEO {...staticRouteSeo.contact} />
+      <div className="space-y-12 sm:space-y-16">
+        <AnimatedSection aria-labelledby="contact-page-heading">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
           <div className="min-w-0 max-w-3xl">
             <p className="text-label text-accent">
@@ -123,25 +86,26 @@ export default function Contact() {
             </div>
           </Card>
         </div>
-      </AnimatedSection>
+        </AnimatedSection>
 
-      <AnimatedSection
-        className="section-divider"
-        aria-labelledby="contact-social-heading"
-      >
-        <SectionHeading
-          id="contact-social-heading"
-          label={contactPageContent.socialSection.label}
-          title={contactPageContent.socialSection.title}
-          description={contactPageContent.socialSection.description}
-          className="mb-8"
-        />
+        <AnimatedSection
+          className="section-divider"
+          aria-labelledby="contact-social-heading"
+        >
+          <SectionHeading
+            id="contact-social-heading"
+            label={contactPageContent.socialSection.label}
+            title={contactPageContent.socialSection.title}
+            description={contactPageContent.socialSection.description}
+            className="mb-8"
+          />
 
-        <SocialLinks
-          links={contactPageContent.socialSection.links}
-          ariaLabel="Garvit Singh professional social links"
-        />
-      </AnimatedSection>
-    </div>
+          <SocialLinks
+            links={contactPageContent.socialSection.links}
+            ariaLabel="Garvit Singh professional social links"
+          />
+        </AnimatedSection>
+      </div>
+    </>
   );
 }
