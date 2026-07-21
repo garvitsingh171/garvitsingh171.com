@@ -1,3 +1,5 @@
+import { motion, useReducedMotion } from "motion/react";
+import { cardMediaVariants } from "../../config/animations";
 import type { ProjectImage } from "../../types/project";
 import { useResolvedTheme } from "../../hooks/useResolvedTheme";
 import { resolveProjectImageSrc } from "../../utils/projectImage";
@@ -24,6 +26,7 @@ export function ProjectMedia({
   className = "",
 }: ProjectMediaProps) {
   const resolvedTheme = useResolvedTheme();
+  const shouldReduceMotion = useReducedMotion();
   const imageSrc = image ? resolveProjectImageSrc(image, resolvedTheme) : "";
 
   return (
@@ -38,13 +41,14 @@ export function ProjectMedia({
     >
       {image && imageSrc ? (
         <div className="aspect-[4/3] w-full overflow-hidden rounded-card border border-border bg-surface">
-          <img
+          <motion.img
             src={imageSrc}
             alt={image.alt}
             loading={priority ? "eager" : "lazy"}
             fetchPriority={priority ? "high" : "auto"}
             decoding="async"
-            className="h-full w-full object-contain object-center transition duration-200 motion-safe:group-hover:scale-[1.01]"
+            variants={shouldReduceMotion ? undefined : cardMediaVariants}
+            className="h-full w-full object-contain object-center"
           />
         </div>
       ) : (

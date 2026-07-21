@@ -5,7 +5,7 @@ import type {
 } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "project";
 type ButtonSize = "sm" | "md" | "lg";
 
 type SharedButtonProps = {
@@ -37,13 +37,15 @@ type ButtonProps =
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "border-accent bg-accent text-inverse-text hover:border-accent-hover hover:bg-accent-hover active:border-accent-active active:bg-accent-active",
+    "border-2 border-button-primary bg-button-primary text-button-primary-foreground shadow-elevated hover:border-button-primary-hover hover:bg-button-primary-hover active:border-button-primary-active active:bg-button-primary-active",
   secondary:
-    "border-inverse bg-inverse text-inverse-text hover:border-primary hover:bg-primary hover:text-page",
+    "border-2 border-button-secondary bg-button-secondary text-button-secondary-foreground shadow-elevated hover:border-button-secondary-hover hover:bg-button-secondary-hover active:border-button-secondary-active active:bg-button-secondary-active",
   outline:
-    "border-border-strong bg-transparent text-primary hover:border-primary hover:bg-surface-hover",
+    "border-2 border-button-outline bg-surface text-button-outline-foreground shadow-subtle hover:border-button-outline-hover hover:bg-button-outline-hover hover:text-button-outline-hover-foreground active:border-button-primary-active active:bg-button-primary-active",
   ghost:
-    "border-transparent bg-transparent text-secondary hover:bg-surface-hover hover:text-primary",
+    "border border-border bg-button-ghost text-button-ghost-foreground hover:border-button-outline hover:bg-button-ghost-hover hover:text-button-ghost-hover-foreground",
+  project:
+    "border-2 border-[#171817] bg-[#171817] text-[#f7f7f3] shadow-elevated hover:border-[#2a2c28] hover:bg-[#2a2c28] active:border-[#11120f] active:bg-[#11120f]",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -60,8 +62,8 @@ function getButtonClasses(
   return [
     "inline-flex items-center justify-center gap-2 rounded-control border font-semibold transition duration-200",
     "motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0",
-    "focus-visible:outline-focus disabled:hover:translate-y-0",
-    "disabled:cursor-not-allowed disabled:opacity-50",
+    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:hover:translate-y-0",
+    "disabled:cursor-not-allowed disabled:opacity-60",
     variantClasses[variant],
     sizeClasses[size],
     className,

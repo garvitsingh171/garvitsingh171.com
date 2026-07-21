@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { AnimatedSection } from "../components/animation";
 import { InternshipAvailability } from "../components/internship";
 import { ResumeDownloadButton } from "../components/resume";
 import { ProjectStatusBadge, TechnologyList } from "../components/projects";
@@ -33,7 +34,7 @@ export default function Resume() {
 
   return (
     <div className="space-y-12 sm:space-y-16">
-      <section aria-labelledby="resume-page-heading">
+      <AnimatedSection aria-labelledby="resume-page-heading">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
           <div className="min-w-0 max-w-4xl">
             <p className="text-label text-accent">
@@ -94,9 +95,9 @@ export default function Resume() {
             </dl>
           </Card>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="resume-summary-heading"
       >
@@ -115,11 +116,11 @@ export default function Resume() {
             ))}
           </div>
         </Card>
-      </section>
+      </AnimatedSection>
 
       <InternshipAvailability content={internshipAvailability} />
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="resume-skills-heading"
       >
@@ -151,9 +152,9 @@ export default function Resume() {
             </Card>
           ))}
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="resume-experience-heading"
       >
@@ -212,9 +213,9 @@ export default function Resume() {
             </Card>
           ))}
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="resume-projects-heading"
       >
@@ -251,7 +252,7 @@ export default function Resume() {
                   <Button
                     as="link"
                     to={project.href}
-                    variant="outline"
+                    variant="project"
                     className="w-full sm:w-auto"
                     aria-label={`View ${project.title} project details`}
                   >
@@ -262,9 +263,9 @@ export default function Resume() {
             </Card>
           ))}
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="resume-education-heading"
       >
@@ -330,9 +331,9 @@ export default function Resume() {
             </div>
           ) : null}
         </Card>
-      </section>
+      </AnimatedSection>
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="resume-achievements-heading"
       >
@@ -354,9 +355,9 @@ export default function Resume() {
             />
           ))}
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="resume-final-cta-heading"
       >
@@ -383,7 +384,7 @@ export default function Resume() {
             </Button>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
     </div>
   );
 }

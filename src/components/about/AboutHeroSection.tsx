@@ -1,5 +1,6 @@
 import { Button } from "../ui";
 import type { AboutIntroduction } from "../../types/about.js";
+import { AnimatedSection } from "../animation";
 import { ResumeDownloadButton } from "../resume";
 
 type AboutHeroSectionProps = {
@@ -8,7 +9,7 @@ type AboutHeroSectionProps = {
 
 export function AboutHeroSection({ content }: AboutHeroSectionProps) {
   return (
-    <section
+    <AnimatedSection
       aria-labelledby="about-page-heading"
     >
       <div className="max-w-4xl">
@@ -52,6 +53,6 @@ export function AboutHeroSection({ content }: AboutHeroSectionProps) {
           </Button>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

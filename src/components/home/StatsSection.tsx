@@ -1,9 +1,10 @@
 import { personalStats } from "../../data/home";
+import { AnimatedSection } from "../animation";
 import { SectionHeading } from "../ui";
 
 export function StatsSection() {
   return (
-    <section className="section-divider" aria-labelledby="home-proof-heading">
+    <AnimatedSection className="section-divider" aria-labelledby="home-proof-heading">
       <SectionHeading
         id="home-proof-heading"
         label="02 / Proof"
@@ -28,6 +29,6 @@ export function StatsSection() {
           </div>
         ))}
       </dl>
-    </section>
+    </AnimatedSection>
   );
 }

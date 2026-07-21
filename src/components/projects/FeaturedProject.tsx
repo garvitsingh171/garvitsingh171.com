@@ -1,4 +1,5 @@
 import type { Project } from "../../types/project";
+import { Card } from "../ui";
 import { ProjectActions } from "./ProjectActions";
 import { ProjectMedia } from "./ProjectMedia";
 import { ProjectMeta } from "./ProjectMeta";
@@ -17,7 +18,10 @@ export function FeaturedProject({
   const [engineeringHighlight] = getProjectEngineeringHighlights(project);
 
   return (
-    <article className="group overflow-hidden rounded-card border border-border bg-surface shadow-subtle transition duration-200 motion-safe:hover:-translate-y-0.5 hover:border-border-strong">
+    <Card
+      interactive
+      className="group overflow-hidden p-0 focus-within:border-border-strong"
+    >
       <div className="grid gap-0 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
         <ProjectMedia
           image={project.image}
@@ -53,6 +57,6 @@ export function FeaturedProject({
           <ProjectActions project={project} className="mt-auto pt-8" />
         </div>
       </div>
-    </article>
+    </Card>
   );
 }

@@ -1,5 +1,6 @@
 import { Card, SectionHeading } from "../ui";
 import type { AboutWorkingStyle } from "../../types/about.js";
+import { AnimatedSection } from "../animation";
 
 type WorkingStyleSectionProps = {
   content: AboutWorkingStyle;
@@ -7,7 +8,7 @@ type WorkingStyleSectionProps = {
 
 export function WorkingStyleSection({ content }: WorkingStyleSectionProps) {
   return (
-    <section className="section-divider">
+    <AnimatedSection className="section-divider">
       <SectionHeading
         label="How I Work"
         title={content.heading}
@@ -30,6 +31,6 @@ export function WorkingStyleSection({ content }: WorkingStyleSectionProps) {
           </Card>
         ))}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

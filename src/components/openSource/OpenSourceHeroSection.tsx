@@ -3,6 +3,7 @@ import type {
   OpenSourceLink,
   OpenSourceStat,
 } from "../../types/openSource.js";
+import { AnimatedSection } from "../animation";
 import { Card } from "../ui";
 import { ExternalLink } from "./ExternalLink";
 import { hasItems } from "./openSourceUtils";
@@ -21,7 +22,7 @@ export function OpenSourceHeroSection({
   const heroStats = stats.slice(0, 2);
 
   return (
-    <section
+    <AnimatedSection
       aria-labelledby="open-source-page-heading"
     >
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
@@ -88,6 +89,6 @@ export function OpenSourceHeroSection({
           </Card>
         ) : null}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

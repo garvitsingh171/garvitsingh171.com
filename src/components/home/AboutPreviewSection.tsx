@@ -1,11 +1,12 @@
 import { aboutContent } from "../../data/about";
+import { AnimatedSection } from "../animation";
 import { Button, SectionHeading } from "../ui";
 
 export function AboutPreviewSection() {
   const principles = aboutContent.workingStyle.principles.slice(0, 3);
 
   return (
-    <section className="section-divider" aria-labelledby="home-about-heading">
+    <AnimatedSection className="section-divider" aria-labelledby="home-about-heading">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-start">
         <SectionHeading
           id="home-about-heading"
@@ -40,6 +41,6 @@ export function AboutPreviewSection() {
           </Button>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

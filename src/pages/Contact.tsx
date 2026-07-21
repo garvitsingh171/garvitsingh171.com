@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { AnimatedSection } from "../components/animation";
 import { SocialIcon, SocialLinks } from "../components/social-links";
 import { Button, Card, SectionHeading } from "../components/ui";
 import { contactDetails, contactPageContent } from "../data/contact";
@@ -46,7 +47,7 @@ export default function Contact() {
 
   return (
     <div className="space-y-12 sm:space-y-16">
-      <section aria-labelledby="contact-page-heading">
+      <AnimatedSection aria-labelledby="contact-page-heading">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
           <div className="min-w-0 max-w-3xl">
             <p className="text-label text-accent">
@@ -122,9 +123,9 @@ export default function Contact() {
             </div>
           </Card>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="contact-social-heading"
       >
@@ -140,7 +141,7 @@ export default function Contact() {
           links={contactPageContent.socialSection.links}
           ariaLabel="Garvit Singh professional social links"
         />
-      </section>
+      </AnimatedSection>
     </div>
   );
 }

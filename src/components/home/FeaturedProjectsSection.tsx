@@ -1,4 +1,5 @@
 import { projects } from "../../data/projects";
+import { AnimatedSection } from "../animation";
 import { FeaturedProject, ProjectCard } from "../projects";
 import { Button, SectionHeading } from "../ui";
 
@@ -12,7 +13,7 @@ export function FeaturedProjectsSection() {
   const [primaryProject, ...supportingProjects] = featuredProjects;
 
   return (
-    <section className="section-divider" aria-labelledby="home-work-heading">
+    <AnimatedSection className="section-divider" aria-labelledby="home-work-heading">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <SectionHeading
           id="home-work-heading"
@@ -44,6 +45,6 @@ export function FeaturedProjectsSection() {
           </div>
         ) : null}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

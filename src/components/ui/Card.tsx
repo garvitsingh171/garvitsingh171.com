@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { cardInteractionVariants } from "../../config/animations";
 
 type CardProps = {
   title?: string;
@@ -16,14 +18,39 @@ export function Card({
   interactive = false,
 }: CardProps) {
   const hasHeaderContent = Boolean(title || description);
+  const shouldReduceMotion = useReducedMotion();
+  const [hasFocusWithin, setHasFocusWithin] = useState(false);
+  const shouldAnimateInteraction = interactive && !shouldReduceMotion;
+  const interactionState = hasFocusWithin ? "focus" : "rest";
 
   return (
-    <article
+    <motion.article
+      initial={false}
+      animate={shouldAnimateInteraction ? interactionState : undefined}
+      whileHover={shouldAnimateInteraction ? "hover" : undefined}
+      variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
+      onFocusCapture={() => {
+        if (interactive) {
+          setHasFocusWithin(true);
+        }
+      }}
+      onBlurCapture={(event) => {
+        if (!interactive) {
+          return;
+        }
+
+        const nextFocusedElement = event.relatedTarget;
+
+        if (
+          !nextFocusedElement ||
+          !event.currentTarget.contains(nextFocusedElement as Node)
+        ) {
+          setHasFocusWithin(false);
+        }
+      }}
       className={[
         "rounded-card border border-border bg-surface p-6 shadow-subtle transition duration-200",
-        interactive
-          ? "motion-safe:hover:-translate-y-0.5 hover:border-border-strong"
-          : "",
+        interactive ? "hover:border-border-strong" : "",
         className,
       ].join(" ")}
     >
@@ -38,6 +65,6 @@ export function Card({
       {children ? (
         <div className={hasHeaderContent ? "mt-5" : ""}>{children}</div>
       ) : null}
-    </article>
+    </motion.article>
   );
 }

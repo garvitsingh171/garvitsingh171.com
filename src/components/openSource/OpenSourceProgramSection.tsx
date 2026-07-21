@@ -1,4 +1,5 @@
 import type { OpenSourceProgram } from "../../types/openSource.js";
+import { AnimatedSection } from "../animation";
 import { Button, Card, SectionHeading } from "../ui";
 import { hasItems } from "./openSourceUtils";
 
@@ -30,7 +31,7 @@ export function OpenSourceProgramSection({
   ];
 
   return (
-    <section
+    <AnimatedSection
       className="section-divider"
       aria-labelledby="open-source-program-heading"
     >
@@ -126,6 +127,6 @@ export function OpenSourceProgramSection({
           ) : null}
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

@@ -1,4 +1,5 @@
 import type { OpenSourceStat } from "../../types/openSource.js";
+import { AnimatedSection } from "../animation";
 import { SectionHeading } from "../ui";
 import { hasItems } from "./openSourceUtils";
 
@@ -15,7 +16,7 @@ export function OpenSourceStatsSection({ stats }: OpenSourceStatsSectionProps) {
   const supportingStats = stats.slice(6);
 
   return (
-    <section
+    <AnimatedSection
       className="section-divider"
       aria-labelledby="open-source-stats-heading"
     >
@@ -70,6 +71,6 @@ export function OpenSourceStatsSection({ stats }: OpenSourceStatsSectionProps) {
           ))}
         </ul>
       ) : null}
-    </section>
+    </AnimatedSection>
   );
 }
