@@ -1,27 +1,57 @@
+import { motion, useReducedMotion } from "motion/react";
+import {
+  heroContainerVariants,
+  heroItemVariants,
+  heroVisualVariants,
+} from "../../config/animations";
 import { heroContent, heroFacts } from "../../data/home";
 import { Button } from "../ui";
 import { PortraitCard } from "./PortraitCard";
 
 export function HeroSection() {
+  const shouldReduceMotion = useReducedMotion();
+  const initialState = shouldReduceMotion ? false : "hidden";
+  const animateState = shouldReduceMotion ? undefined : "visible";
+
   return (
     <section aria-labelledby="home-hero-title" className="py-4 sm:py-8">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.62fr)] lg:items-center">
-        <div className="min-w-0">
-          <p className="text-label text-accent">{heroContent.label}</p>
+        <motion.div
+          className="min-w-0"
+          initial={initialState}
+          animate={animateState}
+          variants={heroContainerVariants}
+        >
+          <motion.p className="text-label text-accent" variants={heroItemVariants}>
+            {heroContent.label}
+          </motion.p>
 
-          <h1 id="home-hero-title" className="mt-5 max-w-5xl text-display-1 text-primary">
+          <motion.h1
+            id="home-hero-title"
+            className="mt-5 max-w-5xl text-display-1 text-primary"
+            variants={heroItemVariants}
+          >
             {heroContent.heading}
-          </h1>
+          </motion.h1>
 
-          <p className="mt-6 max-w-3xl text-body-lg text-secondary">
+          <motion.p
+            className="mt-6 max-w-3xl text-body-lg text-secondary"
+            variants={heroItemVariants}
+          >
             {heroContent.description}
-          </p>
+          </motion.p>
 
-          <p className="mt-5 max-w-3xl border-l border-border-strong pl-4 text-body-md text-secondary">
+          <motion.p
+            className="mt-5 max-w-3xl border-l border-border-strong pl-4 text-body-md text-secondary"
+            variants={heroItemVariants}
+          >
             {heroContent.position}
-          </p>
+          </motion.p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <motion.div
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            variants={heroItemVariants}
+          >
             <Button
               as="link"
               to={heroContent.primaryCta.href}
@@ -39,9 +69,12 @@ export function HeroSection() {
             >
               {heroContent.secondaryCta.label}
             </Button>
-          </div>
+          </motion.div>
 
-          <dl className="mt-8 grid gap-3 sm:grid-cols-3">
+          <motion.dl
+            className="mt-8 grid gap-3 sm:grid-cols-3"
+            variants={heroItemVariants}
+          >
             {heroFacts.map((fact) => (
               <div key={fact.label} className="border-l border-border pl-3">
                 <dt className="text-label text-muted">{fact.label}</dt>
@@ -50,10 +83,16 @@ export function HeroSection() {
                 </dd>
               </div>
             ))}
-          </dl>
-        </div>
+          </motion.dl>
+        </motion.div>
 
-        <PortraitCard />
+        <motion.div
+          initial={initialState}
+          animate={animateState}
+          variants={shouldReduceMotion ? undefined : heroVisualVariants}
+        >
+          <PortraitCard />
+        </motion.div>
       </div>
     </section>
   );

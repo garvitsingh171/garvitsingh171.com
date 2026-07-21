@@ -6,6 +6,7 @@
 | Current audit and migration notes | `docs/design/current-ui-audit.md` |
 | Global tokens and Tailwind semantic mappings | `src/index.css` |
 | Base typography, selection, focus, reduced motion | `src/index.css` |
+| Motion tokens, variants, and section reveal wrapper | `src/config/animations.ts`, `src/components/animation/*` |
 | Theme initialization | `index.html` |
 | App-level route shell and page container | `src/layouts/MainLayout.tsx` |
 | Primary navigation and mobile menu | `src/components/layout/Navbar.tsx`, `src/components/layout/MobileNavigation.tsx` |

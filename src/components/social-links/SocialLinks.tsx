@@ -1,4 +1,6 @@
+import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router-dom";
+import { cardInteractionVariants } from "../../config/animations";
 import type { SocialLink } from "../../data/socialLinks";
 import { isEmailLink, isExternalWebLink } from "../../utils/links";
 import { SocialIcon } from "./SocialIcon";
@@ -37,12 +39,16 @@ function ExternalLinkIcon() {
 function getLinkClasses() {
   return [
     "group flex min-h-16 items-center gap-3 rounded-card border border-border bg-surface p-4 transition duration-200",
-    "motion-safe:hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover",
+    "hover:border-border-strong hover:bg-surface-hover",
     "focus-visible:outline-focus",
   ].join(" ");
 }
 
+const MotionLink = motion.create(Link);
+
 function SocialLinkItem({ link }: { link: SocialLink }) {
+  const shouldReduceMotion = useReducedMotion();
+  const shouldAnimateInteraction = !shouldReduceMotion;
   const content = (
     <>
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-control border border-accent-border bg-accent-soft text-accent transition group-hover:border-accent">
@@ -64,30 +70,53 @@ function SocialLinkItem({ link }: { link: SocialLink }) {
 
   if (isExternalWebLink(link.href)) {
     return (
-      <a
+      <motion.a
         href={link.href}
         target="_blank"
         rel="noopener noreferrer"
+        initial={false}
+        animate={shouldAnimateInteraction ? "rest" : undefined}
+        whileHover={shouldAnimateInteraction ? "hover" : undefined}
+        whileFocus={shouldAnimateInteraction ? "focus" : undefined}
+        variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
         className={getLinkClasses()}
         aria-label={link.ariaLabel}
       >
         {content}
-      </a>
+      </motion.a>
     );
   }
 
   if (isEmailLink(link.href)) {
     return (
-      <a href={link.href} className={getLinkClasses()} aria-label={link.ariaLabel}>
+      <motion.a
+        href={link.href}
+        initial={false}
+        animate={shouldAnimateInteraction ? "rest" : undefined}
+        whileHover={shouldAnimateInteraction ? "hover" : undefined}
+        whileFocus={shouldAnimateInteraction ? "focus" : undefined}
+        variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
+        className={getLinkClasses()}
+        aria-label={link.ariaLabel}
+      >
         {content}
-      </a>
+      </motion.a>
     );
   }
 
   return (
-    <Link to={link.href} className={getLinkClasses()} aria-label={link.ariaLabel}>
+    <MotionLink
+      to={link.href}
+      initial={false}
+      animate={shouldAnimateInteraction ? "rest" : undefined}
+      whileHover={shouldAnimateInteraction ? "hover" : undefined}
+      whileFocus={shouldAnimateInteraction ? "focus" : undefined}
+      variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
+      className={getLinkClasses()}
+      aria-label={link.ariaLabel}
+    >
       {content}
-    </Link>
+    </MotionLink>
   );
 }
 

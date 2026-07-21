@@ -1,4 +1,6 @@
+import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router-dom";
+import { cardInteractionVariants } from "../../config/animations";
 import type { Project } from "../../types/project";
 
 export type ProjectNavigationProps = {
@@ -12,18 +14,27 @@ type ProjectNavLinkProps = {
   align?: "left" | "right";
 };
 
+const MotionLink = motion.create(Link);
+
 function ProjectNavLink({
   label,
   project,
   align = "left",
 }: ProjectNavLinkProps) {
   const alignmentClass = align === "right" ? "text-right" : "text-left";
+  const shouldReduceMotion = useReducedMotion();
+  const shouldAnimateInteraction = !shouldReduceMotion;
 
   return (
-    <Link
+    <MotionLink
       to={`/projects/${project.slug}`}
+      initial={false}
+      animate={shouldAnimateInteraction ? "rest" : undefined}
+      whileHover={shouldAnimateInteraction ? "hover" : undefined}
+      whileFocus={shouldAnimateInteraction ? "focus" : undefined}
+      variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
       className={[
-        "rounded-card border border-border bg-surface p-5 transition duration-200 motion-safe:hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover",
+        "rounded-card border border-border bg-surface p-5 transition duration-200 hover:border-border-strong hover:bg-surface-hover",
         "focus-visible:outline-focus",
         alignmentClass,
       ].join(" ")}
@@ -37,7 +48,7 @@ function ProjectNavLink({
       <span className="mt-2 line-clamp-2 block text-body-sm text-secondary">
         {project.summary}
       </span>
-    </Link>
+    </MotionLink>
   );
 }
 

@@ -27,6 +27,24 @@
   --color-accent-active: var(--accent-active);
   --color-accent-soft: var(--accent-soft);
   --color-accent-border: var(--accent-border);
+  --color-button-primary: var(--button-primary);
+  --color-button-primary-foreground: var(--button-primary-foreground);
+  --color-button-primary-hover: var(--button-primary-hover);
+  --color-button-primary-active: var(--button-primary-active);
+  --color-button-secondary: var(--button-secondary);
+  --color-button-secondary-foreground: var(--button-secondary-foreground);
+  --color-button-secondary-hover: var(--button-secondary-hover);
+  --color-button-secondary-active: var(--button-secondary-active);
+  --color-button-outline: var(--button-outline);
+  --color-button-outline-foreground: var(--button-outline-foreground);
+  --color-button-outline-hover: var(--button-outline-hover);
+  --color-button-outline-hover-foreground: var(
+    --button-outline-hover-foreground
+  );
+  --color-button-ghost: var(--button-ghost);
+  --color-button-ghost-foreground: var(--button-ghost-foreground);
+  --color-button-ghost-hover: var(--button-ghost-hover);
+  --color-button-ghost-hover-foreground: var(--button-ghost-hover-foreground);
   --color-success: var(--success);
   --color-success-soft: var(--success-soft);
   --color-warning: var(--warning);
@@ -84,6 +102,22 @@
   --accent-active: #203c9a;
   --accent-soft: #e8ecfc;
   --accent-border: #bac7f7;
+  --button-primary: #3157d5;
+  --button-primary-foreground: #ffffff;
+  --button-primary-hover: #2748b8;
+  --button-primary-active: #203c9a;
+  --button-secondary: #171817;
+  --button-secondary-foreground: #f7f7f3;
+  --button-secondary-hover: #3157d5;
+  --button-secondary-active: #203c9a;
+  --button-outline: #3157d5;
+  --button-outline-foreground: #203c9a;
+  --button-outline-hover: #3157d5;
+  --button-outline-hover-foreground: #ffffff;
+  --button-ghost: transparent;
+  --button-ghost-foreground: #3f423c;
+  --button-ghost-hover: #e8ecfc;
+  --button-ghost-hover-foreground: #203c9a;
   --success: #217a55;
   --success-soft: #e7f4ed;
   --warning: #9a5d12;
@@ -145,6 +179,22 @@
   --accent-active: #c6ceff;
   --accent-soft: #252d4a;
   --accent-border: #4d5fa4;
+  --button-primary: #9aa9ff;
+  --button-primary-foreground: #11120f;
+  --button-primary-hover: #b2beff;
+  --button-primary-active: #c6ceff;
+  --button-secondary: #f4f4ee;
+  --button-secondary-foreground: #141511;
+  --button-secondary-hover: #b2beff;
+  --button-secondary-active: #c6ceff;
+  --button-outline: #6976be;
+  --button-outline-foreground: #eef0ff;
+  --button-outline-hover: #9aa9ff;
+  --button-outline-hover-foreground: #11120f;
+  --button-ghost: transparent;
+  --button-ghost-foreground: #f1f2ea;
+  --button-ghost-hover: #252d4a;
+  --button-ghost-hover-foreground: #eef0ff;
   --success: #7ad2a5;
   --success-soft: #193d2d;
   --warning: #e9bd78;
@@ -315,21 +365,6 @@ svg {
     padding-top: 3rem;
   }
 
-  .portrait-card-reveal {
-    animation: portrait-card-reveal 640ms var(--ease-enter) 120ms both;
-  }
-}
-
-@keyframes portrait-card-reveal {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(0.985);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 @media (min-width: 640px) {
@@ -381,10 +416,6 @@ svg {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .portrait-card-reveal {
-    animation: none !important;
-  }
-
   *,
   *::before,
   *::after {

@@ -4,6 +4,7 @@ import {
   ProjectFilters,
   type ProjectFilter,
 } from "../components/projects";
+import { AnimatedSection } from "../components/animation";
 import { EmptyState, PageHeader } from "../components/ui";
 import { projects } from "../data/projects";
 
@@ -17,7 +18,7 @@ export default function Projects() {
   const hasProjects = projects.length > 0;
 
   return (
-    <section>
+    <AnimatedSection>
       <PageHeader
         label="Selected Work"
         title="Projects"
@@ -58,6 +59,6 @@ export default function Projects() {
           />
         )}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

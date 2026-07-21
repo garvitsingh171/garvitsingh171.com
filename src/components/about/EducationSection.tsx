@@ -1,5 +1,6 @@
 import { Card, SectionHeading } from "../ui";
 import type { AboutEducation } from "../../types/about.js";
+import { AnimatedSection } from "../animation";
 
 type EducationSectionProps = {
   content: AboutEducation;
@@ -16,7 +17,7 @@ export function EducationSection({ content }: EducationSectionProps) {
   ];
 
   return (
-    <section className="section-divider">
+    <AnimatedSection className="section-divider">
       <SectionHeading
         label="Background"
         title={content.heading}
@@ -78,6 +79,6 @@ export function EducationSection({ content }: EducationSectionProps) {
           </div>
         </div>
       </Card>
-    </section>
+    </AnimatedSection>
   );
 }

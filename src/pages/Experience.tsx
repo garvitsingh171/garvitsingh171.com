@@ -1,6 +1,8 @@
+import { AnimatedSection } from "../components/animation";
+
 export default function Experience() {
   return (
-    <section aria-labelledby="experience-page-heading">
+    <AnimatedSection aria-labelledby="experience-page-heading">
       <header className="max-w-3xl">
         <p className="text-label text-accent">
           Work History
@@ -16,6 +18,6 @@ export default function Experience() {
       <p className="mt-5 max-w-2xl text-body-lg text-secondary">
         Work experience and achievements will be added here.
       </p>
-    </section>
+    </AnimatedSection>
   );
 }

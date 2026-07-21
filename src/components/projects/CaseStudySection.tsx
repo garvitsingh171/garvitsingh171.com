@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { AnimatedSection } from "../animation";
 import { Card } from "../ui";
 
 export type CaseStudySectionProps = {
@@ -17,7 +18,7 @@ export function CaseStudySection({
   className = "",
 }: CaseStudySectionProps) {
   return (
-    <section id={id} className={className}>
+    <AnimatedSection id={id} className={className}>
       <Card className="p-6 sm:p-8">
         <div className="max-w-3xl">
           <h2 className="text-heading-2 text-primary">{title}</h2>
@@ -31,6 +32,6 @@ export function CaseStudySection({
 
         <div className="mt-5">{children}</div>
       </Card>
-    </section>
+    </AnimatedSection>
   );
 }

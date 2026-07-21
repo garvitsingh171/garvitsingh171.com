@@ -1,11 +1,15 @@
 import { openSourceContent } from "../../data/openSource";
+import { AnimatedSection } from "../animation";
 import { Button, SectionHeading } from "../ui";
 
 export function OpenSourcePreviewSection() {
   const proofStats = openSourceContent.stats.slice(0, 3);
 
   return (
-    <section className="section-divider" aria-labelledby="home-open-source-heading">
+    <AnimatedSection
+      className="section-divider"
+      aria-labelledby="home-open-source-heading"
+    >
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.55fr)] lg:items-start">
         <div>
           <SectionHeading
@@ -39,6 +43,6 @@ export function OpenSourcePreviewSection() {
           ))}
         </dl>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

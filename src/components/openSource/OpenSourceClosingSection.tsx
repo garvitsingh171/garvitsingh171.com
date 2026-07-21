@@ -2,6 +2,7 @@ import type {
   OpenSourceContent,
   OpenSourceLink,
 } from "../../types/openSource.js";
+import { AnimatedSection } from "../animation";
 import { Button } from "../ui";
 import { ExternalLink } from "./ExternalLink";
 import { hasItems } from "./openSourceUtils";
@@ -18,7 +19,7 @@ export function OpenSourceClosingSection({
   const primaryLink = links[0];
 
   return (
-    <section
+    <AnimatedSection
       className="section-divider"
       aria-labelledby="open-source-closing-heading"
     >
@@ -59,6 +60,6 @@ export function OpenSourceClosingSection({
           </Button>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

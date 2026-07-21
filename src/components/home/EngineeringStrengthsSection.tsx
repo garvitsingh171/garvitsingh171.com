@@ -1,9 +1,13 @@
 import { skillCategories, skills } from "../../data/skills";
+import { AnimatedSection } from "../animation";
 import { Badge, SectionHeading } from "../ui";
 
 export function EngineeringStrengthsSection() {
   return (
-    <section className="section-divider" aria-labelledby="home-strengths-heading">
+    <AnimatedSection
+      className="section-divider"
+      aria-labelledby="home-strengths-heading"
+    >
       <SectionHeading
         id="home-strengths-heading"
         label="04 / Engineering Strengths"
@@ -43,6 +47,6 @@ export function EngineeringStrengthsSection() {
           );
         })}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

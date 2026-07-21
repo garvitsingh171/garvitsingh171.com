@@ -1,10 +1,11 @@
 import { SITE_CONFIG } from "../../constants/site";
 import { resumeConfig } from "../../data/resume";
+import { AnimatedSection } from "../animation";
 import { Button } from "../ui";
 
 export function ContactCtaSection() {
   return (
-    <section
+    <AnimatedSection
       className="rounded-card border border-inverse bg-inverse p-6 text-inverse-text sm:p-8 lg:p-10"
       aria-labelledby="home-contact-heading"
     >
@@ -33,11 +34,11 @@ export function ContactCtaSection() {
           href={resumeConfig.filePath}
           download
           variant="outline"
-          className="w-full border-inverse-text/40 text-inverse-text hover:bg-inverse-text hover:text-inverse sm:w-auto"
+          className="w-full sm:w-auto"
         >
           Download Resume
         </Button>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

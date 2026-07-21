@@ -1,4 +1,5 @@
 import type { OpenSourceProject } from "../../types/openSource.js";
+import { AnimatedSection } from "../animation";
 import { SectionHeading } from "../ui";
 import { OpenSourceProjectSection } from "./OpenSourceProjectSection";
 import { hasItems } from "./openSourceUtils";
@@ -15,7 +16,7 @@ export function OpenSourceProjectsSection({
   }
 
   return (
-    <section
+    <AnimatedSection
       className="section-divider"
       aria-labelledby="open-source-projects-heading"
     >
@@ -32,6 +33,6 @@ export function OpenSourceProjectsSection({
           <OpenSourceProjectSection key={project.id} project={project} />
         ))}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

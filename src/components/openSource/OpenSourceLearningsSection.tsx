@@ -1,4 +1,5 @@
 import type { OpenSourceContent } from "../../types/openSource.js";
+import { AnimatedSection } from "../animation";
 import { Card, SectionHeading } from "../ui";
 import { hasItems } from "./openSourceUtils";
 
@@ -14,7 +15,7 @@ export function OpenSourceLearningsSection({
   }
 
   return (
-    <section
+    <AnimatedSection
       className="section-divider"
       aria-labelledby="open-source-learnings-heading"
     >
@@ -54,6 +55,6 @@ export function OpenSourceLearningsSection({
           </Card>
         ))}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

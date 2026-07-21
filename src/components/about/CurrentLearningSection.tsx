@@ -1,5 +1,6 @@
 import { Card, SectionHeading } from "../ui";
 import type { AboutCurrentLearning } from "../../types/about.js";
+import { AnimatedSection } from "../animation";
 
 type CurrentLearningSectionProps = {
   content: AboutCurrentLearning;
@@ -9,7 +10,7 @@ export function CurrentLearningSection({
   content,
 }: CurrentLearningSectionProps) {
   return (
-    <section className="section-divider">
+    <AnimatedSection className="section-divider">
       <SectionHeading
         label="Learning Focus"
         title={content.heading}
@@ -39,6 +40,6 @@ export function CurrentLearningSection({
           </Card>
         ))}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

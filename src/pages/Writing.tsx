@@ -11,6 +11,7 @@ import {
   writingCategories,
 } from "../data/writing";
 import type { WritingCategory, WritingCategoryId } from "../types/writing";
+import { AnimatedSection } from "../components/animation";
 import { EmptyState } from "../components/ui";
 
 const writingPageTitle = "Writing | Garvit Singh";
@@ -66,7 +67,7 @@ export default function Writing() {
 
   return (
     <div className="space-y-12 sm:space-y-16">
-      <section aria-labelledby="writing-page-heading">
+      <AnimatedSection aria-labelledby="writing-page-heading">
         <header className="max-w-3xl">
           <p className="text-label text-accent">
             Writing
@@ -84,10 +85,10 @@ export default function Writing() {
             collaboration, DSA, and the systems I use to improve as a developer.
           </p>
         </header>
-      </section>
+      </AnimatedSection>
 
       {featuredArticle ? (
-        <section
+        <AnimatedSection
           className="section-divider"
           aria-labelledby="featured-writing-heading"
         >
@@ -107,10 +108,10 @@ export default function Writing() {
             article={featuredArticle}
             category={resolveWritingCategory(featuredArticle.category)}
           />
-        </section>
+        </AnimatedSection>
       ) : null}
 
-      <section
+      <AnimatedSection
         className="section-divider"
         aria-labelledby="writing-library-heading"
       >
@@ -170,7 +171,7 @@ export default function Writing() {
             />
           ) : null}
         </div>
-      </section>
+      </AnimatedSection>
     </div>
   );
 }

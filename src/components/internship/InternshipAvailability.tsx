@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { InternshipAvailabilityContent } from "../../types/internship.js";
+import { AnimatedSection } from "../animation";
 import { ResumeDownloadButton } from "../resume";
 import { Button } from "../ui";
 
@@ -31,7 +32,7 @@ export function InternshipAvailability({
   content,
 }: InternshipAvailabilityProps) {
   return (
-    <section
+    <AnimatedSection
       className="section-divider"
       aria-labelledby="internship-availability-heading"
     >
@@ -153,6 +154,6 @@ export function InternshipAvailability({
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

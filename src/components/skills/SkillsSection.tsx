@@ -1,10 +1,11 @@
 import { skillCategories, skills } from "../../data/skills";
+import { AnimatedSection } from "../animation";
 import { SectionHeading } from "../ui";
 import { SkillCard } from "./SkillCard";
 
 export function SkillsSection() {
   return (
-    <section
+    <AnimatedSection
       className="section-divider"
       aria-labelledby="skills-heading"
     >
@@ -55,6 +56,6 @@ export function SkillsSection() {
           );
         })}
       </div>
-    </section>
+    </AnimatedSection>
   );
 }
