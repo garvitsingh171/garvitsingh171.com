@@ -1,39 +1,6 @@
-import { useEffect, useState } from "react";
-
-type ThemePreference = "light" | "dark";
-
-const storageKey = "garvit-theme";
-
-function getSystemTheme(): ThemePreference {
-  if (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  ) {
-    return "dark";
-  }
-
-  return "light";
-}
-
-function getInitialTheme(): ThemePreference {
-  if (typeof document === "undefined") {
-    return "light";
-  }
-
-  const documentTheme = document.documentElement.dataset.theme;
-
-  if (documentTheme === "light" || documentTheme === "dark") {
-    return documentTheme;
-  }
-
-  return getSystemTheme();
-}
-
-function applyTheme(theme: ThemePreference) {
-  document.documentElement.dataset.theme = theme;
-  document.documentElement.classList.toggle("dark", theme === "dark");
-  document.documentElement.style.colorScheme = theme;
-}
+import { useEffect } from "react";
+import { useResolvedTheme } from "../../hooks/useResolvedTheme";
+import { applyTheme, getStoredTheme, themeStorageKey } from "../../utils/theme";
 
 function SunIcon() {
   return (
@@ -70,22 +37,18 @@ function MoonIcon() {
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<ThemePreference>(getInitialTheme);
+  const theme = useResolvedTheme();
   const nextTheme = theme === "dark" ? "light" : "dark";
-
-  useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
     function handleSystemThemeChange(event: MediaQueryListEvent) {
-      if (window.localStorage.getItem(storageKey)) {
+      if (getStoredTheme()) {
         return;
       }
 
-      setTheme(event.matches ? "dark" : "light");
+      applyTheme(event.matches ? "dark" : "light");
     }
 
     mediaQuery.addEventListener("change", handleSystemThemeChange);
@@ -104,8 +67,13 @@ export function ThemeToggle() {
       aria-label={label}
       title={label}
       onClick={() => {
-        window.localStorage.setItem(storageKey, nextTheme);
-        setTheme(nextTheme);
+        try {
+          window.localStorage.setItem(themeStorageKey, nextTheme);
+        } catch {
+          // The root theme remains the active source of truth if storage is blocked.
+        }
+
+        applyTheme(nextTheme);
       }}
       className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-control border border-border bg-surface text-secondary transition duration-200 hover:border-border-strong hover:bg-surface-hover hover:text-primary focus-visible:outline-focus"
     >

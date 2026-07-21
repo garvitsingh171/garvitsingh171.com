@@ -25,8 +25,9 @@ export const projects: Project[] = [
       "Vitest",
     ],
     image: {
-      src: "/images/projects/pravaah.svg",
-      alt: "Pravaah clinic operations project cover for appointment, queue, and patient-flow management",
+      light: "/pravaah-light.png",
+      dark: "/pravaah-dark.png",
+      alt: "Pravaah clinic operations dashboard preview",
     },
     githubUrl: "https://github.com/garvitsingh171/pravaah",
     caseStudy: {
@@ -422,8 +423,9 @@ export const projects: Project[] = [
       "Docker",
     ],
     image: {
-      src: "/images/projects/beathub-api.svg",
-      alt: "BeatHub API backend project cover for music catalog, authentication, and playlist endpoints",
+      light: "/beathubapi-light.png",
+      dark: "/beathubapi-dark.png",
+      alt: "BeatHub API backend dashboard preview",
     },
     githubUrl: "https://github.com/garvitsingh171/beathub-api",
     caseStudy: {
@@ -833,8 +835,9 @@ export const projects: Project[] = [
       "GitHub Actions",
     ],
     image: {
-      src: "/images/projects/workoutly.svg",
-      alt: "Workoutly workout tracking project cover for routines, completed sessions, and progress history",
+      light: "/workoutly-light.png",
+      dark: "/workoutly-dark.png",
+      alt: "Workoutly fitness tracking dashboard preview",
     },
     githubUrl: "https://github.com/garvitsingh171/workoutly",
     caseStudy: {

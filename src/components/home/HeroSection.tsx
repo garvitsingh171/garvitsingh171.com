@@ -1,14 +1,11 @@
 import { heroContent, heroFacts } from "../../data/home";
-import { projects } from "../../data/projects";
 import { Button } from "../ui";
-import { ProjectMedia, ProjectMeta } from "../projects";
+import { PortraitCard } from "./PortraitCard";
 
 export function HeroSection() {
-  const heroProject = projects.find((project) => project.slug === "pravaah") ?? projects[0];
-
   return (
     <section aria-labelledby="home-hero-title" className="py-4 sm:py-8">
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.72fr)] lg:items-center">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.62fr)] lg:items-center">
         <div className="min-w-0">
           <p className="text-label text-accent">{heroContent.label}</p>
 
@@ -56,29 +53,7 @@ export function HeroSection() {
           </dl>
         </div>
 
-        {heroProject?.image ? (
-          <aside
-            className="rounded-media border border-border bg-surface p-3 shadow-subtle"
-            aria-label="Featured project preview"
-          >
-            <ProjectMedia
-              image={heroProject.image}
-              projectTitle={heroProject.title}
-              priority
-              className="rounded-card"
-            />
-
-            <div className="p-4">
-              <ProjectMeta project={heroProject} compact />
-              <h2 className="mt-3 text-2xl font-semibold text-primary">
-                {heroProject.title}
-              </h2>
-              <p className="mt-2 text-body-sm text-secondary">
-                {heroProject.caseStudy?.category ?? heroProject.summary}
-              </p>
-            </div>
-          </aside>
-        ) : null}
+        <PortraitCard />
       </div>
     </section>
   );
