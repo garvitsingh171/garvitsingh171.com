@@ -46,6 +46,17 @@ static route metadata plus the centralized project slugs. Vercel still serves
 the React app as a client-side application, but known public routes have
 pre-rendered head metadata for non-JavaScript crawlers.
 
+## Site Icons
+
+`public/favicon.svg` is the source of truth for the site icon system. Run
+`npm run generate:icons` after changing it to regenerate `public/favicon.ico`,
+`public/favicon-16x16.png`, `public/favicon-32x32.png`,
+`public/apple-touch-icon.png`, `public/icon-192x192.png`, and
+`public/icon-512x512.png`; these generated assets should be committed. The
+icon uses `171` as Garvit Singh's visual signature, but the written brand name
+remains "Garvit Singh." Keep the mark recognizable at 16x16 before shipping
+new icon artwork.
+
 ## Deployment
 
 The website is deployed on Vercel and connected to a custom domain.

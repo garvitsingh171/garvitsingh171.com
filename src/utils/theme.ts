@@ -1,6 +1,10 @@
 export type ThemePreference = "light" | "dark";
 
 export const themeStorageKey = "garvit-theme";
+export const themeColorByTheme: Record<ThemePreference, string> = {
+  light: "#f7f7f3",
+  dark: "#11120f",
+};
 
 export function getSystemTheme(): ThemePreference {
   if (
@@ -57,4 +61,10 @@ export function applyTheme(theme: ThemePreference) {
   document.documentElement.dataset.theme = theme;
   document.documentElement.classList.toggle("dark", theme === "dark");
   document.documentElement.style.colorScheme = theme;
+
+  const themeColor = document.querySelector<HTMLMetaElement>("#theme-color");
+
+  if (themeColor) {
+    themeColor.content = themeColorByTheme[theme];
+  }
 }

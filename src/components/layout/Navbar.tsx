@@ -58,6 +58,35 @@ function MenuIcon({ isOpen }: { isOpen: boolean }) {
   );
 }
 
+function BrandMark() {
+  return (
+    <span
+      aria-hidden="true"
+      className="flex h-9 w-12 shrink-0 items-center justify-center rounded-[0.7rem] border border-border bg-[#171817] text-[#f7f7f3] transition duration-200 group-hover:border-accent-border"
+    >
+      <svg
+        className="h-6 w-9"
+        viewBox="0 0 108 72"
+        fill="none"
+        role="presentation"
+      >
+        <path
+          fill="currentColor"
+          d="M25 12h5v48H18V26h-4v-9l11-5Z"
+        />
+        <path
+          fill="#3157d5"
+          d="M39 12h31v13H39V12Zm15 11h16L57 60H44l10-37Z"
+        />
+        <path
+          fill="currentColor"
+          d="M86 12h5v48H79V26h-4v-9l11-5Z"
+        />
+      </svg>
+    </span>
+  );
+}
+
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -132,15 +161,11 @@ export function Navbar() {
       <div className="mx-auto flex min-h-18 max-w-[var(--container-full)] items-center justify-between gap-4 px-5 py-3 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <NavLink
           to="/"
+          aria-label="Garvit Singh home"
           className="group inline-flex min-w-0 items-center gap-3 rounded-sm text-base font-semibold text-primary transition hover:text-accent focus-visible:outline-focus sm:text-lg"
           end
         >
-          <span
-            aria-hidden="true"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-subtle font-mono text-sm text-accent transition group-hover:border-accent-border"
-          >
-            GS
-          </span>
+          <BrandMark />
           <span className="block truncate">{SITE_CONFIG.name}</span>
         </NavLink>
 
