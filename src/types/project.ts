@@ -113,6 +113,12 @@ export type ProjectCaseStudy = {
   futureImprovements?: string[];
 };
 
+export type ProjectSeo = {
+  title?: string;
+  description?: string;
+  image?: string;
+};
+
 export type Project = {
   title: string;
   slug: string;
@@ -128,5 +134,6 @@ export type Project = {
   apiDocsUrl?: string;
   caseStudyUrl?: string;
   caseStudy?: ProjectCaseStudy;
+  seo?: ProjectSeo;
   featured: boolean;
 };

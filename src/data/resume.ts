@@ -6,6 +6,7 @@ import type {
   ResumeProjectItem,
   ResumeSkillGroup,
 } from "../types/resume.js";
+import { SITE_CONFIG } from "../constants/site";
 import { aboutContent } from "./about";
 import { personalStats } from "./home";
 import { openSourceContent } from "./openSource";
@@ -13,7 +14,7 @@ import { projects } from "./projects";
 import { skillCategories, skills } from "./skills";
 
 export const resumeConfig = {
-  pagePath: "/resume",
+  pagePath: SITE_CONFIG.resumePath,
   filePath: "/garvit-singh-resume.pdf",
 } as const;
 
