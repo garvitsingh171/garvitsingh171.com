@@ -2,9 +2,16 @@
 <html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f8fafc" />
+    <meta name="application-name" content="Garvit Singh Portfolio" />
+    <meta name="apple-mobile-web-app-title" content="Garvit Singh" />
+    <meta id="theme-color" name="theme-color" content="#f7f7f3" />
     <!-- seo:start -->
     <title data-seo-managed="true">Garvit Singh — Backend & Full-Stack Developer</title>
     <meta name="description" content="Portfolio of Garvit Singh, a Software Product Engineering student building practical backend and full-stack products with modern web technologies." data-seo-managed="true" />
@@ -44,6 +51,15 @@
         document.documentElement.dataset.theme = theme;
         document.documentElement.classList.toggle("dark", theme === "dark");
         document.documentElement.style.colorScheme = theme;
+
+        var themeColor = document.querySelector('meta[name="theme-color"]');
+
+        if (themeColor) {
+          themeColor.setAttribute(
+            "content",
+            theme === "dark" ? "#11120f" : "#f7f7f3"
+          );
+        }
       })();
     </script>
   </head>
