@@ -1,4 +1,6 @@
 import type { ProjectImage } from "../../types/project";
+import { useResolvedTheme } from "../../hooks/useResolvedTheme";
+import { resolveProjectImageSrc } from "../../utils/projectImage";
 
 export type ProjectMediaProps = {
   image?: ProjectImage;
@@ -9,9 +11,9 @@ export type ProjectMediaProps = {
 };
 
 const aspectClasses = {
-  standard: "aspect-[4/3]",
-  wide: "aspect-[16/10]",
-  featured: "aspect-[16/10] lg:h-full lg:aspect-auto",
+  standard: "",
+  wide: "",
+  featured: "lg:h-full",
 } as const;
 
 export function ProjectMedia({
@@ -21,25 +23,32 @@ export function ProjectMedia({
   aspect = "standard",
   className = "",
 }: ProjectMediaProps) {
+  const resolvedTheme = useResolvedTheme();
+  const imageSrc = image ? resolveProjectImageSrc(image, resolvedTheme) : "";
+
   return (
     <figure
       className={[
-        "overflow-hidden rounded-media border border-border bg-subtle",
+        "flex items-center justify-center overflow-hidden rounded-media border border-border bg-subtle p-2.5 transition duration-200 group-hover:bg-surface-hover sm:p-3 lg:p-4",
+        "dark:bg-surface-elevated dark:group-hover:bg-surface-hover",
+        aspect === "featured" ? "lg:p-5" : "",
         aspectClasses[aspect],
         className,
       ].join(" ")}
     >
-      {image ? (
-        <img
-          src={image.src}
-          alt={image.alt}
-          loading={priority ? "eager" : "lazy"}
-          fetchPriority={priority ? "high" : "auto"}
-          decoding="async"
-          className="h-full w-full object-contain p-3 transition duration-300 motion-safe:group-hover:scale-[1.015]"
-        />
+      {image && imageSrc ? (
+        <div className="aspect-[4/3] w-full overflow-hidden rounded-card border border-border bg-surface">
+          <img
+            src={imageSrc}
+            alt={image.alt}
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding="async"
+            className="h-full w-full object-contain object-center transition duration-200 motion-safe:group-hover:scale-[1.01]"
+          />
+        </div>
       ) : (
-        <div className="flex h-full items-center justify-center p-6 text-center">
+        <div className="flex aspect-[4/3] w-full items-center justify-center rounded-card border border-border bg-surface p-6 text-center">
           <span className="text-label text-muted">{projectTitle}</span>
         </div>
       )}

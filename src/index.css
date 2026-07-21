@@ -128,35 +128,40 @@
 
 :root.dark,
 :root[data-theme="dark"] {
-  --bg-page: #10110f;
-  --bg-surface: #171816;
-  --bg-surface-elevated: #1b1d19;
-  --bg-surface-hover: #1e201d;
-  --bg-subtle: #1e201d;
-  --bg-inverse: #f3f3ee;
-  --text-primary: #f3f3ee;
-  --text-secondary: #a9aca4;
-  --text-tertiary: #858980;
-  --text-inverse: #151614;
-  --border-default: #33362f;
-  --border-strong: #4c5147;
-  --accent: #8297ff;
-  --accent-hover: #9eaeff;
-  --accent-active: #b2beff;
-  --accent-soft: #20294a;
-  --accent-border: #43579e;
-  --success: #64c898;
-  --success-soft: #173829;
-  --warning: #e4af62;
-  --warning-soft: #3d2d16;
-  --danger: #f08b8b;
-  --danger-soft: #412020;
-  --info: #8297ff;
-  --info-soft: #20294a;
-  --focus: #a9b6ff;
+  --bg-page: #11120f;
+  --bg-surface: #181a16;
+  --bg-surface-elevated: #1d201b;
+  --bg-surface-hover: #22251f;
+  --bg-subtle: #20221d;
+  --bg-inverse: #f4f4ee;
+  --text-primary: #f1f2ea;
+  --text-secondary: #bdc0b7;
+  --text-tertiary: #8f9489;
+  --text-inverse: #141511;
+  --border-default: #373c33;
+  --border-strong: #535a4e;
+  --accent: #9aa9ff;
+  --accent-hover: #b2beff;
+  --accent-active: #c6ceff;
+  --accent-soft: #252d4a;
+  --accent-border: #4d5fa4;
+  --success: #7ad2a5;
+  --success-soft: #193d2d;
+  --warning: #e9bd78;
+  --warning-soft: #3f3019;
+  --danger: #f29a9a;
+  --danger-soft: #462424;
+  --info: #9aa9ff;
+  --info-soft: #252d4a;
+  --focus: #b7c2ff;
   --overlay: rgba(0, 0, 0, 0.68);
-  --selection-background: #a9b6ff;
-  --selection-text: #10110f;
+  --selection-background: #b7c2ff;
+  --selection-text: #11120f;
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  --shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.36);
 
   color-scheme: dark;
 }
@@ -309,6 +314,22 @@ svg {
     border-top: 1px solid var(--border-default);
     padding-top: 3rem;
   }
+
+  .portrait-card-reveal {
+    animation: portrait-card-reveal 640ms var(--ease-enter) 120ms both;
+  }
+}
+
+@keyframes portrait-card-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @media (min-width: 640px) {
@@ -360,6 +381,10 @@ svg {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .portrait-card-reveal {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {

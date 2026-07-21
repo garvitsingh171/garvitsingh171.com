@@ -7,8 +7,10 @@ export type ProjectType =
   | "open-source";
 
 export type ProjectImage = {
-  src: string;
   alt: string;
+  src?: string;
+  light?: string;
+  dark?: string;
 };
 
 export type ProjectTextContent = string | string[];
@@ -78,7 +80,9 @@ export type ProjectArchitectureConnection = {
   label?: string;
 };
 
-export type ProjectArchitectureDiagram = ProjectImage & {
+export type ProjectArchitectureDiagram = {
+  src: string;
+  alt: string;
   caption?: string;
 };
 

@@ -18,7 +18,9 @@ import {
 import { Badge, Button, EmptyState } from "../components/ui";
 import { fallbackStates } from "../data/fallbackStates";
 import { projects } from "../data/projects";
+import { useResolvedTheme } from "../hooks/useResolvedTheme";
 import type { ProjectType } from "../types/project";
+import { resolveProjectImageSrc } from "../utils/projectImage";
 
 const projectTypeLabels = {
   "full-stack": "Full-stack",
@@ -86,6 +88,7 @@ export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((projectItem) => projectItem.slug === slug);
   const isMissingProject = !project;
+  const resolvedTheme = useResolvedTheme();
 
   useMissingProjectMetadata(isMissingProject);
 
@@ -159,6 +162,9 @@ export default function ProjectDetail() {
   ].filter((link): link is { label: string; href: string; ariaLabel: string } =>
     Boolean(link),
   );
+  const projectImageSrc = project.image
+    ? resolveProjectImageSrc(project.image, resolvedTheme)
+    : "";
 
   return (
     <article className="space-y-12">
@@ -228,13 +234,15 @@ export default function ProjectDetail() {
           ) : null}
         </div>
 
-        {project.image ? (
-          <div className="overflow-hidden rounded-media border border-border bg-subtle p-2 shadow-subtle">
-            <img
-              src={project.image.src}
-              alt={project.image.alt}
-              className="aspect-[4/3] h-full w-full rounded-card object-cover"
-            />
+        {project.image && projectImageSrc ? (
+          <div className="overflow-hidden rounded-media border border-border bg-subtle p-3 shadow-subtle sm:p-4 dark:bg-surface-elevated">
+            <div className="aspect-[4/3] overflow-hidden rounded-card border border-border bg-surface">
+              <img
+                src={projectImageSrc}
+                alt={project.image.alt}
+                className="h-full w-full object-contain object-center"
+              />
+            </div>
           </div>
         ) : null}
       </header>
