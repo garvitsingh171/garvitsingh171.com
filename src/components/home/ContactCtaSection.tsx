@@ -1,20 +1,23 @@
-import { SITE_CONFIG } from "../../constants/site";
-import { resumeConfig } from "../../data/resume";
+import { SITE_CONFIG } from "@/data/site";
+import { resumeConfig } from "@/data/resume";
 import { AnimatedSection } from "../animation";
 import { Button } from "../ui";
 
 export function ContactCtaSection() {
   return (
     <AnimatedSection
-      className="rounded-card border border-inverse bg-inverse p-6 text-inverse-text sm:p-8 lg:p-10"
+      className="surface-elevated p-6 sm:p-8 lg:p-10"
       aria-labelledby="home-contact-heading"
     >
-      <p className="text-label opacity-80">06 / Contact</p>
-      <h2 id="home-contact-heading" className="mt-4 max-w-3xl text-heading-1">
+      <p className="text-label text-accent">06 / Contact</p>
+      <h2
+        id="home-contact-heading"
+        className="mt-4 max-w-3xl text-heading-1 text-primary"
+      >
         Building something useful or looking for a product-minded engineering
         intern?
       </h2>
-      <p className="mt-5 max-w-3xl text-body-md opacity-80">
+      <p className="mt-5 max-w-3xl text-body-md text-secondary">
         I am open to remote software engineering internships and collaboration
         conversations around full-stack products, backend systems, and practical
         web applications.

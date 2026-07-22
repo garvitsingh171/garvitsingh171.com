@@ -1,5 +1,5 @@
 import { Card, SectionHeading } from "../ui";
-import type { AboutCurrentLearning } from "../../types/about.js";
+import type { AboutCurrentLearning } from "@/types/about.js";
 import { AnimatedSection } from "../animation";
 
 type CurrentLearningSectionProps = {

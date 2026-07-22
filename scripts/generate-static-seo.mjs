@@ -9,7 +9,7 @@ import {
   renderSeoTags,
   resolveProjectSeoMetadata,
   resolveSeoMetadata,
-} from "../src/utils/seo.ts";
+} from "../src/lib/seo.ts";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(scriptDirectory, "..");

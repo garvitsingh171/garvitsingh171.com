@@ -1,4 +1,4 @@
-import type { OpenSourceProject } from "../../types/openSource.js";
+import type { OpenSourceProject } from "@/types/openSource.js";
 import { AnimatedSection } from "../animation";
 import { SectionHeading } from "../ui";
 import { OpenSourceProjectSection } from "./OpenSourceProjectSection";

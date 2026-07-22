@@ -1,4 +1,4 @@
-import type { OpenSourceProgram } from "../../types/openSource.js";
+import type { OpenSourceProgram } from "@/types/openSource.js";
 import { AnimatedSection } from "../animation";
 import { Button, Card, SectionHeading } from "../ui";
 import { hasItems } from "./openSourceUtils";
@@ -49,7 +49,7 @@ export function OpenSourceProgramSection({
             {metadata.map((item) => (
               <div
                 key={item.label}
-                className="rounded-lg border border-border bg-surface p-5"
+                className="surface-card p-5"
               >
                 <dt className="text-sm font-semibold uppercase text-muted">
                   {item.label}

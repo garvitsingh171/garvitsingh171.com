@@ -1,4 +1,5 @@
-import type { ProjectFeature } from "../../types/project";
+import type { ProjectFeature } from "@/types/project";
+import { StaggeredReveal, StaggeredRevealItem } from "../animation";
 import { Card } from "../ui";
 
 export type FeatureGridProps = {
@@ -17,18 +18,22 @@ export function FeatureGrid({ features }: FeatureGridProps) {
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <StaggeredReveal className="grid gap-4 md:grid-cols-2">
       {visibleFeatures.map((feature) => (
-        <Card key={feature.title} className="h-full p-5">
-          <h3 className="text-lg font-semibold text-primary">{feature.title}</h3>
+        <StaggeredRevealItem key={feature.title} className="h-full">
+          <Card className="h-full p-5">
+            <h3 className="text-lg font-semibold text-primary">
+              {feature.title}
+            </h3>
 
-          {feature.description ? (
-            <p className="mt-3 text-body-sm text-secondary">
-              {feature.description}
-            </p>
-          ) : null}
-        </Card>
+            {feature.description ? (
+              <p className="mt-3 text-body-sm text-secondary">
+                {feature.description}
+              </p>
+            ) : null}
+          </Card>
+        </StaggeredRevealItem>
       ))}
-    </div>
+    </StaggeredReveal>
   );
 }

@@ -1,5 +1,6 @@
-import { projects } from "../../data/projects";
-import { AnimatedSection } from "../animation";
+import { routes } from "@/routes/routes";
+import { projects } from "@/data/projects";
+import { AnimatedSection, StaggeredReveal, StaggeredRevealItem } from "../animation";
 import { FeaturedProject, ProjectCard } from "../projects";
 import { Button, SectionHeading } from "../ui";
 
@@ -24,7 +25,7 @@ export function FeaturedProjectsSection() {
 
         <Button
           as="link"
-          to="/projects"
+          to={routes.projects}
           variant="outline"
           className="w-full sm:w-auto"
         >
@@ -38,11 +39,13 @@ export function FeaturedProjectsSection() {
         ) : null}
 
         {supportingProjects.length > 0 ? (
-          <div className="grid gap-6 lg:grid-cols-2">
+          <StaggeredReveal className="grid gap-6 lg:grid-cols-2">
             {supportingProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+              <StaggeredRevealItem key={project.slug} className="h-full">
+                <ProjectCard project={project} />
+              </StaggeredRevealItem>
             ))}
-          </div>
+          </StaggeredReveal>
         ) : null}
       </div>
     </AnimatedSection>

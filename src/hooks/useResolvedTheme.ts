@@ -4,7 +4,7 @@ import {
   getInitialTheme,
   getSystemTheme,
   type ThemePreference,
-} from "../utils/theme";
+} from "@/lib/theme";
 
 export function useResolvedTheme() {
   const [theme, setTheme] = useState<ThemePreference>(getInitialTheme);

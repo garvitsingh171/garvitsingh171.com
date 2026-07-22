@@ -1,4 +1,4 @@
-import type { WritingArticle, WritingCategory } from "../../types/writing";
+import type { WritingArticle, WritingCategory } from "@/types/writing";
 import { Button, Card } from "../ui";
 import { WritingArticleStatusBadge } from "./WritingArticleStatusBadge";
 

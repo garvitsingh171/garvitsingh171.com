@@ -1,4 +1,4 @@
-import type { OpenSourceContent } from "../../types/openSource.js";
+import type { OpenSourceContent } from "@/types/openSource.js";
 import { AnimatedSection } from "../animation";
 import { Card, SectionHeading } from "../ui";
 import { hasItems } from "./openSourceUtils";

@@ -5,10 +5,10 @@ import {
   OpenSourceProgramSection,
   OpenSourceProjectsSection,
   OpenSourceStatsSection,
-} from "../components/openSource";
-import { SEO } from "../components/seo";
-import { openSourceContent } from "../data/openSource";
-import { staticRouteSeo } from "../data/seo";
+} from "@/components/openSource";
+import { SEO } from "@/components/seo";
+import { openSourceContent } from "@/data/openSource";
+import { staticRouteSeo } from "@/data/seo";
 
 export default function OpenSource() {
   return (

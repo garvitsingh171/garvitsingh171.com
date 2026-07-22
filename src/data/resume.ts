@@ -5,8 +5,8 @@ import type {
   ResumeExperienceItem,
   ResumeProjectItem,
   ResumeSkillGroup,
-} from "../types/resume.js";
-import { SITE_CONFIG } from "../constants/site";
+} from "@/types/resume.js";
+import { SITE_CONFIG } from "@/data/site";
 import { aboutContent } from "./about";
 import { personalStats } from "./home";
 import { openSourceContent } from "./openSource";

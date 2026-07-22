@@ -1,5 +1,5 @@
 import { Card, SectionHeading } from "../ui";
-import type { AboutWorkingStyle } from "../../types/about.js";
+import type { AboutWorkingStyle } from "@/types/about.js";
 import { AnimatedSection } from "../animation";
 
 type WorkingStyleSectionProps = {

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
-import { useResolvedTheme } from "../../hooks/useResolvedTheme";
-import { applyTheme, getStoredTheme, themeStorageKey } from "../../utils/theme";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { themeIconVariants } from "@/config/animations";
+import { useResolvedTheme } from "@/hooks/useResolvedTheme";
+import { applyTheme, getStoredTheme, themeStorageKey } from "@/lib/theme";
 
 function SunIcon() {
   return (
@@ -39,6 +41,7 @@ function MoonIcon() {
 export function ThemeToggle() {
   const theme = useResolvedTheme();
   const nextTheme = theme === "dark" ? "light" : "dark";
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -77,7 +80,17 @@ export function ThemeToggle() {
       }}
       className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-control border border-border bg-surface text-secondary transition duration-200 hover:border-border-strong hover:bg-surface-hover hover:text-primary focus-visible:outline-focus"
     >
-      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={theme}
+          initial={shouldReduceMotion ? false : "hidden"}
+          animate={shouldReduceMotion ? undefined : "visible"}
+          exit={shouldReduceMotion ? undefined : "exit"}
+          variants={shouldReduceMotion ? undefined : themeIconVariants}
+        >
+          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+        </motion.span>
+      </AnimatePresence>
     </button>
   );
 }

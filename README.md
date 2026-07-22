@@ -32,9 +32,24 @@ npm install
 npm run dev
 ```
 
+## Project Structure
+
+- `src/App.tsx` is the application shell.
+- `src/providers` contains app-level providers.
+- `src/routes` contains route constants and route configuration.
+- `src/pages` contains route-level `*Page.tsx` files that compose sections, connect route state, and render SEO.
+- `src/components/ui` contains domain-independent primitives such as buttons, cards, badges, headings, and empty states.
+- `src/components/layout` contains the shared navigation, mobile menu, footer, and page shell pieces.
+- `src/components/animation` contains reusable motion wrappers for route transitions, scroll management, section reveals, and staggered reveals.
+- Domain-specific section and card components live in grouped folders such as `src/components/home`, `src/components/projects`, `src/components/openSource`, and `src/components/writing`.
+- `src/data`, `src/types`, and `src/constants` hold portfolio content, typed data models, navigation, and site metadata.
+- `src/lib` contains stable shared helpers such as `cn`, SEO helpers, link helpers, theme helpers, and project-image resolution.
+- Public assets that need stable URLs live under `public`; project thumbnails are grouped under `public/images/projects/<project>/`, profile images under `public/images/profile/`, and Open Graph images under `public/og/`.
+- Imports inside the React app can use the `@/` alias for `src`, configured in `vite.config.ts` and `tsconfig.app.json`.
+
 ## SEO Metadata
 
-Site-wide metadata defaults live in `src/constants/site.ts`. Page metadata for
+Site-wide metadata defaults live in `src/data/site.ts`. Page metadata for
 indexable static routes lives in `src/data/seo.ts`, and each page renders it
 through the reusable `SEO` component. Project case-study metadata is derived
 from `src/data/projects.ts`; a project can optionally provide `seo.title`,
@@ -60,18 +75,3 @@ new icon artwork.
 ## Deployment
 
 The website is deployed on Vercel and connected to a custom domain.
-
-## Website Structure
-
-The website will include:
-
-- Home
-- About
-- Projects
-- Project Details
-- Open Source
-- Writing
-- Resume
-- Contact
-
-The first version focuses on content, structure, and recruiter clarity. Visual polish, animations, and inspiration-based improvements will be added after the content is stable.

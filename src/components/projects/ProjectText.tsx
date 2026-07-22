@@ -1,4 +1,4 @@
-import type { ProjectTextContent } from "../../types/project";
+import type { ProjectTextContent } from "@/types/project";
 import { getTextItems } from "./projectTextUtils";
 
 export type ProjectTextProps = {

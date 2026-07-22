@@ -1,4 +1,4 @@
-import type { WritingArticleStatus } from "../../types/writing";
+import type { WritingArticleStatus } from "@/types/writing";
 
 export type WritingArticleStatusBadgeProps = {
   status: WritingArticleStatus;

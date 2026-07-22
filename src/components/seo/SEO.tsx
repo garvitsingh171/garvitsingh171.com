@@ -3,7 +3,7 @@ import {
   resolveSeoMetadata,
   type ResolvedSeoMetadata,
   type SeoInput,
-} from "../../utils/seo";
+} from "@/lib/seo";
 
 const managedAttribute = "data-seo-managed";
 

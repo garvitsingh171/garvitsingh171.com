@@ -1,6 +1,6 @@
 import type { HTMLMotionProps } from "motion/react";
 import { motion, useReducedMotion } from "motion/react";
-import { sectionRevealVariants, sectionViewport } from "../../config/animations";
+import { sectionRevealVariants, sectionViewport } from "@/config/animations";
 
 type AnimatedSectionProps = HTMLMotionProps<"section">;
 

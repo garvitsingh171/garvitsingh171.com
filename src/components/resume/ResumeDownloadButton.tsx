@@ -1,5 +1,5 @@
-import type { ResumeButtonVariant } from "../../types/resume.js";
-import { resumeConfig } from "../../data/resume";
+import type { ResumeButtonVariant } from "@/types/resume.js";
+import { resumeConfig } from "@/data/resume";
 import { Button } from "../ui";
 
 export type ResumeDownloadButtonProps = {

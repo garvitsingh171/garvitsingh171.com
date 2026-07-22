@@ -1,4 +1,4 @@
-import { resumeConfig } from "../data/resume";
+import { routes } from "@/routes/routes";
 
 export type NavigationItem = {
   id: string;
@@ -10,29 +10,29 @@ export const primaryNavigation = [
   {
     id: "work",
     label: "Work",
-    href: "/projects",
+    href: routes.projects,
   },
   {
     id: "about",
     label: "About",
-    href: "/about",
+    href: routes.about,
   },
   {
     id: "open-source",
     label: "Open Source",
-    href: "/open-source",
+    href: routes.openSource,
   },
   {
     id: "resume",
     label: "Resume",
-    href: resumeConfig.pagePath,
+    href: routes.resume,
   },
 ] as const satisfies readonly NavigationItem[];
 
 export const contactNavigation = {
   id: "contact",
   label: "Contact",
-  href: "/contact",
+  href: routes.contact,
 } as const satisfies NavigationItem;
 
 export const mobileNavigation = [
@@ -44,31 +44,31 @@ export const footerNavigation = [
   {
     id: "about",
     label: "About",
-    href: "/about",
+    href: routes.about,
   },
   {
     id: "projects",
     label: "Projects",
-    href: "/projects",
+    href: routes.projects,
   },
   {
     id: "open-source",
     label: "Open Source",
-    href: "/open-source",
+    href: routes.openSource,
   },
   {
     id: "writing",
     label: "Writing",
-    href: "/writing",
+    href: routes.writing,
   },
   {
     id: "resume",
     label: "Resume",
-    href: resumeConfig.pagePath,
+    href: routes.resume,
   },
   {
     id: "contact",
     label: "Contact",
-    href: "/contact",
+    href: routes.contact,
   },
 ] as const satisfies readonly NavigationItem[];

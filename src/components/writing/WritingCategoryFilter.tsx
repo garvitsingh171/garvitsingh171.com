@@ -1,4 +1,4 @@
-import type { WritingCategory, WritingCategoryId } from "../../types/writing";
+import type { WritingCategory, WritingCategoryId } from "@/types/writing";
 import { Button } from "../ui";
 
 export type WritingFilter = "all" | WritingCategoryId;

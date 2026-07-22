@@ -1,4 +1,5 @@
-import type { Project } from "../../types/project";
+import { routes } from "@/routes/routes";
+import type { Project } from "@/types/project";
 import { Button } from "../ui";
 
 export type ProjectActionsProps = {
@@ -23,7 +24,7 @@ export function ProjectActions({
     >
       <Button
         as="link"
-        to={`/projects/${project.slug}`}
+        to={routes.project(project.slug)}
         size={compact ? "sm" : "md"}
         className={buttonClass}
         aria-label={`Read ${project.title} case study`}

@@ -1,7 +1,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router-dom";
-import { cardInteractionVariants } from "../../config/animations";
-import type { Project } from "../../types/project";
+import { routes } from "@/routes/routes";
+import { cardInteractionVariants } from "@/config/animations";
+import type { Project } from "@/types/project";
 
 export type ProjectNavigationProps = {
   projects: Project[];
@@ -27,10 +28,11 @@ function ProjectNavLink({
 
   return (
     <MotionLink
-      to={`/projects/${project.slug}`}
+      to={routes.project(project.slug)}
       initial={false}
       animate={shouldAnimateInteraction ? "rest" : undefined}
       whileHover={shouldAnimateInteraction ? "hover" : undefined}
+      whileTap={shouldAnimateInteraction ? "tap" : undefined}
       whileFocus={shouldAnimateInteraction ? "focus" : undefined}
       variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
       className={[

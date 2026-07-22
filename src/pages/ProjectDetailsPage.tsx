@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { routes } from "@/routes/routes";
 import {
   CaseStudySection,
   ChallengeList,
@@ -13,15 +14,15 @@ import {
   ProjectText,
   TechnicalDecisionList,
   TechnologyList,
-} from "../components/projects";
-import { SEO } from "../components/seo";
-import { Badge, Button, EmptyState } from "../components/ui";
-import { fallbackStates } from "../data/fallbackStates";
-import { projects } from "../data/projects";
-import { useResolvedTheme } from "../hooks/useResolvedTheme";
-import type { ProjectType } from "../types/project";
-import { resolveProjectImageSrc } from "../utils/projectImage";
-import { resolveProjectSeoMetadata } from "../utils/seo";
+} from "@/components/projects";
+import { SEO } from "@/components/seo";
+import { Badge, Button, EmptyState } from "@/components/ui";
+import { fallbackStates } from "@/data/fallbackStates";
+import { projects } from "@/data/projects";
+import { useResolvedTheme } from "@/hooks/useResolvedTheme";
+import type { ProjectType } from "@/types/project";
+import { resolveProjectImageSrc } from "@/lib/projectImage";
+import { resolveProjectSeoMetadata } from "@/lib/seo";
 
 const projectTypeLabels = {
   "full-stack": "Full-stack",
@@ -64,7 +65,7 @@ export default function ProjectDetail() {
           primaryAction={{
             type: "link",
             label: "View projects",
-            to: "/projects",
+            to: routes.projects,
           }}
           secondaryAction={{
             type: "link",
@@ -132,7 +133,7 @@ export default function ProjectDetail() {
       <SEO {...resolveProjectSeoMetadata(project)} />
       <article className="space-y-12">
         <Link
-          to="/projects"
+          to={routes.projects}
           className="inline-flex rounded-sm text-sm font-semibold text-accent transition hover:text-accent-hover focus-visible:outline-focus"
         >
           &larr; Back to Projects

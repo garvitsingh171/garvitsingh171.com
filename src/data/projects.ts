@@ -1,4 +1,4 @@
-import type { Project } from "../types/project.js";
+import type { Project } from "@/types/project.js";
 
 export const projects: Project[] = [
   {
@@ -25,8 +25,8 @@ export const projects: Project[] = [
       "Vitest",
     ],
     image: {
-      light: "/pravaah-light.png",
-      dark: "/pravaah-dark.png",
+      light: "/images/projects/pravaah/pravaah-thumbnail-light.png",
+      dark: "/images/projects/pravaah/pravaah-thumbnail-dark.png",
       alt: "Pravaah clinic operations dashboard preview",
     },
     githubUrl: "https://github.com/garvitsingh171/pravaah",
@@ -423,8 +423,8 @@ export const projects: Project[] = [
       "Docker",
     ],
     image: {
-      light: "/beathubapi-light.png",
-      dark: "/beathubapi-dark.png",
+      light: "/images/projects/beathub-api/beathub-api-thumbnail-light.png",
+      dark: "/images/projects/beathub-api/beathub-api-thumbnail-dark.png",
       alt: "BeatHub API backend dashboard preview",
     },
     githubUrl: "https://github.com/garvitsingh171/beathub-api",
@@ -508,7 +508,7 @@ export const projects: Project[] = [
       ],
       architecture: {
         overview: [
-          "The application starts in src/server.js, loads environment variables, connects to MongoDB, and listens on the configured PORT or 3000. src/app.js creates the Express app, enables JSON parsing, applies the API rate limiter, registers route modules, serves Swagger UI, and attaches not-found and global error handlers.",
+          "The application starts in src/server.js, loads environment variables, connects to MongoDB, and listens on the configured PORT or 3000. src.js creates the Express app, enables JSON parsing, applies the API rate limiter, registers route modules, serves Swagger UI, and attaches not-found and global error handlers.",
           "The code is organized as route, middleware, controller, service, model, and MongoDB. Routes define endpoint paths and middleware chains. Middleware handles validation, JWT authentication, role checks, rate limiting, and errors. Controllers shape HTTP responses. Services call Mongoose models. Models define MongoDB document structure.",
           "MongoDB data is modelled with Mongoose schemas. Songs reference artists and optionally albums, albums reference artists, playlists reference users and songs, and users can reference liked songs. The model uses document collections with references where relationships are needed.",
         ],
@@ -835,8 +835,8 @@ export const projects: Project[] = [
       "GitHub Actions",
     ],
     image: {
-      light: "/workoutly-light.png",
-      dark: "/workoutly-dark.png",
+      light: "/images/projects/workoutly/workoutly-thumbnail-light.png",
+      dark: "/images/projects/workoutly/workoutly-thumbnail-dark.png",
       alt: "Workoutly fitness tracking dashboard preview",
     },
     githubUrl: "https://github.com/garvitsingh171/workoutly",

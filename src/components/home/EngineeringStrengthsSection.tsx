@@ -1,4 +1,4 @@
-import { skillCategories, skills } from "../../data/skills";
+import { skillCategories, skills } from "@/data/skills";
 import { AnimatedSection } from "../animation";
 import { Badge, SectionHeading } from "../ui";
 

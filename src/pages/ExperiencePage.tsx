@@ -1,6 +1,6 @@
-import { AnimatedSection } from "../components/animation";
-import { SEO } from "../components/seo";
-import { staticRouteSeo } from "../data/seo";
+import { AnimatedSection } from "@/components/animation";
+import { SEO } from "@/components/seo";
+import { staticRouteSeo } from "@/data/seo";
 
 export default function Experience() {
   return (

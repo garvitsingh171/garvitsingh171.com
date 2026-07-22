@@ -3,12 +3,16 @@ import {
   ProjectCard,
   ProjectFilters,
   type ProjectFilter,
-} from "../components/projects";
-import { AnimatedSection } from "../components/animation";
-import { SEO } from "../components/seo";
-import { EmptyState, PageHeader } from "../components/ui";
-import { projects } from "../data/projects";
-import { staticRouteSeo } from "../data/seo";
+} from "@/components/projects";
+import {
+  AnimatedSection,
+  StaggeredReveal,
+  StaggeredRevealItem,
+} from "@/components/animation";
+import { SEO } from "@/components/seo";
+import { EmptyState, PageHeader } from "@/components/ui";
+import { projects } from "@/data/projects";
+import { staticRouteSeo } from "@/data/seo";
 
 export default function Projects() {
   const [selectedFilter, setSelectedFilter] = useState<ProjectFilter>("all");
@@ -38,11 +42,13 @@ export default function Projects() {
 
         <div className="mt-10">
           {filteredProjects.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <StaggeredReveal className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {filteredProjects.map((project) => (
-                <ProjectCard key={project.slug} project={project} />
+                <StaggeredRevealItem key={project.slug} className="h-full">
+                  <ProjectCard project={project} />
+                </StaggeredRevealItem>
               ))}
-            </div>
+            </StaggeredReveal>
           ) : hasProjects ? (
             <EmptyState
               title="No projects found in this category"

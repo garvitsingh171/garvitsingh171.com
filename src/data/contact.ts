@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from "../constants/site";
+import { SITE_CONFIG } from "@/data/site";
 import { socialLinks } from "./socialLinks";
 
 const emailSubject = "Portfolio Contact";

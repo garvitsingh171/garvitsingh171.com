@@ -1,4 +1,4 @@
-import { personalStats } from "../../data/home";
+import { personalStats } from "@/data/home";
 import { AnimatedSection } from "../animation";
 import { SectionHeading } from "../ui";
 

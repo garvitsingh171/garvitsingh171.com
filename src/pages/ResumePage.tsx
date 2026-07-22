@@ -1,12 +1,13 @@
-import { AnimatedSection } from "../components/animation";
-import { InternshipAvailability } from "../components/internship";
-import { ResumeDownloadButton } from "../components/resume";
-import { ProjectStatusBadge, TechnologyList } from "../components/projects";
-import { SEO } from "../components/seo";
-import { Button, Card, SectionHeading } from "../components/ui";
-import { internshipAvailability } from "../data/internship";
-import { resumeContent } from "../data/resume";
-import { staticRouteSeo } from "../data/seo";
+import { AnimatedSection } from "@/components/animation";
+import { routes } from "@/routes/routes";
+import { InternshipAvailability } from "@/components/internship";
+import { ResumeDownloadButton } from "@/components/resume";
+import { ProjectStatusBadge, TechnologyList } from "@/components/projects";
+import { SEO } from "@/components/seo";
+import { Button, Card, SectionHeading } from "@/components/ui";
+import { internshipAvailability } from "@/data/internship";
+import { resumeContent } from "@/data/resume";
+import { staticRouteSeo } from "@/data/seo";
 
 function TextList({ items }: { items: string[] }) {
   return (
@@ -50,7 +51,7 @@ export default function Resume() {
               <ResumeDownloadButton className="w-full sm:w-auto" />
               <Button
                 as="link"
-                to="/contact"
+                to={routes.contact}
                 variant="outline"
                 className="w-full sm:w-auto"
               >
@@ -162,7 +163,7 @@ export default function Resume() {
 
           <Button
             as="link"
-            to="/open-source"
+            to={routes.openSource}
             variant="outline"
             className="w-full sm:w-auto"
           >
@@ -289,7 +290,7 @@ export default function Resume() {
 
           <dl className="mt-6 flex flex-wrap gap-3">
             {resumeContent.education.location ? (
-              <div className="min-w-0 rounded-md border border-border bg-subtle px-3 py-2">
+              <div className="surface-muted min-w-0 rounded-control px-3 py-2">
                 <dt className="text-xs font-semibold uppercase text-muted">
                   Location
                 </dt>
@@ -302,7 +303,7 @@ export default function Resume() {
             {resumeContent.education.metadata?.map((item) => (
               <div
                 key={item.label}
-                className="min-w-0 rounded-md border border-border bg-subtle px-3 py-2"
+                className="surface-muted min-w-0 rounded-control px-3 py-2"
               >
                 <dt className="text-xs font-semibold uppercase text-muted">
                   {item.label}
@@ -355,7 +356,7 @@ export default function Resume() {
         className="section-divider"
         aria-labelledby="resume-final-cta-heading"
       >
-        <div className="rounded-lg border border-border bg-surface p-6 sm:p-8">
+        <div className="surface-card p-6 sm:p-8">
           <h2
             id="resume-final-cta-heading"
             className="max-w-3xl text-heading-1 text-primary"
@@ -370,7 +371,7 @@ export default function Resume() {
             <ResumeDownloadButton className="w-full sm:w-auto" />
             <Button
               as="link"
-              to="/contact"
+              to={routes.contact}
               variant="outline"
               className="w-full sm:w-auto"
             >

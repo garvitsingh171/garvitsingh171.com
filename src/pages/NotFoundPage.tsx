@@ -1,6 +1,7 @@
-import { SEO } from "../components/seo";
-import { EmptyState } from "../components/ui";
-import { fallbackStates } from "../data/fallbackStates";
+import { routes } from "@/routes/routes";
+import { SEO } from "@/components/seo";
+import { EmptyState } from "@/components/ui";
+import { fallbackStates } from "@/data/fallbackStates";
 
 export default function NotFound() {
   return (
@@ -26,7 +27,7 @@ export default function NotFound() {
         secondaryAction={{
           type: "link",
           label: "View projects",
-          to: "/projects",
+          to: routes.projects,
         }}
       />
     </>

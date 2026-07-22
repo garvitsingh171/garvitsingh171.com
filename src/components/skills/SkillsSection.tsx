@@ -1,5 +1,5 @@
-import { skillCategories, skills } from "../../data/skills";
-import { AnimatedSection } from "../animation";
+import { skillCategories, skills } from "@/data/skills";
+import { AnimatedSection, StaggeredReveal, StaggeredRevealItem } from "../animation";
 import { SectionHeading } from "../ui";
 import { SkillCard } from "./SkillCard";
 
@@ -47,11 +47,13 @@ export function SkillsSection() {
                 ) : null}
               </div>
 
-              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <StaggeredReveal className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {categorySkills.map((skill) => (
-                  <SkillCard key={skill.id} skill={skill} />
+                  <StaggeredRevealItem key={skill.id} className="h-full">
+                    <SkillCard skill={skill} />
+                  </StaggeredRevealItem>
                 ))}
-              </div>
+              </StaggeredReveal>
             </section>
           );
         })}

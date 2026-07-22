@@ -1,5 +1,5 @@
 import { Card, SectionHeading } from "../ui";
-import type { AboutEducation } from "../../types/about.js";
+import type { AboutEducation } from "@/types/about.js";
 import { AnimatedSection } from "../animation";
 
 type EducationSectionProps = {
@@ -45,7 +45,7 @@ export function EducationSection({ content }: EducationSectionProps) {
           {metadata.map((item) => (
             <div
               key={item.label}
-              className="min-w-0 rounded-md border border-border bg-subtle px-3 py-2"
+              className="surface-muted min-w-0 rounded-control px-3 py-2"
             >
               <dt className="text-xs font-semibold uppercase text-muted">
                 {item.label}

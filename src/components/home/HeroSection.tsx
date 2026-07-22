@@ -1,10 +1,11 @@
 import { motion, useReducedMotion } from "motion/react";
 import {
   heroContainerVariants,
+  heroHeadingVariants,
   heroItemVariants,
   heroVisualVariants,
-} from "../../config/animations";
-import { heroContent, heroFacts } from "../../data/home";
+} from "@/config/animations";
+import { heroContent, heroFacts } from "@/data/home";
 import { Button } from "../ui";
 import { PortraitCard } from "./PortraitCard";
 
@@ -29,7 +30,7 @@ export function HeroSection() {
           <motion.h1
             id="home-hero-title"
             className="mt-5 max-w-5xl text-display-1 text-primary"
-            variants={heroItemVariants}
+            variants={heroHeadingVariants}
           >
             {heroContent.heading}
           </motion.h1>

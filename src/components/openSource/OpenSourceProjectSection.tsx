@@ -1,5 +1,6 @@
-import type { OpenSourceProject } from "../../types/openSource.js";
+import type { OpenSourceProject } from "@/types/openSource.js";
 import { TechnologyList } from "../projects";
+import { Badge } from "../ui";
 import { ContributionCard } from "./ContributionCard";
 import { ExternalLink } from "./ExternalLink";
 import { hasItems } from "./openSourceUtils";
@@ -20,7 +21,7 @@ function ProjectList({
   }
 
   return (
-    <div className="rounded-lg border border-border bg-surface p-5">
+    <div className="surface-card p-5">
       <h4 className="text-label text-accent">
         {title}
       </h4>
@@ -54,13 +55,11 @@ export function OpenSourceProjectSection({
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
             {showShortName ? (
-              <span className="rounded-full border border-border-strong bg-subtle px-3 py-1 text-xs font-semibold text-secondary">
+              <Badge>
                 {project.shortName}
-              </span>
+              </Badge>
             ) : null}
-            <span className="rounded-full border border-accent-border bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
-              {project.role}
-            </span>
+            <Badge tone="accent">{project.role}</Badge>
           </div>
 
           <h3
@@ -85,7 +84,7 @@ export function OpenSourceProjectSection({
         </div>
 
         {hasItems(project.links) ? (
-          <div className="min-w-0 rounded-lg border border-border bg-surface p-5">
+          <div className="surface-card min-w-0 p-5">
             <h4 className="text-label text-accent">
               Project links
             </h4>
@@ -109,7 +108,7 @@ export function OpenSourceProjectSection({
         <ProjectList title="Project learnings" items={project.learnings} />
 
         {hasItems(project.stats) ? (
-          <div className="rounded-lg border border-border bg-subtle p-5">
+          <div className="surface-muted p-5">
             <h4 className="text-label text-accent">
               Project stats
             </h4>
@@ -142,7 +141,7 @@ export function OpenSourceProjectSection({
               <li key={contribution.id} className="relative min-w-0">
                 <span
                   aria-hidden="true"
-                  className="absolute -left-[1.85rem] top-6 hidden h-3 w-3 rounded-full border border-emerald-300 bg-page md:block"
+                  className="absolute -left-[1.85rem] top-6 hidden h-3 w-3 rounded-full border border-success bg-page md:block"
                 />
                 <ContributionCard contribution={contribution} />
               </li>
