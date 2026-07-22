@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
 type BadgeTone = "neutral" | "accent" | "success" | "warning" | "danger";
 
@@ -23,11 +24,11 @@ export function Badge({
 }: BadgeProps) {
   return (
     <span
-      className={[
+      className={cn(
         "inline-flex w-fit shrink-0 items-center rounded-full border px-3 py-1 text-xs font-semibold leading-none",
         toneClasses[tone],
         className,
-      ].join(" ")}
+      )}
     >
       {children}
     </span>

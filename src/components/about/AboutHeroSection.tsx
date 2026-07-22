@@ -1,5 +1,6 @@
+import { routes } from "@/routes/routes";
 import { Button } from "../ui";
-import type { AboutIntroduction } from "../../types/about.js";
+import type { AboutIntroduction } from "@/types/about.js";
 import { AnimatedSection } from "../animation";
 import { ResumeDownloadButton } from "../resume";
 
@@ -33,7 +34,7 @@ export function AboutHeroSection({ content }: AboutHeroSectionProps) {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Button
             as="link"
-            to="/projects"
+            to={routes.projects}
             variant="secondary"
             className="w-full sm:w-auto"
           >
@@ -45,7 +46,7 @@ export function AboutHeroSection({ content }: AboutHeroSectionProps) {
           />
           <Button
             as="link"
-            to="/contact"
+            to={routes.contact}
             variant="ghost"
             className="w-full sm:w-auto"
           >

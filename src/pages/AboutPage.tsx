@@ -3,11 +3,11 @@ import {
   CurrentLearningSection,
   EducationSection,
   WorkingStyleSection,
-} from "../components/about";
-import { SEO } from "../components/seo";
-import { SkillsSection } from "../components/skills";
-import { aboutContent } from "../data/about";
-import { staticRouteSeo } from "../data/seo";
+} from "@/components/about";
+import { SEO } from "@/components/seo";
+import { SkillsSection } from "@/components/skills";
+import { aboutContent } from "@/data/about";
+import { staticRouteSeo } from "@/data/seo";
 
 export default function About() {
   return (

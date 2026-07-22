@@ -1,4 +1,4 @@
-import type { Skill } from "../../types/skill.js";
+import type { Skill } from "@/types/skill.js";
 import { Card } from "../ui";
 import { SkillIcon } from "./SkillIcon";
 

@@ -1,4 +1,4 @@
-import type { ProjectImage } from "../types/project";
+import type { ProjectImage } from "@/types/project";
 import type { ThemePreference } from "./theme";
 
 export function resolveProjectImageSrc(

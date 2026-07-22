@@ -1,4 +1,4 @@
-import type { ProjectTextContent } from "../../types/project";
+import type { ProjectTextContent } from "@/types/project";
 
 export function getTextItems(content?: ProjectTextContent) {
   if (Array.isArray(content)) {

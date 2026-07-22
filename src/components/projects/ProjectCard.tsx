@@ -1,4 +1,4 @@
-import type { Project } from "../../types/project";
+import type { Project } from "@/types/project";
 import { Card } from "../ui";
 import { ProjectActions } from "./ProjectActions";
 import { ProjectMedia } from "./ProjectMedia";

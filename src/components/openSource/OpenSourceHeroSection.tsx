@@ -2,7 +2,7 @@ import type {
   OpenSourceContent,
   OpenSourceLink,
   OpenSourceStat,
-} from "../../types/openSource.js";
+} from "@/types/openSource.js";
 import { AnimatedSection } from "../animation";
 import { Card } from "../ui";
 import { ExternalLink } from "./ExternalLink";

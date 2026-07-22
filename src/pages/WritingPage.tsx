@@ -4,17 +4,17 @@ import {
   WritingArticleCard,
   WritingCategoryFilter,
   type WritingFilter,
-} from "../components/writing";
+} from "@/components/writing";
 import {
   getWritingCategoryById,
   writingArticles,
   writingCategories,
-} from "../data/writing";
-import type { WritingCategory, WritingCategoryId } from "../types/writing";
-import { AnimatedSection } from "../components/animation";
-import { SEO } from "../components/seo";
-import { EmptyState } from "../components/ui";
-import { staticRouteSeo } from "../data/seo";
+} from "@/data/writing";
+import type { WritingCategory, WritingCategoryId } from "@/types/writing";
+import { AnimatedSection } from "@/components/animation";
+import { SEO } from "@/components/seo";
+import { EmptyState } from "@/components/ui";
+import { staticRouteSeo } from "@/data/seo";
 
 const fallbackCategory = (id: WritingCategoryId): WritingCategory => ({
   id,

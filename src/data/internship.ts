@@ -1,5 +1,5 @@
-import { SITE_CONFIG } from "../constants/site";
-import type { InternshipAvailabilityContent } from "../types/internship.js";
+import { SITE_CONFIG } from "@/data/site";
+import type { InternshipAvailabilityContent } from "@/types/internship.js";
 import { socialLinks } from "./socialLinks";
 
 const getSocialLink = (label: string) =>

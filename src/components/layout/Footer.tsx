@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import { routes } from "@/routes/routes";
 import { ResumeDownloadButton } from "../resume";
 import { SocialIcon } from "../social-links";
-import { footerNavigation } from "../../constants/navigation";
-import { SITE_CONFIG } from "../../constants/site";
-import { socialLinks, type SocialLink } from "../../data/socialLinks";
-import { isEmailLink, isExternalWebLink } from "../../utils/links";
+import { footerNavigation } from "@/data/navigation";
+import { SITE_CONFIG } from "@/data/site";
+import { socialLinks, type SocialLink } from "@/data/socialLinks";
+import { isEmailLink, isExternalWebLink } from "@/lib/links";
 
 const linkClasses = [
   "inline-flex min-h-10 items-center rounded-sm text-secondary transition duration-200",
@@ -62,7 +63,7 @@ export function Footer() {
         <section className="space-y-4 md:col-span-2 lg:col-span-1">
           <div>
             <Link
-              to="/"
+              to={routes.home}
               className="inline-flex rounded-sm text-base font-semibold text-primary transition hover:text-accent focus-visible:outline-focus"
             >
               {SITE_CONFIG.name}

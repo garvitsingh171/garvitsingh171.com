@@ -1,25 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { routes } from "@/routes/routes";
 import {
   contactNavigation,
   mobileNavigation,
   primaryNavigation,
-} from "../../constants/navigation";
-import { SITE_CONFIG } from "../../constants/site";
+} from "@/data/navigation";
+import { SITE_CONFIG } from "@/data/site";
+import { cn } from "@/lib/cn";
 import { Button, ThemeToggle } from "../ui";
 import { MobileNavigation } from "./MobileNavigation";
 
 const mobileNavigationId = "primary-mobile-navigation";
 
 function getDesktopLinkClasses({ isActive }: { isActive: boolean }) {
-  return [
+  return cn(
     "relative whitespace-nowrap rounded-sm px-1 py-2 text-sm font-semibold transition duration-200",
     "after:absolute after:inset-x-1 after:bottom-0 after:h-px after:origin-left after:bg-accent after:transition-transform after:duration-200",
     "focus-visible:outline-focus",
     isActive
       ? "text-primary after:scale-x-100"
       : "text-secondary after:scale-x-0 hover:text-primary hover:after:scale-x-100",
-  ].join(" ");
+  );
 }
 
 function MenuIcon({ isOpen }: { isOpen: boolean }) {
@@ -62,7 +64,7 @@ function BrandMark() {
   return (
     <span
       aria-hidden="true"
-      className="flex h-9 w-12 shrink-0 items-center justify-center rounded-[0.7rem] border border-border bg-[#171817] text-[#f7f7f3] transition duration-200 group-hover:border-accent-border"
+      className="flex h-9 w-12 shrink-0 items-center justify-center rounded-control border border-border bg-inverse text-inverse-text transition duration-200 group-hover:border-accent-border"
     >
       <svg
         className="h-6 w-9"
@@ -75,7 +77,7 @@ function BrandMark() {
           d="M25 12h5v48H18V26h-4v-9l11-5Z"
         />
         <path
-          fill="#3157d5"
+          fill="var(--accent)"
           d="M39 12h31v13H39V12Zm15 11h16L57 60H44l10-37Z"
         />
         <path
@@ -160,7 +162,7 @@ export function Navbar() {
     <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur">
       <div className="mx-auto flex min-h-18 max-w-[var(--container-full)] items-center justify-between gap-4 px-5 py-3 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <NavLink
-          to="/"
+          to={routes.home}
           aria-label="Garvit Singh home"
           className="group inline-flex min-w-0 items-center gap-3 rounded-sm text-base font-semibold text-primary transition hover:text-accent focus-visible:outline-focus sm:text-lg"
           end
@@ -202,12 +204,12 @@ export function Navbar() {
             aria-controls={mobileNavigationId}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
-            className={[
+            className={cn(
               "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-control border transition duration-200 focus-visible:outline-focus",
               isMenuOpen
-                ? "border-accent bg-accent text-inverse-text"
+                ? "border-accent bg-accent text-accent-foreground"
                 : "border-border bg-surface text-secondary hover:border-border-strong hover:bg-surface-hover hover:text-primary",
-            ].join(" ")}
+            )}
           >
             <MenuIcon isOpen={isMenuOpen} />
           </button>

@@ -1,5 +1,5 @@
-import { SITE_CONFIG } from "../constants/site.ts";
-import type { Project } from "../types/project.js";
+import { SITE_CONFIG } from "../data/site.ts";
+import type { Project } from "@/types/project.js";
 
 export type SeoImage = string;
 

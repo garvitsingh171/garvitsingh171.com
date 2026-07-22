@@ -3,7 +3,7 @@ import type {
   ProjectArchitectureConnection,
   ProjectArchitectureLayer,
   ProjectArchitectureLayerKind,
-} from "../../types/project";
+} from "@/types/project";
 import { Badge, Card } from "../ui";
 import { CaseStudySection } from "./CaseStudySection";
 import { ProjectText } from "./ProjectText";

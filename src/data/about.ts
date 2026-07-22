@@ -1,4 +1,4 @@
-import type { AboutContent } from "../types/about.js";
+import type { AboutContent } from "@/types/about.js";
 
 export const aboutContent: AboutContent = {
   introduction: {

@@ -1,5 +1,5 @@
 import type { ReactNode, SVGProps } from "react";
-import type { SocialLinkIconName } from "../../data/socialLinks";
+import type { SocialLinkIconName } from "@/data/socialLinks";
 
 type IconComponent = (props: SVGProps<SVGSVGElement>) => ReactNode;
 

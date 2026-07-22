@@ -1,4 +1,5 @@
-import { aboutContent } from "../../data/about";
+import { routes } from "@/routes/routes";
+import { aboutContent } from "@/data/about";
 import { AnimatedSection } from "../animation";
 import { Button, SectionHeading } from "../ui";
 
@@ -36,7 +37,7 @@ export function AboutPreviewSection() {
             ))}
           </div>
 
-          <Button as="link" to="/about" variant="outline">
+          <Button as="link" to={routes.about} variant="outline">
             Read About Garvit
           </Button>
         </div>

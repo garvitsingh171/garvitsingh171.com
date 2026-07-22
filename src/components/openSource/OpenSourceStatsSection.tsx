@@ -1,4 +1,4 @@
-import type { OpenSourceStat } from "../../types/openSource.js";
+import type { OpenSourceStat } from "@/types/openSource.js";
 import { AnimatedSection } from "../animation";
 import { SectionHeading } from "../ui";
 import { hasItems } from "./openSourceUtils";
@@ -32,7 +32,7 @@ export function OpenSourceStatsSection({ stats }: OpenSourceStatsSectionProps) {
         {primaryStats.map((stat) => (
           <li
             key={stat.label}
-            className="min-w-0 rounded-lg border border-border bg-surface p-4 sm:p-5"
+            className="surface-card min-w-0 p-4 sm:p-5"
           >
             <p className="break-words text-3xl font-semibold text-primary sm:text-4xl">
               {stat.value}
@@ -54,7 +54,7 @@ export function OpenSourceStatsSection({ stats }: OpenSourceStatsSectionProps) {
           {supportingStats.map((stat) => (
             <li
               key={stat.label}
-              className="min-w-0 rounded-lg border border-border bg-subtle p-4"
+              className="surface-muted min-w-0 p-4"
             >
               <p className="break-words text-xl font-semibold text-primary">
                 {stat.value}

@@ -1,4 +1,4 @@
-import type { Project } from "../../types/project";
+import type { Project } from "@/types/project";
 import { Badge } from "../ui";
 import { ProjectStatusBadge } from "./ProjectStatusBadge";
 import { getProjectCategory, getProjectRole } from "./projectPresentationUtils";

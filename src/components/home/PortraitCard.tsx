@@ -1,4 +1,4 @@
-import { useResolvedTheme } from "../../hooks/useResolvedTheme";
+import { useResolvedTheme } from "@/hooks/useResolvedTheme";
 
 const portrait = {
   alt: "Portrait of Garvit Singh",
@@ -10,8 +10,8 @@ export function PortraitCard() {
   const resolvedTheme = useResolvedTheme();
   const portraitSrc =
     resolvedTheme === "dark"
-      ? "/garvitsingh171-dark.png"
-      : "/garvitsingh171-light.png";
+      ? "/images/profile/garvit-singh-profile-dark.png"
+      : "/images/profile/garvit-singh-profile-light.png";
 
   return (
     <figure className="group relative isolate mx-auto w-full max-w-[23rem] sm:max-w-[25rem] lg:mx-0 lg:max-w-[24rem] xl:max-w-[26rem]">

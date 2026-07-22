@@ -3,7 +3,7 @@ export type ThemePreference = "light" | "dark";
 export const themeStorageKey = "garvit-theme";
 export const themeColorByTheme: Record<ThemePreference, string> = {
   light: "#f7f7f3",
-  dark: "#11120f",
+  dark: "#11130f",
 };
 
 export function getSystemTheme(): ThemePreference {

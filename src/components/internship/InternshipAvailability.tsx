@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import type { InternshipAvailabilityContent } from "../../types/internship.js";
+import type { InternshipAvailabilityContent } from "@/types/internship.js";
 import { AnimatedSection } from "../animation";
 import { ResumeDownloadButton } from "../resume";
-import { Button } from "../ui";
+import { Badge, Button } from "../ui";
 
 export type InternshipAvailabilityProps = {
   content: InternshipAvailabilityContent;
@@ -36,15 +36,13 @@ export function InternshipAvailability({
       className="section-divider"
       aria-labelledby="internship-availability-heading"
     >
-      <div className="rounded-lg border border-border bg-surface p-6 sm:p-8">
+      <div className="surface-card p-6 sm:p-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-label text-accent">
             {content.label}
           </p>
 
-          <p className="w-fit rounded-full border border-accent-border bg-accent-soft px-3 py-1 text-sm font-semibold text-accent">
-            {content.status}
-          </p>
+          <Badge tone="accent" className="text-sm">{content.status}</Badge>
         </div>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.75fr)]">
@@ -134,7 +132,7 @@ export function InternshipAvailability({
             </div>
 
             <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-              <div className="rounded-md border border-border bg-subtle px-3 py-2">
+              <div className="surface-muted rounded-control px-3 py-2">
                 <dt className="text-xs font-semibold uppercase text-muted">
                   Working preference
                 </dt>
@@ -142,7 +140,7 @@ export function InternshipAvailability({
                   {content.workingPreference}
                 </dd>
               </div>
-              <div className="rounded-md border border-border bg-subtle px-3 py-2">
+              <div className="surface-muted rounded-control px-3 py-2">
                 <dt className="text-xs font-semibold uppercase text-muted">
                   Availability
                 </dt>

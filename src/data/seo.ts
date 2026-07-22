@@ -1,5 +1,5 @@
-import { SITE_CONFIG } from "../constants/site.ts";
-import type { SeoInput } from "../utils/seo.ts";
+import { SITE_CONFIG } from "../data/site.ts";
+import type { SeoInput } from "../lib/seo.ts";
 
 export type StaticRouteSeo = SeoInput & {
   path: string;

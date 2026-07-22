@@ -1,7 +1,7 @@
 import type {
   ProjectLearning,
   ProjectLearningCategory,
-} from "../../types/project";
+} from "@/types/project";
 import { Badge, Card } from "../ui";
 import { CaseStudySection } from "./CaseStudySection";
 

@@ -1,0 +1,111 @@
+import { AnimatedSection } from "@/components/animation";
+import { SEO } from "@/components/seo";
+import { SocialIcon, SocialLinks } from "@/components/social-links";
+import { Badge, Button, Card, SectionHeading } from "@/components/ui";
+import { contactDetails, contactPageContent } from "@/data/contact";
+import { staticRouteSeo } from "@/data/seo";
+
+export default function Contact() {
+  return (
+    <>
+      <SEO {...staticRouteSeo.contact} />
+      <div className="space-y-12 sm:space-y-16">
+        <AnimatedSection aria-labelledby="contact-page-heading">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
+            <div className="min-w-0 max-w-3xl">
+              <p className="text-label text-accent">
+                {contactPageContent.introduction.label}
+              </p>
+
+              <h1
+                id="contact-page-heading"
+                className="mt-5 max-w-4xl text-display-2 text-primary"
+              >
+                {contactPageContent.introduction.heading}
+              </h1>
+
+              <div className="mt-6 max-w-3xl space-y-4 text-body-lg text-secondary">
+                <p>{contactPageContent.introduction.description}</p>
+                <p>{contactPageContent.introduction.supportingDescription}</p>
+              </div>
+
+              <div className="mt-8">
+                <h2 className="text-xl font-semibold text-primary">
+                  {contactPageContent.opportunities.heading}
+                </h2>
+
+                <ul
+                  aria-label={contactPageContent.opportunities.heading}
+                  className="mt-4 flex flex-wrap gap-2"
+                >
+                  {contactPageContent.opportunities.items.map((item) => (
+                    <li key={item} className="min-w-0 max-w-full">
+                      <Badge className="max-w-full whitespace-normal text-sm leading-5">
+                        {item}
+                      </Badge>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <Card className="p-5 sm:p-6">
+              <h2 className="text-xl font-semibold text-primary">
+                {contactPageContent.emailCard.title}
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-secondary">
+                {contactPageContent.emailCard.description}
+              </p>
+
+              <div className="mt-6">
+                <Button
+                  as="anchor"
+                  href={contactDetails.emailHref}
+                  className="w-full gap-2 sm:w-auto"
+                  aria-label={contactDetails.emailCtaAriaLabel}
+                >
+                  <SocialIcon icon="email" className="h-4 w-4" />
+                  <span>{contactDetails.emailCtaLabel}</span>
+                </Button>
+              </div>
+
+              <p className="mt-4 break-words text-sm font-medium leading-6 text-secondary">
+                {contactDetails.email}
+              </p>
+
+              <div className="mt-6 border-t border-border pt-5">
+                <h3 className="text-label text-accent">
+                  {contactPageContent.availability.heading}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-secondary">
+                  {contactPageContent.availability.description}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-secondary">
+                  {contactPageContent.responseNote}
+                </p>
+              </div>
+            </Card>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection
+          className="section-divider"
+          aria-labelledby="contact-social-heading"
+        >
+          <SectionHeading
+            id="contact-social-heading"
+            label={contactPageContent.socialSection.label}
+            title={contactPageContent.socialSection.title}
+            description={contactPageContent.socialSection.description}
+            className="mb-8"
+          />
+
+          <SocialLinks
+            links={contactPageContent.socialSection.links}
+            ariaLabel="Garvit Singh professional social links"
+          />
+        </AnimatedSection>
+      </div>
+    </>
+  );
+}

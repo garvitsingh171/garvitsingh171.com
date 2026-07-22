@@ -1,8 +1,9 @@
 import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router-dom";
-import { cardInteractionVariants } from "../../config/animations";
-import type { SocialLink } from "../../data/socialLinks";
-import { isEmailLink, isExternalWebLink } from "../../utils/links";
+import { cardInteractionVariants } from "@/config/animations";
+import type { SocialLink } from "@/data/socialLinks";
+import { cn } from "@/lib/cn";
+import { isEmailLink, isExternalWebLink } from "@/lib/links";
 import { SocialIcon } from "./SocialIcon";
 
 export type SocialLinksProps = {
@@ -37,11 +38,11 @@ function ExternalLinkIcon() {
 }
 
 function getLinkClasses() {
-  return [
-    "group flex min-h-16 items-center gap-3 rounded-card border border-border bg-surface p-4 transition duration-200",
+  return cn(
+    "surface-card group flex min-h-16 items-center gap-3 p-4 transition duration-200",
     "hover:border-border-strong hover:bg-surface-hover",
     "focus-visible:outline-focus",
-  ].join(" ");
+  );
 }
 
 const MotionLink = motion.create(Link);
@@ -77,6 +78,7 @@ function SocialLinkItem({ link }: { link: SocialLink }) {
         initial={false}
         animate={shouldAnimateInteraction ? "rest" : undefined}
         whileHover={shouldAnimateInteraction ? "hover" : undefined}
+        whileTap={shouldAnimateInteraction ? "tap" : undefined}
         whileFocus={shouldAnimateInteraction ? "focus" : undefined}
         variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
         className={getLinkClasses()}
@@ -94,6 +96,7 @@ function SocialLinkItem({ link }: { link: SocialLink }) {
         initial={false}
         animate={shouldAnimateInteraction ? "rest" : undefined}
         whileHover={shouldAnimateInteraction ? "hover" : undefined}
+        whileTap={shouldAnimateInteraction ? "tap" : undefined}
         whileFocus={shouldAnimateInteraction ? "focus" : undefined}
         variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
         className={getLinkClasses()}
@@ -110,6 +113,7 @@ function SocialLinkItem({ link }: { link: SocialLink }) {
       initial={false}
       animate={shouldAnimateInteraction ? "rest" : undefined}
       whileHover={shouldAnimateInteraction ? "hover" : undefined}
+      whileTap={shouldAnimateInteraction ? "tap" : undefined}
       whileFocus={shouldAnimateInteraction ? "focus" : undefined}
       variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
       className={getLinkClasses()}

@@ -1,4 +1,4 @@
-import type { ProjectScreenshot } from "../../types/project";
+import type { ProjectScreenshot } from "@/types/project";
 import { Badge } from "../ui";
 import { CaseStudySection } from "./CaseStudySection";
 

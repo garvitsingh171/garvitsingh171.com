@@ -1,4 +1,4 @@
-import type { ProjectChallenge } from "../../types/project";
+import type { ProjectChallenge } from "@/types/project";
 import { Card } from "../ui";
 
 export type ChallengeListProps = {

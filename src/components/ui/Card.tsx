@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { cardInteractionVariants } from "../../config/animations";
+import { cardInteractionVariants } from "@/config/animations";
 
 type CardProps = {
   title?: string;
@@ -28,6 +28,7 @@ export function Card({
       initial={false}
       animate={shouldAnimateInteraction ? interactionState : undefined}
       whileHover={shouldAnimateInteraction ? "hover" : undefined}
+      whileTap={shouldAnimateInteraction ? "tap" : undefined}
       variants={shouldAnimateInteraction ? cardInteractionVariants : undefined}
       onFocusCapture={() => {
         if (interactive) {
@@ -49,7 +50,7 @@ export function Card({
         }
       }}
       className={[
-        "rounded-card border border-border bg-surface p-6 shadow-subtle transition duration-200",
+        "surface-card p-6 transition duration-200",
         interactive ? "hover:border-border-strong" : "",
         className,
       ].join(" ")}

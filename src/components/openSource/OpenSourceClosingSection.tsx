@@ -1,7 +1,8 @@
+import { routes } from "@/routes/routes";
 import type {
   OpenSourceContent,
   OpenSourceLink,
-} from "../../types/openSource.js";
+} from "@/types/openSource.js";
 import { AnimatedSection } from "../animation";
 import { Button } from "../ui";
 import { ExternalLink } from "./ExternalLink";
@@ -23,7 +24,7 @@ export function OpenSourceClosingSection({
       className="section-divider"
       aria-labelledby="open-source-closing-heading"
     >
-      <div className="rounded-lg border border-border bg-surface p-6 sm:p-8">
+      <div className="surface-card p-6 sm:p-8">
         <h2
           id="open-source-closing-heading"
           className="max-w-3xl text-heading-1 text-primary"
@@ -52,7 +53,7 @@ export function OpenSourceClosingSection({
 
           <Button
             as="link"
-            to="/contact"
+            to={routes.contact}
             variant={hasItems(links) ? "outline" : "secondary"}
             className="w-full sm:w-auto"
           >

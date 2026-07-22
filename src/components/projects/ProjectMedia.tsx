@@ -1,8 +1,8 @@
 import { motion, useReducedMotion } from "motion/react";
-import { cardMediaVariants } from "../../config/animations";
-import type { ProjectImage } from "../../types/project";
-import { useResolvedTheme } from "../../hooks/useResolvedTheme";
-import { resolveProjectImageSrc } from "../../utils/projectImage";
+import { cardMediaVariants } from "@/config/animations";
+import type { ProjectImage } from "@/types/project";
+import { useResolvedTheme } from "@/hooks/useResolvedTheme";
+import { resolveProjectImageSrc } from "@/lib/projectImage";
 
 export type ProjectMediaProps = {
   image?: ProjectImage;

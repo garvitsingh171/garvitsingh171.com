@@ -6,9 +6,9 @@ import {
   HeroSection,
   OpenSourcePreviewSection,
   StatsSection,
-} from "../components/home";
-import { SEO } from "../components/seo";
-import { staticRouteSeo } from "../data/seo";
+} from "@/components/home";
+import { SEO } from "@/components/seo";
+import { staticRouteSeo } from "@/data/seo";
 
 export default function Home() {
   return (

@@ -1,4 +1,5 @@
-import { openSourceContent } from "../../data/openSource";
+import { routes } from "@/routes/routes";
+import { openSourceContent } from "@/data/openSource";
 import { AnimatedSection } from "../animation";
 import { Button, SectionHeading } from "../ui";
 
@@ -20,7 +21,7 @@ export function OpenSourcePreviewSection() {
           />
 
           <div className="mt-8">
-            <Button as="link" to="/open-source" variant="outline">
+            <Button as="link" to={routes.openSource} variant="outline">
               View Open Source Work
             </Button>
           </div>

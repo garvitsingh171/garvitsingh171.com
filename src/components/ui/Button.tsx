@@ -4,9 +4,17 @@ import type {
   ReactNode,
 } from "react";
 import { Link, type LinkProps } from "react-router-dom";
+import { cn } from "@/lib/cn";
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "project";
-type ButtonSize = "sm" | "md" | "lg";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "ghost"
+  | "link"
+  | "destructive"
+  | "project";
+type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 type SharedButtonProps = {
   variant?: ButtonVariant;
@@ -43,15 +51,20 @@ const variantClasses: Record<ButtonVariant, string> = {
   outline:
     "border-2 border-button-outline bg-surface text-button-outline-foreground shadow-subtle hover:border-button-outline-hover hover:bg-button-outline-hover hover:text-button-outline-hover-foreground active:border-button-primary-active active:bg-button-primary-active",
   ghost:
-    "border border-border bg-button-ghost text-button-ghost-foreground hover:border-button-outline hover:bg-button-ghost-hover hover:text-button-ghost-hover-foreground",
+    "border border-transparent bg-button-ghost text-button-ghost-foreground hover:border-border hover:bg-button-ghost-hover hover:text-button-ghost-hover-foreground",
+  link:
+    "border border-transparent bg-transparent px-0 text-accent hover:text-accent-hover active:text-accent-active",
+  destructive:
+    "border-2 border-danger bg-danger text-primary-foreground shadow-elevated hover:border-danger hover:bg-danger active:border-danger active:bg-danger",
   project:
-    "border-2 border-[#171817] bg-[#171817] text-[#f7f7f3] shadow-elevated hover:border-[#2a2c28] hover:bg-[#2a2c28] active:border-[#11120f] active:bg-[#11120f]",
+    "border-2 border-button-secondary bg-button-secondary text-button-secondary-foreground shadow-elevated hover:border-button-secondary-hover hover:bg-button-secondary-hover active:border-button-secondary-active active:bg-button-secondary-active",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
   sm: "min-h-9 px-3.5 py-1.5 text-sm",
   md: "min-h-11 px-4 py-2 text-sm",
   lg: "min-h-12 px-5 py-2.5 text-base",
+  icon: "h-11 w-11 p-0 text-sm",
 };
 
 function getButtonClasses(
@@ -59,15 +72,14 @@ function getButtonClasses(
   size: ButtonSize,
   className: string,
 ) {
-  return [
-    "inline-flex items-center justify-center gap-2 rounded-control border font-semibold transition duration-200",
-    "motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0",
+  return cn(
+    "button-motion inline-flex items-center justify-center gap-2 rounded-control border font-semibold",
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:hover:translate-y-0",
     "disabled:cursor-not-allowed disabled:opacity-60",
-    variantClasses[variant],
     sizeClasses[size],
+    variantClasses[variant],
     className,
-  ].join(" ");
+  );
 }
 
 export function Button({

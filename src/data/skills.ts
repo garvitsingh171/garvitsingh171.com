@@ -1,4 +1,4 @@
-import type { Skill, SkillCategory } from "../types/skill.js";
+import type { Skill, SkillCategory } from "@/types/skill.js";
 
 export const skillCategories: SkillCategory[] = [
   {

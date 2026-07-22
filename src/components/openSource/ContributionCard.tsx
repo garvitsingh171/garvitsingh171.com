@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { OpenSourceContribution } from "../../types/openSource.js";
+import type { OpenSourceContribution } from "@/types/openSource.js";
 import { TechnologyList } from "../projects";
 import { Card } from "../ui";
 import { ContributionMetadata } from "./ContributionMetadata";
@@ -102,7 +102,7 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
           ) : null}
         </div>
 
-        <details className="group mt-6 rounded-md border border-border bg-subtle">
+        <details className="surface-muted group mt-6 rounded-control">
           <summary
             className={[
               "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-md px-4 py-3 text-sm font-semibold text-primary transition-colors",

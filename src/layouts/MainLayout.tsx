@@ -1,12 +1,19 @@
-import { Outlet } from "react-router-dom";
-import { Footer, Navbar } from "../components/layout";
+import { AnimatePresence } from "motion/react";
+import { Outlet, useLocation } from "react-router-dom";
+import { PageTransition, RouteScrollManager } from "@/components/animation";
+import { Footer, Navbar } from "@/components/layout";
 
 export default function MainLayout() {
+  const location = useLocation();
+  const routeKey = `${location.pathname}${location.search}`;
+
   return (
-    <div className="flex min-h-screen flex-col bg-page text-primary">
+    <div className="theme-transition flex min-h-screen flex-col bg-page text-primary">
+      <RouteScrollManager />
+
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-50 focus:rounded-control focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-inverse-text focus:outline-none"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-50 focus:rounded-control focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-foreground focus:outline-none"
       >
         Skip to main content
       </a>
@@ -15,9 +22,14 @@ export default function MainLayout() {
 
       <main
         id="main-content"
-        className="mx-auto w-full max-w-[var(--container-full)] flex-1 px-5 py-12 sm:px-6 sm:py-16 md:px-8 lg:px-12 lg:py-20 xl:px-16"
+        tabIndex={-1}
+        className="mx-auto w-full max-w-[var(--container-full)] flex-1 px-5 py-12 focus:outline-none sm:px-6 sm:py-16 md:px-8 lg:px-12 lg:py-20 xl:px-16"
       >
-        <Outlet />
+        <AnimatePresence mode="wait" initial={false}>
+          <PageTransition key={routeKey}>
+            <Outlet />
+          </PageTransition>
+        </AnimatePresence>
       </main>
 
       <Footer />

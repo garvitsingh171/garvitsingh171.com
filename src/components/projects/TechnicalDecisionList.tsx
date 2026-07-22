@@ -1,4 +1,4 @@
-import type { ProjectTechnicalDecision } from "../../types/project";
+import type { ProjectTechnicalDecision } from "@/types/project";
 import { Card } from "../ui";
 
 export type TechnicalDecisionListProps = {

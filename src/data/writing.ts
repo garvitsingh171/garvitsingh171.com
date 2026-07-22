@@ -2,7 +2,7 @@ import type {
   WritingArticle,
   WritingCategory,
   WritingCategoryId,
-} from "../types/writing.js";
+} from "@/types/writing.js";
 
 export const writingCategories: WritingCategory[] = [
   {
@@ -92,7 +92,7 @@ export const writingArticles: WritingArticle[] = [
           id: "application-structure",
           heading: "How I Structured the Application",
           paragraphs: [
-            "The actual request path is straightforward: Express registers route modules in `src/app.js`, routes attach validation and auth middleware, controllers shape the HTTP response, services call Mongoose operations, models define MongoDB documents, and `src/server.js` connects to MongoDB before listening on the configured port.",
+            "The actual request path is straightforward: Express registers route modules in `src.js`, routes attach validation and auth middleware, controllers shape the HTTP response, services call Mongoose operations, models define MongoDB documents, and `src/server.js` connects to MongoDB before listening on the configured port.",
             "That separation made it easier to add multiple resources without putting everything in one server file. Auth, users, songs, artists, albums, playlists, analytics, validation, rate limiting, errors, Swagger configuration, and cursor helpers each had a place. The structure is still not a perfect enterprise system. Some service methods are thin wrappers around Mongoose, and song cursor pagination lives in the controller. Even that taught me how architecture evolves from real pressure instead of from a diagram alone.",
           ],
         },

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/cn";
 import { Button } from "../ui";
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
@@ -16,7 +17,7 @@ function ExternalLinkIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-3.5 w-3.5 shrink-0"
+      className="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5"
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -74,11 +75,11 @@ export function ExternalLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={ariaLabel}
-      className={[
-        "inline-flex min-h-10 items-center gap-1.5 rounded-md text-sm font-semibold text-accent transition-colors hover:text-accent",
+      className={cn(
+        "group inline-flex min-h-10 items-center gap-1.5 rounded-md text-sm font-semibold text-accent transition-colors hover:text-accent-hover",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
         className,
-      ].join(" ")}
+      )}
     >
       {content}
     </a>

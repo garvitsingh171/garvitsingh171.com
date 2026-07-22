@@ -1,4 +1,4 @@
-import type { ProjectType } from "../../types/project";
+import type { ProjectType } from "@/types/project";
 import { Button } from "../ui";
 
 export type ProjectFilter = "all" | ProjectType;

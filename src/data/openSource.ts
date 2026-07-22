@@ -1,4 +1,4 @@
-import type { OpenSourceContent } from "../types/openSource.js";
+import type { OpenSourceContent } from "@/types/openSource.js";
 
 export const openSourceContent: OpenSourceContent = {
   introduction: {
