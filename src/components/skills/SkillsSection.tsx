@@ -47,9 +47,16 @@ export function SkillsSection() {
                 ) : null}
               </div>
 
-              <StaggeredReveal className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <StaggeredReveal
+                as="ul"
+                className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+              >
                 {categorySkills.map((skill) => (
-                  <StaggeredRevealItem key={skill.id} className="h-full">
+                  <StaggeredRevealItem
+                    key={skill.id}
+                    as="li"
+                    className="h-full"
+                  >
                     <SkillCard skill={skill} />
                   </StaggeredRevealItem>
                 ))}

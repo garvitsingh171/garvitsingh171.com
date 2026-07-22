@@ -42,9 +42,16 @@ export default function Projects() {
 
         <div className="mt-10">
           {filteredProjects.length > 0 ? (
-            <StaggeredReveal className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <StaggeredReveal
+              as="ul"
+              className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+            >
               {filteredProjects.map((project) => (
-                <StaggeredRevealItem key={project.slug} className="h-full">
+                <StaggeredRevealItem
+                  key={project.slug}
+                  as="li"
+                  className="h-full"
+                >
                   <ProjectCard project={project} />
                 </StaggeredRevealItem>
               ))}

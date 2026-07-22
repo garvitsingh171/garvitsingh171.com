@@ -10,21 +10,26 @@ import { cn } from "@/lib/cn";
 type StaggeredRevealProps = {
   children: ReactNode;
   className?: string;
+  as?: "div" | "ul" | "ol";
 };
 
 type StaggeredRevealItemProps = {
   children: ReactNode;
   className?: string;
+  as?: "div" | "li";
 };
 
 export function StaggeredReveal({
   children,
   className = "",
+  as = "div",
 }: StaggeredRevealProps) {
   const shouldReduceMotion = useReducedMotion();
+  const Component =
+    as === "ul" ? motion.ul : as === "ol" ? motion.ol : motion.div;
 
   return (
-    <motion.div
+    <Component
       initial={shouldReduceMotion ? false : "hidden"}
       whileInView={shouldReduceMotion ? undefined : "visible"}
       viewport={staggerViewport}
@@ -32,22 +37,24 @@ export function StaggeredReveal({
       className={className}
     >
       {children}
-    </motion.div>
+    </Component>
   );
 }
 
 export function StaggeredRevealItem({
   children,
   className = "",
+  as = "div",
 }: StaggeredRevealItemProps) {
   const shouldReduceMotion = useReducedMotion();
+  const Component = as === "li" ? motion.li : motion.div;
 
   return (
-    <motion.div
+    <Component
       variants={shouldReduceMotion ? undefined : staggerItemVariants}
       className={cn("min-w-0", className)}
     >
       {children}
-    </motion.div>
+    </Component>
   );
 }

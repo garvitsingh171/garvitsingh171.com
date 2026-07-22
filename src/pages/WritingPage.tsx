@@ -141,15 +141,16 @@ export default function Writing() {
               headingLevel="h3"
             />
           ) : hasGridArticles ? (
-            <div className="grid gap-6 md:grid-cols-2">
+            <ul className="grid gap-6 md:grid-cols-2">
               {visibleGridArticles.map((article) => (
-                <WritingArticleCard
-                  key={article.slug}
-                  article={article}
-                  category={resolveWritingCategory(article.category)}
-                />
+                <li key={article.slug} className="min-w-0">
+                  <WritingArticleCard
+                    article={article}
+                    category={resolveWritingCategory(article.category)}
+                  />
+                </li>
               ))}
-            </div>
+            </ul>
           ) : !hasFilteredArticles ? (
             <EmptyState
               title="No articles are available in this category yet"

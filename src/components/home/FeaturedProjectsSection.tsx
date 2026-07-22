@@ -39,9 +39,13 @@ export function FeaturedProjectsSection() {
         ) : null}
 
         {supportingProjects.length > 0 ? (
-          <StaggeredReveal className="grid gap-6 lg:grid-cols-2">
+          <StaggeredReveal as="ul" className="grid gap-6 lg:grid-cols-2">
             {supportingProjects.map((project) => (
-              <StaggeredRevealItem key={project.slug} className="h-full">
+              <StaggeredRevealItem
+                key={project.slug}
+                as="li"
+                className="h-full"
+              >
                 <ProjectCard project={project} />
               </StaggeredRevealItem>
             ))}

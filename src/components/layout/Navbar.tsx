@@ -11,7 +11,7 @@ import { cn } from "@/lib/cn";
 import { Button, ThemeToggle } from "../ui";
 import { MobileNavigation } from "./MobileNavigation";
 
-const mobileNavigationId = "primary-mobile-navigation";
+const mobileNavigationId = "mobile-navigation";
 
 function getDesktopLinkClasses({ isActive }: { isActive: boolean }) {
   return cn(
@@ -109,6 +109,13 @@ export function Navbar() {
       return;
     }
 
+    const animationFrame = window.requestAnimationFrame(() => {
+      const firstMenuLink = document.querySelector<HTMLAnchorElement>(
+        `#${mobileNavigationId} a[href]`,
+      );
+      firstMenuLink?.focus();
+    });
+
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key !== "Escape") {
         return;
@@ -121,6 +128,7 @@ export function Navbar() {
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      window.cancelAnimationFrame(animationFrame);
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isMenuOpen]);
@@ -172,19 +180,16 @@ export function Navbar() {
         </NavLink>
 
         <div className="hidden items-center gap-6 lg:flex">
-          <nav
-            aria-label="Primary navigation"
-            className="flex items-center gap-6"
-          >
-            {primaryNavigation.map((link) => (
-              <NavLink
-                key={link.id}
-                to={link.href}
-                className={getDesktopLinkClasses}
-              >
-                {link.label}
-              </NavLink>
-            ))}
+          <nav aria-label="Primary navigation">
+            <ul className="flex items-center gap-6">
+              {primaryNavigation.map((link) => (
+                <li key={link.id}>
+                  <NavLink to={link.href} className={getDesktopLinkClasses}>
+                    {link.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
           </nav>
 
           <div className="flex items-center gap-3">

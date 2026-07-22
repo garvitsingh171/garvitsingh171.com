@@ -2,29 +2,39 @@ import { useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { cardInteractionVariants } from "@/config/animations";
 
+type CardElement = "article" | "div" | "aside";
+
 type CardProps = {
+  as?: CardElement;
   title?: string;
   description?: string;
   children?: ReactNode;
   className?: string;
   interactive?: boolean;
+  id?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
 };
 
 export function Card({
+  as = "article",
   title,
   description,
   children,
   className = "",
   interactive = false,
+  ...props
 }: CardProps) {
   const hasHeaderContent = Boolean(title || description);
   const shouldReduceMotion = useReducedMotion();
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const shouldAnimateInteraction = interactive && !shouldReduceMotion;
   const interactionState = hasFocusWithin ? "focus" : "rest";
+  const Component =
+    as === "aside" ? motion.aside : as === "div" ? motion.div : motion.article;
 
   return (
-    <motion.article
+    <Component
       initial={false}
       animate={shouldAnimateInteraction ? interactionState : undefined}
       whileHover={shouldAnimateInteraction ? "hover" : undefined}
@@ -54,6 +64,7 @@ export function Card({
         interactive ? "hover:border-border-strong" : "",
         className,
       ].join(" ")}
+      {...props}
     >
       {title ? (
         <h3 className="text-xl font-semibold text-primary">{title}</h3>
@@ -66,6 +77,6 @@ export function Card({
       {children ? (
         <div className={hasHeaderContent ? "mt-5" : ""}>{children}</div>
       ) : null}
-    </motion.article>
+    </Component>
   );
 }

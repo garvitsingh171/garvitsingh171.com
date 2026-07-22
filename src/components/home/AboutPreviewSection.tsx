@@ -21,9 +21,9 @@ export function AboutPreviewSection() {
             {aboutContent.introduction.paragraphs[1]}
           </p>
 
-          <div className="grid gap-4">
+          <ul className="grid gap-4">
             {principles.map((principle) => (
-              <div
+              <li
                 key={principle.title}
                 className="border-l border-border-strong pl-4"
               >
@@ -33,9 +33,9 @@ export function AboutPreviewSection() {
                 <p className="mt-2 text-body-sm text-secondary">
                   {principle.description}
                 </p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <Button as="link" to={routes.about} variant="outline">
             Read About Garvit

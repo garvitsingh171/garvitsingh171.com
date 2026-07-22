@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { routes } from "@/routes/routes";
 import type { Project } from "@/types/project";
 import { Card } from "../ui";
 import { ProjectActions } from "./ProjectActions";
@@ -34,7 +36,14 @@ export function FeaturedProject({
         <div className="flex min-w-0 flex-col p-6 sm:p-8 lg:p-10">
           <ProjectMeta project={project} />
 
-          <h3 className="mt-5 text-heading-2 text-primary">{project.title}</h3>
+          <h3 className="mt-5 text-heading-2 text-primary">
+            <Link
+              to={routes.project(project.slug)}
+              className="rounded-sm transition hover:text-accent focus-visible:outline-focus"
+            >
+              {project.title}
+            </Link>
+          </h3>
 
           <p className="mt-4 text-body-md text-secondary">{project.summary}</p>
 
