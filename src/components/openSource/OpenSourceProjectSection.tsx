@@ -88,17 +88,18 @@ export function OpenSourceProjectSection({
             <h4 className="text-label text-accent">
               Project links
             </h4>
-            <div className="mt-4 flex flex-col items-start gap-2">
+            <ul className="mt-4 flex flex-col items-start gap-2">
               {project.links.map((link) => (
-                <ExternalLink
-                  key={link.url}
-                  href={link.url}
-                  ariaLabel={`${link.label} in a new tab`}
-                >
-                  {link.label}
-                </ExternalLink>
+                <li key={link.url}>
+                  <ExternalLink
+                    href={link.url}
+                    ariaLabel={`${link.label} in a new tab`}
+                  >
+                    {link.label}
+                  </ExternalLink>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         ) : null}
       </header>

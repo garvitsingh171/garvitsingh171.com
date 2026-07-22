@@ -17,8 +17,12 @@ export function EducationSection({ content }: EducationSectionProps) {
   ];
 
   return (
-    <AnimatedSection className="section-divider">
+    <AnimatedSection
+      className="section-divider"
+      aria-labelledby="about-education-heading"
+    >
       <SectionHeading
+        id="about-education-heading"
         label="Background"
         title={content.heading}
         description={content.description}

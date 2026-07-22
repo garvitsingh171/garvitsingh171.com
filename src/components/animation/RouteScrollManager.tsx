@@ -41,6 +41,13 @@ function focusElement(element: HTMLElement) {
   }
 }
 
+function getRouteFocusTarget() {
+  return (
+    document.querySelector<HTMLElement>("main h1") ??
+    document.getElementById("main-content")
+  );
+}
+
 export function RouteScrollManager() {
   const location = useLocation();
   const hasHandledInitialRoute = useRef(false);
@@ -70,7 +77,10 @@ export function RouteScrollManager() {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
       if (shouldMoveFocus) {
-        document.getElementById("main-content")?.focus({ preventScroll: true });
+        const focusTarget = getRouteFocusTarget();
+        if (focusTarget) {
+          focusElement(focusTarget);
+        }
       }
 
       return () => undefined;
@@ -83,9 +93,10 @@ export function RouteScrollManager() {
         window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
         if (shouldMoveFocus) {
-          document.getElementById("main-content")?.focus({
-            preventScroll: true,
-          });
+          const focusTarget = getRouteFocusTarget();
+          if (focusTarget) {
+            focusElement(focusTarget);
+          }
         }
 
         return;

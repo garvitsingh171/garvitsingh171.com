@@ -177,24 +177,25 @@ export default function ProjectDetail() {
           />
 
           {projectLinks.length > 0 ? (
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <ul className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {projectLinks.map((link) => (
-                <Button
-                  key={link.href}
-                  as="anchor"
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant={
-                    link.label === "View Live Project" ? "primary" : "outline"
-                  }
-                  className="w-full sm:w-auto"
-                  aria-label={link.ariaLabel}
-                >
-                  {link.label}
-                </Button>
+                <li key={link.href} className="min-w-0">
+                  <Button
+                    as="anchor"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant={
+                      link.label === "View Live Project" ? "primary" : "outline"
+                    }
+                    className="w-full sm:w-auto"
+                    aria-label={link.ariaLabel}
+                  >
+                    {link.label}
+                  </Button>
+                </li>
               ))}
-            </div>
+            </ul>
           ) : null}
         </div>
 

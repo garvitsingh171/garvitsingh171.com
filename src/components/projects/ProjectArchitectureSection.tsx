@@ -106,42 +106,44 @@ export function ProjectArchitectureSection({
         ) : null}
 
         {visibleLayers.length > 0 ? (
-          <div className="grid gap-4 md:grid-cols-2">
+          <ul className="grid gap-4 md:grid-cols-2">
             {visibleLayers.map((layer) => (
-              <Card key={layer.id} className="h-full p-5">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <h3 className="text-lg font-semibold text-primary">
-                    {layer.title}
-                  </h3>
+              <li key={layer.id} className="min-w-0">
+                <Card className="h-full p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <h3 className="text-lg font-semibold text-primary">
+                      {layer.title}
+                    </h3>
 
-                  {layer.kind ? (
-                    <Badge>
-                      {layerKindLabels[layer.kind]}
-                    </Badge>
+                    {layer.kind ? (
+                      <Badge>
+                        {layerKindLabels[layer.kind]}
+                      </Badge>
+                    ) : null}
+                  </div>
+
+                  <p className="mt-3 text-body-sm text-secondary">
+                    {layer.description}
+                  </p>
+
+                  {layer.technologies?.length ? (
+                    <ul
+                      aria-label={`${layer.title} technologies`}
+                      className="mt-4 flex flex-wrap gap-2"
+                    >
+                      {layer.technologies.map((technology) => (
+                        <li key={technology}>
+                          <Badge className="rounded-md font-medium normal-case">
+                            {technology}
+                          </Badge>
+                        </li>
+                      ))}
+                    </ul>
                   ) : null}
-                </div>
-
-                <p className="mt-3 text-body-sm text-secondary">
-                  {layer.description}
-                </p>
-
-                {layer.technologies?.length ? (
-                  <ul
-                    aria-label={`${layer.title} technologies`}
-                    className="mt-4 flex flex-wrap gap-2"
-                  >
-                    {layer.technologies.map((technology) => (
-                      <li key={technology}>
-                        <Badge className="rounded-md font-medium normal-case">
-                          {technology}
-                        </Badge>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </Card>
+                </Card>
+              </li>
             ))}
-          </div>
+          </ul>
         ) : null}
 
         {visibleConnections.length > 0 ? (

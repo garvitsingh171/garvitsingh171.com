@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { routes } from "@/routes/routes";
 import type { Project } from "@/types/project";
 import { Card } from "../ui";
 import { ProjectActions } from "./ProjectActions";
@@ -28,7 +30,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <ProjectMeta project={project} compact />
 
         <h3 className="mt-4 min-w-0 text-2xl font-semibold text-primary">
-          {project.title}
+          <Link
+            to={routes.project(project.slug)}
+            className="rounded-sm transition hover:text-accent focus-visible:outline-focus"
+          >
+            {project.title}
+          </Link>
         </h3>
 
         <p className="mt-3 text-body-sm text-secondary">
