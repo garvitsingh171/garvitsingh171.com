@@ -29,7 +29,7 @@ export function FeaturedProjectsSection() {
           variant="outline"
           className="w-full sm:w-auto"
         >
-          View All Projects
+          Explore All Projects
         </Button>
       </div>
 

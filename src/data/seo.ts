@@ -5,52 +5,81 @@ export type StaticRouteSeo = SeoInput & {
   path: string;
 };
 
+const personEntity = {
+  "@type": "Person",
+  name: SITE_CONFIG.name,
+  url: `${SITE_CONFIG.url}/`,
+  jobTitle: "Software Engineering Student and Full-Stack Developer",
+  sameAs: [
+    "https://github.com/garvitsingh171",
+    "https://linkedin.com/in/garvitsingh171",
+  ],
+} as const;
+
 export const staticRouteSeo = {
   home: {
     path: "/",
     title: SITE_CONFIG.defaultTitle,
     description:
-      "Portfolio of Garvit Singh, a Software Product Engineering student building practical backend and full-stack products with modern web technologies.",
+      "Garvit Singh is a software engineering student and backend-focused full-stack developer sharing projects, open-source work, and engineering notes.",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          name: SITE_CONFIG.name,
+          url: `${SITE_CONFIG.url}/`,
+        },
+        personEntity,
+      ],
+    },
   },
   about: {
     path: "/about",
-    title: "About Garvit Singh | Software Product Engineering",
+    title: "About Garvit Singh — Software Engineering Student",
     description:
-      "Learn about Garvit Singh's Software Product Engineering journey, education, development approach, current learning, and product-building experience.",
+      "Learn about Garvit Singh's background, education, engineering interests, current learning, skills, and approach to building software products.",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      name: "About Garvit Singh",
+      url: `${SITE_CONFIG.url}/about`,
+      mainEntity: personEntity,
+    },
   },
   projects: {
     path: "/projects",
-    title: "Software Projects and Case Studies | Garvit Singh",
+    title: "Software Engineering Projects — Garvit Singh",
     description:
-      "Explore backend and full-stack projects by Garvit Singh, including product decisions, architecture, implementation challenges, and technical outcomes.",
+      "Explore software projects by Garvit Singh, including backend APIs, full-stack applications, architecture notes, and engineering case studies.",
   },
   openSource: {
     path: "/open-source",
-    title: "Open Source Contributions | Garvit Singh",
+    title: "Open Source Contributions — Garvit Singh",
     description:
-      "Review Garvit Singh's open-source work, merged contributions, engineering collaboration, and experience contributing to maintained software projects.",
+      "Review Garvit Singh's open-source contributions, pull requests, collaboration experience, and lessons from maintained software projects.",
   },
   writing: {
     path: "/writing",
-    title: "Writing on Software Engineering | Garvit Singh",
+    title: "Software Engineering Writing — Garvit Singh",
     description:
-      "Read Garvit Singh's notes on software projects, backend engineering, open-source collaboration, DSA, and engineering growth.",
+      "Read Garvit Singh's notes on software projects, backend engineering, open-source collaboration, DSA practice, and engineering growth.",
   },
   experience: {
     path: "/experience",
-    title: "Experience | Garvit Singh",
+    title: "Experience and Open-Source Contributions — Garvit Singh",
     description:
-      "Review Garvit Singh's work history page for software engineering experience, achievements, and professional updates as the portfolio grows.",
+      "Review Garvit Singh's software engineering experience, open-source work, contributions, achievements, and professional updates.",
   },
   resume: {
     path: SITE_CONFIG.resumePath,
-    title: "Resume | Garvit Singh",
+    title: "Resume — Garvit Singh",
     description:
       "View Garvit Singh's education, technical skills, software projects, open-source contributions, achievements, and internship-focused resume.",
   },
   contact: {
     path: "/contact",
-    title: "Contact Garvit Singh | Backend & Full-Stack Developer",
+    title: "Contact Garvit Singh — Software Developer",
     description:
       "Contact Garvit Singh about remote software engineering internships, backend and full-stack projects, open-source work, and practical software products.",
   },

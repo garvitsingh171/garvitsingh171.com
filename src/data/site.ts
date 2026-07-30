@@ -7,11 +7,11 @@ export const SITE_CONFIG = {
   description:
     "Portfolio of Garvit Singh, a backend and full-stack developer building practical software products with React, Node.js, TypeScript, PostgreSQL, and modern web technologies.",
   defaultDescription:
-    "Portfolio of Garvit Singh, a backend and full-stack developer building practical software products with React, Node.js, TypeScript, PostgreSQL, and modern web technologies.",
-  url: "https://garvitsingh171.com",
-  domain: "garvitsingh171.com",
+    "Garvit Singh is a software engineering student and full-stack developer building backend-focused products with React, Node.js, TypeScript, PostgreSQL, and MongoDB.",
+  url: "https://www.garvitsingh171.com",
+  domain: "www.garvitsingh171.com",
   locale: "en_IN",
-  defaultOgImage: "/og/default-og.png",
+  defaultOgImage: "/og/garvit-singh.png",
   twitterCard: "summary_large_image",
   resumePath: "/resume",
   email: "garvitsingh171@gmail.com",

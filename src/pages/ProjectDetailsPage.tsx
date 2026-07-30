@@ -64,7 +64,7 @@ export default function ProjectDetail() {
           className="my-4 sm:my-8"
           primaryAction={{
             type: "link",
-            label: "View projects",
+            label: "Explore software projects",
             to: routes.projects,
           }}
           secondaryAction={{
@@ -95,14 +95,14 @@ export default function ProjectDetail() {
   const projectLinks = [
     project.liveUrl
       ? {
-          label: "View Live Project",
+          label: "Open Live Application",
           href: project.liveUrl,
           ariaLabel: `View the live ${project.title} project in a new tab`,
         }
       : null,
     project.githubUrl
       ? {
-          label: "View Repository",
+          label: "View Repository on GitHub",
           href: project.githubUrl,
           ariaLabel: `View ${project.title} repository on GitHub in a new tab`,
         }
@@ -186,7 +186,9 @@ export default function ProjectDetail() {
                     target="_blank"
                     rel="noopener noreferrer"
                     variant={
-                      link.label === "View Live Project" ? "primary" : "outline"
+                      link.label === "Open Live Application"
+                        ? "primary"
+                        : "outline"
                     }
                     className="w-full sm:w-auto"
                     aria-label={link.ariaLabel}
@@ -205,6 +207,9 @@ export default function ProjectDetail() {
               <img
                 src={projectImageSrc}
                 alt={project.image.alt}
+                width={1448}
+                height={1086}
+                decoding="async"
                 className="h-full w-full object-contain object-center"
               />
             </div>

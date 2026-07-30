@@ -11,13 +11,16 @@ export type SeoInput = {
   image?: SeoImage;
   type?: "website" | "article";
   noIndex?: boolean;
+  structuredData?: StructuredData | StructuredData[];
 };
+
+export type StructuredData = Record<string, unknown>;
 
 export type ResolvedSeoMetadata = {
   title: string;
   description: string;
   canonicalUrl?: string;
-  robots: "index, follow" | "noindex, nofollow";
+  robots: "index, follow" | "noindex, follow";
   openGraph: {
     title: string;
     description: string;
@@ -33,6 +36,7 @@ export type ResolvedSeoMetadata = {
     description: string;
     image: string;
   };
+  structuredData: StructuredData[];
 };
 
 const absoluteUrlPattern = /^https?:\/\//i;
@@ -99,8 +103,13 @@ export function resolveSeoMetadata(input: SeoInput = {}): ResolvedSeoMetadata {
       ? undefined
       : buildCanonicalUrl(input.canonicalUrl ?? input.path ?? "/");
   const image = buildAbsoluteUrl(input.image ?? SITE_CONFIG.defaultOgImage);
-  const robots = input.noIndex ? "noindex, nofollow" : "index, follow";
+  const robots = input.noIndex ? "noindex, follow" : "index, follow";
   const url = canonicalUrl ?? buildCanonicalUrl("/");
+  const structuredData = Array.isArray(input.structuredData)
+    ? input.structuredData
+    : input.structuredData
+      ? [input.structuredData]
+      : [];
 
   return {
     title,
@@ -122,6 +131,7 @@ export function resolveSeoMetadata(input: SeoInput = {}): ResolvedSeoMetadata {
       description,
       image,
     },
+    structuredData,
   };
 }
 
@@ -154,6 +164,11 @@ export function renderSeoTags(metadata: ResolvedSeoMetadata) {
     ? `    <link rel="canonical" href="${escapeHtml(metadata.canonicalUrl)}" data-seo-managed="true" />\n`
     : "";
 
+  const structuredDataTags = metadata.structuredData.map(
+    (data, index) =>
+      `    <script type="application/ld+json" data-seo-managed="true" data-seo-json-ld="${index}">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`,
+  );
+
   return [
     `    <title data-seo-managed="true">${escapeHtml(metadata.title)}</title>`,
     `    <meta name="description" content="${escapeHtml(metadata.description)}" data-seo-managed="true" />`,
@@ -170,6 +185,7 @@ export function renderSeoTags(metadata: ResolvedSeoMetadata) {
     `    <meta name="twitter:title" content="${escapeHtml(metadata.twitter.title)}" data-seo-managed="true" />`,
     `    <meta name="twitter:description" content="${escapeHtml(metadata.twitter.description)}" data-seo-managed="true" />`,
     `    <meta name="twitter:image" content="${escapeHtml(metadata.twitter.image)}" data-seo-managed="true" />`,
+    ...structuredDataTags,
   ]
     .filter(Boolean)
     .join("\n");
