@@ -6,6 +6,10 @@ This is the official personal website and portfolio of Garvit Singh.
 
 The website showcases my projects, open-source contributions, writing, resume, and software engineering journey.
 
+## Live Website
+
+[garvitsingh171.com](https://www.garvitsingh171.com)
+
 ## Tech Stack
 
 - React
@@ -49,11 +53,26 @@ npm run dev
 
 ## SEO Metadata
 
-Site-wide metadata defaults live in `src/data/site.ts`. Page metadata for
-indexable static routes lives in `src/data/seo.ts`, and each page renders it
-through the reusable `SEO` component. Project case-study metadata is derived
-from `src/data/projects.ts`; a project can optionally provide `seo.title`,
-`seo.description`, or `seo.image` when the derived values need an override.
+The canonical production URL is `https://www.garvitsingh171.com`.
+
+Site-wide metadata defaults live in `src/data/site.ts`. Page metadata and
+structured data for indexable static routes lives in `src/data/seo.ts`, and
+each page renders it through the reusable `SEO` component. Project case-study
+metadata is derived from `src/data/projects.ts`; a project can optionally
+provide `seo.title`, `seo.description`, or `seo.image` when the derived values
+need an override.
+
+When adding a new public route, add the route constant and React Router entry,
+then add its title, description, canonical path, and any supported structured
+data in `src/data/seo.ts`. Add the public canonical URL to `public/sitemap.xml`
+only when the route is complete, public, canonical, and indexable. The
+production build also regenerates `dist/sitemap.xml` from the route metadata
+and project slugs.
+
+The default social preview image is stored at `public/og/garvit-singh.png`.
+External search setup, including Google Search Console, Bing Webmaster Tools,
+domain verification, and sitemap submission, is handled outside this
+repository.
 
 The production build runs `scripts/generate-static-seo.mjs` after Vite. That
 script creates route-specific static HTML files and `dist/sitemap.xml` from the

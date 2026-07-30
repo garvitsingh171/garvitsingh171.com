@@ -52,9 +52,9 @@ export const internshipAvailability: InternshipAvailabilityContent = {
   resumeCtaLabel: "Download Resume",
   supportingLinks: [
     {
-      label: "View Projects",
+      label: "Explore Software Projects",
       href: "/projects",
-      ariaLabel: "View Garvit Singh's projects",
+      ariaLabel: "Explore Garvit Singh's software projects",
     },
     {
       label: "GitHub",

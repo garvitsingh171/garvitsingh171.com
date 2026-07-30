@@ -37,11 +37,11 @@ export const heroContent: HeroContent = {
   position:
     "Currently focused on backend development, full-stack projects, open source, and practical software engineering.",
   primaryCta: {
-    label: "View Selected Work",
+    label: "Explore Software Projects",
     href: "/projects",
   },
   secondaryCta: {
-    label: "View Resume",
+    label: "Read Resume",
     href: "/resume",
   },
 };

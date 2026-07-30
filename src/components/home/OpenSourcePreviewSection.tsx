@@ -22,7 +22,7 @@ export function OpenSourcePreviewSection() {
 
           <div className="mt-8">
             <Button as="link" to={routes.openSource} variant="outline">
-              View Open Source Work
+              Read About Open Source Work
             </Button>
           </div>
         </div>

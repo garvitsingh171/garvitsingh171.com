@@ -70,6 +70,21 @@ function applyMetadata(metadata: ResolvedSeoMetadata) {
   setMeta("name", "twitter:title", metadata.twitter.title);
   setMeta("name", "twitter:description", metadata.twitter.description);
   setMeta("name", "twitter:image", metadata.twitter.image);
+
+  document.head
+    .querySelectorAll<HTMLScriptElement>(
+      `script[type="application/ld+json"][${managedAttribute}="true"]`,
+    )
+    .forEach((element) => element.remove());
+
+  metadata.structuredData.forEach((data, index) => {
+    const element = document.createElement("script");
+    element.type = "application/ld+json";
+    element.textContent = JSON.stringify(data);
+    element.setAttribute(managedAttribute, "true");
+    element.setAttribute("data-seo-json-ld", String(index));
+    document.head.append(element);
+  });
 }
 
 export function SEO({
@@ -78,6 +93,7 @@ export function SEO({
   image,
   noIndex,
   path,
+  structuredData,
   title,
   type,
 }: SeoInput) {
@@ -89,10 +105,11 @@ export function SEO({
         image,
         noIndex,
         path,
+        structuredData,
         title,
         type,
       }),
-    [canonicalUrl, description, image, noIndex, path, title, type],
+    [canonicalUrl, description, image, noIndex, path, structuredData, title, type],
   );
 
   useEffect(() => {

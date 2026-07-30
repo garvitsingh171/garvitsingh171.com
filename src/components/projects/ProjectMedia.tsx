@@ -18,6 +18,11 @@ const aspectClasses = {
   featured: "lg:h-full",
 } as const;
 
+const projectImageDimensions = {
+  width: 1448,
+  height: 1086,
+} as const;
+
 export function ProjectMedia({
   image,
   projectTitle,
@@ -44,6 +49,8 @@ export function ProjectMedia({
           <motion.img
             src={imageSrc}
             alt={image.alt}
+            width={projectImageDimensions.width}
+            height={projectImageDimensions.height}
             loading={priority ? "eager" : "lazy"}
             fetchPriority={priority ? "high" : "auto"}
             decoding="async"

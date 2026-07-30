@@ -5,7 +5,7 @@ export const fallbackStates = {
     description:
       "The page you requested may have moved, been removed, or never existed.",
     meta: {
-      title: "Page Not Found | Garvit Singh",
+      title: "Page Not Found — Garvit Singh",
       description:
         "The requested page could not be found. Return to Garvit Singh's portfolio homepage or explore available software projects.",
     },
@@ -16,7 +16,7 @@ export const fallbackStates = {
     description:
       "The project you requested may have moved, been removed, or never existed.",
     meta: {
-      title: "Project Not Found | Garvit Singh",
+      title: "Project Not Found — Garvit Singh",
       description:
         "The requested project could not be found. Return to Garvit Singh's projects page or explore the portfolio homepage.",
     },

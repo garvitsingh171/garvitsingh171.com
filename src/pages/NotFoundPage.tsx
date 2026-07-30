@@ -26,7 +26,7 @@ export default function NotFound() {
         }}
         secondaryAction={{
           type: "link",
-          label: "View projects",
+          label: "Explore software projects",
           to: routes.projects,
         }}
       />

@@ -167,7 +167,7 @@ export default function Resume() {
             variant="outline"
             className="w-full sm:w-auto"
           >
-            View Open Source
+            Read Open Source Experience
           </Button>
         </div>
 
@@ -251,7 +251,7 @@ export default function Resume() {
                     className="w-full sm:w-auto"
                     aria-label={`View ${project.title} project details`}
                   >
-                    View Project
+                    Read Project Case Study
                   </Button>
                 </div>
               </div>

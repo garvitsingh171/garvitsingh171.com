@@ -38,7 +38,7 @@ export function AboutHeroSection({ content }: AboutHeroSectionProps) {
             variant="secondary"
             className="w-full sm:w-auto"
           >
-            View projects
+            Explore software projects
           </Button>
           <ResumeDownloadButton
             variant="outline"
