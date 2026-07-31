@@ -5,9 +5,9 @@ export const projects: Project[] = [
     title: "Pravaah",
     slug: "pravaah",
     summary:
-      "A clinic appointment and patient-flow management MVP that connects clinic-side sign-in, doctor and patient records, appointment booking, daily queue operations, dashboard summaries, and rule-based no-show risk context.",
+      "A clinic operations platform for managing appointments, patient queues, staff workflows, self-service clinic onboarding, and explainable no-show risk assistance.",
     description:
-      "I built Pravaah to explore how small and medium clinics could manage connected daily workflows from one structured application. The project goes beyond isolated CRUD screens by tying together authenticated clinic staff, clinic records, doctors, patients, appointments, queue entries, dashboard data, and stored no-show risk results. The current no-show feature is deterministic and rule-based, not a trained machine-learning model.",
+      "I built Pravaah to explore how small and medium clinics could manage the full clinic-day flow from one structured application. It has grown from an owner-provisioned appointment and queue MVP into a broader clinic operations platform with public entry, Clerk sign-up, self-service clinic onboarding, clinic settings, doctor and patient management, appointment lifecycle controls, queue reordering, dashboard activity, and stored no-show risk context. The no-show feature is deterministic and rule-based, not a trained machine-learning model.",
     status: "in-progress",
     type: "full-stack",
     techStack: [
@@ -30,34 +30,60 @@ export const projects: Project[] = [
       alt: "Pravaah clinic operations dashboard preview",
     },
     githubUrl: "https://github.com/garvitsingh171/pravaah",
+    seo: {
+      title: "Pravaah Case Study | Clinic Appointment and Queue Management",
+      description:
+        "Pravaah is a full-stack clinic appointment and patient queue management case study built with React, Express, PostgreSQL, Prisma, Clerk, and Zod.",
+      image: "/images/projects/pravaah/pravaah-thumbnail-light.png",
+    },
     caseStudy: {
-      category: "Clinic operations MVP",
+      category: "Clinic operations platform",
       role: "Full-stack developer",
       problem: [
-        "The problem space for Pravaah is the amount of coordination required during a clinic day. A clinic may need to keep doctor records, patient records, scheduled appointments, arrivals, queue order, called patients, completed visits, cancellations, and no-show handling in sync.",
-        "If appointment state and queue state drift apart, staff lose visibility into who has arrived, who is waiting, and which appointments have reached a final status. The project focuses on making those status changes explicit and keeping them inside backend business rules rather than relying only on frontend screens.",
+        "The problem space for Pravaah is the amount of coordination required during a clinic day. Staff may need to keep clinic setup, doctor records, patient records, scheduled appointments, arrivals, queue order, called patients, completed visits, cancellations, and no-show handling in sync.",
+        "If appointment state, queue state, and clinic ownership drift apart, staff lose visibility into who has arrived, who is waiting, which records belong to the current clinic, and which appointments have reached a final status. The project focuses on making those transitions explicit and keeping important rules in the backend instead of relying only on frontend screens.",
       ],
       solution: [
-        "Pravaah uses a React and TypeScript frontend with an Express and TypeScript API backed by PostgreSQL through Prisma. Authenticated clinic-side Admin and Staff users sign in with Clerk, then the backend maps that identity to an internal active user with a clinic association before protected clinic operations run.",
+        "Pravaah uses a React and TypeScript frontend with an Express and TypeScript API backed by PostgreSQL through Prisma. Public visitors can reach a landing page and Clerk sign-up flow, while protected clinic workflows still require an active internal Pravaah user with a role, status, and clinic association.",
+        "The current source implements a v0.2 release candidate for self-service clinic onboarding. A valid Clerk identity can create a clinic and become its first Admin through a server-owned transaction, optionally provision fictional sample data, complete first-run setup guidance, and then use the existing appointment, queue, dashboard, doctor, patient, and clinic settings workflows.",
         "The backend creates appointments, queue entries, and no-show prediction records through coordinated service and repository logic. It validates request data with Zod, checks clinic ownership for doctors and patients, prevents active appointment conflicts, and keeps appointment and queue statuses synchronized through transactions.",
       ],
       targetUsers: [
-        "Clinic administrators who need clinic-level access and admin-only backend actions such as clinic create or update.",
-        "Reception or clinic staff who manage doctor records, patient records, appointments, daily queue status, and dashboard activity.",
-        "Doctors and patients are represented as records in the system, but the current MVP does not implement doctor or patient login.",
+        "Clinic Admin users who can complete onboarding, create the first clinic workspace, update clinic settings, and access the protected clinic application.",
+        "Clinic Staff users who can manage daily doctor, patient, appointment, queue, and dashboard workflows inside their assigned clinic.",
+        "Doctors and patients are represented as records in the system, but the current codebase does not implement doctor or patient login.",
       ],
       useCases: [
-        "Create and list doctor records connected to a clinic.",
-        "Create and list patient records with clinic-specific history.",
+        "Sign up with Clerk, resolve onboarding status, create a clinic workspace, and become the first active Admin.",
+        "Optionally provision fictional sample data scoped to the new clinic.",
+        "Review and update clinic profile and operational settings as an Admin.",
+        "Create, list, search, and edit doctor records connected to a clinic.",
+        "Create, list, search, and edit patient records with clinic-specific history.",
         "Book appointments for a clinic, doctor, patient, time, and booking source.",
         "Filter appointments by date, doctor, patient, or status.",
         "Move appointments and queue entries through arrived, in-queue, called, completed, cancelled, and no-show states.",
+        "Manually reorder active queue entries with backend validation and conflict handling.",
         "View dashboard summaries, high-risk appointments, and activity feed data.",
         "Review rule-based no-show risk reasons and suggested staff actions.",
       ],
       features: [
         {
-          title: "Clerk sign-in with internal user mapping",
+          title: "Public entry and Clerk authentication",
+          description:
+            "The frontend includes public landing, sign-in, and sign-up routes. Clerk provides session identity before the API decides whether the user is onboarded or authorized for clinic operations.",
+        },
+        {
+          title: "Self-service clinic onboarding",
+          description:
+            "A valid Clerk user without an internal Pravaah account can create a clinic workspace and first active Admin through a dedicated onboarding API.",
+        },
+        {
+          title: "Transactional clinic and Admin provisioning",
+          description:
+            "Clinic creation and first Admin creation run inside one Prisma transaction, with slug checks, replay handling, and conflict responses to avoid orphan clinic records.",
+        },
+        {
+          title: "Internal user mapping",
           description:
             "Protected API requests use Clerk authentication, then map the Clerk user ID to an internal active Pravaah user with a role, status, and clinic association.",
         },
@@ -67,9 +93,14 @@ export const projects: Project[] = [
             "Backend services verify that the signed-in internal user can access the requested clinic before clinic-scoped operations continue.",
         },
         {
+          title: "Clinic settings and first-run setup",
+          description:
+            "Admin users can review and update clinic profile, timezone, operating hours, slot duration, and buffer settings. A first-run checklist tracks clinic setup, doctors, patients, appointments, and queue readiness.",
+        },
+        {
           title: "Doctor and patient records",
           description:
-            "The Prisma schema models doctors, patients, and clinic relationships through DoctorClinic and PatientClinic links so records can be associated with clinic workflows.",
+            "The Prisma schema models doctors, patients, and clinic relationships through DoctorClinic and PatientClinic links. The frontend supports create, list, search, and edit workflows for these records.",
         },
         {
           title: "Appointment booking and listing",
@@ -87,9 +118,9 @@ export const projects: Project[] = [
             "Queue entries track position, waiting, arrived, called, completed, cancelled, and no-show states, with status updates synchronized back to the linked appointment.",
         },
         {
-          title: "Queue reordering API",
+          title: "Manual queue reordering",
           description:
-            "The backend can reorder all active queue entries for a selected date after validating clinic ownership, final statuses, and the complete active queue list.",
+            "Staff-facing queue controls can move active queue entries while the backend validates clinic ownership, final statuses, the selected date, and the complete active queue list.",
         },
         {
           title: "Dashboard summaries",
@@ -104,17 +135,18 @@ export const projects: Project[] = [
       ],
       architecture: {
         overview: [
-          "The backend follows a route, validation middleware, controller, service, repository, Prisma, and PostgreSQL flow. Routes define endpoints, Zod validation checks inputs, controllers handle HTTP concerns, services apply business rules, and repositories perform database reads, writes, transactions, and raw SQL where needed.",
+          "The request flow is React client, Clerk authentication, Express API, Zod validation, controller, service layer, repository or Prisma operation, and PostgreSQL. Routes define endpoints, Zod validation checks inputs, controllers handle HTTP concerns, services apply business rules, and repositories perform database reads, writes, transactions, and raw SQL where needed.",
           "The main relational entities are User, Clinic, Doctor, DoctorClinic, Patient, PatientClinic, Appointment, QueueEntry, and NoShowPrediction. Appointments connect clinic, doctor, patient, creator, time, status, queue entry, and risk context. Queue entries represent the daily operational flow.",
           "Appointment creation is a multi-step operation. It verifies clinic ownership for doctor and patient records, counts previous patient attendance signals, acquires transaction-level advisory locks, checks slot conflicts, calculates the next queue position, creates the appointment, creates the queue entry, and stores the no-show prediction inside a transaction.",
-          "The frontend is responsible for Clerk sign-in, active clinic resolution, protected app layout, dashboard, doctors, patients, appointments, queue, loading states, empty states, errors, and toast feedback. Final authorization and writes remain backend responsibilities.",
+          "Clinic onboarding has a separate identity-aware path. The API can answer onboarding status for a valid Clerk identity before an internal user exists, then creates the clinic and first Admin together with server-controlled role, status, and clinic ownership.",
+          "The frontend is responsible for public routing, Clerk sign-in and sign-up, onboarding-aware redirects, active clinic resolution, protected app layout, dashboard, doctors, patients, appointments, queue, clinic settings, loading states, empty states, errors, and toast feedback. Final authorization and writes remain backend responsibilities.",
         ],
         layers: [
           {
             id: "react-app",
             title: "React application",
             description:
-              "Handles Clerk sign-in, protected application shell, active clinic context, dashboard, doctors, patients, appointments, queue, loading states, empty states, errors, and toast feedback.",
+              "Handles public routes, Clerk sign-in and sign-up, onboarding-aware routing, protected application shell, active clinic context, dashboard, doctors, patients, appointments, queue, clinic settings, loading states, empty states, errors, and toast feedback.",
             technologies: [
               "React",
               "TypeScript",
@@ -129,7 +161,7 @@ export const projects: Project[] = [
             id: "express-api",
             title: "Express API",
             description:
-              "Registers routes, resolves authentication context, validates input with Zod, runs HTTP controllers and business services, enforces clinic access rules, and coordinates appointment and queue workflows.",
+              "Registers routes, resolves authentication and onboarding context, validates input with Zod, runs HTTP controllers and business services, enforces clinic access rules, and coordinates onboarding, appointment, queue, dashboard, doctor, patient, and settings workflows.",
             technologies: ["Node.js", "Express", "TypeScript", "Zod"],
             kind: "api",
           },
@@ -137,7 +169,7 @@ export const projects: Project[] = [
             id: "persistence",
             title: "Repository and persistence layer",
             description:
-              "Runs Prisma operations, PostgreSQL transactions, appointment conflict checks, queue position calculation, advisory locks, and multi-record writes.",
+              "Runs Prisma operations, PostgreSQL transactions, clinic/Admin provisioning, appointment conflict checks, queue position calculation, advisory locks, queue reordering, and multi-record writes.",
             technologies: ["Prisma", "PostgreSQL"],
             kind: "service",
           },
@@ -145,7 +177,7 @@ export const projects: Project[] = [
             id: "postgresql",
             title: "PostgreSQL database",
             description:
-              "Stores relational clinic, user, doctor, patient, appointment, queue, and no-show prediction data.",
+              "Stores relational clinic, user, doctor, patient, appointment, queue, settings, and no-show prediction data.",
             technologies: ["PostgreSQL"],
             kind: "database",
           },
@@ -199,11 +231,20 @@ export const projects: Project[] = [
         {
           title: "Clerk for authentication plus internal authorization",
           description:
-            "Clerk confirms who is signed in, while Pravaah stores the internal role, status, and clinic access rules.",
+            "Clerk confirms who is signed in, while Pravaah stores the internal role, status, onboarding state, and clinic access rules.",
           reason:
             "This keeps identity management separate from clinic-specific authorization decisions.",
           tradeOff:
-            "A signed-in Clerk user still needs a matching active internal Pravaah user, so seeding and user setup matter.",
+            "A signed-in Clerk user may be unprovisioned, so the app needs onboarding-aware routing and recovery states in addition to protected app routes.",
+        },
+        {
+          title: "Server-owned onboarding bootstrap",
+          description:
+            "A dedicated onboarding API creates the clinic and first Admin together, using trusted Clerk identity data and server-controlled role, status, and clinic ownership.",
+          reason:
+            "A normal clinic creation API requires an existing Admin, so first-run onboarding needs a separate guarded path.",
+          tradeOff:
+            "The flow has more edge cases to handle, including duplicate submissions, slug conflicts, recovery states, and sample data provisioning.",
         },
         {
           title: "Layered backend structure",
@@ -226,7 +267,7 @@ export const projects: Project[] = [
         {
           title: "Transactions and advisory locks",
           description:
-            "Appointment creation, queue status synchronization, and queue reordering use Prisma transactions. PostgreSQL transaction-level advisory locks are used while checking appointment slots and calculating queue positions.",
+            "Clinic/Admin onboarding, appointment creation, queue status synchronization, and queue reordering use Prisma transactions. PostgreSQL transaction-level advisory locks are used while checking appointment slots and calculating queue positions.",
           reason:
             "These operations update multiple related records and need consistent appointment and queue state.",
           tradeOff:
@@ -254,6 +295,22 @@ export const projects: Project[] = [
       challenges: [
         {
           challenge:
+            "A new Clerk user can be authenticated before Pravaah has any internal user or clinic record for them.",
+          resolution:
+            "The auth module exposes an onboarding status path for identity-only users and keeps normal operational APIs protected behind active internal Admin or Staff records.",
+          learning:
+            "A product can have valid states between sign-up and authorization, and those states should be modeled directly instead of treated as generic auth failures.",
+        },
+        {
+          challenge:
+            "Self-service onboarding needed to avoid creating a clinic without an owning Admin.",
+          resolution:
+            "The onboarding service creates the Clinic and first ACTIVE ADMIN user inside one Prisma transaction, handles duplicate identity or slug conflicts, and returns an already-completed result when the same identity safely replays a completed request.",
+          learning:
+            "Bootstrap flows need stronger consistency guarantees than ordinary CRUD screens because they create the ownership boundary for the rest of the app.",
+        },
+        {
+          challenge:
             "Appointment booking needed to create several related records while avoiding conflicting active slots.",
           resolution:
             "The service validates clinic ownership, uses a transaction, acquires an advisory lock for the clinic-doctor-time slot, checks active conflicting statuses, then creates the appointment, queue entry, and prediction together.",
@@ -266,7 +323,15 @@ export const projects: Project[] = [
           resolution:
             "The repository acquires a transaction-level advisory lock for the clinic, doctor, and clinic-local date before reading the highest queue position.",
           learning:
-            "Concurrency issues can appear even in small MVP workflows when position numbers or status transitions are shared.",
+            "Concurrency issues can appear even in compact product workflows when position numbers or status transitions are shared.",
+        },
+        {
+          challenge:
+            "Manual queue reordering needed to stay human-controlled without allowing final records or partial queue lists to be reshuffled.",
+          resolution:
+            "The queue service validates clinic access, rejects final statuses, requires every active queue entry for the selected date, and returns a conflict if the queue changed during reorder.",
+          learning:
+            "Operational flexibility works best when the UI gives staff control while the backend still protects invariants.",
         },
         {
           challenge:
@@ -320,7 +385,7 @@ export const projects: Project[] = [
         },
         {
           category: "debugging",
-          title: "Concurrency exists even in small MVPs",
+          title: "Concurrency appears before scale",
           description:
             "Appointment-slot checks and queue-position calculation both depend on read-then-write behavior. Pravaah needed transaction-level advisory locks and conflict checks because local single-user testing can hide race conditions.",
           application:
@@ -368,33 +433,36 @@ export const projects: Project[] = [
         },
       ],
       results: [
-        "Implemented the core MVP spine for clinic-side Admin and Staff workflows.",
+        "Implemented the core clinic operations spine for clinic-side Admin and Staff workflows.",
+        "Added public landing, Clerk sign-up, onboarding status, transactional clinic/Admin provisioning, optional sample data, onboarding-aware routing, and first-run setup guidance in the current v0.2 release candidate source.",
         "Added backend APIs for auth context, clinics, doctors, patients, appointments, queues, dashboard data, and no-show prediction records.",
-        "Added frontend screens for dashboard, doctors, patients, appointments, queue, login, and protected application shell.",
-        "Added backend Vitest coverage for critical auth, appointment, queue, prediction, dashboard, and validation behavior.",
+        "Added frontend screens for public entry, onboarding, dashboard, clinic settings, doctors, patients, appointments, queue, login, sign-up, and protected application shell.",
+        "Added frontend edit workflows for doctors and patients, plus manual queue reorder controls.",
+        "Added backend, frontend, and Playwright test files covering critical auth, onboarding, appointment, queue, prediction, dashboard, validation, and routing behavior.",
       ],
       currentProgress: [
-        "The project is in progress as a full-stack clinic operations MVP.",
-        "The repository documents that the MVP spine is implemented locally.",
-        "The repo does not contain a proven production deployment or live deployment URL.",
+        "The frozen v0.1 MVP is documented as completed and deployed, while the active source is a v0.2 release candidate for public demo and self-service clinic onboarding.",
+        "The current codebase contains implementation paths for public routing, sign-up, onboarding status, transactional clinic/Admin provisioning, sample data, onboarding-aware routing, clinic settings, doctor edit, patient edit, queue reorder controls, and Render-safe backend build output.",
+        "The repository says v0.2 still needs release verification, deployment URL confirmation, and screenshot capture before it should be described as fully released.",
       ],
       limitations: [
         "No patient login or doctor login is implemented.",
         "The no-show feature is rule-based and uses limited local data signals; it is not trained machine learning.",
-        "The current model is a single-clinic MVP through User.clinicId, not a full multi-clinic SaaS membership system.",
-        "Clinic settings UI is still limited, and some frontend edit flows remain release-readiness work.",
+        "The current authorization model uses one active User.clinicId, not a full multi-clinic SaaS membership system.",
         "No WhatsApp, SMS, or email automation is implemented.",
-        "No proven production deployment, screenshots, or production monitoring setup is documented in the repo.",
+        "No billing, prescriptions, inventory, full medical record system, patient portal, or doctor portal is implemented.",
+        "No verified public v0.2 frontend or backend deployment URLs are recorded in the repository.",
+        "No real v0.2 screenshots are committed yet; screenshot slots are documented and still need reviewed captures from fake demo data.",
       ],
       futureImprovements: [
-        "Complete the remaining clinic settings and edit screens.",
-        "Expose queue reordering in the frontend if the workflow needs it.",
         "Add appointment reminders or patient communication flows.",
         "Improve no-show scoring with real historical data before considering a trained model.",
         "Add audit logs for important appointment and queue state changes.",
-        "Expand frontend and integration test coverage.",
+        "Add richer analytics and reporting for clinic operations.",
+        "Expand role and permission management beyond the current Admin and Staff model.",
+        "Introduce a ClinicMember or UserClinic model if multi-clinic user access becomes a real requirement.",
         "Configure and smoke-test a real production deployment.",
-        "Improve role and permission management beyond the current Admin and Staff MVP roles.",
+        "Capture reviewed v0.2 demo screenshots with fictional data for public project materials.",
       ],
     },
     featured: true,
