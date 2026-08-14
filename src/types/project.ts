@@ -99,12 +99,17 @@ export type ProjectCaseStudy = {
   team?: string;
   category?: string;
   problem?: ProjectTextContent;
+  productThesis?: ProjectTextContent;
   solution?: ProjectTextContent;
+  businessValue?: ProjectFeature[];
+  differentiators?: ProjectFeature[];
   targetUsers?: string[];
   useCases?: string[];
+  workflow?: string[];
   features?: ProjectFeature[];
   architecture?: ProjectArchitecture;
   technicalDecisions?: ProjectTechnicalDecision[];
+  tradeOffs?: ProjectTechnicalDecision[];
   challenges?: ProjectChallenge[];
   learnings?: ProjectLearning[];
   results?: ProjectTextContent;

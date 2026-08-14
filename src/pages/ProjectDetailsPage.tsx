@@ -80,12 +80,17 @@ export default function ProjectDetail() {
   const caseStudy = project.caseStudy;
   const projectTypeLabel = projectTypeLabels[project.type];
   const problem = caseStudy?.problem;
+  const productThesis = caseStudy?.productThesis;
   const solution = caseStudy?.solution;
+  const businessValue = caseStudy?.businessValue;
+  const differentiators = caseStudy?.differentiators;
   const targetUsers = caseStudy?.targetUsers;
   const useCases = caseStudy?.useCases;
+  const workflow = caseStudy?.workflow;
   const features = caseStudy?.features;
   const architecture = caseStudy?.architecture;
   const technicalDecisions = caseStudy?.technicalDecisions;
+  const tradeOffs = caseStudy?.tradeOffs;
   const challenges = caseStudy?.challenges;
   const learnings = caseStudy?.learnings;
   const results = caseStudy?.results;
@@ -95,7 +100,7 @@ export default function ProjectDetail() {
   const projectLinks = [
     project.liveUrl
       ? {
-          label: "Open Live Application",
+          label: "View Live Product",
           href: project.liveUrl,
           ariaLabel: `View the live ${project.title} project in a new tab`,
         }
@@ -186,7 +191,7 @@ export default function ProjectDetail() {
                     target="_blank"
                     rel="noopener noreferrer"
                     variant={
-                      link.label === "Open Live Application"
+                      link.label === "View Live Product"
                         ? "primary"
                         : "outline"
                     }
@@ -228,9 +233,30 @@ export default function ProjectDetail() {
           </CaseStudySection>
         ) : null}
 
+        {hasTextContent(productThesis) ? (
+          <CaseStudySection id="product-thesis" title="Product Thesis">
+            <ProjectText content={productThesis} />
+          </CaseStudySection>
+        ) : null}
+
         {hasTextContent(solution) ? (
           <CaseStudySection id="solution" title="The Solution">
             <ProjectText content={solution} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(businessValue) ? (
+          <CaseStudySection id="business-value" title="Business Value">
+            <FeatureGrid features={businessValue} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(differentiators) ? (
+          <CaseStudySection
+            id="differentiators"
+            title="What Makes It Different"
+          >
+            <FeatureGrid features={differentiators} />
           </CaseStudySection>
         ) : null}
 
@@ -268,6 +294,12 @@ export default function ProjectDetail() {
           </CaseStudySection>
         ) : null}
 
+        {hasItems(workflow) ? (
+          <CaseStudySection id="workflow" title="How It Works">
+            <ProjectText content={workflow} />
+          </CaseStudySection>
+        ) : null}
+
         <ProjectScreenshotsSection
           projectTitle={project.title}
           screenshots={project.screenshots}
@@ -281,6 +313,12 @@ export default function ProjectDetail() {
         {hasItems(technicalDecisions) ? (
           <CaseStudySection id="technical-decisions" title="Technical Decisions">
             <TechnicalDecisionList decisions={technicalDecisions} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(tradeOffs) ? (
+          <CaseStudySection id="trade-offs" title="Product Trade-offs">
+            <TechnicalDecisionList decisions={tradeOffs} />
           </CaseStudySection>
         ) : null}
 

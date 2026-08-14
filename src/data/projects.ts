@@ -5,9 +5,9 @@ export const projects: Project[] = [
     title: "Pravaah",
     slug: "pravaah",
     summary:
-      "A clinic operations platform for managing appointments, patient queues, staff workflows, self-service clinic onboarding, and explainable no-show risk assistance.",
+      "A production-deployed clinic operations platform connecting appointments, patient flow, live queues, dashboard visibility, and explainable no-show assistance for small and medium clinics.",
     description:
-      "I built Pravaah to explore how small and medium clinics could manage the full clinic-day flow from one structured application. It has grown from an owner-provisioned appointment and queue MVP into a broader clinic operations platform with public entry, Clerk sign-up, self-service clinic onboarding, clinic settings, doctor and patient management, appointment lifecycle controls, queue reordering, dashboard activity, and stored no-show risk context. The no-show feature is deterministic and rule-based, not a trained machine-learning model.",
+      "Pravaah is a production-deployed clinic operations product for small and medium clinics. I built it around clinic flow: the connection between appointment booking, expected arrival, patient check-in, live queue movement, consultation status, dashboard visibility, and explainable no-show assistance. The current release is v0.3.0, the Clinic Operations Release, and the product is still actively developing toward broader SaaS maturity.",
     status: "in-progress",
     type: "full-stack",
     techStack: [
@@ -27,43 +27,98 @@ export const projects: Project[] = [
     image: {
       light: "/images/projects/pravaah/pravaah-thumbnail-light.png",
       dark: "/images/projects/pravaah/pravaah-thumbnail-dark.png",
-      alt: "Pravaah clinic operations dashboard preview",
+      alt: "Pravaah clinic operations dashboard showing appointments, queue activity, and no-show risk context",
     },
     githubUrl: "https://github.com/garvitsingh171/pravaah",
+    liveUrl: "https://pravaah.garvitsingh171.com",
     seo: {
-      title: "Pravaah Case Study | Clinic Appointment and Queue Management",
+      title: "Pravaah | Clinic Operations Product Case Study",
       description:
-        "Pravaah is a full-stack clinic appointment and patient queue management case study built with React, Express, PostgreSQL, Prisma, Clerk, and Zod.",
+        "Pravaah is a production-deployed clinic operations product connecting appointments, patient flow, live queues, dashboard visibility, and explainable no-show assistance.",
       image: "/images/projects/pravaah/pravaah-thumbnail-light.png",
     },
     caseStudy: {
-      category: "Clinic operations platform",
-      role: "Full-stack developer",
+      category: "Clinic Operations / Clinic Flow Management",
+      role: "Product-minded full-stack developer",
+      timeline: "v0.3.0 released; actively developing",
       problem: [
-        "The problem space for Pravaah is the amount of coordination required during a clinic day. Staff may need to keep clinic setup, doctor records, patient records, scheduled appointments, arrivals, queue order, called patients, completed visits, cancellations, and no-show handling in sync.",
-        "If appointment state, queue state, and clinic ownership drift apart, staff lose visibility into who has arrived, who is waiting, which records belong to the current clinic, and which appointments have reached a final status. The project focuses on making those transitions explicit and keeping important rules in the backend instead of relying only on frontend screens.",
+        "Small and medium clinics often coordinate the day through notebooks, phone calls, messages, spreadsheets, reception conversations, and memory. Those tools can hold fragments of appointment context, but they do not automatically keep the clinic day coherent.",
+        "The real problem is not just booking an appointment. A scheduled visit affects expected arrival, waiting order, doctor time, queue movement, consultation completion, cancellations, no-shows, and the operational picture staff need in order to decide what needs attention next.",
+      ],
+      productThesis: [
+        "Pravaah means flow. The product is built around the clinic day rather than only the appointment calendar: clinic setup leads to doctors and patients, appointments create queue context, risk assistance gives staff review signals, arrivals move into the queue, and the dashboard reflects what has happened and what is happening now.",
+        "The product direction is a clinic-side operations platform that can help staff reduce coordination overhead, protect appointment capacity, keep queues moving, and make operational decisions with better context. It does this without pretending to be a hospital ERP, patient portal, doctor portal, or trained AI prediction product.",
       ],
       solution: [
-        "Pravaah uses a React and TypeScript frontend with an Express and TypeScript API backed by PostgreSQL through Prisma. Public visitors can reach a landing page and Clerk sign-up flow, while protected clinic workflows still require an active internal Pravaah user with a role, status, and clinic association.",
-        "The current source implements a v0.2 release candidate for self-service clinic onboarding. A valid Clerk identity can create a clinic and become its first Admin through a server-owned transaction, optionally provision fictional sample data, complete first-run setup guidance, and then use the existing appointment, queue, dashboard, doctor, patient, and clinic settings workflows.",
-        "The backend creates appointments, queue entries, and no-show prediction records through coordinated service and repository logic. It validates request data with Zod, checks clinic ownership for doctors and patients, prevents active appointment conflicts, and keeps appointment and queue statuses synchronized through transactions.",
+        "Pravaah combines a React and TypeScript frontend with an Express and TypeScript API, PostgreSQL, Prisma, Clerk, and Zod. Public visitors can reach the product landing page, sign up or sign in through Clerk, and complete onboarding if they are a new clinic Admin.",
+        "The v0.3.0 release supports a production-verified clinic-side workflow: self-service onboarding, transactional clinic and first Admin provisioning, optional fictional sample data, clinic settings, setup guidance, doctor and patient records, appointment booking and filtering, queue status and manual reorder, dashboard summaries, and stored no-show risk context.",
+        "Important writes stay backend-owned. Appointment creation validates clinic, doctor, and patient relationships, checks exact same-time active doctor conflicts, creates the appointment, queue entry, and no-show prediction in a transaction, and uses PostgreSQL advisory locks for selected slot and queue-position scopes.",
+      ],
+      businessValue: [
+        {
+          title: "Save staff time",
+          description:
+            "By keeping appointments, arrival state, queue progression, risk context, and operational summaries connected, Pravaah is designed to reduce the manual coordination reception teams do during the clinic day.",
+        },
+        {
+          title: "Protect appointment capacity",
+          description:
+            "Unused appointment slots can mean lost doctor capacity. Explainable risk assistance gives staff earlier visibility into appointments that may deserve attention before they become avoidable operational gaps.",
+        },
+        {
+          title: "Improve clinic productivity",
+          description:
+            "Productivity means less coordination overhead: fewer repeated status checks, clearer appointment-to-queue progression, and a shared operational view for Admin and Staff users.",
+        },
+        {
+          title: "Improve operational visibility",
+          description:
+            "The dashboard and workflow screens help clinic teams see today's appointments, current queue state, completed visits, cancellations, no-shows, high-risk appointments, and recent activity.",
+        },
+      ],
+      differentiators: [
+        {
+          title: "Clinic-flow-first, not calendar-first",
+          description:
+            "Pravaah is built around the clinic day. Appointments feed into arrival, queue state, completion, dashboard visibility, and risk context instead of remaining isolated calendar rows.",
+        },
+        {
+          title: "Appointment-to-queue continuity",
+          description:
+            "A scheduled visit becomes part of the live operational queue, so booking, waiting, called, completed, cancelled, and no-show states stay connected.",
+        },
+        {
+          title: "Explainable no-show assistance",
+          description:
+            "The current feature stores LOW, MEDIUM, or HIGH risk, a numeric score, readable reasons, and suggested staff actions. It is deterministic decision support, not unsupported machine learning.",
+        },
+        {
+          title: "Human-controlled operations",
+          description:
+            "Pravaah does not automatically cancel appointments, contact patients, or silently reorder queues. It gives context while authorized clinic staff keep final control.",
+        },
+        {
+          title: "Clinic-scoped operational integrity",
+          description:
+            "Backend authorization maps Clerk identity to an active internal user and clinic before protected operations continue. The v0.3.0 production verification records cross-clinic rejection as passing.",
+        },
       ],
       targetUsers: [
-        "Clinic Admin users who can complete onboarding, create the first clinic workspace, update clinic settings, and access the protected clinic application.",
-        "Clinic Staff users who can manage daily doctor, patient, appointment, queue, and dashboard workflows inside their assigned clinic.",
-        "Doctors and patients are represented as records in the system, but the current codebase does not implement doctor or patient login.",
+        "Reception and Staff users manage appointments, patient records, arrivals, queue status, manual queue reorder, visit state, dashboard review, and no-show context inside their assigned clinic.",
+        "Clinic Admin users provision the clinic workspace, become the first Admin during onboarding, manage clinic settings, optionally provision fictional sample data, and use the same operational workflows.",
+        "Doctors are records in the current product, not logged-in users. Their benefit is indirect: clearer patient order, smoother queue progression, and fewer interruptions caused by operational uncertainty.",
+        "Patients are records in the current product, not logged-in users. The current release does not implement self-booking, patient login, or a patient portal.",
       ],
       useCases: [
-        "Sign up with Clerk, resolve onboarding status, create a clinic workspace, and become the first active Admin.",
+        "Open the public product, sign up with Clerk, resolve onboarding status, create a clinic workspace, and become the first active Admin.",
         "Optionally provision fictional sample data scoped to the new clinic.",
-        "Review and update clinic profile and operational settings as an Admin.",
-        "Create, list, search, and edit doctor records connected to a clinic.",
-        "Create, list, search, and edit patient records with clinic-specific history.",
-        "Book appointments for a clinic, doctor, patient, time, and booking source.",
-        "Filter appointments by date, doctor, patient, or status.",
-        "Move appointments and queue entries through arrived, in-queue, called, completed, cancelled, and no-show states.",
-        "Manually reorder active queue entries with backend validation and conflict handling.",
-        "View dashboard summaries, high-risk appointments, and activity feed data.",
+        "Complete first-run setup by configuring clinic details and adding doctors, patients, and appointments.",
+        "Create, list, search, edit, activate, and deactivate doctor and patient records where the current UI/API supports those actions.",
+        "Book appointments for a clinic, doctor, patient, scheduled time, duration, booking source, reason, and notes.",
+        "Filter appointment and queue views by supported clinic-day context such as date, doctor, patient, or status.",
+        "Move appointments and queue entries through arrived, in queue, called, completed, cancelled, and no-show states.",
+        "Manually reorder active queue entries for one doctor and clinic-local date with backend validation and conflict handling.",
+        "Review dashboard summaries, high-risk appointments, setup state, and recent operational activity.",
         "Review rule-based no-show risk reasons and suggested staff actions.",
       ],
       features: [
@@ -110,7 +165,7 @@ export const projects: Project[] = [
         {
           title: "Appointment conflict prevention",
           description:
-            "The backend checks active appointment statuses for the same clinic, doctor, and scheduled time, returning a conflict instead of allowing duplicate active slots.",
+            "The backend checks active appointment statuses for the same clinic, doctor, and exact scheduled time, returning a conflict instead of allowing duplicate active slots.",
         },
         {
           title: "Daily queue operations",
@@ -132,6 +187,17 @@ export const projects: Project[] = [
           description:
             "The current risk feature stores LOW, MEDIUM, or HIGH results with scores, reasons, and suggested staff actions. It is deterministic rule logic, not trained machine learning.",
         },
+      ],
+      workflow: [
+        "A new clinic Admin signs up or signs in through Clerk.",
+        "Pravaah checks onboarding status before assuming the user has an internal clinic account.",
+        "The Admin creates a clinic workspace, and the backend provisions the clinic plus first active Admin in one transaction.",
+        "The Admin completes clinic setup, optionally adds fictional sample data, and creates doctor and patient records.",
+        "Staff books an appointment after backend checks clinic access plus active doctor and patient clinic links.",
+        "Appointment creation stores the appointment, creates a queue entry, and stores explainable no-show context together.",
+        "When the patient arrives, Staff updates arrival or queue status, and appointment and queue state stay synchronized where a queue entry exists.",
+        "Staff manages waiting, called, completed, cancelled, or no-show states through the clinic day, including manual reorder for active queue entries.",
+        "The dashboard gives Admin and Staff visibility into current appointments, queue status, high-risk appointments, activity, and setup state.",
       ],
       architecture: {
         overview: [
@@ -267,11 +333,11 @@ export const projects: Project[] = [
         {
           title: "Transactions and advisory locks",
           description:
-            "Clinic/Admin onboarding, appointment creation, queue status synchronization, and queue reordering use Prisma transactions. PostgreSQL transaction-level advisory locks are used while checking appointment slots and calculating queue positions.",
+            "Clinic/Admin onboarding, appointment creation, queue status synchronization, and queue reordering use Prisma transactions. PostgreSQL transaction-level advisory locks are used for selected appointment slot, queue-position, queue-reorder, and sample-data scopes.",
           reason:
-            "These operations update multiple related records and need consistent appointment and queue state.",
+            "Two concurrent requests should not both believe the same doctor slot or queue state is available and leave the clinic day inconsistent.",
           tradeOff:
-            "The code is more complex than a simple insert flow, and concurrency guarantees are still scoped to the implemented database logic.",
+            "The code is more complex than a simple insert flow, and the concurrency guarantee is scoped to the implemented database logic rather than every possible race condition.",
         },
         {
           title: "Separate appointment and queue entities",
@@ -283,13 +349,50 @@ export const projects: Project[] = [
             "The backend must keep the linked statuses synchronized.",
         },
         {
-          title: "Deterministic no-show scoring",
+          title: "Deterministic no-show assistance",
           description:
-            "The no-show feature uses starter rules based on available appointment and patient-clinic history signals.",
+            "The no-show feature uses starter rules based on appointment timing and available patient-clinic history signals. It stores risk level, score, reasons, and suggested staff actions.",
           reason:
-            "There is no verified training dataset in the project, so rule-based scoring keeps the result explainable and honest.",
+            "There is no validated training dataset in the project, so rule-based decision support keeps the result explainable and honest.",
           tradeOff:
             "The score can provide useful staff context, but it should not be treated as a trained predictive model.",
+        },
+      ],
+      tradeOffs: [
+        {
+          title: "Rule-based assistance instead of ML",
+          reason:
+            "Deterministic rules are inspectable and appropriate while the product has no validated historical dataset.",
+          tradeOff:
+            "Pravaah cannot claim learned prediction accuracy, calibration, fairness metrics, or adaptive model behavior yet.",
+        },
+        {
+          title: "Separate Appointment and QueueEntry records",
+          reason:
+            "Scheduling state and live clinic queue state are related but different domain concepts.",
+          tradeOff:
+            "The backend has to synchronize linked statuses and protect terminal states carefully.",
+        },
+        {
+          title: "Backend authorization as the source of truth",
+          reason:
+            "Frontend guards improve UX, but clinic data protection needs server-side user, role, status, and clinic checks.",
+          tradeOff:
+            "More request context and recovery handling is required, especially for newly signed-up users.",
+        },
+        {
+          title: "One active clinic per internal user today",
+          reason:
+            "A single `User.clinicId` keeps the current product scope manageable for v0.3.0.",
+          tradeOff:
+            "Full multi-clinic SaaS membership, role-per-clinic access, and clinic switching remain future work.",
+        },
+        {
+          title: "Human-controlled queue operations",
+          reason:
+            "Staff need operational flexibility and should remain responsible for queue and risk decisions.",
+          tradeOff:
+            "The current product does not optimize queues, contact patients, or make autonomous capacity decisions.",
         },
       ],
       challenges: [
@@ -319,17 +422,9 @@ export const projects: Project[] = [
         },
         {
           challenge:
-            "Queue positions could become inconsistent if concurrent requests calculated the next position at the same time.",
+            "Queue positions and manual reordering are mutable operational state, so stale or incomplete client order cannot be trusted.",
           resolution:
-            "The repository acquires a transaction-level advisory lock for the clinic, doctor, and clinic-local date before reading the highest queue position.",
-          learning:
-            "Concurrency issues can appear even in compact product workflows when position numbers or status transitions are shared.",
-        },
-        {
-          challenge:
-            "Manual queue reordering needed to stay human-controlled without allowing final records or partial queue lists to be reshuffled.",
-          resolution:
-            "The queue service validates clinic access, rejects final statuses, requires every active queue entry for the selected date, and returns a conflict if the queue changed during reorder.",
+            "Queue reorder validates clinic access, one doctor, one clinic-local date, non-final statuses, and the complete active queue set before persisting positions inside a locked transaction.",
           learning:
             "Operational flexibility works best when the UI gives staff control while the backend still protects invariants.",
         },
@@ -356,14 +451,6 @@ export const projects: Project[] = [
             "The implementation stores rule-based LOW, MEDIUM, and HIGH risk levels with scores, reason codes, and suggested staff actions.",
           learning:
             "A transparent rule-based feature can be more honest than an unsupported AI claim when historical data is limited.",
-        },
-        {
-          challenge:
-            "Deployment requires coordinating frontend, backend, database, Clerk, CORS, and environment variables.",
-          resolution:
-            "The repository documents deployment steps and environment requirements, while clearly stating that no proven production deployment is configured in the repo.",
-          learning:
-            "Release readiness is more than a successful local build; it needs configured environments and smoke tests.",
         },
       ],
       learnings: [
@@ -417,9 +504,9 @@ export const projects: Project[] = [
         },
         {
           category: "deployment",
-          title: "Deployment is a cross-system workflow",
+          title: "Release readiness is cross-system",
           description:
-            "Pravaah deployment planning has to coordinate the frontend, backend, PostgreSQL, Prisma migrations, Clerk configuration, CORS, and environment variables. A successful local build is only one part of release readiness.",
+            "Pravaah v0.3.0 required coordinating frontend deployment, backend deployment, PostgreSQL migration, Clerk configuration, CORS, environment variables, health checks, and production smoke testing.",
           application:
             "I use deployment checklists, environment documentation, migrations, and post-deploy smoke tests instead of treating deployment as a single command.",
         },
@@ -433,36 +520,39 @@ export const projects: Project[] = [
         },
       ],
       results: [
-        "Implemented the core clinic operations spine for clinic-side Admin and Staff workflows.",
-        "Added public landing, Clerk sign-up, onboarding status, transactional clinic/Admin provisioning, optional sample data, onboarding-aware routing, and first-run setup guidance in the current v0.2 release candidate source.",
-        "Added backend APIs for auth context, clinics, doctors, patients, appointments, queues, dashboard data, and no-show prediction records.",
-        "Added frontend screens for public entry, onboarding, dashboard, clinic settings, doctors, patients, appointments, queue, login, sign-up, and protected application shell.",
-        "Added frontend edit workflows for doctors and patients, plus manual queue reorder controls.",
-        "Added backend, frontend, and Playwright test files covering critical auth, onboarding, appointment, queue, prediction, dashboard, validation, and routing behavior.",
+        "Shipped Pravaah v0.3.0 as the Clinic Operations Release, recorded as released after owner production verification and GO decision.",
+        "Production verification records PASS for database migration, database connectivity, health endpoint, fresh Clerk signup, onboarding, clinic provisioning, Admin flow, Staff authorization, cross-clinic rejection, doctor flow, patient flow, appointment flow, no-show assistance, queue workflow, manual reorder, dashboard, and production smoke testing.",
+        "Implemented the clinic-side Admin and Staff operations spine: public entry, sign-up/sign-in, onboarding, clinic settings, setup guidance, doctors, patients, appointments, queue, dashboard, and explainable no-show assistance.",
+        "Kept the no-show feature responsible and evidence-backed by presenting deterministic rules, reasons, and suggested staff actions rather than claiming trained AI or measured prediction accuracy.",
+        "Expanded reviewer, workflow, product, architecture, release, and case-study documentation so implementation evidence and product boundaries are easier to audit.",
       ],
       currentProgress: [
-        "The frozen v0.1 MVP is documented as completed and deployed, while the active source is a v0.2 release candidate for public demo and self-service clinic onboarding.",
-        "The current codebase contains implementation paths for public routing, sign-up, onboarding status, transactional clinic/Admin provisioning, sample data, onboarding-aware routing, clinic settings, doctor edit, patient edit, queue reorder controls, and Render-safe backend build output.",
-        "The repository says v0.2 still needs release verification, deployment URL confirmation, and screenshot capture before it should be described as fully released.",
+        "Current release: v0.3.0 - Clinic Operations Release.",
+        "Release status: released, production deployed, and production-verified by owner with GO decision.",
+        "Production frontend: https://pravaah.garvitsingh171.com.",
+        "Product state: actively developing toward broader SaaS maturity.",
+        "Release metadata still missing in the Pravaah repository: actual calendar release date and GitHub Release URL.",
       ],
       limitations: [
         "No patient login or doctor login is implemented.",
-        "The no-show feature is rule-based and uses limited local data signals; it is not trained machine learning.",
-        "The current authorization model uses one active User.clinicId, not a full multi-clinic SaaS membership system.",
-        "No WhatsApp, SMS, or email automation is implemented.",
-        "No billing, prescriptions, inventory, full medical record system, patient portal, or doctor portal is implemented.",
-        "No verified public v0.2 frontend or backend deployment URLs are recorded in the repository.",
-        "No real v0.2 screenshots are committed yet; screenshot slots are documented and still need reviewed captures from fake demo data.",
+        "No patient portal, doctor portal, self-booking flow, billing, payments, prescriptions, inventory, full medical records, hospital ERP workflow, or native mobile app is implemented.",
+        "The no-show feature is deterministic and uses limited available operational signals; it is not trained machine learning and has no committed accuracy, fairness, calibration, or real-world outcome metrics.",
+        "The system does not automatically cancel appointments, contact patients, prioritize appointments by risk, or silently reorder queues.",
+        "Appointment booking checks exact same-time active doctor conflicts, but does not enforce duration overlap, clinic opening hours, slot-duration alignment, or buffer windows.",
+        "Appointment lifecycle enforcement blocks changes away from terminal states, but it does not implement a complete transition matrix.",
+        "The current authorization model uses one active `User.clinicId`, not full multi-clinic SaaS membership or clinic switching.",
+        "No notification automation, audit log, browser E2E suite, CI/CD workflow, or production monitoring/observability stack is committed.",
+        "No committed real Pravaah screenshots are available for the portfolio yet, so I kept the existing thumbnail assets rather than fabricating product screenshots.",
       ],
       futureImprovements: [
-        "Add appointment reminders or patient communication flows.",
-        "Improve no-show scoring with real historical data before considering a trained model.",
-        "Add audit logs for important appointment and queue state changes.",
-        "Add richer analytics and reporting for clinic operations.",
-        "Expand role and permission management beyond the current Admin and Staff model.",
-        "Introduce a ClinicMember or UserClinic model if multi-clinic user access becomes a real requirement.",
-        "Configure and smoke-test a real production deployment.",
-        "Capture reviewed v0.2 demo screenshots with fictional data for public project materials.",
+        "Add reminder logs, confirmations, rescheduling or cancellation flows, and SMS, email, or WhatsApp integrations.",
+        "Strengthen appointment and queue lifecycle transition rules, clinic-hours enforcement, slot-duration checks, buffer rules, and attendance-counter maintenance.",
+        "Add audit logs for important appointment, queue, and risk-review decisions.",
+        "Add richer operational analytics, dashboard drill-downs, pagination, sorting, and production observability.",
+        "Introduce staff invitations, expanded permissions, and a ClinicMember or UserClinic model for multi-clinic SaaS membership and clinic switching.",
+        "Explore patient and doctor portals as future surfaces, clearly separate from the current v0.3.0 product.",
+        "Improve no-show assistance with richer historical data and consider trained models only after appropriate data governance, evaluation, and explainability work exist.",
+        "Capture reviewed production or demo screenshots with fictional data for future portfolio visuals.",
       ],
     },
     featured: true,

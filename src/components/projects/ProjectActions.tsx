@@ -45,7 +45,7 @@ export function ProjectActions({
             className={buttonClass}
             aria-label={`View the live ${project.title} project in a new tab`}
           >
-            View live project
+            View live product
           </Button>
         </li>
       ) : null}
