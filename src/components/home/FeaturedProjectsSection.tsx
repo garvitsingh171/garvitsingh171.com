@@ -4,8 +4,14 @@ import { AnimatedSection, StaggeredReveal, StaggeredRevealItem } from "../animat
 import { FeaturedProject, ProjectCard } from "../projects";
 import { Button, SectionHeading } from "../ui";
 
+const selectedWorkSlugs = ["pravaah", "beathub-api", "workoutly"] as const;
+
 export function FeaturedProjectsSection() {
-  const featuredProjects = projects.filter((project) => project.featured);
+  const featuredProjects = selectedWorkSlugs.flatMap((slug) => {
+    const project = projects.find((item) => item.slug === slug && item.featured);
+
+    return project ? [project] : [];
+  });
 
   if (featuredProjects.length === 0) {
     return null;

@@ -141,6 +141,10 @@ export function resolveProjectSeoMetadata(project: Project): SeoInput {
     project.image?.light ??
     project.image?.src ??
     project.image?.dark;
+  const projectUrl = buildCanonicalUrl(`/projects/${project.slug}`);
+  const programmingLanguages = project.techStack.filter((technology) =>
+    ["TypeScript", "JavaScript", "Python", "Java", "SQL"].includes(technology),
+  );
 
   return {
     title: project.seo?.title ?? `${project.title} Case Study | Garvit Singh`,
@@ -148,6 +152,35 @@ export function resolveProjectSeoMetadata(project: Project): SeoInput {
       project.seo?.description ?? project.summary ?? project.description,
     path: `/projects/${project.slug}`,
     image,
+    type: "article",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      name: project.title,
+      description:
+        project.seo?.description ?? project.summary ?? project.description,
+      url: projectUrl,
+      image: image ? buildAbsoluteUrl(image) : undefined,
+      codeRepository: project.githubUrl,
+      runtimePlatform: "Web",
+      programmingLanguage: programmingLanguages,
+      keywords: project.techStack.join(", "),
+      author: {
+        "@type": "Person",
+        name: SITE_CONFIG.name,
+        url: `${SITE_CONFIG.url}/`,
+      },
+      ...(project.liveUrl
+        ? {
+            workExample: {
+              "@type": "WebApplication",
+              name: project.title,
+              url: project.liveUrl,
+              applicationCategory: "WebApplication",
+            },
+          }
+        : {}),
+    },
   };
 }
 

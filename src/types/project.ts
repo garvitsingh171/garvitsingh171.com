@@ -107,6 +107,7 @@ export type ProjectCaseStudy = {
   useCases?: string[];
   workflow?: string[];
   features?: ProjectFeature[];
+  apiHighlights?: ProjectFeature[];
   architecture?: ProjectArchitecture;
   technicalDecisions?: ProjectTechnicalDecision[];
   tradeOffs?: ProjectTechnicalDecision[];
@@ -129,6 +130,7 @@ export type Project = {
   slug: string;
   summary: string;
   description: string;
+  engineeringHighlight?: string;
   status: ProjectStatus;
   type: ProjectType;
   techStack: string[];

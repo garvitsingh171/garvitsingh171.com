@@ -19,7 +19,7 @@ export function CaseStudySection({
 }: CaseStudySectionProps) {
   return (
     <AnimatedSection id={id} className={className}>
-      <Card className="p-6 sm:p-8">
+      <Card className="min-w-0 p-5 sm:p-8">
         <div className="max-w-3xl">
           <h2 className="text-heading-2 text-primary">{title}</h2>
 

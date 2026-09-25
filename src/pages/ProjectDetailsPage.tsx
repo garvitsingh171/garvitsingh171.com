@@ -88,6 +88,7 @@ export default function ProjectDetail() {
   const useCases = caseStudy?.useCases;
   const workflow = caseStudy?.workflow;
   const features = caseStudy?.features;
+  const apiHighlights = caseStudy?.apiHighlights;
   const architecture = caseStudy?.architecture;
   const technicalDecisions = caseStudy?.technicalDecisions;
   const tradeOffs = caseStudy?.tradeOffs;
@@ -291,6 +292,16 @@ export default function ProjectDetail() {
         {hasItems(features) ? (
           <CaseStudySection id="features" title="Key Features">
             <FeatureGrid features={features} />
+          </CaseStudySection>
+        ) : null}
+
+        {hasItems(apiHighlights) ? (
+          <CaseStudySection
+            id="api-surface"
+            title="API Surface"
+            subtitle="Selected route groups and the backend responsibilities they expose."
+          >
+            <FeatureGrid features={apiHighlights} />
           </CaseStudySection>
         ) : null}
 

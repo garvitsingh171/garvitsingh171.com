@@ -5,42 +5,44 @@ export const projects: Project[] = [
     title: "Pravaah",
     slug: "pravaah",
     summary:
-      "A production-deployed clinic operations platform connecting appointments, patient flow, live queues, dashboard visibility, and explainable no-show assistance for small and medium clinics.",
+      "An actively developed clinic operations platform connecting staff access, doctor availability, slot-aware scheduling, arrivals, live queues, activity history, and explainable no-show support.",
     description:
-      "Pravaah is a production-deployed clinic operations product for small and medium clinics. I built it around clinic flow: the connection between appointment booking, expected arrival, patient check-in, live queue movement, consultation status, dashboard visibility, and explainable no-show assistance. The current release is v0.3.0, the Clinic Operations Release, and the product is still actively developing toward broader SaaS maturity.",
+      "Pravaah is a clinic operations product for small and medium clinics, built around the full flow from clinic setup and staff access to scheduling, arrival, queue movement, consultation status, and operational review. v0.3.0 is the production-verified Clinic Operations Release. The current source has since expanded with staff invitation APIs, doctor availability, slot discovery, appointment rescheduling and activity history, structured arrival and terminal reasons, address geocoding, and patient travel estimates; those post-release capabilities remain clearly separated from the deployed v0.3 baseline until deployment verification is recorded.",
+    engineeringHighlight:
+      "Added Staff invitation, doctor-availability, slot-discovery, rescheduling, activity-history, geocoding, and travel-routing APIs after the v0.3 release.",
     status: "in-progress",
     type: "full-stack",
     techStack: [
-      "React",
       "TypeScript",
-      "Vite",
-      "Tailwind CSS",
-      "React Router",
+      "React",
       "Node.js",
       "Express",
       "PostgreSQL",
       "Prisma",
       "Clerk",
+      "Geoapify",
       "Zod",
+      "Vite",
+      "Tailwind CSS",
       "Vitest",
     ],
     image: {
       light: "/images/projects/pravaah/pravaah-thumbnail-light.png",
       dark: "/images/projects/pravaah/pravaah-thumbnail-dark.png",
-      alt: "Pravaah clinic operations dashboard showing appointments, queue activity, and no-show risk context",
+      alt: "Pravaah clinic operations dashboard preview for appointment, queue, and workflow management",
     },
     githubUrl: "https://github.com/garvitsingh171/pravaah",
     liveUrl: "https://pravaah.garvitsingh171.com",
     seo: {
       title: "Pravaah | Clinic Operations Product Case Study",
       description:
-        "Pravaah is a production-deployed clinic operations product connecting appointments, patient flow, live queues, dashboard visibility, and explainable no-show assistance.",
+        "Pravaah clinic operations case study: TypeScript APIs, PostgreSQL workflows, slot-aware scheduling, staff access, live queues, and explainable no-show support.",
       image: "/images/projects/pravaah/pravaah-thumbnail-light.png",
     },
     caseStudy: {
       category: "Clinic Operations / Clinic Flow Management",
       role: "Product-minded full-stack developer",
-      timeline: "v0.3.0 released; actively developing",
+      timeline: "v0.3.0 released; post-release source actively developing",
       problem: [
         "Small and medium clinics often coordinate the day through notebooks, phone calls, messages, spreadsheets, reception conversations, and memory. Those tools can hold fragments of appointment context, but they do not automatically keep the clinic day coherent.",
         "The real problem is not just booking an appointment. A scheduled visit affects expected arrival, waiting order, doctor time, queue movement, consultation completion, cancellations, no-shows, and the operational picture staff need in order to decide what needs attention next.",
@@ -52,7 +54,8 @@ export const projects: Project[] = [
       solution: [
         "Pravaah combines a React and TypeScript frontend with an Express and TypeScript API, PostgreSQL, Prisma, Clerk, and Zod. Public visitors can reach the product landing page, sign up or sign in through Clerk, and complete onboarding if they are a new clinic Admin.",
         "The v0.3.0 release supports a production-verified clinic-side workflow: self-service onboarding, transactional clinic and first Admin provisioning, optional fictional sample data, clinic settings, setup guidance, doctor and patient records, appointment booking and filtering, queue status and manual reorder, dashboard summaries, and stored no-show risk context.",
-        "Important writes stay backend-owned. Appointment creation validates clinic, doctor, and patient relationships, checks exact same-time active doctor conflicts, creates the appointment, queue entry, and no-show prediction in a transaction, and uses PostgreSQL advisory locks for selected slot and queue-position scopes.",
+        "Post-release source work adds invitation-based Staff provisioning, Admin staff management, recurring doctor availability, slot discovery, rescheduling, appointment activity history, structured arrival and terminal reasons, patient attendance statistics, and structured clinic/patient location workflows backed by Geoapify geocoding and routing.",
+        "Important writes stay backend-owned. Appointment creation and rescheduling validate clinic relationships, availability, operating hours, duration and buffer conflicts; transactions and PostgreSQL advisory locks protect selected slot, queue-position, lifecycle, and reorder scopes.",
       ],
       businessValue: [
         {
@@ -105,21 +108,21 @@ export const projects: Project[] = [
       ],
       targetUsers: [
         "Reception and Staff users manage appointments, patient records, arrivals, queue status, manual queue reorder, visit state, dashboard review, and no-show context inside their assigned clinic.",
-        "Clinic Admin users provision the clinic workspace, become the first Admin during onboarding, manage clinic settings, optionally provision fictional sample data, and use the same operational workflows.",
+        "Clinic Admin users provision the clinic workspace, manage settings and sample data, and—in the current post-release source—create one-time Staff invitations, review invitation state, revoke pending invitations, and suspend or reactivate Staff access.",
         "Doctors are records in the current product, not logged-in users. Their benefit is indirect: clearer patient order, smoother queue progression, and fewer interruptions caused by operational uncertainty.",
         "Patients are records in the current product, not logged-in users. The current release does not implement self-booking, patient login, or a patient portal.",
       ],
       useCases: [
         "Open the public product, sign up with Clerk, resolve onboarding status, create a clinic workspace, and become the first active Admin.",
-        "Optionally provision fictional sample data scoped to the new clinic.",
-        "Complete first-run setup by configuring clinic details and adding doctors, patients, and appointments.",
-        "Create, list, search, edit, activate, and deactivate doctor and patient records where the current UI/API supports those actions.",
-        "Book appointments for a clinic, doctor, patient, scheduled time, duration, booking source, reason, and notes.",
-        "Filter appointment and queue views by supported clinic-day context such as date, doctor, patient, or status.",
-        "Move appointments and queue entries through arrived, in queue, called, completed, cancelled, and no-show states.",
-        "Manually reorder active queue entries for one doctor and clinic-local date with backend validation and conflict handling.",
+        "Configure clinic settings, doctors, recurring weekly availability, patients, and optional fictional sample data.",
+        "Invite Staff through a one-time, hashed-token workflow and manage Staff access without exposing authority fields to the browser.",
+        "Discover valid appointment slots from doctor availability, clinic hours, duration, buffer, and existing active appointments.",
+        "Book or reschedule appointments while preserving queue identity and protecting against stale concurrent changes.",
+        "Track first arrival, lateness, lifecycle activity, cancellation reasons, no-show reasons, and patient attendance statistics.",
+        "Geocode structured clinic and patient addresses and calculate server-side travel distance and duration estimates through Geoapify.",
+        "Manage live queue status and manual ordering for one doctor and clinic-local date with backend validation and conflict handling.",
         "Review dashboard summaries, high-risk appointments, setup state, and recent operational activity.",
-        "Review rule-based no-show risk reasons and suggested staff actions.",
+        "Review deterministic no-show risk reasons and suggested staff actions without treating the score as trained machine learning.",
       ],
       features: [
         {
@@ -163,9 +166,29 @@ export const projects: Project[] = [
             "Appointments connect a clinic, doctor, patient, creator, scheduled time, duration, booking source, notes, status, queue entry, and no-show prediction.",
         },
         {
-          title: "Appointment conflict prevention",
+          title: "Availability-aware scheduling",
           description:
-            "The backend checks active appointment statuses for the same clinic, doctor, and exact scheduled time, returning a conflict instead of allowing duplicate active slots.",
+            "Recurring doctor availability and slot APIs enforce clinic hours, appointment duration, buffer windows, inactive-doctor checks, and overlap conflicts before booking or rescheduling.",
+        },
+        {
+          title: "Invitation-based Staff access",
+          description:
+            "Admin-only APIs create, list, revoke, and accept one-time Staff invitations, then support Staff suspension and reactivation while preserving operational attribution.",
+        },
+        {
+          title: "Appointment rescheduling and history",
+          description:
+            "Appointment-specific APIs discover alternative slots, reschedule with optimistic concurrency checks, preserve the linked queue record, and expose an append-only activity timeline.",
+        },
+        {
+          title: "Arrival and outcome context",
+          description:
+            "Lifecycle updates capture first arrival, signed timing offset, late classification, cancellation or no-show reasons, and idempotent patient attendance statistics.",
+        },
+        {
+          title: "Location and travel estimates",
+          description:
+            "Structured clinic and patient addresses can be geocoded server-side, while route calculation stores compact distance and free-flow travel-duration context without exposing the provider key.",
         },
         {
           title: "Daily queue operations",
@@ -188,24 +211,57 @@ export const projects: Project[] = [
             "The current risk feature stores LOW, MEDIUM, or HIGH results with scores, reasons, and suggested staff actions. It is deterministic rule logic, not trained machine learning.",
         },
       ],
+      apiHighlights: [
+        {
+          title: "Staff access APIs",
+          description:
+            "GET/POST /api/clinics/:clinicId/staff and /staff/invitations manage members and invitations; GET/POST /api/staff/invitations/:token provides identity-aware preview and acceptance.",
+        },
+        {
+          title: "Doctor availability APIs",
+          description:
+            "GET and PUT /api/clinics/:clinicId/doctors/:doctorId/availability read or atomically replace a clinic-specific seven-day availability schedule.",
+        },
+        {
+          title: "Slot and rescheduling APIs",
+          description:
+            "GET /api/clinics/:clinicId/appointments/available-slots discovers bookable capacity; appointment-specific reschedule-slots and PATCH reschedule routes protect self-exclusion and stale writes.",
+        },
+        {
+          title: "Lifecycle and activity APIs",
+          description:
+            "PATCH /api/appointments/:appointmentId/status enforces lifecycle rules and structured outcome reasons; GET /activities returns the appointment's append-only operational timeline.",
+        },
+        {
+          title: "Location APIs",
+          description:
+            "Clinic and patient geocode routes perform explicit retries, while POST /api/clinics/:clinicId/patients/:patientId/route calculates synchronized travel metrics through a server-owned provider integration.",
+        },
+        {
+          title: "Queue and dashboard APIs",
+          description:
+            "Clinic-scoped queue list, status, and reorder routes work alongside dashboard summary, high-risk appointment, and activity endpoints for the selected clinic day.",
+        },
+      ],
       workflow: [
-        "A new clinic Admin signs up or signs in through Clerk.",
-        "Pravaah checks onboarding status before assuming the user has an internal clinic account.",
-        "The Admin creates a clinic workspace, and the backend provisions the clinic plus first active Admin in one transaction.",
-        "The Admin completes clinic setup, optionally adds fictional sample data, and creates doctor and patient records.",
-        "Staff books an appointment after backend checks clinic access plus active doctor and patient clinic links.",
-        "Appointment creation stores the appointment, creates a queue entry, and stores explainable no-show context together.",
-        "When the patient arrives, Staff updates arrival or queue status, and appointment and queue state stay synchronized where a queue entry exists.",
-        "Staff manages waiting, called, completed, cancelled, or no-show states through the clinic day, including manual reorder for active queue entries.",
-        "The dashboard gives Admin and Staff visibility into current appointments, queue status, high-risk appointments, activity, and setup state.",
+        "A new clinic Admin signs up through Clerk and creates the clinic plus first active Admin in one transaction.",
+        "The Admin configures clinic settings, structured location data, doctors, weekly availability, patients, and optional fictional sample data.",
+        "The Admin can create a one-time Staff invite; the invitee signs in with the matching Clerk identity and explicitly accepts before receiving clinic access.",
+        "Staff selects a doctor, patient, date, and duration; the backend derives valid slots from availability, clinic hours, buffers, and active conflicts.",
+        "Booking creates the appointment, queue entry, and explainable no-show context together under transaction and advisory-lock protection.",
+        "The clinic can reschedule through appointment-specific slot discovery, preserving the appointment and queue identity while recording an activity event.",
+        "Arrival and lifecycle updates synchronize appointment and queue state, record lateness and terminal reasons, and update patient statistics once.",
+        "Optional geocoding and routing jobs enrich clinic-patient context with address confidence, distance, and travel duration without changing booking or risk decisions.",
+        "The dashboard gives Admin and Staff visibility into current appointments, queue state, high-risk appointments, activity, and setup progress.",
       ],
       architecture: {
         overview: [
           "The request flow is React client, Clerk authentication, Express API, Zod validation, controller, service layer, repository or Prisma operation, and PostgreSQL. Routes define endpoints, Zod validation checks inputs, controllers handle HTTP concerns, services apply business rules, and repositories perform database reads, writes, transactions, and raw SQL where needed.",
-          "The main relational entities are User, Clinic, Doctor, DoctorClinic, Patient, PatientClinic, Appointment, QueueEntry, and NoShowPrediction. Appointments connect clinic, doctor, patient, creator, time, status, queue entry, and risk context. Queue entries represent the daily operational flow.",
+          "The relational model now includes User, StaffInvitation, Clinic, Doctor, DoctorClinic, DoctorAvailabilityPeriod, Patient, PatientClinic, Appointment, AppointmentActivity, QueueEntry, and NoShowPrediction. These records separate identity, clinic membership, scheduling policy, visit history, live operations, and decision-support context.",
           "Appointment creation is a multi-step operation. It verifies clinic ownership for doctor and patient records, counts previous patient attendance signals, acquires transaction-level advisory locks, checks slot conflicts, calculates the next queue position, creates the appointment, creates the queue entry, and stores the no-show prediction inside a transaction.",
           "Clinic onboarding has a separate identity-aware path. The API can answer onboarding status for a valid Clerk identity before an internal user exists, then creates the clinic and first Admin together with server-controlled role, status, and clinic ownership.",
-          "The frontend is responsible for public routing, Clerk sign-in and sign-up, onboarding-aware redirects, active clinic resolution, protected app layout, dashboard, doctors, patients, appointments, queue, clinic settings, loading states, empty states, errors, and toast feedback. Final authorization and writes remain backend responsibilities.",
+          "The frontend handles public and invite routes, Clerk auth, onboarding-aware redirects, active clinic resolution, staff management, doctor availability, patients, appointments, activity dialogs, queues, dashboard, settings, and feedback states. Final authorization, provider credentials, state transitions, and writes remain backend responsibilities.",
+          "Post-release location modules treat geocoding and routing as best-effort enrichment. Geoapify calls happen server-side, stale-attempt guards prevent older responses from overwriting newer address state, and travel metrics remain operational context rather than prediction or navigation data.",
         ],
         layers: [
           {
@@ -227,7 +283,7 @@ export const projects: Project[] = [
             id: "express-api",
             title: "Express API",
             description:
-              "Registers routes, resolves authentication and onboarding context, validates input with Zod, runs HTTP controllers and business services, enforces clinic access rules, and coordinates onboarding, appointment, queue, dashboard, doctor, patient, and settings workflows.",
+              "Registers clinic-scoped REST routes, resolves identity and role context, validates with Zod, and coordinates onboarding, Staff invitations, availability, slots, appointments, lifecycle activity, queues, location enrichment, dashboard, and settings workflows.",
             technologies: ["Node.js", "Express", "TypeScript", "Zod"],
             kind: "api",
           },
@@ -251,8 +307,16 @@ export const projects: Project[] = [
             id: "clerk",
             title: "External identity service",
             description:
-              "Provides user sign-in, session identity, and authentication verification before the API maps that identity to an internal Pravaah user.",
+              "Provides user sign-in, session identity, and authentication verification before the API maps that identity to an internal Pravaah user or invitation acceptance path.",
             technologies: ["Clerk"],
+            kind: "external",
+          },
+          {
+            id: "geoapify",
+            title: "Geocoding and routing service",
+            description:
+              "Resolves structured addresses and calculates compact clinic-to-patient travel metrics through server-side calls with retry and stale-attempt protection.",
+            technologies: ["Geoapify"],
             kind: "external",
           },
         ],
@@ -276,6 +340,11 @@ export const projects: Project[] = [
             from: "express-api",
             to: "persistence",
             label: "Prisma queries, transactions, and clinic-scoped business rules.",
+          },
+          {
+            from: "express-api",
+            to: "geoapify",
+            label: "Server-owned geocoding and route requests; provider credentials never reach the browser.",
           },
           {
             from: "persistence",
@@ -347,6 +416,24 @@ export const projects: Project[] = [
             "A patient can have an appointment record while the clinic still needs a separate operational queue view for the day.",
           tradeOff:
             "The backend must keep the linked statuses synchronized.",
+        },
+        {
+          title: "Explicit lifecycle state machines",
+          description:
+            "Appointment and queue transitions are checked against backend policies, with compare-and-set writes, idempotent same-status retries, append-only activity events, and one-time terminal effects.",
+          reason:
+            "A valid enum value is not automatically a valid next state, especially when appointment, queue, and patient statistics must stay synchronized.",
+          tradeOff:
+            "More transition code and tests are required than a generic status update endpoint.",
+        },
+        {
+          title: "Best-effort geospatial enrichment",
+          description:
+            "Address geocoding and route calculation run after core record writes and track attempt identity, provider status, and source hashes.",
+          reason:
+            "Clinic operations should still save when an external location provider is unavailable or an address cannot be resolved.",
+          tradeOff:
+            "Location data can temporarily be missing or stale and needs explicit retry and synchronization paths.",
         },
         {
           title: "Deterministic no-show assistance",
@@ -446,6 +533,30 @@ export const projects: Project[] = [
         },
         {
           challenge:
+            "Invitation acceptance had to authorize a Clerk identity that did not yet have an internal Pravaah user without weakening normal operational APIs.",
+          resolution:
+            "Dedicated preview and acceptance routes validate a one-time hashed token, normalized email, expiry, invitation state, and trusted Clerk identity before transactionally creating the Staff user.",
+          learning:
+            "Bootstrap and invitation paths need narrow identity-aware exceptions instead of bypassing the application's normal authorization boundary.",
+        },
+        {
+          challenge:
+            "Scheduling needed to account for weekly availability, clinic hours, duration overlap, buffer windows, rescheduling self-exclusion, and concurrent writes.",
+          resolution:
+            "Shared scheduling policy drives slot discovery and mutations; appointment-specific rescheduling derives immutable fields from persistence and confirms the client's current scheduled time before writing.",
+          learning:
+            "Availability is a domain policy shared by read and write paths, not merely a calendar UI calculation.",
+        },
+        {
+          challenge:
+            "External geocoding and routing responses could arrive late or fail after a clinic or patient address had already changed.",
+          resolution:
+            "The backend uses source hashes and attempt IDs so stale results cannot overwrite newer location state, while core clinic and patient writes remain independent from provider success.",
+          learning:
+            "External enrichment should be failure-tolerant and guarded against out-of-order completion.",
+        },
+        {
+          challenge:
             "The no-show idea needed to be useful without pretending to be machine learning.",
           resolution:
             "The implementation stores rule-based LOW, MEDIUM, and HIGH risk levels with scores, reason codes, and suggested staff actions.",
@@ -521,41 +632,537 @@ export const projects: Project[] = [
       ],
       results: [
         "Shipped Pravaah v0.3.0 as the Clinic Operations Release, recorded as released after owner production verification and GO decision.",
-        "Production verification records PASS for database migration, database connectivity, health endpoint, fresh Clerk signup, onboarding, clinic provisioning, Admin flow, Staff authorization, cross-clinic rejection, doctor flow, patient flow, appointment flow, no-show assistance, queue workflow, manual reorder, dashboard, and production smoke testing.",
-        "Implemented the clinic-side Admin and Staff operations spine: public entry, sign-up/sign-in, onboarding, clinic settings, setup guidance, doctors, patients, appointments, queue, dashboard, and explainable no-show assistance.",
-        "Kept the no-show feature responsible and evidence-backed by presenting deterministic rules, reasons, and suggested staff actions rather than claiming trained AI or measured prediction accuracy.",
-        "Expanded reviewer, workflow, product, architecture, release, and case-study documentation so implementation evidence and product boundaries are easier to audit.",
+        "Production verification records PASS for the v0.3 database migration, health endpoint, fresh Clerk signup, onboarding, clinic provisioning, authorization, doctor, patient, appointment, no-show, queue, dashboard, and smoke-test flows.",
+        "Expanded the current source beyond v0.3 with Staff invitation and access APIs, availability-aware scheduling, appointment rescheduling, activity history, arrival and outcome context, patient statistics, and Geoapify-backed location services.",
+        "Kept deployment claims auditable by separating the production-verified v0.3 baseline from newer source capabilities that still require owner migration, environment, and live smoke verification.",
+        "Kept no-show support evidence-based by exposing deterministic reasons and suggested actions rather than claiming trained AI or measured predictive accuracy.",
       ],
       currentProgress: [
-        "Current release: v0.3.0 - Clinic Operations Release.",
-        "Release status: released, production deployed, and production-verified by owner with GO decision.",
+        "Released baseline: v0.3.0 - Clinic Operations Release, production-verified by owner with a GO decision.",
         "Production frontend: https://pravaah.garvitsingh171.com.",
-        "Product state: actively developing toward broader SaaS maturity.",
-        "Release metadata still missing in the Pravaah repository: actual calendar release date and GitHub Release URL.",
+        "Current source: post-v0.3 development with Staff access, scheduling, lifecycle, activity, location, and routing capabilities implemented across API, database, tests, and UI.",
+        "Verification boundary: newer post-release features are not described as production-deployed until their migrations, provider configuration, build/test gates, deployed SHA, and smoke checks are recorded.",
+        "Release tracking: the tagged release remains v0.3.0 while newer mainline capabilities await a verified release record.",
       ],
       limitations: [
         "No patient login or doctor login is implemented.",
         "No patient portal, doctor portal, self-booking flow, billing, payments, prescriptions, inventory, full medical records, hospital ERP workflow, or native mobile app is implemented.",
         "The no-show feature is deterministic and uses limited available operational signals; it is not trained machine learning and has no committed accuracy, fairness, calibration, or real-world outcome metrics.",
         "The system does not automatically cancel appointments, contact patients, prioritize appointments by risk, or silently reorder queues.",
-        "Appointment booking checks exact same-time active doctor conflicts, but does not enforce duration overlap, clinic opening hours, slot-duration alignment, or buffer windows.",
-        "Appointment lifecycle enforcement blocks changes away from terminal states, but it does not implement a complete transition matrix.",
+        "Post-release availability, rescheduling, Staff invitation, geocoding, and routing capabilities are implemented in source but do not yet have recorded production deployment verification.",
+        "Scheduling has no date-specific doctor exceptions, holiday or leave calendar, and past-date booking remains a documented business-rule gap.",
+        "Rescheduling preserves the existing no-show prediction instead of recalculating it for the new appointment time.",
+        "The Staff invitation flow creates a copyable one-time link but does not send email because no mail provider is integrated.",
+        "Travel metrics use free-flow routing context; the system stores no route geometry or live-traffic navigation data, and travel time does not affect booking or no-show scoring.",
         "The current authorization model uses one active `User.clinicId`, not full multi-clinic SaaS membership or clinic switching.",
         "No notification automation, audit log, browser E2E suite, CI/CD workflow, or production monitoring/observability stack is committed.",
         "No committed real Pravaah screenshots are available for the portfolio yet, so I kept the existing thumbnail assets rather than fabricating product screenshots.",
       ],
       futureImprovements: [
-        "Add reminder logs, confirmations, rescheduling or cancellation flows, and SMS, email, or WhatsApp integrations.",
-        "Strengthen appointment and queue lifecycle transition rules, clinic-hours enforcement, slot-duration checks, buffer rules, and attendance-counter maintenance.",
-        "Add audit logs for important appointment, queue, and risk-review decisions.",
+        "Verify and release the post-v0.3 Staff, scheduling, lifecycle, geocoding, and routing work with production migrations, environment checks, deployed SHAs, and focused smoke tests.",
+        "Add reminder logs, confirmations, and SMS, email, or WhatsApp integrations; connect Staff invitations to a transactional email provider.",
+        "Add date-specific doctor leave and holiday exceptions, reject past-date booking, and recalculate decision-support context after rescheduling where appropriate.",
+        "Add broader audit coverage for Staff access, queue decisions, location retries, and risk review.",
         "Add richer operational analytics, dashboard drill-downs, pagination, sorting, and production observability.",
-        "Introduce staff invitations, expanded permissions, and a ClinicMember or UserClinic model for multi-clinic SaaS membership and clinic switching.",
+        "Evolve the single-clinic user link into a ClinicMember or UserClinic model for multi-clinic membership and clinic switching.",
         "Explore patient and doctor portals as future surfaces, clearly separate from the current v0.3.0 product.",
         "Improve no-show assistance with richer historical data and consider trained models only after appropriate data governance, evaluation, and explainability work exist.",
         "Capture reviewed production or demo screenshots with fictional data for future portfolio visuals.",
       ],
     },
     featured: true,
+  },
+  {
+    title: "ClearTax",
+    slug: "cleartax",
+    summary:
+      "A bulk GST invoice reconciliation workspace that compares Purchase Register CSV data with GSTR-2B references and persists matched, mismatched, and failed row outcomes.",
+    description:
+      "ClearTax is a two-person, in-progress invoice reconciliation product built through the Kalvium Simulated Work program. I own the backend and database work: authentication context, GSTIN-scoped authorization, GSTR-2B and Purchase Register upload contracts, inline row reconciliation, PostgreSQL persistence, cursor-paginated result APIs, structured errors, request IDs, and logging. Edha Singh owns the frontend. The current implementation is a working Next.js MVP; durable Cloud Tasks processing, Cloud Storage file persistence, CI/CD, and verified production deployment remain future work.",
+    engineeringHighlight:
+      "Built the business-scoped reconciliation backend, validated upload workflows, persisted row evidence, cursor pagination, structured errors, and request logging.",
+    status: "in-progress",
+    type: "full-stack",
+    techStack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "NextAuth.js",
+      "Zod",
+      "Pino",
+      "Tailwind CSS",
+      "bcrypt",
+    ],
+    image: {
+      light: "/images/projects/cleartax/cleartax-thumbnail-light.png",
+      dark: "/images/projects/cleartax/cleartax-thumbnail-dark.png",
+      alt: "Invoice reconciliation dashboard concept showing matched, mismatched, unmatched, and error records",
+    },
+    githubUrl: "https://github.com/kalviumcommunity/SW2627-ClearTax",
+    seo: {
+      title: "ClearTax | GST Invoice Reconciliation Case Study",
+      description:
+        "ClearTax case study: a Next.js and PostgreSQL GST invoice reconciliation workflow with validated uploads, persisted row results, pagination, and structured APIs.",
+      image: "/images/projects/cleartax/cleartax-thumbnail-light.png",
+    },
+    caseStudy: {
+      category: "GST Invoice Reconciliation / FinTech Workflow",
+      role: "Backend & database developer",
+      team: "Garvit Singh — Backend · Edha Singh — Frontend",
+      timeline: "In progress · Kalvium Simulated Work",
+      problem: [
+        "GST teams compare an internal Purchase Register with supplier-reported invoices in GSTR-2B. Manual comparison becomes slow and error-prone when invoice numbers, supplier GSTINs, dates, taxable values, tax components, or totals differ across thousands of rows.",
+        "The engineering problem is larger than file upload. The application needs a trustworthy business ownership boundary, strict file and row validation, deterministic monetary comparisons, durable batch history, inspectable mismatch reasons, pagination, and failure isolation so one malformed invoice does not hide the rest of a batch.",
+      ],
+      productThesis: [
+        "The product turns reconciliation into a reviewable workflow: establish a trusted GSTR-2B reference, upload a Purchase Register, classify every row, preserve the result, and let the user return to the batch after refresh.",
+        "This is a ClearTax-inspired educational product, not a production tax-filing service. The current scope focuses on reconciliation evidence and backend workflow design rather than GST filing, compliance advice, or unsupported cloud-scale claims.",
+      ],
+      solution: [
+        "The application uses Next.js 16 App Router for server-rendered pages, client-side upload interactions, and authenticated route handlers in one TypeScript codebase. NextAuth supplies JWT session context, while APIs and private pages resolve the current user and business before querying data.",
+        "A GSTR-2B JSON import is validated, checked against the authenticated business GSTIN, normalized, and persisted as a ReferenceImport with ReferenceInvoice rows. A Purchase Register CSV is then validated and reconciled against that selected reference inside a database transaction.",
+        "Each Purchase Register row becomes a persisted ReconciliationRow. Valid exact comparisons become MATCHED, valid rows with missing or differing reference data become MISMATCHED, and malformed rows become ERROR with a reusable error code and readable explanation. Results remain available through batch pages and a cursor-paginated API.",
+      ],
+      businessValue: [
+        {
+          title: "Reduce manual comparison",
+          description:
+            "The workflow normalizes and compares invoice identity and monetary fields so reviewers can focus on exceptions instead of checking every row by hand.",
+        },
+        {
+          title: "Make exceptions inspectable",
+          description:
+            "Persisted mismatch codes, mismatch details, row errors, and linked reference invoices provide evidence for why a row did or did not reconcile.",
+        },
+        {
+          title: "Preserve reconciliation history",
+          description:
+            "Reference imports, upload batches, counters, and row results survive refresh and can be revisited from protected dashboard and history pages.",
+        },
+      ],
+      differentiators: [
+        {
+          title: "Row-level fault isolation",
+          description:
+            "File-contract failures reject the upload, while valid files can preserve malformed invoice rows as ERROR records so other rows still complete.",
+        },
+        {
+          title: "Exact money storage",
+          description:
+            "PostgreSQL Decimal(18, 2) columns and normalized monetary strings avoid relying on binary floating-point comparisons for GST values.",
+        },
+        {
+          title: "Business-scoped access",
+          description:
+            "Private pages and APIs filter imports, batches, and results through the business ID resolved from the authenticated session.",
+        },
+        {
+          title: "Honest processing boundary",
+          description:
+            "The current request performs reconciliation inline. Queue workers, raw-file cloud storage, and GCP deployment are documented as planned rather than presented as implemented.",
+        },
+      ],
+      targetUsers: [
+        "Business owners, accountants, GST executives, and finance teams who need to compare Purchase Register data with GSTR-2B reference invoices.",
+        "Evaluators and developers reviewing a realistic authentication, upload, reconciliation, and persistence workflow in a two-person product build.",
+      ],
+      useCases: [
+        "Create an account with a business legal name and GSTIN, then sign in through credentials or a configured Google provider.",
+        "Import a GSTR-2B-like JSON file whose GSTIN matches the authenticated business.",
+        "Upload a Purchase Register CSV of up to 10,000 rows against an owned reference import.",
+        "Review batch status, totals, matched rows, mismatches, and row-level errors after processing.",
+        "Filter the result API by reconciliation outcome and continue through results using a batch-scoped cursor.",
+        "Return to dashboard, reconciliation history, batch detail, reference-import history, and reference-import detail views after refresh.",
+      ],
+      features: [
+        {
+          title: "Credentials signup and sign-in",
+          description:
+            "Signup creates the User and first Business, hashes passwords with bcrypt, and handles unique email or GSTIN conflicts. NextAuth credentials sessions carry user, business, and OWNER context.",
+        },
+        {
+          title: "Protected business workspace",
+          description:
+            "A route proxy protects workspace pages, while private pages and every business-data API independently enforce session and business context on the server.",
+        },
+        {
+          title: "GSTR-2B JSON import",
+          description:
+            "Multipart validation checks extension, MIME type, 10 MB size, JSON structure, supplier GSTINs, invoice dates, totals, item values, duplicates, and ownership GSTIN before persistence.",
+        },
+        {
+          title: "Purchase Register CSV upload",
+          description:
+            "CSV validation requires the expected header set, rejects duplicate headers, caps files at 10 MB and 10,000 invoice rows, and validates row shape and invoice fields.",
+        },
+        {
+          title: "Deterministic reconciliation",
+          description:
+            "Rows are indexed against reference invoices by supplier GSTIN and normalized invoice number, then compared across date, taxable value, GST components, cess, and total value.",
+        },
+        {
+          title: "Persisted batch and row results",
+          description:
+            "One UploadBatch stores aggregate counters while ReconciliationRow records preserve raw input, normalized fields, outcome, errors, mismatch evidence, and optional matched-reference linkage.",
+        },
+        {
+          title: "Cursor-paginated results",
+          description:
+            "The batch results API validates that a cursor belongs to the requested batch, supports outcome filtering, fetches one extra record to determine hasMore, and returns a next cursor plus total count.",
+        },
+        {
+          title: "Structured API failures",
+          description:
+            "Shared helpers return stable error codes, readable messages, validation details, safe generic internal errors, and consistent success envelopes.",
+        },
+        {
+          title: "Request-aware logging",
+          description:
+            "Pino logs request context and upload lifecycle events, while completed API responses expose an x-request-id header for debugging and correlation.",
+        },
+        {
+          title: "Idempotent demo data",
+          description:
+            "The Prisma seed creates a repeatable local business, active reference import, reference invoices, completed batch, and representative matched, mismatched, and error rows.",
+        },
+      ],
+      apiHighlights: [
+        {
+          title: "Authentication API",
+          description:
+            "POST /api/auth/signup validates identity and business data, hashes the password, creates User and Business records, and returns conflict details without exposing the password hash.",
+        },
+        {
+          title: "Reference import APIs",
+          description:
+            "GET/POST /api/reference-imports lists owned imports or accepts JSON metadata and multipart GSTR-2B uploads; GET /api/reference-imports/[referenceImportId] returns one owned import.",
+        },
+        {
+          title: "Reconciliation batch APIs",
+          description:
+            "GET/POST /api/reconciliation-batches lists recent business batches or accepts metadata and multipart Purchase Register uploads that run the current inline reconciliation transaction.",
+        },
+        {
+          title: "Batch detail and status APIs",
+          description:
+            "GET /api/reconciliation-batches/[batchId] returns one business-scoped batch, while /status exposes lifecycle state and aggregate counters.",
+        },
+        {
+          title: "Paginated result API",
+          description:
+            "GET /api/reconciliation-batches/[batchId]/results supports validated limit, cursor, and result parameters and returns batch-scoped row details with pagination metadata.",
+        },
+      ],
+      workflow: [
+        "The user creates an account; the signup transaction creates their identity and GSTIN-scoped business workspace.",
+        "NextAuth establishes a JWT session containing the user ID, first business ID, and current OWNER role.",
+        "The user uploads GSTR-2B JSON; the API validates the file and business GSTIN, then transactionally activates the new reference import and stores normalized invoices.",
+        "The user selects that reference and uploads a Purchase Register CSV; the API validates its file contract, headers, row count, and row data.",
+        "The backend loads owned reference invoices, builds an in-memory lookup, classifies each row, and creates the batch plus row records in one Prisma transaction.",
+        "The UI opens the batch detail with counters and initial results; API consumers can filter and paginate the complete persisted result set.",
+        "Every private read remains constrained by the business context resolved from the authenticated session.",
+      ],
+      architecture: {
+        overview: [
+          "ClearTax uses one Next.js App Router application. Server components query PostgreSQL through Prisma for dashboard and detail pages; client components handle forms and uploads; route handlers own JSON and multipart API contracts.",
+          "The core relational path is User to Business to ReferenceImport and ReferenceInvoice, plus Business and ReferenceImport to UploadBatch, then UploadBatch to ReconciliationRow. A row can optionally link to the reference invoice used for its comparison.",
+          "The upload path separates whole-file validation from row-level reconciliation. Invalid file metadata, JSON structure, CSV headers, or excessive row counts reject the request. Once the file contract is valid, malformed invoice rows are persisted as isolated errors instead of aborting the remaining batch.",
+          "Current reconciliation runs synchronously inside POST /api/reconciliation-batches. GCP environment placeholders and storage keys preserve a future direction, but there is no implemented Cloud Tasks dispatch, Cloud Storage upload, independent worker, or verified cloud deployment.",
+        ],
+        layers: [
+          {
+            id: "next-ui",
+            title: "Next.js application UI",
+            description:
+              "Provides server-rendered dashboard and history pages plus focused client interactions for authentication, uploads, and reconciliation review.",
+            technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+            kind: "client",
+          },
+          {
+            id: "route-handlers",
+            title: "App Router route handlers",
+            description:
+              "Own session checks, Zod validation, multipart parsing, response contracts, inline reconciliation orchestration, cache revalidation, and request completion logging.",
+            technologies: ["Next.js Route Handlers", "Zod", "Pino"],
+            kind: "api",
+          },
+          {
+            id: "next-auth",
+            title: "Authentication and business context",
+            description:
+              "Uses NextAuth JWT sessions, credentials with bcrypt, optional Google OAuth, and server-owned user, business, and role resolution.",
+            technologies: ["NextAuth.js", "bcrypt"],
+            kind: "service",
+          },
+          {
+            id: "prisma",
+            title: "Reconciliation and persistence layer",
+            description:
+              "Uses Prisma transactions, ownership-scoped queries, exact decimal fields, normalized lookup keys, constraints, indexes, migrations, and deterministic seed data.",
+            technologies: ["Prisma", "@prisma/adapter-pg"],
+            kind: "service",
+          },
+          {
+            id: "postgresql",
+            title: "PostgreSQL database",
+            description:
+              "Stores users, businesses, reference imports, reference invoices, upload batches, row results, mismatch evidence, errors, and lifecycle counters.",
+            technologies: ["PostgreSQL"],
+            kind: "database",
+          },
+        ],
+        connections: [
+          {
+            from: "next-ui",
+            to: "next-auth",
+            label: "Sign-in and protected page session resolution.",
+          },
+          {
+            from: "next-ui",
+            to: "route-handlers",
+            label: "Validated JSON and multipart requests for uploads and result review.",
+          },
+          {
+            from: "route-handlers",
+            to: "next-auth",
+            label: "Server-side authentication and business ownership context.",
+          },
+          {
+            from: "route-handlers",
+            to: "prisma",
+            label: "Transactions, scoped reads, batch writes, and paginated result queries.",
+          },
+          {
+            from: "prisma",
+            to: "postgresql",
+            label: "Relational persistence, constraints, indexes, and exact decimal values.",
+          },
+        ],
+      },
+      technicalDecisions: [
+        {
+          title: "Next.js as one full-stack codebase",
+          description:
+            "App Router pages and route handlers share TypeScript, validation, authentication, and persistence utilities.",
+          reason:
+            "A compact codebase fits a two-person MVP and avoids operating separate frontend and backend services.",
+          tradeOff:
+            "Inline reconciliation competes with web request time and cannot scale independently until worker infrastructure exists.",
+        },
+        {
+          title: "PostgreSQL with Prisma",
+          description:
+            "Relational models connect identity, business ownership, reference data, batches, results, and optional matched invoices.",
+          reason:
+            "The workflow benefits from foreign keys, exact decimal columns, compound uniqueness, indexes, migrations, and typed queries.",
+          tradeOff:
+            "Schema and migration changes require deliberate coordination and generated-client management.",
+        },
+        {
+          title: "Persist every reconciliation row",
+          description:
+            "Batch counters summarize the run, while each parsed row keeps its outcome, errors, mismatch details, raw data, and matched-reference link.",
+          reason:
+            "Results must survive refresh and remain explainable during later review.",
+          tradeOff:
+            "Row persistence increases storage and makes chunking or background writes important for larger uploads.",
+        },
+        {
+          title: "Decimal money values",
+          description:
+            "GST amounts use Decimal(18, 2) in PostgreSQL and normalized two-decimal strings during comparison.",
+          reason:
+            "Financial reconciliation should not depend on binary floating-point behavior.",
+          tradeOff:
+            "Values require explicit parsing, normalization, and serialization across files, Prisma, and JSON responses.",
+        },
+        {
+          title: "Business ID as the authorization boundary",
+          description:
+            "The JWT session carries the current business ID and private queries combine resource identifiers with that business scope.",
+          reason:
+            "Authentication alone should not allow access to another business's imports, batches, or results.",
+          tradeOff:
+            "The current session selects the first business and does not implement business switching or fine-grained roles.",
+        },
+        {
+          title: "Cursor pagination for row results",
+          description:
+            "The results endpoint orders by row ID, verifies cursor ownership, fetches limit plus one, and returns nextCursor and hasMore.",
+          reason:
+            "A batch can contain up to 10,000 rows and should not require one unbounded response.",
+          tradeOff:
+            "The current detail page still renders a limited first-page table and does not expose the full API pagination experience in the UI.",
+        },
+        {
+          title: "Centralized responses and logging",
+          description:
+            "Shared helpers coordinate response envelopes, error codes, request IDs, log context, and safe unexpected-error handling.",
+          reason:
+            "Predictable contracts improve frontend integration and make failed requests traceable during demos and debugging.",
+          tradeOff:
+            "Every route must consistently complete requests through the shared helper path.",
+        },
+      ],
+      tradeOffs: [
+        {
+          title: "Inline processing before background workers",
+          reason:
+            "It keeps the current MVP executable without unimplemented cloud dependencies.",
+          tradeOff:
+            "Large uploads can hold a request open, and queued or processing statuses do not yet represent durable asynchronous work.",
+        },
+        {
+          title: "File validation before record creation",
+          reason:
+            "A structurally invalid file should not create ambiguous import or batch metadata.",
+          tradeOff:
+            "Whole-file contract failures reject the upload, while only valid-file row errors receive partial-failure persistence.",
+        },
+        {
+          title: "One active business context",
+          reason:
+            "The first-business session model keeps authorization understandable for the current scope.",
+          tradeOff:
+            "Multi-business switching and actual OWNER, ADMIN, and ACCOUNTANT permission behavior remain unimplemented.",
+        },
+        {
+          title: "No invented deployment claim",
+          reason:
+            "The repository contains planned GCP variables but no verified infrastructure or public production URL.",
+          tradeOff:
+            "The portfolio exposes source and case-study evidence without a live-product button.",
+        },
+      ],
+      challenges: [
+        {
+          challenge:
+            "The same invoice number can be formatted differently across datasets.",
+          resolution:
+            "The import and upload paths normalize invoice numbers and index reference data with supplier GSTIN before comparison.",
+          learning:
+            "Reconciliation depends on explicit normalization rules, not raw string equality alone.",
+        },
+        {
+          challenge:
+            "Financial fields needed deterministic comparisons across CSV text, JSON values, Prisma Decimal objects, and PostgreSQL.",
+          resolution:
+            "The backend rejects invalid or negative values, normalizes money to two decimals, and persists exact Decimal(18, 2) values.",
+          learning:
+            "Money needs an intentional representation at every boundary.",
+        },
+        {
+          challenge:
+            "A malformed invoice row should not make every valid row disappear.",
+          resolution:
+            "After file-level validation succeeds, each row is independently classified and invalid rows receive an error code, message, raw payload, and completed processing state.",
+          learning:
+            "Batch systems need a clear distinction between fatal file errors and recoverable row errors.",
+        },
+        {
+          challenge:
+            "Result cursors could otherwise be reused across another batch.",
+          resolution:
+            "The paginated endpoint verifies that the cursor row exists inside the authenticated business's requested batch before using it.",
+          learning:
+            "Pagination identifiers are also authorization inputs and need scope validation.",
+        },
+        {
+          challenge:
+            "Frontend failures needed useful messages without leaking database or server internals.",
+          resolution:
+            "Centralized error helpers map known validation, auth, conflict, and not-found cases while logging unexpected errors under a request ID and returning a generic public message.",
+          learning:
+            "Error contracts are part of both security and product usability.",
+        },
+      ],
+      learnings: [
+        {
+          category: "architecture",
+          title: "Batch workflows need durable domain records",
+          description:
+            "Upload metadata alone is not enough. Reference imports, batches, counters, row outcomes, mismatch evidence, and lifecycle timestamps create the reviewable product workflow.",
+          application:
+            "I model batch state and row evidence before optimizing the worker that produces them.",
+        },
+        {
+          category: "technical",
+          title: "Validation belongs at multiple boundaries",
+          description:
+            "ClearTax validates auth forms, API JSON, multipart metadata, MIME and extensions, file size, JSON structure, CSV headers, row counts, GSTINs, dates, money, duplicates, and pagination input.",
+          application:
+            "I separate transport, file-contract, domain, and row-level validation so failures remain specific and actionable.",
+        },
+        {
+          category: "architecture",
+          title: "Tenant context must reach every query",
+          description:
+            "A valid session identifies the user, but business-scoped data still needs businessId filters and owned-reference checks on reads and writes.",
+          application:
+            "I treat tenant scope as part of repository criteria rather than relying only on page guards.",
+        },
+        {
+          category: "technical",
+          title: "Pagination is an API contract",
+          description:
+            "Limit bounds, stable ordering, cursor scope, hasMore, nextCursor, result filtering, and total counts all affect how clients safely traverse a batch.",
+          application:
+            "I design pagination metadata and invalid-cursor behavior alongside the database query.",
+        },
+        {
+          category: "collaboration",
+          title: "Shared response contracts support team development",
+          description:
+            "In a two-person project, centralized success and error envelopes reduce frontend/backend drift and make integration failures easier to diagnose.",
+          application:
+            "I document route behavior and keep response helpers reusable when another developer consumes the API.",
+        },
+        {
+          category: "product",
+          title: "Planned infrastructure is not implementation evidence",
+          description:
+            "Environment placeholders and PRD architecture describe direction, but the current code still performs reconciliation inline and does not upload files to Cloud Storage.",
+          application:
+            "I separate current capabilities from future architecture in documentation, demos, and portfolio claims.",
+        },
+      ],
+      results: [
+        "Implemented credentials authentication, account and business creation, password hashing, JWT business context, and protected private routes.",
+        "Implemented validated GSTR-2B JSON imports and Purchase Register CSV uploads with a 10 MB file limit and a 10,000-row batch limit.",
+        "Persisted reference invoices, reconciliation batches, exact aggregate counters, and explainable row-level outcomes through PostgreSQL and Prisma.",
+        "Added business-scoped batch, status, import, and cursor-paginated result APIs with centralized errors, request IDs, and Pino logging.",
+        "Worked in a two-person backend/frontend split with shared API contracts, migrations, documentation, and seeded demo data.",
+      ],
+      currentProgress: [
+        "Status: in active development as a Kalvium Simulated Work team project.",
+        "Implemented workflow: authentication to GSTR-2B import to Purchase Register upload to inline reconciliation to persisted review.",
+        "Current result classifications: MATCHED, MISMATCHED, and ERROR in the implemented upload path; UNMATCHED exists in the schema but missing references are currently represented as MISMATCHED with REFERENCE_NOT_FOUND.",
+        "Repository evidence includes committed Prisma migrations, idempotent seed data, API and architecture documentation, and the current UI workflow.",
+        "No verified public production URL is exposed in the repository, so the portfolio intentionally provides no live-product link.",
+      ],
+      limitations: [
+        "Reconciliation runs synchronously inside the upload request; durable background jobs and independent worker scaling are not implemented.",
+        "Cloud Tasks, Cloud Storage persistence, deployed GCP infrastructure, and GitHub Actions CI/CD remain planned.",
+        "Uploaded raw files are validated in memory and not written to durable object storage.",
+        "The implemented upload path uses MATCHED, MISMATCHED, and ERROR; the UNMATCHED enum value is not currently emitted for missing references.",
+        "The role type lists OWNER, ADMIN, and ACCOUNTANT, but current authentication assigns OWNER only and does not provide role administration.",
+        "The session selects the first business; business switching and richer multi-business membership are not implemented.",
+        "The batch detail UI shows a limited first result page even though the API supports cursor pagination and result filtering.",
+        "No automated test script or committed test suite is present in package.json; current quality gates are lint, build, migrations, seed data, and manual workflow verification.",
+      ],
+      futureImprovements: [
+        "Move reconciliation into idempotent Cloud Tasks workers with chunked processing, retries, progress counters, and safe replay behavior.",
+        "Persist raw GSTR-2B and Purchase Register files in private Cloud Storage with retention and access controls.",
+        "Add automated unit, integration, route-handler, reconciliation, authorization, and upload-contract tests.",
+        "Connect UI pagination, outcome filtering, search, export, and virtualized result review to the existing result API.",
+        "Implement explicit UNMATCHED semantics or simplify the enum and product language to match the chosen classification model.",
+        "Add multi-business membership, business switching, and enforced OWNER, ADMIN, and ACCOUNTANT permissions.",
+        "Establish verified deployment, CI/CD, monitoring, and production-safe secret and migration workflows before presenting the product as production deployed.",
+      ],
+    },
+    featured: false,
   },
   {
     title: "BeatHub API",

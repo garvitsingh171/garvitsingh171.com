@@ -16,6 +16,10 @@ export function getProjectRole(project: Project) {
 }
 
 export function getProjectEngineeringHighlights(project: Project) {
+  if (project.engineeringHighlight) {
+    return [project.engineeringHighlight];
+  }
+
   const decisions = project.caseStudy?.technicalDecisions
     ?.slice(0, 3)
     .map((decision) => decision.title);

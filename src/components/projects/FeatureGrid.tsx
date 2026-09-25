@@ -27,7 +27,7 @@ export function FeatureGrid({ features }: FeatureGridProps) {
             </h3>
 
             {feature.description ? (
-              <p className="mt-3 text-body-sm text-secondary">
+              <p className="mt-3 break-words text-body-sm text-secondary">
                 {feature.description}
               </p>
             ) : null}
